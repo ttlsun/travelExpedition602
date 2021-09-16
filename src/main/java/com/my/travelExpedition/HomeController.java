@@ -13,7 +13,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
-		logger.info("½ÃÀÛ > ¸ŞÀÎ ÆäÀÌÁö");
+		logger.info("ë©”ì¸ í™”ë©´ì…ë‹ˆë‹¤");
 		return "main";
 	}
 	
