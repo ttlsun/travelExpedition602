@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration debug="true">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	
+	<property name="FILE_LOG_PATH" value="/mnt/logs/travel" />
+	
+    <property name="LOG_PATTERN" value="[%d][%boldGreen(%method:%line)] - %m%n"/>
+	<property name="LOG_FILE_NAME" value="travel"/>
+	
+    <!-- 콘솔 로그 출력 --> 
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+              <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_LOG_PATH}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${FILE_LOG_PATH}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
+                <!-- maxFileSize>10KB</maxFileSize -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 30 일단위로 삭제 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+              <charset>UTF-8</charset>
+              <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+     <appender name="ERROR_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_LOG_PATH}/error/${LOG_FILE_NAME}_error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>${FILE_LOG_PATH}/error/${LOG_FILE_NAME}_error-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- 90 일단위로 삭제 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <!-- 
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+         -->
+           <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+              <charset>UTF-8</charset>
+              <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+      <!-- Loggers -->
+    <logger name="org.springframework" additivity="true">
+       <level value="ERROR"/>
+       <appender-ref ref="ERROR_ROLLING" />
+       <appender-ref ref="ROLLING" />
+    </logger>
+    
+    <!-- Loggers -->
+    <logger name="com.fasterxml.jackson" additivity="true">
+       <level value="ERROR"/>
+       <appender-ref ref="ERROR_ROLLING" />
+       <appender-ref ref="ROLLING" />
+    </logger>
+    
+    <root level="INFO">
+       <appender-ref ref="ROLLING" />
+       <appender-ref ref="CONSOLE" />
+    </root>
+    
+</configuration>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+  
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- Encoding 설정 -->
+        <property name="defaultEncoding" value="UTF-8"/> 
+        <!-- Reload Cache 설정 -->
+        <property name="cacheSeconds" value="5"/>
+        <!-- basenames 설정: 아래처럼 하면 WEB-INF 밑의 message 폴더 아래의 labels로 시작하는 모든 Property-->
+        <property name="basenames">
+            <list>
+                <value>classpath:messages/messages</value>
+            </list>
+        </property>       
+    </bean>
+     
+    <!-- MessageSource를 사용하기 위한 Accessor 설정 -->
+    <bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+        <constructor-arg ref="messageSource"/>
+    </bean>
+     
+    <!-- MessageSource를 사용하기위한 MessageUtils 매핑 -->
+    <bean id="message" class="com.my.travelExpedition.utility.MessageUtil">
+        <property name="messageSourceAccessor" ref="messageSourceAccessor"/>
+    </bean>
+      
+    <!-- Default Location 설정 -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="ko"></property>
+    </bean>
+</beans>
