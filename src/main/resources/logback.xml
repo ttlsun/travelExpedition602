@@ -62,19 +62,21 @@
       <!-- Loggers -->
     <logger name="org.springframework" additivity="true">
        <level value="ERROR"/>
-       <appender-ref ref="ERROR_ROLLING" />
-       <appender-ref ref="ROLLING" />
+       <!-- <appender-ref ref="ERROR_ROLLING" /> -->
+       <!-- <appender-ref ref="ROLLING" /> -->
+       <appender-ref ref="CONSOLE" />
     </logger>
     
     <!-- Loggers -->
     <logger name="com.fasterxml.jackson" additivity="true">
        <level value="ERROR"/>
-       <appender-ref ref="ERROR_ROLLING" />
-       <appender-ref ref="ROLLING" />
+       <!-- <appender-ref ref="ERROR_ROLLING" /> -->
+       <!-- <appender-ref ref="ROLLING" /> -->
+       <appender-ref ref="CONSOLE" />
     </logger>
     
     <root level="INFO">
-       <appender-ref ref="ROLLING" />
+       <!-- <appender-ref ref="ROLLING" /> -->
        <appender-ref ref="CONSOLE" />
     </root>
     
