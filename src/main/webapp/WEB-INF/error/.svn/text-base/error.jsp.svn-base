@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/init.jsp" %>
+<%@ page isErrorPage ="true" %>
+<%String contextPath =  request.getContextPath(); %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>스마트렌탈서비스</title>
+
+  <!-- include css -->
+    <link href="<%=contextPath%>/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=contextPath%>/resources/css/commonStyle.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<script type="text/javascript">		  
+	function home() {
+		alert("로그인페이지로 이동합니다");
+		location.href = "<%= request.getContextPath()%>/login";
+	}
+	
+</script>
+
+	<!-- <div class="container" style="width: 390px; height: 200px;">
+	    <div class="row">
+			<div class="col-lg-12"  style="top: 40px;">
+			     <h1 class="page-header"> error </h1>
+			</div>
+	        <div class=""  style="border-color: #ddd;">
+			  
+	            <div class="panel panel-default">
+	                <div class="panel-heading" >
+	                    <h3 class="panel-title" >error</h3>
+	                </div>
+	                <div class="panel-body panel-default">	
+	                    <form role="form">
+	                        <fieldset style="text-align:center; margin-top: 7%; ">
+	                           입력하신 주소가 정확한지 다시 한번 확인하시고,<br/>
+								동일한 문제가 지속적으로 발생되는 경우는 <br/>
+								<a id="QnA" style="color: #DB3A00; cursor: pointer;" >
+								AcroFuture (all@acrofuture.co.kr)</a> 
+								으로 문의해주세요.<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+									Copyright ⓒ 2014 AcroFuture All rights reserved
+								<br/>
+								<br/>
+								<br/>
+	                            <a href="javascript:home();" class="btn btn-lg btn-success btn-block" style="margin: 6px;  height: 60px; text-align:center;">재접속해주세요</a>
+	                        </fieldset>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div> -->
+
+
+
+<div class="container">
+    <div class="row">
+		<div class="login_col-lg-12" >
+		     <h1 class="page-header" >error</h1>
+		</div>
+        <div class="col-md-4 col-md-offset-4" style="width: 200px;">
+		  
+            <div class="login-panel panel panel-default" style="width: 800px;">
+                <div class="panel-heading" >
+                    <h3 class="panel-title" >error</h3>
+                </div>
+                <div class="panel-bodys">
+                   <div class="panel-body panel-default">	
+	                    <form role="form">
+	                        <fieldset style="text-align:center; margin-top: 7%; ">
+	                           입력하신 주소가 정확한지 다시 한번 확인하시고,<br/>
+								동일한 문제가 지속적으로 발생되는 경우는 <br/>
+								<a id="QnA" style="color: #DB3A00; cursor: pointer;" >
+								AcroFuture (all@acrofuture.co.kr)</a> 
+								으로 문의해주세요.<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+									Copyright ⓒ 2014 AcroFuture All rights reserved
+								<br/>
+								<br/>
+								<br/>
+	                            <a href="javascript:home();" class="btn btn-lg btn-success btn-block" style="margin: 6px;  height: 60px; text-align:center;">재접속해주세요</a>
+	                        </fieldset>
+	                    </form>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
