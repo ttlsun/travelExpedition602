@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../common/top.jsp" %>     
-
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#metaTitle").attr("content", "이용약관");
+	$("#metaDescription").attr("content", "위치기반 서비스 이용약관");
+	$("#metaKeywords").attr("content", "#이용약관,#위치기반 서비스 이용약관");
+});
+</script>
 <section class="container">
 <article>
 <div>

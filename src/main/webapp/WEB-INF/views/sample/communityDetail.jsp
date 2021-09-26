@@ -8,6 +8,9 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('community');
 	
+	$("#metaTitle").attr("content", "후기상세");
+	$("#metaDescription").attr("content", "한줄요약");
+	$("#metaKeywords").attr("content", "#캠핑찜, #글램핑찜, #찜");
 });
 
 //리스트 버튼 클릭시

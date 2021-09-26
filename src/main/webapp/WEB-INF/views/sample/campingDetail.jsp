@@ -18,6 +18,12 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('camping');
 	
+	//메타태그 설정. (DB에 가져온 값 셋팅)
+	var title = "캠핑 상세"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
+	$("#metaTitle").attr("content", title);
+	$("#metaDescription").attr("content", "한줄요약내용");
+	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
+	
 	//지도를 생성합니다
 	map = mapViewInit('map');
 	

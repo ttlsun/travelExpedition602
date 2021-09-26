@@ -11,6 +11,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('event');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "이벤트");
+	$("#metaDescription").attr("content", "이벤트 리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호, #이벤트, #단순이벤트");
 });
 
 </script>

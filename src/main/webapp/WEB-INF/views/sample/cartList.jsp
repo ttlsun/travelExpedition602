@@ -12,6 +12,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('reservation');
+	
+	$("#metaTitle").attr("content", "찜 내역");
+	$("#metaDescription").attr("content", "찜등록");
+	$("#metaKeywords").attr("content", "#캠핑찜, #글램핑찜, #찜");
+	
 });
 
 </script>

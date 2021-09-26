@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../common/top.jsp" %>     
-
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#metaTitle").attr("content", "이용약관");
+	$("#metaDescription").attr("content", "개인정보 처리방침");
+	$("#metaKeywords").attr("content", "#이용약관,#개인정보 처리방침");
+});
+</script>
 <section class="container">
 <article>
 	<div>

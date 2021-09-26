@@ -7,6 +7,11 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('login');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "로그인");
+	$("#metaDescription").attr("content", "로그인");
+	$("#metaKeywords").attr("content", "#여행자들602호 로그인");
+	
 });
 
 //회원가입 클릭시

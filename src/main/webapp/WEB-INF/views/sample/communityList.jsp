@@ -14,7 +14,7 @@ $(document).ready(function() {
 	navActive('community');
 	
 	//메타태그 설정.
-	$("#metaTitle").attr("content", "602호 여행자들 후기 리스트");
+	$("#metaTitle").attr("content", "후기 리스트");
 	$("#metaDescription").attr("content", "캠핑/글램핑, 관광지 후기 리스트");
 	$("#metaKeywords").attr("content", "#캠핑/글램핑, #관광지, #후기");
 	

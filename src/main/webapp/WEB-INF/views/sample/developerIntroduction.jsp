@@ -4,9 +4,15 @@
 <%@ include file="../../common/top.jsp" %> 
 
 <script type="text/javascript" >
-	$(document).ready(function() {
-		navActive('introduction');
-	});
+$(document).ready(function() {
+	navActive('introduction');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "여행자들602호 소개");
+	$("#metaDescription").attr("content", "여행자들602호 개발자들 소개");
+	$("#metaKeywords").attr("content", "#여행자들602호, #개발자들");
+	
+});
 </script>
 
 <section class="container">

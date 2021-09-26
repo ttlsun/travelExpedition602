@@ -33,6 +33,10 @@ var selSecondArr = [['강남구','강동구','강북구','강서구','관악구'
 $(document).ready(function() {
 	navActive('camping');
 	
+	$("#metaTitle").attr("content", "캠핑 리스트");
+	$("#metaDescription").attr("content", "캠핑리스트");
+	$("#metaKeywords").attr("content", "#캠핑리스트");
+	
 	//셀렉트 박스 셋팅.
 	selInit();
 	selThemeInit();

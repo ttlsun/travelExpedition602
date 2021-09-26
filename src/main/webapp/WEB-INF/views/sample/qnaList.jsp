@@ -11,6 +11,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('qandA');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "자주하는 질문");
+	$("#metaDescription").attr("content", "자주하는 질문");
+	$("#metaKeywords").attr("content", "#여행자들602호 자주하는 질문");
 });
 </script>
 

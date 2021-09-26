@@ -75,6 +75,11 @@ var addr2 = {
 $(document).ready(function() {
 	navActive('camping');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "리스트");
+	$("#metaDescription").attr("content", "리스트");
+	$("#metaKeywords").attr("content", "#캠핑리스트 ,#관광지리스트,#후기리스트");
+	
 	//셀렉트 박스 셋팅.
 	selInit();
 	selThemeInit();

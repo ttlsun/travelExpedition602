@@ -9,6 +9,11 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('sample');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "등록");
+	$("#metaDescription").attr("content", "등록");
+	$("#metaKeywords").attr("content", "#등록");
+	
 	//summernote 선언
 	$('.summernote').summernote({
 	 	height: 200,   //set editable area's height

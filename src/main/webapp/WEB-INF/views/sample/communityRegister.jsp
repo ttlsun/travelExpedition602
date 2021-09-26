@@ -71,9 +71,9 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="reviewDivision"><span class="redFont"> * </span> 후기 </label> </td>
+			<td><label for="reviewType"><span class="redFont"> * </span> 후기 </label> </td>
 			<td>
-				<select class="form-control" name="" id="reviewDivision" >
+				<select class="form-control" name="reviewtype" id="reviewType" >
 					<option value="01">캠핑/글램핑</option>
 					<option value="02">관광지</option>
 				</select>

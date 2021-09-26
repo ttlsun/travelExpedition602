@@ -12,6 +12,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('notice');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "공지사항");
+	$("#metaDescription").attr("content", "공지사항 상세");
+	$("#metaKeywords").attr("content", "#공지사항");
 });
 
 function goList() {

@@ -14,6 +14,11 @@ $(document).ready(function() {
 	$('.tdTextClassAdd').css('padding-top', '10%').css('border-top','none').css('border-right','none').css('border-left','none');
 	$('.tdborderClassAdd').css('border-top','none').css('border-right','none').css('border-left','none');
 
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "예약");
+	$("#metaDescription").attr("content", "예약 등록");
+	$("#metaKeywords").attr("content", "#여행자들602호 예약,#예약, #예약등록");
 });
 
 //모든 이용약관 체크

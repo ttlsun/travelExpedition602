@@ -11,6 +11,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('reservation');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "예약");
+	$("#metaDescription").attr("content", "예약내역 리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호 예약,#예약");
 });
 </script>
 

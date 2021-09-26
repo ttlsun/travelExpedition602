@@ -6,6 +6,11 @@
 <script type="text/javascript" >
 $(document).ready(function() {
 	navActive('member');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "회원정보");
+	$("#metaDescription").attr("content", "회원정보");
+	$("#metaKeywords").attr("content", "#여행자들602호 회원정보");
 });
 
 function byeBtn() {

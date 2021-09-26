@@ -18,6 +18,10 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('camping');
 	
+	$("#metaTitle").attr("content", "캠핑 객실 등록");
+	$("#metaDescription").attr("content", "캠핑 객실 등록");
+	$("#metaKeywords").attr("content", "#캠핑리스트, #글램핑리스트, #캠핑 객실 등록");
+	
   	//summernote 선언
 	$('.summernote').summernote({
 	 	height: 200,   //set editable area's height

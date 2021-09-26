@@ -7,6 +7,11 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('sample');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "상세");
+	$("#metaDescription").attr("content", "상세화면");
+	$("#metaKeywords").attr("content", "#상세");
+	
 });
 
 //리스트 버튼 클릭시

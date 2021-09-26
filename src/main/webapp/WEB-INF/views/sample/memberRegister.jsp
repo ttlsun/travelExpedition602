@@ -13,6 +13,11 @@ $(document).ready(function(){
 	//메뉴 on 유지.
 	navActive('member');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "회원가입");
+	$("#metaDescription").attr("content", "회원가입");
+	$("#metaKeywords").attr("content", "#여행자들602호 회원가입");
+	
 	//모달로 우편번호 띄우기.
   	$('#searchZip').click(function(){
   		addrKakao();
