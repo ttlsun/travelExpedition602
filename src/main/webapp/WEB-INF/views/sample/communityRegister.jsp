@@ -9,6 +9,11 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('community');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "후기 상세");
+	$("#metaDescription").attr("content", "한줄요약내용");
+	$("#metaKeywords").attr("content", "#키워드,#좋아요");
+	
 	//summernote 선언
 	$('.summernote').summernote({
 	 	height: 200,   //set editable area's height

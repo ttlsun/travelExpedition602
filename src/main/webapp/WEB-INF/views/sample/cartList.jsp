@@ -19,37 +19,26 @@ $(document).ready(function() {
 <section>
 <article>
 <div class="marginPadding10">
-	<h2 align="center" class="text-primary">주문 내역</h2>
+	<h2 align="center" class="text-primary">내가 찜한 내역</h2>
 	
 	<form action="" method="post" class="form-horizontal">
 	<table border="1" class="table table-bordered">
 		<caption>주문자 정보 : </caption>
 		<thead>
 			<tr class="active">
-				<th>상품 번호</th>
-				<th>상품명</th>
-				<th>주문 수량</th>
+				<th>찜한 숙소 번호</th>
+				<th>숙소명</th>
 				<th>단가</th>
 				<th>금액</th>
 			</tr>
 		</thead>
 		<tbody>
-		
-		<c:if test="${empty lists}">
-		<tr>
-			<td colspan="5" align="center"> 해당 주문 내역이 없습니다.</td>
-		</tr>
-		</c:if>
-		
-		<c:forEach var="" items="${lists}">
 		<tr>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
 		</tr>
-		</c:forEach>
 		
 		<tr>
 			<td colspan="3" style="border-right: none;">

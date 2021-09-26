@@ -4,6 +4,8 @@
 <%@ include file="../../common/top.jsp" %>
 
 <!-- 지도관련 js -->
+<!-- 지도 마커 css -->
+<link href="${css}/mapview-1.0.0.css" rel="stylesheet">
 <script src="${js}/mapview-1.0.0.js"></script>
 <!-- //지도관련 js -->
 
@@ -66,6 +68,14 @@ function addSerach(fullAddr) {
 		
         // 결과값으로 받은 위치를 마커로 표시합니다
         marker = mapViewSetMarker(map, coords, marker);
+        
+        var coordsLa = coords.La;
+        var coordsMa = coords.Ma;
+
+        //console.log(coordsLa+","+coordsMa);
+      	//좌표값 내려주기
+        $('#coordsLa').val(coordsLa);
+        $('#coordsMa').val(coordsMa);
         
         //관광지 이름
         var name = $('#name').val();
@@ -196,6 +206,10 @@ function fileSelectChange(event) {
 					<input type="text" class="form-control40" id="address2" name="address2" placeholder="구" readonly="readonly">
 					<input type="text" class="form-control40" id="address3" name="address3" placeholder="동" readonly="readonly">
 					<input type="text" class="form-control40" id="address4" name="address4" placeholder="상세주소 입력">
+				
+					<input type="hidden" class="form-control40" id="coordsMa" name="" placeholder="좌표Ma">
+					<input type="hidden" class="form-control40" id="coordsLa" name="" placeholder="좌표La">
+					
 				</label>
 				
 				<span id="fullAddr" style="display: inline-block;"></span>

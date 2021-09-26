@@ -37,26 +37,30 @@ function goDelete() {
 <div class="marginPadding10">
 	<header><h2 align="center" class="text-primary">리스트 화면</h2></header>
 	
-	<div class="form-horizontal rounded" style="padding-right:20%">
-		<form action="list.prd" >
-			<div class="form-group">
-				<div class="col-xs-4 col-lg-4">
-				<select name="whatColumn" class="form-control">
-					<option value="all">전체 검색</option>
-					<option value="name">이름</option>
-				</select>
-				</div>
-				<div class="col-sm-4  col-lg-4">
-					<input type="text" class="form-control" name="keyword" placeholder="검색">
-				</div>
-				<span style="display: inline-block;">
-					<input type="submit" class="btn btn-default" value="검색">
-				</span>
+	<div class="form-horizontal rounded">
+		<form action="">
+			<div class="">
+				<dl>
+					<dt><label for="keyword">검색</label></dt>
+					<dd>
+						<select name="whatColumn" class="form-control">
+							<option value="all">전체 검색</option>
+							<option value="">이름</option>
+						</select>
+						
+						<div align="left" style="padding-top: 5px;">
+							<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색">
+						</div>
+						<div align="right" style="padding-top: 5px;">
+							<input type="submit" class="btn btn-default" value="검색">
+						</div>
+					</dd>
+				</dl>
 			</div>
 		</form>
 	</div>
 	
-    <div style="padding-left: 90%; padding-top: 1%;">
+    <div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="추가하기" onclick="goInsert()">
 	</div>
   

@@ -57,21 +57,3 @@ border-bottom:1px dotted navy;
      -webkit-border-radius: 32px;
      border-radius: 32px;
 } */
-
-
-/*°øÅë*/
-.floatLeft{float:left}
-.floatRight{float:right}
-.overflowH{overflow:hidden}
-.textCenter{text-align:center!important;}
-.textLeft{text-align:left!important;}
-.textRight{text-align:right!important;}
-.fontB{font-weight:bold!important;}
-.nonLeftBorder{border-left: 0px!important;}
-.nonRightBorder{border-right: 0px!important;}
-.nonTopBorder{border-top: 0px!important;}
-.nonBottomBorder{border-Bottom: 0px!important;}
-.nonBorder{border: 0px!important;}
-.nonPadding{padding: 0px!important;}
-.nonMargin{margin: 0px!important;}
-.nonPAndM{padding: 0px!important; margin: 0px!important;}

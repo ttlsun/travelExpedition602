@@ -34,11 +34,11 @@ function regBtn() {
 
 		<div class="marginPadding10">			
 			<table class="table table-bordered">
-			<caption>MY 장바구니 담은 리스트 </caption>
+			<caption> 내가 찜한 리스트 </caption>
 				<thead>
 					<tr class="tableColor">
-						<th width="7%">예약 번호</th>
-						<th>예약 숙소명</th>
+						<th width="7%">찜한 숙소 번호</th>
+						<th>숙소명</th>
 						<th width="10%">적립 예정 포인트</th>
 						<th width="10%">할인</th>
 						<th width="10%">금액</th>
@@ -63,14 +63,14 @@ function regBtn() {
 				<td>
 					<label>예약자 이름</label>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="reservationType1">예약자 타입</label>
 				</td>
-				<td colspan="2" style="border-right: none;">
+				<td style="border-right: none;">
 					<label for="reservationType1"><input type="radio" id="reservationType1" name="" value="1" checked="checked"> 카드</label>
 					<label for="reservationType2"><input type="radio" id="reservationType2" name="" value="2"> 무통장</label>
 				</td>
@@ -80,27 +80,17 @@ function regBtn() {
 			</tr>
 			<tr>
 				<td>
-					<label for="phone1">예약자 핸드폰번호</label>
+					<label for="phone">예약자 핸드폰번호</label>
 				</td>
-				<td style="border-right: none;">
-					<select class="form-control" id="phone1" name="">
-						<option>010</option>
-						<option>019</option>
-						<option>011</option>
-					</select>
-				</td>
-				<td style="border-right: none; border-left: none;">
-					<input type="text"  class="form-control" id="phone2" name="" maxlength="4" placeholder="두번째자리 입력">
-				</td>
-				<td style="border-left: none;">
-					<input type="text" class="form-control" id="phone3" name="" maxlength="4" placeholder="세번째자리 입력">
+				<td colspan="2">
+					<input type="text" class="form-control" id="phone" name="" placeholder="입력">
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="email">이메일 (선택)</label>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 					<input type="text" class="form-control" id="email" name="" value="">
 				</td>
 			</tr>
@@ -108,7 +98,7 @@ function regBtn() {
 				<td>
 					<label for="yocheong">예약 요청사항 (선택)</label>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 					<input type="text" class="form-control" id="yocheong" name="" value="">
 				</td>
 			</tr>
@@ -116,7 +106,7 @@ function regBtn() {
 				<td>
 					<label for="agreeY">예약 결재 동의</label>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 					<label for="agreeY"><input type="radio" id="agreeY" name="" value="Y"> 동의 </label>
 					<label for="agreeN"><input type="radio" id="agreeN" name="" value="N"> 비동의</label>
 				</td>
@@ -125,7 +115,7 @@ function regBtn() {
 				<td>
 					<label for="content">예약 총 금액</label>
 				</td>
-				<td colspan="3">
+				<td colspan="2">
 					<span id="totalPrice"> 총 결재 금액 </span>
 					<span class="redFont">원 </span>
 				</td>

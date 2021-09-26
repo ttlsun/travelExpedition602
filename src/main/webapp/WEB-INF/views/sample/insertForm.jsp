@@ -52,15 +52,15 @@ function goList() {
 	<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
-			<td width="20%"><label for=""><span class="redFont"> * </span> 일반 text </label></td>
+			<td width="20%"><label for="textId"><span class="redFont"> * </span> 일반 text </label></td>
 			<td>
 				<input type="text" class="form-control" id="textId" name="textName" value="" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
-			<td><label for=""><span class="redFont"> * </span>select박스 </label></td>
+			<td><label for="selectText"><span class="redFont"> * </span>select박스 </label></td>
 			<td>
-				<select class="form-control" name="" id="" >
+				<select class="form-control" name="" id="selectText" >
 					<option value="">선택</option>
 				</select>
 			</td>
@@ -88,7 +88,7 @@ function goList() {
 		</tr>
 		<!--  // label 있는경우, radio label 안에 있는 것들 클릭 가능 for="radio아이디명시" -->
 		<tr>
-			<td><span class="redFont"> * </span>checkbox 박스</td>
+			<td><label for="checkbox1"><span class="redFont"> * </span>checkbox 박스</label></td>
 			<td>
 				<label for="checkbox1"><input type="checkbox" class="" id="checkbox1" name="checkboxName" value=""> checkbox1 </label>
 				<label for="checkbox2"><input type="checkbox" class="" id="checkbox2" name="checkboxName" value=""> checkbox2 </label>
@@ -96,9 +96,9 @@ function goList() {
 		</tr>
 		<!-- class 에 summernote 추가 -->
 		<tr>
-			<td><label for=""><span class="redFont"> * </span> 설명</label></td>
+			<td><label for="summernoteText"><span class="redFont"> * </span> 설명</label></td>
 			<td>
-				<textarea rows="10" cols="3" id="" class="form-control summernote" name=""></textarea>
+				<textarea rows="10" cols="3" id="summernoteText" class="form-control summernote" name=""></textarea>
 			</td>
 		</tr>
 		<!-- // class 에 summernote 추가 -->
@@ -124,16 +124,16 @@ function goList() {
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
-			<td width="20%"><label for=""><span class="redFont"> * </span> 일반 text </label></td>
+			<td width="20%"><label for="textId"><span class="redFont"> * </span> 일반 text </label></td>
 			<td>
-				<input type="text" class="form-control" id="textId" name="textName" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-control" id="textId" name="" value="" placeholder="입력해주세요.">
 				<form:errors cssClass="errMessage" path="textName"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for=""><span class="redFont"> * </span>select박스</label></td>
+			<td><label for="selectText"><span class="redFont"> * </span>select박스</label></td>
 			<td>
-				<select class="form-control" name="" id="">
+				<select class="form-control" name="" id="selectText">
 					<option value="">선택</option>
 				</select>
 				<form:errors cssClass="errMessage" path=""/>

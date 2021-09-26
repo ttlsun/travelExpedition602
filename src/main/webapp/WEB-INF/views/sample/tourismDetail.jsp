@@ -4,6 +4,8 @@
 <%@ include file="../../common/top.jsp" %>   
 
 <!-- 지도관련 js -->
+<!-- 지도 마커 css -->
+<link href="${css}/mapview-1.0.0.css" rel="stylesheet">
 <script src="${js}/mapview-1.0.0.js"></script>
 <!-- //지도관련 js -->
 
@@ -21,7 +23,9 @@ $(document).ready(function() {
 	
 	//주소 값 내려서 받기.
 	var fullAddr = "경기 가평군 북면 노씨터길 12"; //테스트 주소.
-	addSerach(fullAddr, 37.9501622932289, 127.536039129141);
+    var coordsLa = "127.536039129141"; //좌표값
+    var coordsMa = "37.9501622932289"; //좌표값
+	addSerach(fullAddr, coordsMa, coordsLa);
 });
 
 function addSerach(fullAddr, lat, lng) {

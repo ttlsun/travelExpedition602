@@ -43,13 +43,18 @@
 				<br><br>[회원 - 캠핑/글램핑 리스트/상세/등록]
 				<br><a href="${contextPath}/sampleCampingList"> 캠핑/글램핑 리스트 페이지</a>
 				<br><a href="${contextPath}/sampleCampingDetail"> 캠핑/글램핑 상세 페이지</a>
+				
+				<br><br>[사업자 회원 - 캠핑/글램핑 등록]
 				<br><a href="${contextPath}/sampleCampingRegister"> 캠핑/글램핑 등록 페이지</a>
+				<br><a href="${contextPath}/sampleCampingRoomRegister"> 캠핑/글램핑 객실 등록 페이지</a>
+				
 				
 				<br><br>[회원 - 관광지리스트/상세/등록]
 				<br><a href="${contextPath}/sampleTourismList"> 관광지 리스트 페이지</a>
-				<br><a href="${contextPath}/sampleTourismRegister"> 관광지 등록 페이지</a>
 				<br><a href="${contextPath}/sampleTourismDetail"> 관광지 상세 페이지</a>
 				
+				<br><br>[사업자 회원 - 관광지리스트 등록]
+				<br><a href="${contextPath}/sampleTourismRegister"> 관광지 등록 페이지</a>
 				
 				<br><br>[회원 - 후기리스트/상세/등록]
 				<br><a href="${contextPath}/sampleCommunityList"> 후기리스트 페이지</a>
@@ -64,13 +69,12 @@
 				<br><a href="${contextPath}/sampleNoticeList"> 회원용 공지사항 리스트 페이지</a>
 				<br><a href="${contextPath}/sampleNoticeDetail">회원용 공지사항 상세용 페이지</a>
 				
-				
 				<br><br>[회원 - Q&A 리스트]
 				<br><a href="${contextPath}/sampleQnaList"> Q&A 페이지</a>
 				<br><a href="${contextPath}/sampleQuestionList"> 문의리스트 페이지</a>
 				
 				<br><br>[회원 - 예약]
-				<br><a href="${contextPath}/sampleCartList"> 장바구니 페이지</a>
+				<br><a href="${contextPath}/sampleCartList"> 찜목록 페이지</a>
 				<br><a href="${contextPath}/sampleReservationList"> 예약리스트 페이지</a>
 				<br><a href="${contextPath}/sampleReservationRegister"> 예약등록 페이지</a>
 				

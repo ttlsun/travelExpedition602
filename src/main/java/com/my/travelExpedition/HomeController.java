@@ -63,6 +63,11 @@ public class HomeController {
 		return "sample/campingRegister";
 	}
 	
+	@RequestMapping(value = "/sampleCampingRoomRegister")
+	public String sampleCampingRoomRegisterView() {
+		return "sample/campingRoomRegister";
+	}
+	
 	@RequestMapping(value = "/sampleTourismList")
 	public String sampleTourismListView() {
 		return "sample/tourismList";

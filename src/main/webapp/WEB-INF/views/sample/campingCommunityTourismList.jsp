@@ -205,7 +205,7 @@ function goDetail() {
 		</form>
 	</div>
 	
-    <div style="padding-left: 90%; padding-top: 1%;">
+    <div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="추가하기" onclick="goInsert()">
 	</div>
   
@@ -228,8 +228,7 @@ function goDetail() {
 		<c:forEach var="beanRow" items="${lists}" varStatus="vsRow" step="2">
 		<tr>
 			<c:forEach var="beanCell" items="${lists}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*2-1}">
-			<td align="center" class="col-xs-12 col-sm-6 col-md-3 ">
-			
+			<td align="center" class="col-xs-12 col-sm-6 col-md-3 " style="width: 50%;">
 				<ul class="thumbnail" style="list-style: none; border: none;">
 					<li><img src="${images}/1.jpg" style="height: 100px;" alt="..."></li>
 					<li class="caption">

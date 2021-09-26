@@ -4,6 +4,8 @@
 <%@ include file="../../common/top.jsp" %>
 
 <!-- 지도관련 js -->
+<!-- 지도 마커 css -->
+<link href="${css}/mapview-1.0.0.css" rel="stylesheet">
 <script src="${js}/mapview-1.0.0.js"></script>
 <!-- //지도관련 js -->
 
@@ -64,7 +66,16 @@ function addSerach(fullAddr) {
 		
         // 결과값으로 받은 위치를 마커로 표시합니다
         marker = mapViewSetMarker(map, coords, marker);
+
         
+        var coordsLa = coords.La;
+        var coordsMa = coords.Ma;
+
+        //console.log(coordsLa+","+coordsMa);
+      	//좌표값 내려주기
+        $('#coordsLa').val(coordsLa);
+        $('#coordsMa').val(coordsMa);
+
         //캠핑장 이름
         var name = $('#name').val();
         if(name == ""){
@@ -173,36 +184,6 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="propguests"><span class="redFont"> * </span> 기준인원 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="propguests" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="maxguests"><span class="redFont"> * </span> 최대인원</label> </td>
-			<td>
-				<input type="text" class="form-control" id="maxguests" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td><label for="startDate"><span class="redFont"> * </span> 예약 가능 시작일자 </label> </td>
-			<td>
-				<input type="date" class="form-control" id="startDate" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="endDate"><span class="redFont"> * </span> 예약 가능 끝일자  </label> </td>
-			<td>
-				<input type="date" class="form-control" id="endDate" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td><label for="weekdayprice"><span class="redFont"> * </span> 주중 가격</label> </td>
-			<td>
-				<input type="text" class="form-control" id="weekdayprice" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="weekendprice"><span class="redFont"> * </span> 주말 가격</label> </td>
-			<td>
-				<input type="text" class="form-control" id="weekendprice" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
-		<tr>
 			<td style="border-bottom: none;">
 				<label for="searchZip"><span class="redFont"> * </span> 캠핑장 주소</label>
 			</td>
@@ -220,6 +201,10 @@ function fileSelectChange(event) {
 					<input type="text" class="form-control40" id="address2" name="address2" placeholder="구" readonly="readonly">
 					<input type="text" class="form-control40" id="address3" name="address3" placeholder="동" readonly="readonly">
 					<input type="text" class="form-control40" id="address4" name="address4" placeholder="상세주소 입력">
+					
+					<input type="hidden" class="form-control40" id="coordsMa" name="" placeholder="좌표Ma">
+					<input type="hidden" class="form-control40" id="coordsLa" name="" placeholder="좌표La">
+					
 				</label>
 				
 				<span id="fullAddr" style="display: inline-block;"></span>

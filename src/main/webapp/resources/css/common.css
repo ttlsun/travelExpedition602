@@ -1,0 +1,136 @@
+/*common.css 공통*/
+table td:first-child{
+	text-align: center;
+}
+
+input[type='text']{
+	vertical-align:middle;
+}
+
+form,h2{
+	margin: 10px;
+	padding: 10px;
+}
+
+.marginPadding10{
+	margin: 10px;
+	padding: 10px;
+}
+
+/* 라운드 */
+.rounded {
+  border:2px solid #f5f5f5;
+  padding:0.5em;
+  line-height: 1em;
+  border-radius:0.5em;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
+
+/* 에러 및 빨간 색상 */
+.errMessage, .redFont {
+	font-size: 9pt;
+	color: red;
+	font-weight: bold;
+}
+
+.spanFlowRootP10{
+	display:flow-root;padding-top: 10px;
+}
+
+.textAlignCenter {
+	text-align: center;
+}
+
+/*form 크기 변경 (50)*/
+.form-control50{
+    width: 50%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/*form 크기 변경(45)*/
+.form-control45{
+    width: 45%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/*form 크기 변경(40)*/
+.form-control40{
+    width: 40%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/*form 크기 변경(20)*/
+.form-control20{
+    width: 20%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/*공통*/
+.floatLeft{float:left}
+.floatRight{float:right}
+.overflowH{overflow:hidden}
+.textCenter{text-align:center!important;}
+.textLeft{text-align:left!important;}
+.textRight{text-align:right!important;}
+.fontB{font-weight:bold!important;}
+.nonLeftBorder{border-left: 0px!important;}
+.nonRightBorder{border-right: 0px!important;}
+.nonTopBorder{border-top: 0px!important;}
+.nonBottomBorder{border-Bottom: 0px!important;}
+.nonBorder{border: 0px!important;}
+.nonPadding{padding: 0px!important;}
+.nonMargin{margin: 0px!important;}
+.nonPAndM{padding: 0px!important; margin: 0px!important;}

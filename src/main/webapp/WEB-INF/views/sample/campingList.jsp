@@ -149,7 +149,7 @@ function goDetail() {
 		</form>
 	</div>
 	
-    <div style="padding-left: 89%; padding-top: 1%;">
+    <div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="추가하기" onclick="goInsert()">
 	</div>
   
