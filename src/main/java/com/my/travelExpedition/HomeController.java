@@ -18,7 +18,7 @@ public class HomeController {
     }
     
     /**
-     * 샘플 데이터들 View.
+     * 회원 샘플 View.
      * @return
      */
     
@@ -26,11 +26,6 @@ public class HomeController {
 	public String samplelistView() {
 		return "sample/list";
 	}
-    
-    @RequestMapping(value = "/sampleAdminList")
-  	public String sampleAdminListView() {
-  		return "sample/adminList";
-  	}
 
 	@RequestMapping(value = "/sampleDetail")
 	public String sampleDetailFormView() {
@@ -51,6 +46,38 @@ public class HomeController {
 	public String sampleMemberRegisterView() {
 		return "sample/memberRegister";
 	}
+	
+	
+	@RequestMapping(value = "/sampleCampingList")
+	public String sampleCampingListView() {
+		return "sample/campingList";
+	}
+	
+	@RequestMapping(value = "/sampleCampingDetail")
+	public String sampleCampingDetailView() {
+		return "sample/campingDetail";
+	}
+	
+	@RequestMapping(value = "/sampleCampingRegister")
+	public String sampleCampingRegisterView() {
+		return "sample/campingRegister";
+	}
+	
+	@RequestMapping(value = "/sampleTourismList")
+	public String sampleTourismListView() {
+		return "sample/tourismList";
+	}
+	
+	@RequestMapping(value = "/sampleTourismDetail")
+	public String sampleTourismDetailView() {
+		return "sample/tourismDetail";
+	}
+	
+	@RequestMapping(value = "/sampleTourismRegister")
+	public String sampleTourismegisterView() {
+		return "sample/tourismRegister";
+	}
+	
 	
 	@RequestMapping(value = "/sampleNoticeList")
   	public String sampleNoticeListView() {
@@ -86,6 +113,11 @@ public class HomeController {
 	@RequestMapping(value = "/sampleReservationList")
 	public String sampleReservationListView() {
 		return "sample/reservationList";
+	}
+	
+	@RequestMapping(value = "/sampleReservationRegister")
+	public String sampleReservationRegisterView() {
+		return "sample/reservationRegister";
 	}
 	
 
@@ -139,5 +171,51 @@ public class HomeController {
 		return "sample/membersInfo";
 	}
 	
+	@RequestMapping(value = "/sampleEventList")
+	public String sampleEventView() {
+		return "sample/eventList";
+	}
+	
 
+	/**
+	 * 관리자페이지 샘플 View.
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/sampleAdminList")
+	  	public String sampleAdminListView() {
+	  		return "sample/admin/adminList";
+	}
+	 
+	@RequestMapping(value = "/sampleAdminEventList")
+	  	public String sampleAdminEventListView() {
+	  		return "sample/admin/eventList";
+	}
+	 
+	@RequestMapping(value = "/sampleAdminEventRegister")
+	  	public String sampleAdminEventRegisterView() {
+	  		return "sample/admin/eventRegister";
+	}
+	 
+
+	/**
+	 * 에러페이지 URL 샘플.
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/sampleError")
+  	public String sampleError() {
+  		return "sample/admin/error";
+	}
+	
+	/**
+	 * 캠핑장/관광지/후기 리스트 샘플.
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/sampleCCTList")
+  	public String sampleCCTListView() {
+  		return "sample/campingCommunityTourismList";
+	}
+	
 }

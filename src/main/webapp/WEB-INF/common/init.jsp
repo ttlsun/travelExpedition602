@@ -10,6 +10,7 @@
 <c:set var ="contextPath"  value= "<%=request.getContextPath()%>"/>
 <c:set var ="css"  value= "${contextPath}/resources/css"/>
 <c:set var ="js"  value= "${contextPath}/resources/js"/>
-<c:set var ="image"  value= "${contextPath}/resources/images"/>
-<c:set var ="fileImg"  value= "${contextPath}/resources/file_upload/"/>
+<c:set var ="images"  value= "${contextPath}/resources/images"/>
+<c:set var ="fileImg"  value= "${contextPath}/resources/file_upload"/>
 
+<c:set var ="kakaoKey" value= "ba21c1a87325273e2407c038da74ea9c&libraries=services"/>

@@ -16,7 +16,7 @@
         <!-- basenames 설정: 아래처럼 하면 WEB-INF 밑의 message 폴더 아래의 labels로 시작하는 모든 Property-->
         <property name="basenames">
             <list>
-                <value>classpath:messages/messages</value>
+                <value>classpath:resources/messages/messages</value>
             </list>
         </property>       
     </bean>

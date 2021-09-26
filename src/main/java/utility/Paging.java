@@ -22,7 +22,7 @@ public class Paging {
 	// 검색을 위한 변수 추가
 	private String whatColumn = ""; // 검색 모드(작성자, 글제목, 전체 검색은 all) 등등
 	private String keyword = ""; // 검색할 단어
-
+	
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -121,7 +121,11 @@ public class Paging {
 
 	public String getPagingHtml() {
 		// System.out.println("pagingHtml:"+pagingHtml);
+
 		return pagingHtml;
+//			pagingHtml:
+//				&nbsp;<font color='red'>1</font>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=2&pageSize=2&whatColumn=null&keyword=null'>2</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=3&pageSize=2&whatColumn=null&keyword=null'>3</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=4&pageSize=2&whatColumn=null&keyword=null'>4</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=5&pageSize=2&whatColumn=null&keyword=null'>5</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=6&pageSize=2&whatColumn=null&keyword=null'>6</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=7&pageSize=2&whatColumn=null&keyword=null'>7</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=8&pageSize=2&whatColumn=null&keyword=null'>8</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=9&pageSize=2&whatColumn=null&keyword=null'>9</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=10&pageSize=2&whatColumn=null&keyword=null'>10</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=11&pageSize=2&whatColumn=null&keyword=null'>다음</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=22&pageSize=2&whatColumn=null&keyword=null'>맨 끝</a>&nbsp;
+
 	}
 
 	public void setPagingHtml(String pagingHtml) {
@@ -144,18 +148,24 @@ public class Paging {
 		this.keyword = keyword;
 	}
 
-	public Paging(String _pageNumber, int totalCount, String url, String whatColumn, String keyword) {
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String whatColumn, String keyword) {
 
-		String _pageSize = "5"; //한페이지에 보여줄 페이지 갯수
-		
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
-			//System.out.println("_pageNumber:" + _pageNumber); // null
+
+			System.out.println("_pageNumber:" + _pageNumber); // null
 			_pageNumber = "1";
 		}
-		this.pageNumber = Integer.parseInt(_pageNumber); //페이지 번호
-		this.pageSize = Integer.parseInt(_pageSize); //한페이지에 보여줄 페이지 갯수
+		this.pageNumber = Integer.parseInt(_pageNumber);
+
+		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
+			_pageSize = "5"; // 한 페이지에 보여줄 레코드 갯수
+		}
+		this.pageSize = Integer.parseInt(_pageSize);
+
 		this.limit = pageSize;
-		this.totalCount = totalCount; // 레코드 총갯수
+
+		this.totalCount = totalCount;
+
 		this.totalPage = (int) Math.ceil((double) this.totalCount / this.pageSize);
 		// ceil(7.0/2) => 3.5=> 4
 
@@ -187,9 +197,9 @@ public class Paging {
 		}
 
 		// System.out.println("pageNumber2:"+pageNumber+"/totalPage2:"+totalPage);
-		this.url = url; // /ex/list.ab // 해당 url
-		this.whatColumn = whatColumn; //검색어(select박스)
-		this.keyword = keyword;	//검색어(검색단어)
+		this.url = url; // /ex/list.ab
+		this.whatColumn = whatColumn;
+		this.keyword = keyword;
 		// System.out.println("whatColumn:"+whatColumn+"/keyword:"+keyword);
 
 		this.pagingHtml = getPagingHtml(url);
