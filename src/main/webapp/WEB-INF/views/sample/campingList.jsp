@@ -156,7 +156,7 @@ function goDetail() {
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>레코드 총 갯수 : </caption>
 		<thead>
-			<tr class="tableColor">
+			<tr class="active">
 				<th width="70%" colspan="3">캠핑/글램핑</th>
 			</tr>
 		</thead>
