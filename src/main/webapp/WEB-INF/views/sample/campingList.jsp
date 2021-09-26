@@ -109,9 +109,9 @@ function goDetail() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">캠핑/글램핑 리스트 화면</h2></header>
 	
 	<div class="form-group rounded">

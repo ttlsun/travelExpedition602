@@ -9,9 +9,10 @@ $(document).ready(function() {
 });
 
 </script>
-<section>
+
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<div class="container alingMargin" style="margin: auto;">
 		<div align="center">
 			<h2><label class="text-primary textFontSizeLarge"> 비밀번호변경 </label></h2>

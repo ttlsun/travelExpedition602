@@ -14,9 +14,9 @@ $(document).ready(function() {
 });
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 자주하는 질문 </h2></header>
 	
 	<div class="marginPadding10">	

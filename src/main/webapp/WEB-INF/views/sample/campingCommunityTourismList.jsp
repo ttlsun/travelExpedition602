@@ -165,9 +165,9 @@ function goDetail() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 캠핑/관광지/후기 리스트 공통예제 화면</h2></header>
 	
 	<div class="form-group rounded">

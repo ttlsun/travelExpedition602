@@ -25,6 +25,7 @@ $(document).ready(function() {
 	var fullAddr = "경기 가평군 북면 노씨터길 12"; //테스트 주소.
     var coordsLa = "127.536039129141"; //좌표값
     var coordsMa = "37.9501622932289"; //좌표값
+    
 	addSerach(fullAddr, coordsMa, coordsLa);
 });
 
@@ -35,7 +36,8 @@ function addSerach(fullAddr, lat, lng) {
 	// 결과값으로 받은 위치를 마커로 표시합니다
     marker = mapViewSetMarker(map, coords, marker);
 	
-    overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
+    var name = "야생화캠핑장" //캠핑장이름
+	overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
@@ -53,9 +55,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">캠핑/글램핑 상세 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" class="form-horizontal">

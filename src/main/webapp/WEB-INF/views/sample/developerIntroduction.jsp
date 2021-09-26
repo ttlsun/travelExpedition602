@@ -9,9 +9,9 @@
 	});
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 여행자들 소개 </h2></header>
 	
 	<div class="marginPadding10">

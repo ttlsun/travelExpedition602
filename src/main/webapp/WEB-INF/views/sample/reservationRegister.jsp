@@ -43,9 +43,9 @@ function inputSave() {
 }
 </script>   
  
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 예약 </h2></header>
 	
 	<form action="" id="myFrom" method="post" class="form-horizontal" role="form">

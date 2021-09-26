@@ -15,9 +15,9 @@ $(document).ready(function() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 이벤트 </h2></header>
 	
 	<div class="form-horizontal rounded">

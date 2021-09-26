@@ -16,9 +16,9 @@ $(document).ready(function() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<h2 align="center" class="text-primary">내가 찜한 내역</h2>
 	
 	<form action="" method="post" class="form-horizontal">

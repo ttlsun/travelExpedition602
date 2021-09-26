@@ -16,10 +16,9 @@ function byeBtn() {
 
 </script>
 
-
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 회원정보 </h2></header>
 	
 	<form action="" method="post" id="myFrom" class="form-horizontal" role="form">

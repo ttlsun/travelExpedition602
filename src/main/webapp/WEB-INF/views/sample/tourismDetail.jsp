@@ -34,7 +34,8 @@ function addSerach(fullAddr, lat, lng) {
 	
 	// 결과값으로 받은 위치를 마커로 표시합니다
     marker = mapViewSetMarker(map, coords, marker);
-	
+
+    var name = "관광지" //관광지이름
     overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -54,9 +55,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">관광지 상세 화면</h2></header>
 	
 	<!-- 상세페이지 form -->

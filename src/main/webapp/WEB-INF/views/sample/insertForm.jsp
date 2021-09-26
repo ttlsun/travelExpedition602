@@ -43,9 +43,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">등록 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" class="form-horizontal">

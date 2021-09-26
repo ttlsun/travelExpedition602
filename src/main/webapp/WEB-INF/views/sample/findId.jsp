@@ -15,9 +15,10 @@ function goRegister() {
 }
 
 </script>
-<section>
+
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<div class="container alingMargin" style="margin: auto;">
 		<header><h2 align="center" class="text-primary textFontSizeLarge">아이디 찾기</h2></header>
 	

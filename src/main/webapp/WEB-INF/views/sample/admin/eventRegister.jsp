@@ -49,9 +49,9 @@ function regBtn() {
 
 </script>    
  
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 이벤트 등록 </h2></header>
 	<form action="" id="myFrom" enctype="multipart/form-data" method="post" name="from" class="form-horizontal" role="form">
 	
