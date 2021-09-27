@@ -10,36 +10,34 @@ create sequence userseq
   nocache;
 
 --기본 유저 테이블
---num : 레코드 번호; ucode : 사용자 구분 코드;
---id : 아이디; pw : 비밀번호; name : 관리자, 사업체 이름, 개인회원 이름(실명);
---email : 이메일; zipcode : 우편번호; address : 주소1, 2; phone : 번호; startdate : 사이트시작일, 사업시작일, 회원생일;
 drop table users cascade constraints;
 create table users(
   num number primary key,
-  ucode varchar2(20) unique not null,
+  ucode varchar2(20) not null,
   id varchar2(20) unique not null,
   pw varchar2(20) not null,
   name varchar2(40) not null,
   email varchar2(30) unique not null,
+  birth date default sysdate,
   zipcode number,
   address1 varchar2(50),
   address2 varchar2(50),
   phone varchar2(20) not null,
   startdate date default sysdate
 );
-
 comment on table users is '사용자 정보';
 comment on column users.num is '레코드 번호';
-comment on column users.ucode is '사용자 구분 코드';
+comment on column users.ucode is '사용자 구분';
 comment on column users.id is '아이디';
 comment on column users.pw is '비밀번호';
 comment on column users.name is '관리자, 사업체 이름, 개인회원 실명';
-comment on column users.email is '이메일 주소';
+comment on column users.email is '사이트시작일, 사업시작일, 이메일 주소';
+comment on column users.birth is '개인회원 생일';
 comment on column users.zipcode is '우편번호';
 comment on column users.address1 is '주소 대분류';
 comment on column users.address2 is '주소 소분류';
 comment on column users.phone is '번호';
-comment on column users.startdate is '사이트시작일, 사업시작일, 회원생일';
+comment on column users.startdate is '회원가입일';
 
 
 --개인(결제수단) 시퀀스
@@ -52,20 +50,18 @@ create sequence payseq
   nocache;
 
 --개인(결제수단) 테이블
---num : 레코드 번호; ucode : 사용자 고유 번호; paycode : 결제수단 고유 번호;
---paydetail : 결제 수단 상세 정보(카드 번호 등);
 drop table pay cascade constraints;
 create table pay(
   num number primary key,
-  ucode varchar2(20) unique not null,
-  paycode varchar2(20) unique not null,
+  id varchar2(20) not null,
+  paycode varchar2(20) not null,
   paydetail varchar2(20) not null,
-  foreign key(ucode) references users(ucode)
+  foreign key(id) references users(id)
 );
 comment on table pay is '결제수단 등록 테이블';
 comment on column pay.num is '레코드 번호';
-comment on column pay.ucode is '사용자 고유 번호 - 부모 users';
-comment on column pay.paycode is '결제수단 고유 번호';
+comment on column pay.id is '사용자 아이디 - 부모 users';
+comment on column pay.paycode is '결제수단 구분';
 comment on column pay.paydetail is '결제수단 상세 정보(카드 번호 등)';
 
 
@@ -79,23 +75,18 @@ create sequence noticeseq
   nocache;
 
 --관리자(공지사항) 테이블
---num : 레코드 번호; ucode : 사용자 구분 코드; postcode : 게시글 고유 번호;
---content : 게시글 내용;
---uploaddate : 게시글 올린 날짜(혹은 수정된 날짜);
 drop table notice cascade constraints;
 create table notice(
   num number primary key,
-  ucode varchar2(20) unique not null,
-  postcode varchar2(20) unique not null,
+  id varchar2(20) not null,
   content clob not null,
   uploaddate date default sysdate,
   readcount number default 0,
-  foreign key(ucode) references users(ucode)
+  foreign key(id) references users(id)
 );
 comment on table notice is '공지사항 테이블';
 comment on column notice.num is '레코드 번호';
-comment on column notice.ucode is '사용자 고유 번호(관리자번호) - 부모 users';
-comment on column notice.postcode is '게시글 고유 번호';
+comment on column notice.id is '사용자 아이디 - 부모 users';
 comment on column notice.content is '게시글 내용';
 comment on column notice.uploaddate is '게시글 올린 날짜';
 comment on column notice.readcount is '게시글 조회수';
@@ -111,59 +102,25 @@ create sequence eventseq
   nocache;
 
 --관리자(이벤트) 테이블
---num : 레코드 번호; ucode : 사용자 구분 코드; postcode : 게시글 고유 번호;
---content : 게시글 내용;
---uploaddate : 게시글 올린 날짜(혹은 수정된 날짜);
 drop table event cascade constraints;
 create table event(
   num number primary key,
-  ucode varchar2(20) unique not null,
-  postcode varchar2(20) unique not null,
+  id varchar2(20) not null,
   content clob not null,
   uploaddate date default sysdate,
   startdate date default sysdate,
   enddate date default sysdate,
   readcount number default 0,
-  foreign key(ucode) references users(ucode)
+  foreign key(id) references users(id)
 );
 comment on table event is '이벤트 테이블';
 comment on column event.num is '레코드 번호';
-comment on column event.ucode is '사용자 고유 번호(관리자번호) - 부모 users';
-comment on column event.postcode is '게시글 고유 번호';
+comment on column event.id is '사용자 아이디 - 부모 users';
 comment on column event.content is '게시글 내용';
 comment on column event.uploaddate is '게시글 올린 날짜';
 comment on column event.startdate is '이벤트 시작 날짜';
 comment on column event.startdate is '이벤트 끝 날짜';
 comment on column event.readcount is '게시글 조회수';
-
-
---관리자+사업자+개인(게시글 이미지) 시퀀스
-drop sequence postimgseq;
-create sequence postimgseq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
-  
---관리자+사업자+개인(게시글 이미지) 테이블
---num : 레코드 번호; postcode : 게시글 고유 번호; imgcode : 이미지 고유 번호; 
---imgname : 이미지 이름; imgraw : 이미지 raw file;
-drop table postimg cascade constraints;
-create table postimg(
-  num number primary key,
-  postcode varchar2(20) not null,
-  imgcode varchar2(20) unique not null,
-  imgname varchar2(40),
-  imgraw blob not null,
-  foreign key(postcode) references notice(postcode)
-);
-comment on table postimg is '게시글 이미지 테이블';
-comment on column postimg.num is '레코드 번호';
-comment on column postimg.postcode is '게시글 고유 번호 - 부모 notice';
-comment on column postimg.imgcode is '이미지 고유 번호';
-comment on column postimg.imgname is '이미지 이름';
-comment on column postimg.imgraw is '이미지 raw file';
 
 
 --관리자+사용자+사업자(문의 게시판) 시퀀스
@@ -176,28 +133,49 @@ create sequence qnaseq
   nocache;
   
 --관리자+사용자+사업자(문의 게시판) 테이블
---num : 레코드 번호; ucode : 사용자 구분 코드; postcode : 게시글 고유 번호; pw : 게시글 비밀번호;
---content : text로 할지 varchar할지 고민 중;
---uploaddate : 게시글 업로드 일자;
 drop table qna cascade constraints;
 create table qna(
   num number primary key,
-  ucode varchar2(20) unique not null,
-  postcode varchar2(20) unique not null,
+  id varchar2(20) not null,
   pw varchar2(20),
   content clob not null,
   uploaddate date default sysdate,
   ref number not null,
   restep number not null,
   relevel number not null,
-  foreign key(ucode) references users(ucode)
+  foreign key(id) references users(id)
 );
 comment on table qna is '문의 게시판 테이블';
 comment on column qna.num is '레코드 번호';
-comment on column qna.postcode is '게시글 고유 번호';
 comment on column qna.pw is '게시글 비밀번호';
 comment on column qna.content is '게시글 내용';
 comment on column qna.uploaddate is '게시글 올린 날짜';
+
+
+--관리자+사업자+개인(게시글 이미지) 시퀀스
+drop sequence postimgseq;
+create sequence postimgseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--관리자+사업자+개인(게시글 이미지) 테이블
+drop table postimg cascade constraints;
+create table postimg(
+  num number primary key,
+  postcode varchar2(20) not null,
+  imgcode varchar2(20) unique not null,
+  imgname varchar2(40),
+  imgraw blob not null
+);
+comment on table postimg is '게시글 이미지 테이블';
+comment on column postimg.num is '레코드 번호';
+comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구분(자바단)+번호(해당 테이블 레코드 번호)';
+comment on column postimg.imgcode is '이미지 고유 번호';
+comment on column postimg.imgname is '이미지 이름';
+comment on column postimg.imgraw is '이미지 raw file';
 
 
 --사업자(고객이용관리) 시퀀스
@@ -210,14 +188,11 @@ create sequence umanageseq
   nocache;
   
 --개인+사업자(고객이용관리) 테이블
---num : 레코드 번호; rcode : 숙소 고유 번호; ucode : 사용자 고유 번호(개인);
---startdate : 사용 시작일; enddate : 사용 마지막; nop : 이용 고객 수;
---totalprice : 총액; status : 현재 상태(예약중, 예약 확인, 입금 완료, 이용 중, 이용 완료 등);
 drop table usermanage cascade constraints;
 create table usermanage(
   num number primary key,
   rcode varchar2(20) unique not null,
-  ucode varchar2(20) unique not null,
+  id varchar2(20) not null,
   bookername varchar2(40) not null,
   bookerphone varchar2(20) not null,
   bookeremail varchar2(30),
@@ -227,15 +202,15 @@ create table usermanage(
   nop number not null,
   totalprice number not null,
   paycode varchar2(20) not null,
+  requestdate date default sysdate,
   status varchar2(20) not null,
   foreign key(rcode) references rooms(rcode),
-  foreign key(ucode) references users(ucode),
-  foreign key(paycode) references pay(paycode)
+  foreign key(id) references users(id)
 );
 comment on table usermanage is '고객이용관리 테이블';
 comment on column usermanage.num is '레코드 번호';
 comment on column usermanage.rcode is '숙소 고유 번호 - 부모 rooms';
-comment on column usermanage.ucode is '사용자 고유 번호(개인) - 부모 users';
+comment on column usermanage.id is '사용자 아이디 - 부모 users';
 comment on column usermanage.bookername is '예약자 성명';
 comment on column usermanage.bookerphone is '예약자 전화번호';
 comment on column usermanage.bookeremail is '예약자 이메일';
@@ -244,7 +219,8 @@ comment on column usermanage.startdate is '사용 시작일';
 comment on column usermanage.enddate is '사용 마지막일';
 comment on column usermanage.nop is '이용할 고객 수';
 comment on column usermanage.totalprice is '결제 총액';
-comment on column usermanage.paycode is '결제 수단 고유 번호 - 부모 pay';
+comment on column usermanage.paycode is '결제 수단 고유 번호 = pay 테이블 paycode(구분)+num(레코드번호)';
+comment on column usermanage.requestdate is '요청일자';
 comment on column usermanage.status is '현재 상태(예약중, 예약 확인, 입금 완료, 이용 중, 이용 완료 등)';
 
 
@@ -258,22 +234,18 @@ create sequence likeseq
   nocache;
   
 --개인(찜/관심목록) 테이블 : 숙소, 관광지, 커뮤니티
---num : 레코드 번호; ucode : 사용자 고유 번호; lcode : likecode, 숙소+관광지+커뮤니티 게시글 코드;
---likedate : 찜한 날짜;
 drop table likes cascade constraints;
 create table likes(
   num number primary key,
-  ucode varchar2(20) not null,
+  id varchar2(20) not null,
   lcode varchar2(20) not null,
   likedate date default sysdate,
-  foreign key(ucode) references users(ucode),
-  foreign key(lcode) references notice(postcode),
-  foreign key(lcode) references qna(postcode)
+  foreign key(id) references users(id)
 );
 comment on table likes is '찜/관심목록 테이블';
 comment on column likes.num is '레코드 번호';
-comment on column likes.ucode is '사용자 고유 번호 - 부모 users';
-comment on column likes.lcode is '게시글 코드 - 부모 숙소관광지커뮤니티 게시글 번호';
+comment on column likes.id is '사용자 아이디 - 부모 users';
+comment on column likes.lcode is '게시글 코드 = 어느 게시판 게시글에서 눌렀는지+해당 게시글 번호';
 comment on column likes.likedate is '찜한 날짜';
 
 
