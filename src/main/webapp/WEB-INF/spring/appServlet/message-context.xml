@@ -27,7 +27,7 @@
     </bean>
      
     <!-- MessageSource를 사용하기위한 MessageUtils 매핑 -->
-    <bean id="message" class="utility.MessageUtil">
+    <bean id="message" class="com.my.travelExpedition.utility.MessageUtil">
         <property name="messageSourceAccessor" ref="messageSourceAccessor"/>
     </bean>
       

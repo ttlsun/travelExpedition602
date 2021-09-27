@@ -11,12 +11,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('qandA');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "문의");
+	$("#metaDescription").attr("content", "문의리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호 문의리스트,#문의,#질문");
 });
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 문의 리스트 </h2></header>
 	
 	<div class="form-horizontal rounded">

@@ -75,6 +75,11 @@ var addr2 = {
 $(document).ready(function() {
 	navActive('camping');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "리스트");
+	$("#metaDescription").attr("content", "리스트");
+	$("#metaKeywords").attr("content", "#캠핑리스트 ,#관광지리스트,#후기리스트");
+	
 	//셀렉트 박스 셋팅.
 	selInit();
 	selThemeInit();
@@ -165,9 +170,9 @@ function goDetail() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 캠핑/관광지/후기 리스트 공통예제 화면</h2></header>
 	
 	<div class="form-group rounded">

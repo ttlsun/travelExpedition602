@@ -19,6 +19,11 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('tourism');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "관광지");
+	$("#metaDescription").attr("content", "관광지 등록");
+	$("#metaKeywords").attr("content", "#여행자들602호 관광지 등록,#관광지,#등록");
+	
   	//모달로 우편번호 띄우기.
   	$('#searchZip').click(function(){
   		addrKakao();
@@ -145,9 +150,9 @@ function fileSelectChange(event) {
 }
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">관광지 등록 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">

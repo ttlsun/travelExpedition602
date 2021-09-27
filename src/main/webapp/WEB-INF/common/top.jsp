@@ -54,19 +54,13 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
          	
-         	<li data-nav="reservation" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 내예약관리 <b class="caret"></b></a>
-            	<ul class="dropdown-menu">
-           			<li><a href="#">장바구니</a></li>
-	            	<li><a href="#">내 예약 목록</a></li>
-	         	</ul>
-         	</li>
-          	
           	<li data-nav="member" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">내정보관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="#">내정보 관리</a></li>
 	            	<li><a href="#">비밀번호 변경</a></li>
+	            	<li><a href="#">찜목록</a></li>
+	            	<li><a href="#">내 예약 목록</a></li>
 	         	</ul>
          	</li>
           	

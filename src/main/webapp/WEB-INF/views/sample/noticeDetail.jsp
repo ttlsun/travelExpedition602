@@ -12,6 +12,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('notice');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "공지사항");
+	$("#metaDescription").attr("content", "공지사항 상세");
+	$("#metaKeywords").attr("content", "#공지사항");
 });
 
 function goList() {
@@ -21,9 +26,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">공지사항 상세 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" class="form-horizontal">

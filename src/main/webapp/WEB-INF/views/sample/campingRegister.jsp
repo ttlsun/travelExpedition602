@@ -18,6 +18,10 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('camping');
 	
+	$("#metaTitle").attr("content", "캠핑 등록");
+	$("#metaDescription").attr("content", "캠핑 등록");
+	$("#metaKeywords").attr("content", "#캠핑리스트, #글램핑리스트, #캠핑등록");
+	
   	//모달로 우편번호 띄우기.
   	$('#searchZip').click(function(){
   		addrKakao();
@@ -144,22 +148,22 @@ function fileSelectChange(event) {
 }
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">캠핑/글램핑 등록 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
-			<td width="20%">
+			<td width="15%">
 				<label for="name"><span class="redFont"> * </span> 캠핑장 이름 </label>
 			</td>
 			<td>
 				<input type="text" class="form-control" id="name" name="" value="" placeholder="입력해주세요.">
 			</td>
-			<td width="20%">
+			<td width="15%">
 				<label for="summary"><span class="redFont"> * </span> 한줄 요약</label>
 			</td>
 			<td>
@@ -213,11 +217,15 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td width="20%">
+			<td>
 				<label for="contact"><span class="redFont"> * </span> 캠핑장 연락처 </label>
 			</td>
-			<td colspan="3">
+			<td>
 				<input type="text" class="form-control" id="contact" name="contact" value="" placeholder="입력해주세요.">
+			</td>
+			<td><label for="amenuty"><span class="redFont"> * </span> 부대시설,비품 </label> </td>
+			<td>
+				<input type="text" class="form-control" id="amenuty" name="" value="" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>

@@ -13,6 +13,11 @@
 $(document).ready(function() {
 	//메뉴바 on 유지.
 	navActive('sample');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "리스트");
+	$("#metaDescription").attr("content", "리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호 리스트");
 });
 
 //등록페이지이동 버튼
@@ -37,9 +42,9 @@ function goDelete() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">리스트 화면</h2></header>
 	
 	<div class="form-horizontal rounded">

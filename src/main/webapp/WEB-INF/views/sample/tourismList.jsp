@@ -33,6 +33,11 @@ var selSecondArr = [['강남구','강동구','강북구','강서구','관악구'
 $(document).ready(function() {
 	navActive('camping');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "관광지");
+	$("#metaDescription").attr("content", "관광지리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호 관광지리스트,#관광지");
+	
 	//셀렉트 박스 셋팅.
 	selInit();
 	selThemeInit();
@@ -109,9 +114,9 @@ function goDetail() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">관광지 리스트 화면</h2></header>
 	
 	<div class="form-group rounded">
@@ -156,7 +161,7 @@ function goDetail() {
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>레코드 총 갯수 : </caption>
 		<thead>
-			<tr class="tableColor">
+			<tr class="active">
 				<th width="70%" colspan="3">관광지</th>
 			</tr>
 		</thead>

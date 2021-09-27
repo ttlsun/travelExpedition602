@@ -10,13 +10,18 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	navActive('reservation');
+	navActive('member');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "예약");
+	$("#metaDescription").attr("content", "예약내역 리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호 예약,#예약");
 });
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 내 예약 내역 </h2></header>
 	
 	<div class="form-horizontal rounded">

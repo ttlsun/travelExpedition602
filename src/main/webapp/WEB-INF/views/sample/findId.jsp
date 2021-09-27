@@ -7,6 +7,10 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('login');
 	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "아이디찾기");
+	$("#metaDescription").attr("content", "아이디 찾기");
+	$("#metaKeywords").attr("content", "#아이디찾기");
 });
 
 //회원가입 클릭시
@@ -15,9 +19,10 @@ function goRegister() {
 }
 
 </script>
-<section>
+
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<div class="container alingMargin" style="margin: auto;">
 		<header><h2 align="center" class="text-primary textFontSizeLarge">아이디 찾기</h2></header>
 	

@@ -11,13 +11,18 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('event');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "이벤트");
+	$("#metaDescription").attr("content", "이벤트 리스트");
+	$("#metaKeywords").attr("content", "#여행자들602호, #이벤트, #단순이벤트");
 });
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 이벤트 </h2></header>
 	
 	<div class="form-horizontal rounded">

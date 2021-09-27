@@ -14,7 +14,7 @@ $(document).ready(function() {
 	navActive('community');
 	
 	//메타태그 설정.
-	$("#metaTitle").attr("content", "602호 여행자들 후기 리스트");
+	$("#metaTitle").attr("content", "후기 리스트");
 	$("#metaDescription").attr("content", "캠핑/글램핑, 관광지 후기 리스트");
 	$("#metaKeywords").attr("content", "#캠핑/글램핑, #관광지, #후기");
 	
@@ -41,9 +41,9 @@ function goDetail() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">후기 리스트 화면</h2></header>
 	
 	<div class="form-horizontal rounded">
@@ -77,7 +77,7 @@ function goDetail() {
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>레코드 총 갯수 : </caption>
 		<thead>
-			<tr class="tableColor">
+			<tr class="active">
 				<th width="70%" colspan="3">후기</th>
 			</tr>
 		</thead>

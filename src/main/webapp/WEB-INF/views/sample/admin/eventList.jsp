@@ -37,9 +37,9 @@ function goDelete() {
 	
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 이벤트 리스트 화면</h2></header>
 	
 	<div class="form-horizontal rounded">

@@ -48,9 +48,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">후기 등록 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -71,9 +71,9 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="reviewDivision"><span class="redFont"> * </span> 후기 </label> </td>
+			<td><label for="reviewType"><span class="redFont"> * </span> 후기 </label> </td>
 			<td>
-				<select class="form-control" name="" id="reviewDivision" >
+				<select class="form-control" name="reviewtype" id="reviewType" >
 					<option value="01">캠핑/글램핑</option>
 					<option value="02">관광지</option>
 				</select>

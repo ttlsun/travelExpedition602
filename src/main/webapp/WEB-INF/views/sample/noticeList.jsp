@@ -11,13 +11,18 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('notice');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "공지사항");
+	$("#metaDescription").attr("content", "공지사항 리스트");
+	$("#metaKeywords").attr("content", "#공지사항");
 });
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary"> 공지사항 </h2></header>
 	
 	<div class="form-horizontal rounded">

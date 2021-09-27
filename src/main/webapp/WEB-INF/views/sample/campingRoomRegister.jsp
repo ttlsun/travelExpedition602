@@ -18,6 +18,10 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('camping');
 	
+	$("#metaTitle").attr("content", "캠핑 객실 등록");
+	$("#metaDescription").attr("content", "캠핑 객실 등록");
+	$("#metaKeywords").attr("content", "#캠핑리스트, #글램핑리스트, #캠핑 객실 등록");
+	
   	//summernote 선언
 	$('.summernote').summernote({
 	 	height: 200,   //set editable area's height
@@ -38,30 +42,12 @@ $(document).ready(function() {
 	
 	//주소 값 내려서 받기.
 	var fullAddr = "경기 가평군 북면 노씨터길 12"; //테스트 주소.
-	addSerach(fullAddr, 37.9501622932289, 127.536039129141);
+    var coordsLa = "127.536039129141"; //좌표값
+    var coordsMa = "37.9501622932289"; //좌표값
+    
+    addSerach(fullAddr, coordsMa, coordsLa);
 	
 });
-
-function addSerach(fullAddr) {
-	mapViewAddressPositionSearch(fullAddr, function(coords) {
-		if (coords == null)
-			return;
-		
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        marker = mapViewSetMarker(map, coords, marker);
-        
-        //캠핑장 이름
-        var name = $('#name').val();
-        if(name == ""){
-        	name = "캠핑장";
-        }
-        
-        overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-	});
-}
 
 function addSerach(fullAddr, lat, lng) {
 	
@@ -70,7 +56,8 @@ function addSerach(fullAddr, lat, lng) {
 	// 결과값으로 받은 위치를 마커로 표시합니다
     marker = mapViewSetMarker(map, coords, marker);
 	
-    overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
+    var name = "야생화캠핑장" //캠핑장이름
+	overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
@@ -98,9 +85,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">캠핑/글램핑 객실 등록 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">

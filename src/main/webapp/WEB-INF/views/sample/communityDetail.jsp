@@ -8,6 +8,9 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('community');
 	
+	$("#metaTitle").attr("content", "후기상세");
+	$("#metaDescription").attr("content", "한줄요약");
+	$("#metaKeywords").attr("content", "#캠핑찜, #글램핑찜, #찜");
 });
 
 //리스트 버튼 클릭시
@@ -17,9 +20,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">후기 상세 화면</h2></header>
 	
 	<form name="myForm" action="" method="post" class="form-horizontal">

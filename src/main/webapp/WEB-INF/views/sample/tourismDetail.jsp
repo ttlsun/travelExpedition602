@@ -18,6 +18,12 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('tourism');
 	
+	//메타태그 설정. (DB에 가져온 값 셋팅)
+	var title = "관광지 상세"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
+	$("#metaTitle").attr("content", title);
+	$("#metaDescription").attr("content", "한줄요약내용");
+	$("#metaKeywords").attr("content", "#키워드,#좋아요,#관광지상세");
+	
 	//지도를 생성합니다
 	map = mapViewInit('map');
 	
@@ -34,7 +40,8 @@ function addSerach(fullAddr, lat, lng) {
 	
 	// 결과값으로 받은 위치를 마커로 표시합니다
     marker = mapViewSetMarker(map, coords, marker);
-	
+
+    var name = "관광지" //관광지이름
     overlay = mapViewSetCustomOverlay(map, marker, name, fullAddr, overlay);
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -54,9 +61,9 @@ function goList() {
 
 </script>
 
-<section>
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<header><h2 align="center" class="text-primary">관광지 상세 화면</h2></header>
 	
 	<!-- 상세페이지 form -->

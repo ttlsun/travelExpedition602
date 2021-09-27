@@ -1,21 +1,31 @@
 /*common.css 공통*/
-table td:first-child{
-	text-align: center;
-}
 
-input[type='text']{
-	vertical-align:middle;
-}
+/*공통*/
+table td:first-child{text-align: center;}
+input[type='text']{vertical-align:middle;}
+form,h2{ margin: 10px; padding: 10px;}
+.marginPadding10{margin: 10px; padding: 10px;}
 
-form,h2{
-	margin: 10px;
-	padding: 10px;
-}
+.floatLeft{float:left}
+.floatRight{float:right}
+.overflowH{overflow:hidden}
+.textCenter{text-align:center!important;}
+.textLeft{text-align:left!important;}
+.textRight{text-align:right!important;}
+.fontB{font-weight:bold!important;}
+.nonLeftBorder{border-left: 0px!important;}
+.nonRightBorder{border-right: 0px!important;}
+.nonTopBorder{border-top: 0px!important;}
+.nonBottomBorder{border-Bottom: 0px!important;}
+.nonBorder{border: 0px!important;}
+.nonPadding{padding: 0px!important;}
+.nonMargin{margin: 0px!important;}
+.nonPAndM{padding: 0px!important; margin: 0px!important;}
+.spanFlowRootP10{display:flow-root;padding-top: 10px;}
+.textAlignCenter {text-align: center;}
 
-.marginPadding10{
-	margin: 10px;
-	padding: 10px;
-}
+/* 에러 및 빨간 색상 */
+.errMessage, .redFont {font-size: 9pt; color: red; font-weight: bold; }
 
 /* 라운드 */
 .rounded {
@@ -25,21 +35,6 @@ form,h2{
   border-radius:0.5em;
   -moz-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
-}
-
-/* 에러 및 빨간 색상 */
-.errMessage, .redFont {
-	font-size: 9pt;
-	color: red;
-	font-weight: bold;
-}
-
-.spanFlowRootP10{
-	display:flow-root;padding-top: 10px;
-}
-
-.textAlignCenter {
-	text-align: center;
 }
 
 /*form 크기 변경 (50)*/
@@ -117,20 +112,3 @@ form,h2{
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-
-/*공통*/
-.floatLeft{float:left}
-.floatRight{float:right}
-.overflowH{overflow:hidden}
-.textCenter{text-align:center!important;}
-.textLeft{text-align:left!important;}
-.textRight{text-align:right!important;}
-.fontB{font-weight:bold!important;}
-.nonLeftBorder{border-left: 0px!important;}
-.nonRightBorder{border-right: 0px!important;}
-.nonTopBorder{border-top: 0px!important;}
-.nonBottomBorder{border-Bottom: 0px!important;}
-.nonBorder{border: 0px!important;}
-.nonPadding{padding: 0px!important;}
-.nonMargin{margin: 0px!important;}
-.nonPAndM{padding: 0px!important; margin: 0px!important;}

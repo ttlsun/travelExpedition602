@@ -6,12 +6,18 @@
 $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('member');
+	
+	//메타태그 설정.
+	$("#metaTitle").attr("content", "비밀번호변경");
+	$("#metaDescription").attr("content", "비밀번호변경");
+	$("#metaKeywords").attr("content", "#여행자들602호 비밀번호변경");
 });
 
 </script>
-<section>
+
+<section class="container">
 <article>
-<div class="marginPadding10">
+<div>
 	<div class="container alingMargin" style="margin: auto;">
 		<div align="center">
 			<h2><label class="text-primary textFontSizeLarge"> 비밀번호변경 </label></h2>
