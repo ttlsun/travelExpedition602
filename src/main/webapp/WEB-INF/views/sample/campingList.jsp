@@ -10,26 +10,6 @@
 </style>
 
 <script type="text/javascript">
-
-var selFirstArr = new Array('서울시','부산시','대구시','인천시','광주시','일산시','세종시','경기도','강원도','충청북도','충청남도','전라북도','경상북도','경상남도','제주도');
-var selSecondArr = [['강남구','강동구','강북구','강서구','관악구'],
-					['강서구','금정구','기장군','남구','동구','동래구'],
-					['남구','달서구'],
-					['강화군','계양구','남구'],
-					['광산구','남구','동구','북구','서구'],
-					['대덕구','덩구','서구','유성구','중구'],
-					['남구'],
-					['금남면'],
-					['가평군'],
-					['강릉시'],
-					['계롱시'],
-					['고창군'],
-					['강진군'],
-					['경산시'],
-					['거세시'],
-					['서귀포시','제주시']
-				   ];
-
 $(document).ready(function() {
 	navActive('camping');
 	
@@ -61,13 +41,15 @@ function selInit() {
 	
 	$("#searchAddr , #searchAddr2").append(new Option("선택", ""));
 	
-	$.each(selFirstArr, function (i, item) {
-	    $('#searchAddr').append($('<option>', {
-	        value: selFirstArr[i],
-	        text : selFirstArr[i]
-	    }));
+	//시도 검색 select박스
+	addrAjax("시도", "", function(data) {
+		$.each(data.body, function (i, item) {
+		    $('#searchAddr').append($('<option>', {
+		        value: item.NO,
+		        text : item.NAME
+		    }));
+		});
 	});
-	
 }
 
 //첫번째 선택시, 두번째 샐랙트 박스 셋팅
@@ -79,16 +61,43 @@ function chageSelOpt() {
 	$("#searchAddr2").empty(); 
 	$("#searchAddr2").append(new Option("선택", ""));
 	
-	//셋팅
+	//구군 검색 select박스
 	if (selFirstIndex > 0) {
-		$("#searchAddr2").empty(); //두번째 셀렉트박스 선택 나오게 할려면 주석 처리.
-		$.each(selSecondArr[selFirstIndex-1], function (i, item) {
-		    $('#searchAddr2').append($('<option>', {
-		        value: selSecondArr[selFirstIndex-1][i],
-		        text : selSecondArr[selFirstIndex-1][i]
-		    }));
+		addrAjax("구군", $("#searchAddr option:selected").val(), function(data) {
+			$.each(data.body, function (i, item) {
+			    $('#searchAddr2').append($('<option>', {
+			        value: item.NO,
+			        text : item.NAME
+			    }));
+			});
 		});
 	}	
+}
+
+//주소 ajax(addrAjax)
+function addrAjax(type, code, callback) {
+	$.ajax({
+		url: "getAddr",
+		type: "POST",
+		data: {
+			addrType : type,
+			addrCode : code
+		},
+		dataType: "json",
+		success: function(data) {
+			console.log(data);
+			if (data.resultCode != 'OK') {
+				callback(null);
+				return;
+			}
+			
+			callback(data);
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+			callback(null);
+		}
+	});
 }
 
 //등록페이지이동 버튼

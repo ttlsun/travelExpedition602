@@ -1,15 +1,32 @@
 package com.my.travelExpedition;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.my.travelExpedition.model.AddrBean;
+import com.my.travelExpedition.model.AddrDao;
+import com.my.travelExpedition.utility.WebUtil;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	
+	@Autowired
+	private AddrDao addrDao;
 	
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
@@ -221,6 +238,63 @@ public class HomeController {
 	@RequestMapping(value = "/sampleCCTList")
   	public String sampleCCTListView() {
   		return "sample/campingCommunityTourismList";
+	}
+	
+	/**
+	 * 공통 시군 검색 getSidoGugun
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getAddr", method = RequestMethod.POST)
+	public void doActionJsonObject(HttpServletResponse response,
+								@RequestParam(value = "addrType") String addrType,
+								@RequestParam(value = "addrCode") String addrCode) throws Exception {
+		
+		System.out.println("doActionJsonObject------------------------------");
+		System.out.println("addrType: " + addrType);
+		System.out.println("-------------------------------------------------");
+		
+		JSONObject json = new JSONObject();
+		
+		List<AddrBean> lists = null;
+		try {
+			JSONArray jsonArray = new JSONArray();
+			if (addrType.equals("시도")) {
+				lists = addrDao.getSidoGugun("A1", ""); //시도
+				System.out.println("lists : " + lists.size());
+				
+				for(int i =0; i< lists.size(); i++) {
+					JSONObject  data = new JSONObject();
+//					System.out.println(lists.get(i).getCode() + " ," + lists.get(i).getName());
+					data.put("NO", lists.get(i).getNo());
+					data.put("CODE", lists.get(i).getCode());
+					data.put("NAME", lists.get(i).getName());
+					jsonArray.add(data);
+				}
+				
+			} else {
+				lists = addrDao.getSidoGugun("A2", addrCode); //구군
+				//System.out.println("lists : " + lists.size());
+				
+				for(int i =0; i< lists.size(); i++) {
+					JSONObject  data = new JSONObject();
+					data.put("NO", lists.get(i).getNo());
+					data.put("CODE", lists.get(i).getCode());
+					data.put("NAME", lists.get(i).getName());
+					jsonArray.add(data);
+				}
+				
+			}
+			json.put("body", jsonArray);
+			json.put("resultCode", "OK");
+			json.put("resultMsg", "성공");
+			
+		} catch (Exception e) {
+			json.put("resultCode", "ERROR");
+			json.put("resultMsg", e.getMessage());
+		}
+		
+		WebUtil.jsonSend(json, response);
 	}
 	
 }

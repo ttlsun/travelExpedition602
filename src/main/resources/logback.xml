@@ -75,6 +75,10 @@
        <appender-ref ref="CONSOLE" />
     </logger>
     
+    <!-- MyBatis의 Mapper.xml에 선언된 namespace명을 넣어주면 해당 쿼리가 로그에 남는다. -->
+    <!-- ex> namespase가 "sql.testMapper.my" 인 경우 맨 앞에 sql만 사용하면 sql로 시작되는 모든 namespace mapper 쿼리가 표시됨  -->
+    <logger name="com.my.travelExpedition.model.AjaxApiAddrBean" level="ERROR"></logger>
+    
     <root level="INFO">
        <!-- <appender-ref ref="ROLLING" /> -->
        <appender-ref ref="CONSOLE" />
