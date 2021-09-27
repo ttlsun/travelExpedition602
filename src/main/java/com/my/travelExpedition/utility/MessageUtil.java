@@ -1,4 +1,4 @@
-package utility;
+package com.my.travelExpedition.utility;
 
 import java.util.Locale;
 
