@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	navActive('reservation');
+	navActive('member');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "예약");

@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {	
-	navActive('reservation');
+	navActive('member');
 	$('.tdTextClassAdd').css('padding-top', '10%').css('border-top','none').css('border-right','none').css('border-left','none');
 	$('.tdborderClassAdd').css('border-top','none').css('border-right','none').css('border-left','none');
 

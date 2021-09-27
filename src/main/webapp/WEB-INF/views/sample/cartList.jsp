@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	navActive('reservation');
+	navActive('member');
 	
 	$("#metaTitle").attr("content", "찜 내역");
 	$("#metaDescription").attr("content", "찜등록");
