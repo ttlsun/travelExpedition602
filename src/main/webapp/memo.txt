@@ -1,6 +1,6 @@
---¼¼¿µ´Ô ÆÄÆ®
---±âº» À¯Àú ½ÃÄö½º
---nocache ÀåÁ¡ : ¹öÆÛ ¸Ş¸ğ¸® Àı¾à; ´ÜÁ¡ : CPU °úµµÇÑ »ç¿ë;
+--ì„¸ì˜ë‹˜ íŒŒíŠ¸
+--ê¸°ë³¸ ìœ ì € ì‹œí€€ìŠ¤
+--nocache ì¥ì  : ë²„í¼ ë©”ëª¨ë¦¬ ì ˆì•½; ë‹¨ì  : CPU ê³¼ë„í•œ ì‚¬ìš©;
 drop sequence userseq;
 create sequence userseq
   increment by 1
@@ -9,10 +9,10 @@ create sequence userseq
   maxvalue 10000
   nocache;
 
---±âº» À¯Àú Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ ±¸ºĞ ÄÚµå;
---id : ¾ÆÀÌµğ; pw : ºñ¹Ğ¹øÈ£; name : °ü¸®ÀÚ, »ç¾÷Ã¼ ÀÌ¸§, °³ÀÎÈ¸¿ø ÀÌ¸§(½Ç¸í);
---email : ÀÌ¸ŞÀÏ; zipcode : ¿ìÆí¹øÈ£; address : ÁÖ¼Ò1, 2; phone : ¹øÈ£; startdate : »çÀÌÆ®½ÃÀÛÀÏ, »ç¾÷½ÃÀÛÀÏ, È¸¿ø»ıÀÏ;
+--ê¸°ë³¸ ìœ ì € í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ;
+--id : ì•„ì´ë””; pw : ë¹„ë°€ë²ˆí˜¸; name : ê´€ë¦¬ì, ì‚¬ì—…ì²´ ì´ë¦„, ê°œì¸íšŒì› ì´ë¦„(ì‹¤ëª…);
+--email : ì´ë©”ì¼; zipcode : ìš°í¸ë²ˆí˜¸; address : ì£¼ì†Œ1, 2; phone : ë²ˆí˜¸; startdate : ì‚¬ì´íŠ¸ì‹œì‘ì¼, ì‚¬ì—…ì‹œì‘ì¼, íšŒì›ìƒì¼;
 drop table users cascade constraints;
 create table users(
   num number primary key,
@@ -28,21 +28,21 @@ create table users(
   startdate date default sysdate
 );
 
-comment on table users is '»ç¿ëÀÚ Á¤º¸';
-comment on column users.num is '·¹ÄÚµå ¹øÈ£';
-comment on column users.ucode is '»ç¿ëÀÚ ±¸ºĞ ÄÚµå';
-comment on column users.id is '¾ÆÀÌµğ';
-comment on column users.pw is 'ºñ¹Ğ¹øÈ£';
-comment on column users.name is '°ü¸®ÀÚ, »ç¾÷Ã¼ ÀÌ¸§, °³ÀÎÈ¸¿ø ½Ç¸í';
-comment on column users.email is 'ÀÌ¸ŞÀÏ ÁÖ¼Ò';
-comment on column users.zipcode is '¿ìÆí¹øÈ£';
-comment on column users.address1 is 'ÁÖ¼Ò ´ëºĞ·ù';
-comment on column users.address2 is 'ÁÖ¼Ò ¼ÒºĞ·ù';
-comment on column users.phone is '¹øÈ£';
-comment on column users.startdate is '»çÀÌÆ®½ÃÀÛÀÏ, »ç¾÷½ÃÀÛÀÏ, È¸¿ø»ıÀÏ';
+comment on table users is 'ì‚¬ìš©ì ì •ë³´';
+comment on column users.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column users.ucode is 'ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ';
+comment on column users.id is 'ì•„ì´ë””';
+comment on column users.pw is 'ë¹„ë°€ë²ˆí˜¸';
+comment on column users.name is 'ê´€ë¦¬ì, ì‚¬ì—…ì²´ ì´ë¦„, ê°œì¸íšŒì› ì‹¤ëª…';
+comment on column users.email is 'ì´ë©”ì¼ ì£¼ì†Œ';
+comment on column users.zipcode is 'ìš°í¸ë²ˆí˜¸';
+comment on column users.address1 is 'ì£¼ì†Œ ëŒ€ë¶„ë¥˜';
+comment on column users.address2 is 'ì£¼ì†Œ ì†Œë¶„ë¥˜';
+comment on column users.phone is 'ë²ˆí˜¸';
+comment on column users.startdate is 'ì‚¬ì´íŠ¸ì‹œì‘ì¼, ì‚¬ì—…ì‹œì‘ì¼, íšŒì›ìƒì¼';
 
 
---°³ÀÎ(°áÁ¦¼ö´Ü) ½ÃÄö½º
+--ê°œì¸(ê²°ì œìˆ˜ë‹¨) ì‹œí€€ìŠ¤
 drop sequence payseq;
 create sequence payseq
   increment by 1
@@ -51,9 +51,9 @@ create sequence payseq
   maxvalue 10000
   nocache;
 
---°³ÀÎ(°áÁ¦¼ö´Ü) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ °íÀ¯ ¹øÈ£; paycode : °áÁ¦¼ö´Ü °íÀ¯ ¹øÈ£;
---paydetail : °áÁ¦ ¼ö´Ü »ó¼¼ Á¤º¸(Ä«µå ¹øÈ£ µî);
+--ê°œì¸(ê²°ì œìˆ˜ë‹¨) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸; paycode : ê²°ì œìˆ˜ë‹¨ ê³ ìœ  ë²ˆí˜¸;
+--paydetail : ê²°ì œ ìˆ˜ë‹¨ ìƒì„¸ ì •ë³´(ì¹´ë“œ ë²ˆí˜¸ ë“±);
 drop table pay cascade constraints;
 create table pay(
   num number primary key,
@@ -62,14 +62,14 @@ create table pay(
   paydetail varchar2(20) not null,
   foreign key(ucode) references users(ucode)
 );
-comment on table pay is '°áÁ¦¼ö´Ü µî·Ï Å×ÀÌºí';
-comment on column pay.num is '·¹ÄÚµå ¹øÈ£';
-comment on column pay.ucode is '»ç¿ëÀÚ °íÀ¯ ¹øÈ£ - ºÎ¸ğ users';
-comment on column pay.paycode is '°áÁ¦¼ö´Ü °íÀ¯ ¹øÈ£';
-comment on column pay.paydetail is '°áÁ¦¼ö´Ü »ó¼¼ Á¤º¸(Ä«µå ¹øÈ£ µî)';
+comment on table pay is 'ê²°ì œìˆ˜ë‹¨ ë“±ë¡ í…Œì´ë¸”';
+comment on column pay.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column pay.ucode is 'ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸ - ë¶€ëª¨ users';
+comment on column pay.paycode is 'ê²°ì œìˆ˜ë‹¨ ê³ ìœ  ë²ˆí˜¸';
+comment on column pay.paydetail is 'ê²°ì œìˆ˜ë‹¨ ìƒì„¸ ì •ë³´(ì¹´ë“œ ë²ˆí˜¸ ë“±)';
 
 
---°ü¸®ÀÚ(°øÁö»çÇ×) ½ÃÄö½º
+--ê´€ë¦¬ì(ê³µì§€ì‚¬í•­) ì‹œí€€ìŠ¤
 drop sequence noticeseq;
 create sequence noticeseq
   increment by 1
@@ -78,10 +78,10 @@ create sequence noticeseq
   maxvalue 10000
   nocache;
 
---°ü¸®ÀÚ(°øÁö»çÇ×) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ ±¸ºĞ ÄÚµå; postcode : °Ô½Ã±Û °íÀ¯ ¹øÈ£;
---content : °Ô½Ã±Û ³»¿ë;
---uploaddate : °Ô½Ã±Û ¿Ã¸° ³¯Â¥(È¤Àº ¼öÁ¤µÈ ³¯Â¥);
+--ê´€ë¦¬ì(ê³µì§€ì‚¬í•­) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ; postcode : ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸;
+--content : ê²Œì‹œê¸€ ë‚´ìš©;
+--uploaddate : ê²Œì‹œê¸€ ì˜¬ë¦° ë‚ ì§œ(í˜¹ì€ ìˆ˜ì •ëœ ë‚ ì§œ);
 drop table notice cascade constraints;
 create table notice(
   num number primary key,
@@ -92,16 +92,16 @@ create table notice(
   readcount number default 0,
   foreign key(ucode) references users(ucode)
 );
-comment on table notice is '°øÁö»çÇ× Å×ÀÌºí';
-comment on column notice.num is '·¹ÄÚµå ¹øÈ£';
-comment on column notice.ucode is '»ç¿ëÀÚ °íÀ¯ ¹øÈ£(°ü¸®ÀÚ¹øÈ£) - ºÎ¸ğ users';
-comment on column notice.postcode is '°Ô½Ã±Û °íÀ¯ ¹øÈ£';
-comment on column notice.content is '°Ô½Ã±Û ³»¿ë';
-comment on column notice.uploaddate is '°Ô½Ã±Û ¿Ã¸° ³¯Â¥';
-comment on column notice.readcount is '°Ô½Ã±Û Á¶È¸¼ö';
+comment on table notice is 'ê³µì§€ì‚¬í•­ í…Œì´ë¸”';
+comment on column notice.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column notice.ucode is 'ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸(ê´€ë¦¬ìë²ˆí˜¸) - ë¶€ëª¨ users';
+comment on column notice.postcode is 'ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸';
+comment on column notice.content is 'ê²Œì‹œê¸€ ë‚´ìš©';
+comment on column notice.uploaddate is 'ê²Œì‹œê¸€ ì˜¬ë¦° ë‚ ì§œ';
+comment on column notice.readcount is 'ê²Œì‹œê¸€ ì¡°íšŒìˆ˜';
 
 
---°ü¸®ÀÚ(ÀÌº¥Æ®) ½ÃÄö½º
+--ê´€ë¦¬ì(ì´ë²¤íŠ¸) ì‹œí€€ìŠ¤
 drop sequence eventseq;
 create sequence eventseq
   increment by 1
@@ -110,10 +110,10 @@ create sequence eventseq
   maxvalue 10000
   nocache;
 
---°ü¸®ÀÚ(ÀÌº¥Æ®) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ ±¸ºĞ ÄÚµå; postcode : °Ô½Ã±Û °íÀ¯ ¹øÈ£;
---content : °Ô½Ã±Û ³»¿ë;
---uploaddate : °Ô½Ã±Û ¿Ã¸° ³¯Â¥(È¤Àº ¼öÁ¤µÈ ³¯Â¥);
+--ê´€ë¦¬ì(ì´ë²¤íŠ¸) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ; postcode : ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸;
+--content : ê²Œì‹œê¸€ ë‚´ìš©;
+--uploaddate : ê²Œì‹œê¸€ ì˜¬ë¦° ë‚ ì§œ(í˜¹ì€ ìˆ˜ì •ëœ ë‚ ì§œ);
 drop table event cascade constraints;
 create table event(
   num number primary key,
@@ -126,18 +126,18 @@ create table event(
   readcount number default 0,
   foreign key(ucode) references users(ucode)
 );
-comment on table event is 'ÀÌº¥Æ® Å×ÀÌºí';
-comment on column event.num is '·¹ÄÚµå ¹øÈ£';
-comment on column event.ucode is '»ç¿ëÀÚ °íÀ¯ ¹øÈ£(°ü¸®ÀÚ¹øÈ£) - ºÎ¸ğ users';
-comment on column event.postcode is '°Ô½Ã±Û °íÀ¯ ¹øÈ£';
-comment on column event.content is '°Ô½Ã±Û ³»¿ë';
-comment on column event.uploaddate is '°Ô½Ã±Û ¿Ã¸° ³¯Â¥';
-comment on column event.startdate is 'ÀÌº¥Æ® ½ÃÀÛ ³¯Â¥';
-comment on column event.startdate is 'ÀÌº¥Æ® ³¡ ³¯Â¥';
-comment on column event.readcount is '°Ô½Ã±Û Á¶È¸¼ö';
+comment on table event is 'ì´ë²¤íŠ¸ í…Œì´ë¸”';
+comment on column event.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column event.ucode is 'ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸(ê´€ë¦¬ìë²ˆí˜¸) - ë¶€ëª¨ users';
+comment on column event.postcode is 'ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸';
+comment on column event.content is 'ê²Œì‹œê¸€ ë‚´ìš©';
+comment on column event.uploaddate is 'ê²Œì‹œê¸€ ì˜¬ë¦° ë‚ ì§œ';
+comment on column event.startdate is 'ì´ë²¤íŠ¸ ì‹œì‘ ë‚ ì§œ';
+comment on column event.startdate is 'ì´ë²¤íŠ¸ ë ë‚ ì§œ';
+comment on column event.readcount is 'ê²Œì‹œê¸€ ì¡°íšŒìˆ˜';
 
 
---°ü¸®ÀÚ(°øÁö»çÇ×+ÀÌº¥Æ® ÀÌ¹ÌÁö) ½ÃÄö½º
+--ê´€ë¦¬ì(ê³µì§€ì‚¬í•­+ì´ë²¤íŠ¸ ì´ë¯¸ì§€) ì‹œí€€ìŠ¤
 drop sequence noticeimgseq;
 create sequence noticeimgseq
   increment by 1
@@ -146,9 +146,9 @@ create sequence noticeimgseq
   maxvalue 10000
   nocache;
   
---°ü¸®ÀÚ(°øÁö»çÇ×+ÀÌº¥Æ® ÀÌ¹ÌÁö) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; postcode : °Ô½Ã±Û °íÀ¯ ¹øÈ£; imgcode : ÀÌ¹ÌÁö °íÀ¯ ¹øÈ£; 
---imgname : ÀÌ¹ÌÁö ÀÌ¸§; imgraw : ÀÌ¹ÌÁö raw file;
+--ê´€ë¦¬ì(ê³µì§€ì‚¬í•­+ì´ë²¤íŠ¸ ì´ë¯¸ì§€) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; postcode : ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸; imgcode : ì´ë¯¸ì§€ ê³ ìœ  ë²ˆí˜¸; 
+--imgname : ì´ë¯¸ì§€ ì´ë¦„; imgraw : ì´ë¯¸ì§€ raw file;
 drop table noticeimg cascade constraints;
 create table noticeimg(
   num number primary key,
@@ -158,15 +158,15 @@ create table noticeimg(
   imgraw blob not null,
   foreign key(postcode) references notice(postcode)
 );
-comment on table noticeimg is '°øÁö»çÇ×+ÀÌº¥Æ® ÀÌ¹ÌÁö Å×ÀÌºí';
-comment on column noticeimg.num is '·¹ÄÚµå ¹øÈ£';
-comment on column noticeimg.postcode is '°Ô½Ã±Û °íÀ¯ ¹øÈ£ - ºÎ¸ğ notice';
-comment on column noticeimg.imgcode is 'ÀÌ¹ÌÁö °íÀ¯ ¹øÈ£';
-comment on column noticeimg.imgname is 'ÀÌ¹ÌÁö ÀÌ¸§';
-comment on column noticeimg.imgraw is 'ÀÌ¹ÌÁö raw file';
+comment on table noticeimg is 'ê³µì§€ì‚¬í•­+ì´ë²¤íŠ¸ ì´ë¯¸ì§€ í…Œì´ë¸”';
+comment on column noticeimg.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column noticeimg.postcode is 'ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸ - ë¶€ëª¨ notice';
+comment on column noticeimg.imgcode is 'ì´ë¯¸ì§€ ê³ ìœ  ë²ˆí˜¸';
+comment on column noticeimg.imgname is 'ì´ë¯¸ì§€ ì´ë¦„';
+comment on column noticeimg.imgraw is 'ì´ë¯¸ì§€ raw file';
 
 
---°ü¸®ÀÚ+»ç¿ëÀÚ+»ç¾÷ÀÚ(¹®ÀÇ °Ô½ÃÆÇ) ½ÃÄö½º
+--ê´€ë¦¬ì+ì‚¬ìš©ì+ì‚¬ì—…ì(ë¬¸ì˜ ê²Œì‹œíŒ) ì‹œí€€ìŠ¤
 drop sequence qnaseq;
 create sequence qnaseq
   increment by 1
@@ -175,10 +175,10 @@ create sequence qnaseq
   maxvalue 10000
   nocache;
   
---°ü¸®ÀÚ+»ç¿ëÀÚ+»ç¾÷ÀÚ(¹®ÀÇ °Ô½ÃÆÇ) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ ±¸ºĞ ÄÚµå; postcode : °Ô½Ã±Û °íÀ¯ ¹øÈ£; pw : °Ô½Ã±Û ºñ¹Ğ¹øÈ£;
---content : text·Î ÇÒÁö varcharÇÒÁö °í¹Î Áß;
---uploaddate : °Ô½Ã±Û ¾÷·Îµå ÀÏÀÚ;
+--ê´€ë¦¬ì+ì‚¬ìš©ì+ì‚¬ì—…ì(ë¬¸ì˜ ê²Œì‹œíŒ) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ; postcode : ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸; pw : ê²Œì‹œê¸€ ë¹„ë°€ë²ˆí˜¸;
+--content : textë¡œ í• ì§€ varcharí• ì§€ ê³ ë¯¼ ì¤‘;
+--uploaddate : ê²Œì‹œê¸€ ì—…ë¡œë“œ ì¼ì;
 drop table qna cascade constraints;
 create table qna(
   num number primary key,
@@ -192,18 +192,18 @@ create table qna(
   relevel number not null,
   foreign key(ucode) references users(ucode)
 );
-comment on table qna is '¹®ÀÇ °Ô½ÃÆÇ Å×ÀÌºí';
-comment on column qna.num is '·¹ÄÚµå ¹øÈ£';
-comment on column qna.postcode is '°Ô½Ã±Û °íÀ¯ ¹øÈ£';
-comment on column qna.pw is '°Ô½Ã±Û ºñ¹Ğ¹øÈ£';
-comment on column qna.content is '°Ô½Ã±Û ³»¿ë';
-comment on column qna.uploaddate is '°Ô½Ã±Û ¿Ã¸° ³¯Â¥';
+comment on table qna is 'ë¬¸ì˜ ê²Œì‹œíŒ í…Œì´ë¸”';
+comment on column qna.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column qna.postcode is 'ê²Œì‹œê¸€ ê³ ìœ  ë²ˆí˜¸';
+comment on column qna.pw is 'ê²Œì‹œê¸€ ë¹„ë°€ë²ˆí˜¸';
+comment on column qna.content is 'ê²Œì‹œê¸€ ë‚´ìš©';
+comment on column qna.uploaddate is 'ê²Œì‹œê¸€ ì˜¬ë¦° ë‚ ì§œ';
 
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
---½Â¹Î´Ô ÆÄÆ®
---°ü¸®ÀÚ+»ç¾÷ÀÚ(»ç¾÷Àå °ü¸®) ½ÃÄö½º
+--ìŠ¹ë¯¼ë‹˜ íŒŒíŠ¸
+--ê´€ë¦¬ì+ì‚¬ì—…ì(ì‚¬ì—…ì¥ ê´€ë¦¬) ì‹œí€€ìŠ¤
 drop sequence roomseq;
 create sequence roomseq
   increment by 1
@@ -212,12 +212,12 @@ create sequence roomseq
   maxvalue 10000
   nocache;
   
---°ü¸®ÀÚ+»ç¾÷ÀÚ(»ç¾÷Àå °ü¸®) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ ±¸ºĞ ÄÚµå; rcode : ¼÷¼Ò °íÀ¯ ¹øÈ£;
---rname : ¼÷¼Ò ÀÌ¸§; radress : ¼÷¼Ò ÁÖ¼Ò; rphone : ¼÷¼Ò ¹øÈ£; guests : ÀÌ¿ë °¡´É ÀÎ¿ø; 
---dayprice : ³·½Ã°£ ºñ¿ë; nightprice : ¹ã½Ã°£ ºñ¿ë; alldayprice : 1¹Ú ºñ¿ë;
---inform : text·Î ÇÒÁö varcharÇÒÁö °í¹Î Áß;
---amenity : ³ĞÀº ÀÇ¹ÌÀÇ amenity, ºÎ´ë ½Ã¼³ ¹× ºñÇ° µî;
+--ê´€ë¦¬ì+ì‚¬ì—…ì(ì‚¬ì—…ì¥ ê´€ë¦¬) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì êµ¬ë¶„ ì½”ë“œ; rcode : ìˆ™ì†Œ ê³ ìœ  ë²ˆí˜¸;
+--rname : ìˆ™ì†Œ ì´ë¦„; radress : ìˆ™ì†Œ ì£¼ì†Œ; rphone : ìˆ™ì†Œ ë²ˆí˜¸; guests : ì´ìš© ê°€ëŠ¥ ì¸ì›; 
+--dayprice : ë‚®ì‹œê°„ ë¹„ìš©; nightprice : ë°¤ì‹œê°„ ë¹„ìš©; alldayprice : 1ë°• ë¹„ìš©;
+--inform : textë¡œ í• ì§€ varcharí• ì§€ ê³ ë¯¼ ì¤‘;
+--amenity : ë„“ì€ ì˜ë¯¸ì˜ amenity, ë¶€ëŒ€ ì‹œì„¤ ë° ë¹„í’ˆ ë“±;
 drop table rooms cascade constraints;
 create table rooms(
   num number primary key,
@@ -238,7 +238,7 @@ create table rooms(
 ---------------------------------------------------------------
 
 
---»ç¾÷ÀÚ(°í°´ÀÌ¿ë°ü¸®) ½ÃÄö½º
+--ì‚¬ì—…ì(ê³ ê°ì´ìš©ê´€ë¦¬) ì‹œí€€ìŠ¤
 drop sequence umanageseq;
 create sequence umanageseq
   increment by 1
@@ -247,10 +247,10 @@ create sequence umanageseq
   maxvalue 10000
   nocache;
   
---°³ÀÎ+»ç¾÷ÀÚ(°í°´ÀÌ¿ë°ü¸®) Å×ÀÌºí
---num : ·¹ÄÚµå ¹øÈ£; rcode : ¼÷¼Ò °íÀ¯ ¹øÈ£; ucode : »ç¿ëÀÚ °íÀ¯ ¹øÈ£(°³ÀÎ);
---startdate : »ç¿ë ½ÃÀÛÀÏ; enddate : »ç¿ë ¸¶Áö¸·; nop : ÀÌ¿ë °í°´ ¼ö;
---totalprice : ÃÑ¾×; status : ÇöÀç »óÅÂ(¿¹¾àÁß, ¿¹¾à È®ÀÎ, ÀÔ±İ ¿Ï·á, ÀÌ¿ë Áß, ÀÌ¿ë ¿Ï·á µî);
+--ê°œì¸+ì‚¬ì—…ì(ê³ ê°ì´ìš©ê´€ë¦¬) í…Œì´ë¸”
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; rcode : ìˆ™ì†Œ ê³ ìœ  ë²ˆí˜¸; ucode : ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸(ê°œì¸);
+--startdate : ì‚¬ìš© ì‹œì‘ì¼; enddate : ì‚¬ìš© ë§ˆì§€ë§‰; nop : ì´ìš© ê³ ê° ìˆ˜;
+--totalprice : ì´ì•¡; status : í˜„ì¬ ìƒíƒœ(ì˜ˆì•½ì¤‘, ì˜ˆì•½ í™•ì¸, ì…ê¸ˆ ì™„ë£Œ, ì´ìš© ì¤‘, ì´ìš© ì™„ë£Œ ë“±);
 drop table usermanage cascade constraints;
 create table usermanage(
   num number primary key,
@@ -266,19 +266,19 @@ create table usermanage(
   foreign key(ucode) references users(ucode),
   foreign key(paycode) references pay(paycode)
 );
-comment on table usermanage is '°í°´ÀÌ¿ë°ü¸® Å×ÀÌºí';
-comment on column usermanage.num is '·¹ÄÚµå ¹øÈ£';
-comment on column usermanage.rcode is '¼÷¼Ò °íÀ¯ ¹øÈ£ - ºÎ¸ğ rooms';
-comment on column usermanage.ucode is '»ç¿ëÀÚ °íÀ¯ ¹øÈ£(°³ÀÎ) - ºÎ¸ğ users';
-comment on column usermanage.startdate is '»ç¿ë ½ÃÀÛÀÏ';
-comment on column usermanage.enddate is '»ç¿ë ¸¶Áö¸·ÀÏ';
-comment on column usermanage.nop is 'ÀÌ¿ëÇÒ °í°´ ¼ö';
-comment on column usermanage.totalprice is '°áÁ¦ ÃÑ¾×';
-comment on column usermanage.paycode is '°áÁ¦ ¼ö´Ü °íÀ¯ ¹øÈ£ - ºÎ¸ğ pay';
-comment on column usermanage.status is 'ÇöÀç »óÅÂ(¿¹¾àÁß, ¿¹¾à È®ÀÎ, ÀÔ±İ ¿Ï·á, ÀÌ¿ë Áß, ÀÌ¿ë ¿Ï·á µî)';
+comment on table usermanage is 'ê³ ê°ì´ìš©ê´€ë¦¬ í…Œì´ë¸”';
+comment on column usermanage.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column usermanage.rcode is 'ìˆ™ì†Œ ê³ ìœ  ë²ˆí˜¸ - ë¶€ëª¨ rooms';
+comment on column usermanage.ucode is 'ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸(ê°œì¸) - ë¶€ëª¨ users';
+comment on column usermanage.startdate is 'ì‚¬ìš© ì‹œì‘ì¼';
+comment on column usermanage.enddate is 'ì‚¬ìš© ë§ˆì§€ë§‰ì¼';
+comment on column usermanage.nop is 'ì´ìš©í•  ê³ ê° ìˆ˜';
+comment on column usermanage.totalprice is 'ê²°ì œ ì´ì•¡';
+comment on column usermanage.paycode is 'ê²°ì œ ìˆ˜ë‹¨ ê³ ìœ  ë²ˆí˜¸ - ë¶€ëª¨ pay';
+comment on column usermanage.status is 'í˜„ì¬ ìƒíƒœ(ì˜ˆì•½ì¤‘, ì˜ˆì•½ í™•ì¸, ì…ê¸ˆ ì™„ë£Œ, ì´ìš© ì¤‘, ì´ìš© ì™„ë£Œ ë“±)';
 
 
---°³ÀÎ(Âò/°ü½É¸ñ·Ï) ½ÃÄö½º
+--ê°œì¸(ì°œ/ê´€ì‹¬ëª©ë¡) ì‹œí€€ìŠ¤
 drop sequence likeseq;
 create sequence likeseq
   increment by 1
@@ -287,9 +287,9 @@ create sequence likeseq
   maxvalue 10000
   nocache;
   
---°³ÀÎ(Âò/°ü½É¸ñ·Ï) Å×ÀÌºí : ¼÷¼Ò, °ü±¤Áö, Ä¿¹Â´ÏÆ¼
---num : ·¹ÄÚµå ¹øÈ£; ucode : »ç¿ëÀÚ °íÀ¯ ¹øÈ£; lcode : likecode, ¼÷¼Ò+°ü±¤Áö+Ä¿¹Â´ÏÆ¼ °Ô½Ã±Û ÄÚµå;
---likedate : ÂòÇÑ ³¯Â¥;
+--ê°œì¸(ì°œ/ê´€ì‹¬ëª©ë¡) í…Œì´ë¸” : ìˆ™ì†Œ, ê´€ê´‘ì§€, ì»¤ë®¤ë‹ˆí‹°
+--num : ë ˆì½”ë“œ ë²ˆí˜¸; ucode : ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸; lcode : likecode, ìˆ™ì†Œ+ê´€ê´‘ì§€+ì»¤ë®¤ë‹ˆí‹° ê²Œì‹œê¸€ ì½”ë“œ;
+--likedate : ì°œí•œ ë‚ ì§œ;
 drop table likes cascade constraints;
 create table likes(
   num number primary key,
@@ -300,11 +300,11 @@ create table likes(
   foreign key(lcode) references notice(postcode),
   foreign key(lcode) references qna(postcode)
 );
-comment on table likes is 'Âò/°ü½É¸ñ·Ï Å×ÀÌºí';
-comment on column likes.num is '·¹ÄÚµå ¹øÈ£';
-comment on column likes.ucode is '»ç¿ëÀÚ °íÀ¯ ¹øÈ£ - ºÎ¸ğ users';
-comment on column likes.lcode is '°Ô½Ã±Û ÄÚµå - ºÎ¸ğ ¼÷¼Ò°ü±¤ÁöÄ¿¹Â´ÏÆ¼ °Ô½Ã±Û ¹øÈ£';
-comment on column likes.likedate is 'ÂòÇÑ ³¯Â¥';
+comment on table likes is 'ì°œ/ê´€ì‹¬ëª©ë¡ í…Œì´ë¸”';
+comment on column likes.num is 'ë ˆì½”ë“œ ë²ˆí˜¸';
+comment on column likes.ucode is 'ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸ - ë¶€ëª¨ users';
+comment on column likes.lcode is 'ê²Œì‹œê¸€ ì½”ë“œ - ë¶€ëª¨ ìˆ™ì†Œê´€ê´‘ì§€ì»¤ë®¤ë‹ˆí‹° ê²Œì‹œê¸€ ë²ˆí˜¸';
+comment on column likes.likedate is 'ì°œí•œ ë‚ ì§œ';
 
 
 
@@ -316,46 +316,46 @@ comment on column likes.likedate is 'ÂòÇÑ ³¯Â¥';
 
 
 -------------------------------------------------------------------
---°üÇü´Ô ÆÄÆ®
+--ê´€í˜•ë‹˜ íŒŒíŠ¸
 
 drop sequence tour_seq;
 create sequence tour_seq
-	increment by 1
-	start with 1
-	minvalue 1
-	nocache;
+   increment by 1
+   start with 1
+   minvalue 1
+   nocache;
 
 
 drop table touristspot;
 
 create table touristspot(
-	tnum number not null primary key,
-	tcategory varchar2(45) not null,
-	ttitle varchar2(60) not null,
-	tcomments varchar2(750),
-	tinputid varchar2(30) not null,
-	tinputdate date default sysdate,
-	taddress1 varchar2(75) not null,
-	taddress2 varchar2(75),
-	tprice number default 0,
-	tdiscount varchar2(30) default '0',
-	timage varchar2(60),
-	tpoint number default '0' 
+   tnum number not null primary key,
+   tcategory varchar2(45) not null,
+   ttitle varchar2(60) not null,
+   tcomments varchar2(750),
+   tinputid varchar2(30) not null,
+   tinputdate date default sysdate,
+   taddress1 varchar2(75) not null,
+   taddress2 varchar2(75),
+   tprice number default 0,
+   tdiscount varchar2(30) default '0',
+   timage varchar2(60),
+   tpoint number default '0' 
 );
 
-comment on table touristspot is '°ü±¤Áö °Ô½ÃÆÇ';
-comment on column touristspot.tnum is '°ü±¤Áö ¹øÈ£';
-comment on column touristspot.tcategory is '°ü±¤Áö Ä«Å×°í¸®';
-comment on column touristspot.ttitle is '°ü±¤Áö Á¦¸ñ';
-comment on column touristspot.tcomments is '°ü±¤Áö ³»¿ë';
-comment on column touristspot.tinputid is '°ü±¤Áö µî·Ï ¾ÆÀÌµğ';
-comment on column touristspot.tinputdate is '°ü±¤Áö µî·Ï ³¯Â¥';
-comment on column touristspot.taddress1 is '°ü±¤Áö ÁÖ¼Ò1';
-comment on column touristspot.taddress2 is '°ü±¤Áö ÁÖ¼Ò2';
-comment on column touristspot.tprice is '°ü±¤Áö °¡°İ';
-comment on column touristspot.tdiscount is '°ü±¤Áö ÇÒÀÎ';
-comment on column touristspot.timage is '°ü±¤Áö ÀÌ¹ÌÁö';
-comment on column touristspot.tpoint is '°ü±¤Áö Æ÷ÀÎÆ®';
+comment on table touristspot is 'ê´€ê´‘ì§€ ê²Œì‹œíŒ';
+comment on column touristspot.tnum is 'ê´€ê´‘ì§€ ë²ˆí˜¸';
+comment on column touristspot.tcategory is 'ê´€ê´‘ì§€ ì¹´í…Œê³ ë¦¬';
+comment on column touristspot.ttitle is 'ê´€ê´‘ì§€ ì œëª©';
+comment on column touristspot.tcomments is 'ê´€ê´‘ì§€ ë‚´ìš©';
+comment on column touristspot.tinputid is 'ê´€ê´‘ì§€ ë“±ë¡ ì•„ì´ë””';
+comment on column touristspot.tinputdate is 'ê´€ê´‘ì§€ ë“±ë¡ ë‚ ì§œ';
+comment on column touristspot.taddress1 is 'ê´€ê´‘ì§€ ì£¼ì†Œ1';
+comment on column touristspot.taddress2 is 'ê´€ê´‘ì§€ ì£¼ì†Œ2';
+comment on column touristspot.tprice is 'ê´€ê´‘ì§€ ê°€ê²©';
+comment on column touristspot.tdiscount is 'ê´€ê´‘ì§€ í• ì¸';
+comment on column touristspot.timage is 'ê´€ê´‘ì§€ ì´ë¯¸ì§€';
+comment on column touristspot.tpoint is 'ê´€ê´‘ì§€ í¬ì¸íŠ¸';
 
 commit;
 
@@ -369,48 +369,48 @@ commit;
 
 
 -------------------------------------------------------------------------
---Çö¼±´Ô ÆÄÆ®
--- Ä¿¹Â´ÏÆ¼Å×ÀÌºí
+--í˜„ì„ ë‹˜ íŒŒíŠ¸
+-- ì»¤ë®¤ë‹ˆí‹°í…Œì´ë¸”
 DROP TABLE COMMUNITY;
 
 CREATE TABLE COMMUNITY ( 
-	NUM NUMBER NOT NULL PRIMARY KEY,
-	REVIEW_NUM NUMBER NOT NULL,
-	REVIEW_TYPE VARCHAR2(2) NOT NULL,
-	IMGURL VARCHAR2(60) NOT NULL,
-	TITLE VARCHAR2(200) NOT NULL,
-	SUMMARY VARCHAR2(200) NOT NULL,
-	CONTENTS CLOB,
-	HITS NUMBER DEFAULT '0' NULL,
-	RECOMMEND NUMBER DEFAULT '0' NULL,
-	STEAMED  NUMBER DEFAULT '0' NULL,
-	STAR_RANKING  NUMBER DEFAULT '0' NULL,
-	REG_KEYWORD VARCHAR2(600) DEFAULT NULL,
-	STATUS VARCHAR2(2) DEFAULT '01' NOT NULL,
-	REG_ID VARCHAR2(45) NULL ,
-	REG_DATE DATE DEFAULT SYSDATE NULL ,
-	MOD_ID VARCHAR2(45) NULL,
-	MOD_DATE DATE NULL 
+   NUM NUMBER NOT NULL PRIMARY KEY,
+   REVIEW_NUM NUMBER NOT NULL,
+   REVIEW_TYPE VARCHAR2(2) NOT NULL,
+   IMGURL VARCHAR2(60) NOT NULL,
+   TITLE VARCHAR2(200) NOT NULL,
+   SUMMARY VARCHAR2(200) NOT NULL,
+   CONTENTS CLOB,
+   HITS NUMBER DEFAULT '0' NULL,
+   RECOMMEND NUMBER DEFAULT '0' NULL,
+   STEAMED  NUMBER DEFAULT '0' NULL,
+   STAR_RANKING  NUMBER DEFAULT '0' NULL,
+   REG_KEYWORD VARCHAR2(600) DEFAULT NULL,
+   STATUS VARCHAR2(2) DEFAULT '01' NOT NULL,
+   REG_ID VARCHAR2(45) NULL ,
+   REG_DATE DATE DEFAULT SYSDATE NULL ,
+   MOD_ID VARCHAR2(45) NULL,
+   MOD_DATE DATE NULL 
 );
 
-COMMENT ON TABLE COMMUNITY IS 'Ä¿¹Â´ÏÆ¼Å×ÀÌºí';
-COMMENT ON COLUMN COMMUNITY.NUM IS 'Ä¿¹Â´ÏÆ¼ °íÀ¯¹øÈ£';
-COMMENT ON COLUMN COMMUNITY.REVIEW_NUM IS 'ÈÄ±â ¹øÈ£(Ä·ÇÎ/±Û·¥ÇÎ¹øÈ£ or °ü±¤Áö¹øÈ£)';
-COMMENT ON COLUMN COMMUNITY.REVIEW_TYPE IS 'ÈÄ±â±¸ºĞ°ª(01:Ä·ÇÎ/±Û·¥ÇÎÈÄ±â, 02:°ü±¤ÁöÈÄ±â) ';
-COMMENT ON COLUMN COMMUNITY.IMGURL IS '´ëÇ¥ÀÌ¹ÌÁö ÆÄÀÏ¸í';
-COMMENT ON COLUMN COMMUNITY.TITLE IS 'Á¦¸ñ';
-COMMENT ON COLUMN COMMUNITY.SUMMARY IS 'ÇÑÁÙ¿ä¾à';
-COMMENT ON COLUMN COMMUNITY.CONTENTS IS '³»¿ë';
-COMMENT ON COLUMN COMMUNITY.HITS IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN COMMUNITY.RECOMMEND IS 'ÃßÃµ¼ö(ÁÁ¾Æ¿ä)';
-COMMENT ON COLUMN COMMUNITY.STEAMED IS 'Âò¼ö';
-COMMENT ON COLUMN COMMUNITY.STAR_RANKING IS 'º°µî±Ş';
-COMMENT ON COLUMN COMMUNITY.REG_KEYWORD IS 'µî·ÏÅ°¿öµå';
-COMMENT ON COLUMN COMMUNITY.STATUS IS 'Ä¿¹Â´ÏÆ¼»óÅÂ°ª(01:³ëÃâ/02:ºñ³ëÃâ)';
-COMMENT ON COLUMN COMMUNITY.REG_ID IS 'µî·Ï¾ÆÀÌµğ';
-COMMENT ON COLUMN COMMUNITY.REG_DATE IS 'µî·Ï³¯Â¥';
-COMMENT ON COLUMN COMMUNITY.MOD_ID IS '¼öÁ¤¾ÆÀÌµğ';
-COMMENT ON COLUMN COMMUNITY.MOD_DATE IS '¼öÁ¤³¯Â¥';
+COMMENT ON TABLE COMMUNITY IS 'ì»¤ë®¤ë‹ˆí‹°í…Œì´ë¸”';
+COMMENT ON COLUMN COMMUNITY.NUM IS 'ì»¤ë®¤ë‹ˆí‹° ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN COMMUNITY.REVIEW_NUM IS 'í›„ê¸° ë²ˆí˜¸(ìº í•‘/ê¸€ë¨í•‘ë²ˆí˜¸ or ê´€ê´‘ì§€ë²ˆí˜¸)';
+COMMENT ON COLUMN COMMUNITY.REVIEW_TYPE IS 'í›„ê¸°êµ¬ë¶„ê°’(01:ìº í•‘/ê¸€ë¨í•‘í›„ê¸°, 02:ê´€ê´‘ì§€í›„ê¸°) ';
+COMMENT ON COLUMN COMMUNITY.IMGURL IS 'ëŒ€í‘œì´ë¯¸ì§€ íŒŒì¼ëª…';
+COMMENT ON COLUMN COMMUNITY.TITLE IS 'ì œëª©';
+COMMENT ON COLUMN COMMUNITY.SUMMARY IS 'í•œì¤„ìš”ì•½';
+COMMENT ON COLUMN COMMUNITY.CONTENTS IS 'ë‚´ìš©';
+COMMENT ON COLUMN COMMUNITY.HITS IS 'ì¡°íšŒìˆ˜';
+COMMENT ON COLUMN COMMUNITY.RECOMMEND IS 'ì¶”ì²œìˆ˜(ì¢‹ì•„ìš”)';
+COMMENT ON COLUMN COMMUNITY.STEAMED IS 'ì°œìˆ˜';
+COMMENT ON COLUMN COMMUNITY.STAR_RANKING IS 'ë³„ë“±ê¸‰';
+COMMENT ON COLUMN COMMUNITY.REG_KEYWORD IS 'ë“±ë¡í‚¤ì›Œë“œ';
+COMMENT ON COLUMN COMMUNITY.STATUS IS 'ì»¤ë®¤ë‹ˆí‹°ìƒíƒœê°’(01:ë…¸ì¶œ/02:ë¹„ë…¸ì¶œ)';
+COMMENT ON COLUMN COMMUNITY.REG_ID IS 'ë“±ë¡ì•„ì´ë””';
+COMMENT ON COLUMN COMMUNITY.REG_DATE IS 'ë“±ë¡ë‚ ì§œ';
+COMMENT ON COLUMN COMMUNITY.MOD_ID IS 'ìˆ˜ì •ì•„ì´ë””';
+COMMENT ON COLUMN COMMUNITY.MOD_DATE IS 'ìˆ˜ì •ë‚ ì§œ';
 
 DROP SEQUENCE COMMUNITY_SEQ;
 CREATE SEQUENCE COMMUNITY_SEQ
@@ -422,26 +422,26 @@ CREATE SEQUENCE COMMUNITY_SEQ
   
 --------------------------------------------------
 
--- ´ñ±ÛÅ×ÀÌºí
+-- ëŒ“ê¸€í…Œì´ë¸”
 
 DROP TABLE REPLY;
 
 CREATE TABLE REPLY ( 
-	NUM NUMBER NOT NULL PRIMARY KEY,
-	REVIEW_NUM NUMBER NOT NULL,
-	REVIEW_TYPE VARCHAR2(2) NOT NULL,
-	CONTENTS CLOB,
-	REG_ID VARCHAR2(45) NULL ,
-	REG_DATE DATE DEFAULT SYSDATE NULL
+   NUM NUMBER NOT NULL PRIMARY KEY,
+   REVIEW_NUM NUMBER NOT NULL,
+   REVIEW_TYPE VARCHAR2(2) NOT NULL,
+   CONTENTS CLOB,
+   REG_ID VARCHAR2(45) NULL ,
+   REG_DATE DATE DEFAULT SYSDATE NULL
 );
 
-COMMENT ON TABLE REPLY IS '´ñ±Û Å×ÀÌºí';
-COMMENT ON COLUMN REPLY.NUM IS '´ñ±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN REPLY.REVIEW_NUM IS 'ÈÄ±â ¹øÈ£(Ä·ÇÎ/±Û·¥ÇÎ¹øÈ£ or °ü±¤Áö¹øÈ£)';
-COMMENT ON COLUMN REPLY.REVIEW_TYPE IS 'ÈÄ±â±¸ºĞ°ª(01:Ä·ÇÎ/±Û·¥ÇÎÈÄ±â, 02:°ü±¤ÁöÈÄ±â) ';
-COMMENT ON COLUMN REPLY.CONTENTS IS '³»¿ë';
-COMMENT ON COLUMN REPLY.REG_ID IS 'µî·Ï¾ÆÀÌµğ';
-COMMENT ON COLUMN REPLY.REG_DATE IS 'µî·Ï³¯Â¥';
+COMMENT ON TABLE REPLY IS 'ëŒ“ê¸€ í…Œì´ë¸”';
+COMMENT ON COLUMN REPLY.NUM IS 'ëŒ“ê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN REPLY.REVIEW_NUM IS 'í›„ê¸° ë²ˆí˜¸(ìº í•‘/ê¸€ë¨í•‘ë²ˆí˜¸ or ê´€ê´‘ì§€ë²ˆí˜¸)';
+COMMENT ON COLUMN REPLY.REVIEW_TYPE IS 'í›„ê¸°êµ¬ë¶„ê°’(01:ìº í•‘/ê¸€ë¨í•‘í›„ê¸°, 02:ê´€ê´‘ì§€í›„ê¸°) ';
+COMMENT ON COLUMN REPLY.CONTENTS IS 'ë‚´ìš©';
+COMMENT ON COLUMN REPLY.REG_ID IS 'ë“±ë¡ì•„ì´ë””';
+COMMENT ON COLUMN REPLY.REG_DATE IS 'ë“±ë¡ë‚ ì§œ';
 
 DROP SEQUENCE REPLY_SEQ;
 CREATE SEQUENCE REPLY_SEQ
@@ -453,19 +453,19 @@ CREATE SEQUENCE REPLY_SEQ
   
 --------------------------------------------------
 
--- Æò°¡ µî±Ş Å×ÀÌºí (ÀúÀå¿ëµµ)
+-- í‰ê°€ ë“±ê¸‰ í…Œì´ë¸” (ì €ì¥ìš©ë„)
 
 DROP TABLE RATING;
 
 CREATE TABLE RATING ( 
-	REVIEW_NUM NUMBER NOT NULL,
-	REVIEW_TYPE VARCHAR2(2) NOT NULL,
-	RATING_TYPE VARCHAR2(2) NOT NULL,
-	STAR_RANKING  NUMBER DEFAULT '0' NULL,
-	REG_ID VARCHAR2(45) NULL ,
-	REG_DATE DATE DEFAULT SYSDATE NULL,
-	MOD_ID VARCHAR2(45) NULL,
-	MOD_DATE DATE NULL 
+   REVIEW_NUM NUMBER NOT NULL,
+   REVIEW_TYPE VARCHAR2(2) NOT NULL,
+   RATING_TYPE VARCHAR2(2) NOT NULL,
+   STAR_RANKING  NUMBER DEFAULT '0' NULL,
+   REG_ID VARCHAR2(45) NULL ,
+   REG_DATE DATE DEFAULT SYSDATE NULL,
+   MOD_ID VARCHAR2(45) NULL,
+   MOD_DATE DATE NULL 
 );
 
 CREATE UNIQUE INDEX RATING_PK ON RATING
@@ -479,15 +479,15 @@ ALTER TABLE RATING ADD (
   USING INDEX RATING_PK
   ENABLE VALIDATE);
 
-COMMENT ON TABLE RATING IS 'ÁÁ¾Æ¿äÂòº° Å×ÀÌºí';
-COMMENT ON COLUMN RATING.REVIEW_NUM IS 'Ä¿¹Â´ÏÆ¼ ÈÄ±â °íÀ¯¹øÈ£';
-COMMENT ON COLUMN RATING.REVIEW_TYPE IS 'ÈÄ±â±¸ºĞ°ª(01:Ä·ÇÎ/±Û·¥ÇÎÈÄ±â, 02:°ü±¤ÁöÈÄ±â) ';
-COMMENT ON COLUMN RATING.RATING_TYPE IS '±¸ºĞ°ª(ÁÁ¾Æ¿ä,Âò,º°)) ';
-COMMENT ON COLUMN RATING.STAR_RANKING IS 'º°°¹¼ö ';
-COMMENT ON COLUMN RATING.REG_ID IS 'µî·Ï¾ÆÀÌµğ';
-COMMENT ON COLUMN RATING.REG_DATE IS 'µî·Ï³¯Â¥';
-COMMENT ON COLUMN RATING.MOD_ID IS '¼öÁ¤¾ÆÀÌµğ';
-COMMENT ON COLUMN RATING.MOD_DATE IS '¼öÁ¤³¯Â¥';
+COMMENT ON TABLE RATING IS 'ì¢‹ì•„ìš”ì°œë³„ í…Œì´ë¸”';
+COMMENT ON COLUMN RATING.REVIEW_NUM IS 'ì»¤ë®¤ë‹ˆí‹° í›„ê¸° ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN RATING.REVIEW_TYPE IS 'í›„ê¸°êµ¬ë¶„ê°’(01:ìº í•‘/ê¸€ë¨í•‘í›„ê¸°, 02:ê´€ê´‘ì§€í›„ê¸°) ';
+COMMENT ON COLUMN RATING.RATING_TYPE IS 'êµ¬ë¶„ê°’(ì¢‹ì•„ìš”,ì°œ,ë³„)) ';
+COMMENT ON COLUMN RATING.STAR_RANKING IS 'ë³„ê°¯ìˆ˜ ';
+COMMENT ON COLUMN RATING.REG_ID IS 'ë“±ë¡ì•„ì´ë””';
+COMMENT ON COLUMN RATING.REG_DATE IS 'ë“±ë¡ë‚ ì§œ';
+COMMENT ON COLUMN RATING.MOD_ID IS 'ìˆ˜ì •ì•„ì´ë””';
+COMMENT ON COLUMN RATING.MOD_DATE IS 'ìˆ˜ì •ë‚ ì§œ';
 
 DROP SEQUENCE RATING_SEQ;
 CREATE SEQUENCE RATING_SEQ
@@ -509,141 +509,141 @@ CREATE SEQUENCE RATING_SEQ
 
 
 ------------------------------------------------------
--- ½Â¹Î´Ô ÆÄÆ®
--- Ä·ÇÎÀå ¸ñ·Ï Å×ÀÌºí
+-- ìŠ¹ë¯¼ë‹˜ íŒŒíŠ¸
+-- ìº í•‘ì¥ ëª©ë¡ í…Œì´ë¸”
 
--- num: Ä·ÇÎÀå °íÀ¯¹øÈ£; name: Ä·ÇÎÀå ÀÌ¸§; district: ±¸¿ª;
--- ccode: Ä·ÇÎ±¸ºĞÄÚµå(01:ÀÏ¹İ¾ß¿µÀå/02:ÀÚµ¿Â÷Ä·ÇÎÀå/03:±Û·¥ÇÎ/04:Ä«¶ó¹İ);
--- theme: Å×¸¶(½£/ÇØº¯/È£¼ö,°è°î/µµ½É/¼¶); tag: ÅÂ±×(#);
--- introduction: ¼Ò°³±Û; outphoto: ¿ÜºÎÀü°æ»çÁø;
--- postcode: ¿ìÆí¹øÈ£; address1,2,3,4: ÁÖ¼Ò1(½Ã), 2(±º,±¸), 3(µ¿,±æ), 4(ÁÂÇ¥); contact: ¿¬¶ôÃ³;
--- regdate: µî·ÏÀÏ; regid: µî·ÏÀÚid; readcount: Á¶È¸¼ö; upcount: ÃßÃµ¼ö;
--- likecount: Âò°¹¼ö; reviewcount: ¸®ºä¼ö; starscore: Æò±Õº°Á¡;
+-- num: ìº í•‘ì¥ ê³ ìœ ë²ˆí˜¸; name: ìº í•‘ì¥ ì´ë¦„; district: êµ¬ì—­;
+-- ccode: ìº í•‘êµ¬ë¶„ì½”ë“œ(01:ì¼ë°˜ì•¼ì˜ì¥/02:ìë™ì°¨ìº í•‘ì¥/03:ê¸€ë¨í•‘/04:ì¹´ë¼ë°˜);
+-- theme: í…Œë§ˆ(ìˆ²/í•´ë³€/í˜¸ìˆ˜,ê³„ê³¡/ë„ì‹¬/ì„¬); tag: íƒœê·¸(#);
+-- introduction: ì†Œê°œê¸€; outphoto: ì™¸ë¶€ì „ê²½ì‚¬ì§„;
+-- postcode: ìš°í¸ë²ˆí˜¸; address1,2,3,4: ì£¼ì†Œ1(ì‹œ), 2(êµ°,êµ¬), 3(ë™,ê¸¸), 4(ì¢Œí‘œ); contact: ì—°ë½ì²˜;
+-- regdate: ë“±ë¡ì¼; regid: ë“±ë¡ìid; readcount: ì¡°íšŒìˆ˜; upcount: ì¶”ì²œìˆ˜;
+-- likecount: ì°œê°¯ìˆ˜; reviewcount: ë¦¬ë·°ìˆ˜; starscore: í‰ê· ë³„ì ;
 
 DROP TABLE CAMPING;
 
 CREATE TABLE CAMPING (
-	NUM NUMBER PRIMARY KEY,
-	NAME VARCHAR2(60) NOT NULL,
-	DISTRICT VARCHAR2(20) NOT NULL,
-	CCODE VARCHAR2(30) NOT NULL,
-	THEME VARCHAR2(30) NOT NULL,
-	TAG VARCHAR2(120) NOT NULL,
-	INTRODUCTION VARCHAR2(300),
-	OUTPHOTO VARCHAR2(100),
-	POSTCODE VARCHAR2(15),
-	ADDRESS1 VARCHAR2(150) NOT NULL,
-	ADDRESS2 VARCHAR2(150) NOT NULL,
-	ADDRESS3 VARCHAR3(150) NOT NULL,
-	ADDRESS4 VARCHAR4(150) NOT NULL,
-	CONTACT VARCHAR2(20) NOT NULL,
-	REGDATE DATE DEFAULT SYSDATE,
-	REGID VARCHAR2(20) NOT NULL,
-	READCOUNT NUMBER DEFAULT 0,
-	UPCOUNT NUMBER DEFAULT 0,
-	LIKECOUNT NUMBER DEFAULT 0,
-	REVIEWCOUNT NUMBER DEFAULT 0,
-	STARSCORE NUMBER DEFAULT 0
+   NUM NUMBER PRIMARY KEY,
+   NAME VARCHAR2(60) NOT NULL,
+   DISTRICT VARCHAR2(20) NOT NULL,
+   CCODE VARCHAR2(30) NOT NULL,
+   THEME VARCHAR2(30) NOT NULL,
+   TAG VARCHAR2(120) NOT NULL,
+   INTRODUCTION VARCHAR2(300),
+   OUTPHOTO VARCHAR2(100),
+   POSTCODE VARCHAR2(15),
+   ADDRESS1 VARCHAR2(150) NOT NULL,
+   ADDRESS2 VARCHAR2(150) NOT NULL,
+   ADDRESS3 VARCHAR3(150) NOT NULL,
+   ADDRESS4 VARCHAR4(150) NOT NULL,
+   CONTACT VARCHAR2(20) NOT NULL,
+   REGDATE DATE DEFAULT SYSDATE,
+   REGID VARCHAR2(20) NOT NULL,
+   READCOUNT NUMBER DEFAULT 0,
+   UPCOUNT NUMBER DEFAULT 0,
+   LIKECOUNT NUMBER DEFAULT 0,
+   REVIEWCOUNT NUMBER DEFAULT 0,
+   STARSCORE NUMBER DEFAULT 0
 );
 
-COMMENT ON TABLE CAMPING IS 'Ä·ÇÎÀå¸ñ·ÏÅ×ÀÌºí';
-COMMENT ON COLUMN CAMPING.NUM IS 'Ä·ÇÎÀå °íÀ¯¹øÈ£';
-COMMENT ON COLUMN CAMPING.NAME IS 'Ä·ÇÎÀå ÀÌ¸§';
-COMMENT ON COLUMN CAMPING.DISTRICT IS '±¸¿ª';
-COMMENT ON COLUMN CAMPING.CCODE IS 'Ä«Å×°í¸®(ÀÏ¹İ/ÀÚµ¿Â÷Ä·ÇÎÀå/±Û·¥ÇÎ/Ä«¶ó¹İ)';
-COMMENT ON COLUMN CAMPING.THEME IS 'Å×¸¶(½£/ÇØº¯/È£¼ö,°è°î/µµ½É/¼¶)';
-COMMENT ON COLUMN CAMPING.TAG IS 'ÅÂ±×(#)'
-COMMENT ON COLUMN CAMPING.INTRODUCTION IS 'ÇÑÁÙ ¼Ò°³±Û';
-COMMENT ON COLUMN CAMPING.OUTPHOTO IS '¿ÜºÎ»çÁø';
-COMMENT ON COLUMN CAMPING.POSTCODE IS '¿ìÆí¹øÈ£';
-COMMENT ON COLUMN CAMPING.ADDRESS1 IS 'Ä·ÇÎÀåÁÖ¼Ò1(½Ã)';
-COMMENT ON COLUMN CAMPING.ADDRESS2 IS 'Ä·ÇÎÀåÁÖ¼Ò2(±º±¸)';
-COMMENT ON COLUMN CAMPING.ADDRESS3 IS 'Ä·ÇÎÀåÁÖ¼Ò3(µ¿±æ)';
-COMMENT ON COLUMN CAMPING.ADDRESS4 IS 'Ä·ÇÎÀåÁÂÇ¥';
-COMMENT ON COLUMN CAMPING.CONTACT IS 'Ä·ÇÎÀå¿¬¶ôÃ³';
-COMMENT ON COLUMN CAMPING.REGDATE IS 'µî·ÏÀÏ';
-COMMENT ON COLUMN CAMPING.REGID IS 'µî·ÏÀÚid';
-COMMENT ON COLUMN CAMPING.READCOUNT IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN CAMPING.UPCOUNT IS 'ÃßÃµ¼ö';
-COMMENT ON COLUMN CAMPING.LIKECOUNT IS 'Âò°¹¼ö';
-COMMENT ON COLUMN CAMPING.REVIEWCOUNT IS '¸®ºä¼ö';
-COMMENT ON COLUMN CAMPING.STARSCORE IS 'Æò±Õº°Á¡';
+COMMENT ON TABLE CAMPING IS 'ìº í•‘ì¥ëª©ë¡í…Œì´ë¸”';
+COMMENT ON COLUMN CAMPING.NUM IS 'ìº í•‘ì¥ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN CAMPING.NAME IS 'ìº í•‘ì¥ ì´ë¦„';
+COMMENT ON COLUMN CAMPING.DISTRICT IS 'êµ¬ì—­';
+COMMENT ON COLUMN CAMPING.CCODE IS 'ì¹´í…Œê³ ë¦¬(ì¼ë°˜/ìë™ì°¨ìº í•‘ì¥/ê¸€ë¨í•‘/ì¹´ë¼ë°˜)';
+COMMENT ON COLUMN CAMPING.THEME IS 'í…Œë§ˆ(ìˆ²/í•´ë³€/í˜¸ìˆ˜,ê³„ê³¡/ë„ì‹¬/ì„¬)';
+COMMENT ON COLUMN CAMPING.TAG IS 'íƒœê·¸(#)'
+COMMENT ON COLUMN CAMPING.INTRODUCTION IS 'í•œì¤„ ì†Œê°œê¸€';
+COMMENT ON COLUMN CAMPING.OUTPHOTO IS 'ì™¸ë¶€ì‚¬ì§„';
+COMMENT ON COLUMN CAMPING.POSTCODE IS 'ìš°í¸ë²ˆí˜¸';
+COMMENT ON COLUMN CAMPING.ADDRESS1 IS 'ìº í•‘ì¥ì£¼ì†Œ1(ì‹œ)';
+COMMENT ON COLUMN CAMPING.ADDRESS2 IS 'ìº í•‘ì¥ì£¼ì†Œ2(êµ°êµ¬)';
+COMMENT ON COLUMN CAMPING.ADDRESS3 IS 'ìº í•‘ì¥ì£¼ì†Œ3(ë™ê¸¸)';
+COMMENT ON COLUMN CAMPING.ADDRESS4 IS 'ìº í•‘ì¥ì¢Œí‘œ';
+COMMENT ON COLUMN CAMPING.CONTACT IS 'ìº í•‘ì¥ì—°ë½ì²˜';
+COMMENT ON COLUMN CAMPING.REGDATE IS 'ë“±ë¡ì¼';
+COMMENT ON COLUMN CAMPING.REGID IS 'ë“±ë¡ìid';
+COMMENT ON COLUMN CAMPING.READCOUNT IS 'ì¡°íšŒìˆ˜';
+COMMENT ON COLUMN CAMPING.UPCOUNT IS 'ì¶”ì²œìˆ˜';
+COMMENT ON COLUMN CAMPING.LIKECOUNT IS 'ì°œê°¯ìˆ˜';
+COMMENT ON COLUMN CAMPING.REVIEWCOUNT IS 'ë¦¬ë·°ìˆ˜';
+COMMENT ON COLUMN CAMPING.STARSCORE IS 'í‰ê· ë³„ì ';
 
 DROP SEQUENCE CAMPINGSEQ;
 CREATE SEQUENCE CAMPINGSEQ
-	INCREMENT BY 1
-	START WITH 1
-	MINVALUE 1
-	MAXVALUE 10000
-	NOCACHE;
+   INCREMENT BY 1
+   START WITH 1
+   MINVALUE 1
+   MAXVALUE 10000
+   NOCACHE;
 
-// ÅÂ±×´Â ´Ù Á¤ÇØ¼­ ³ÖÀº ´ÙÀ½, Ä·ÇÎÀå µî·ÏÇÒ ¶§ º¹¼ö¼±ÅÃ
+// íƒœê·¸ëŠ” ë‹¤ ì •í•´ì„œ ë„£ì€ ë‹¤ìŒ, ìº í•‘ì¥ ë“±ë¡í•  ë•Œ ë³µìˆ˜ì„ íƒ
 -------------------------------------------------------------------------------
 
--- Ä·ÇÎÀå »ó¼¼ »çÀÌÆ®(¹æ) Å×ÀÌºí
+-- ìº í•‘ì¥ ìƒì„¸ ì‚¬ì´íŠ¸(ë°©) í…Œì´ë¸”
 
--- num: »çÀÌÆ®¹øÈ£; name: »çÀÌÆ® ÀÌ¸§;
--- cnum: Ä·ÇÎÀå¹øÈ£(camping Å×ÀÌºí°ú ¿¬°á); cname: Ä·ÇÎÀåÀÌ¸§(camping Å×ÀÌºí°ú ¿¬°á);
--- propguests: ÀûÁ¤ÀÎ¿ø; maxguests: ÃÖ´ëÀÎ¿ø;
--- weekdayprice: ÁÖÁß°¡°İ; weekendprice: ÁÖ¸»°¡°İ;
--- bookeddatd: ¿¹¾àµÈ³¯Â¥; innerphoto: ³»ºÎ»çÁø;
--- contents: ³»¿ë; amenity: ºÎ´ë½Ã¼³ ¹× ºñÇ°;
+-- num: ì‚¬ì´íŠ¸ë²ˆí˜¸; name: ì‚¬ì´íŠ¸ ì´ë¦„;
+-- cnum: ìº í•‘ì¥ë²ˆí˜¸(camping í…Œì´ë¸”ê³¼ ì—°ê²°); cname: ìº í•‘ì¥ì´ë¦„(camping í…Œì´ë¸”ê³¼ ì—°ê²°);
+-- propguests: ì ì •ì¸ì›; maxguests: ìµœëŒ€ì¸ì›;
+-- weekdayprice: ì£¼ì¤‘ê°€ê²©; weekendprice: ì£¼ë§ê°€ê²©;
+-- bookeddatd: ì˜ˆì•½ëœë‚ ì§œ; innerphoto: ë‚´ë¶€ì‚¬ì§„;
+-- contents: ë‚´ìš©; amenity: ë¶€ëŒ€ì‹œì„¤ ë° ë¹„í’ˆ;
 
 DROP TABLE SITE;
 
 CREATE TABLE SITE (
-	NUM NUMBER PRIMARY KEY,
-	NAME VARCHAR2(60) NOT NULL,
-	CNUM NUMBER NOT NULL,
-	CNAME VARCHAR2(60) NOT NULL,
-	PROPGUESTS NUMBER NOT NULL,
-	MAXGUESTS NUMBER NOT NULL,
-	WEEKDAYPRICE NUMBER NOT NULL,
-	WEEKENDPRICE NUMBER NOT NULL,
-	BOOKEDDATE VARCHAR2(100),
-	INNERPHOTO VARCHAR2(100),
-	CONTENTS CLOB,
-	AMENUTY VARCHAR2(200),
-	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
-	FOREIGN KEY(CNAME) REFERENCES CAMPING(NAME)
+   NUM NUMBER PRIMARY KEY,
+   NAME VARCHAR2(60) NOT NULL,
+   CNUM NUMBER NOT NULL,
+   CNAME VARCHAR2(60) NOT NULL,
+   PROPGUESTS NUMBER NOT NULL,
+   MAXGUESTS NUMBER NOT NULL,
+   WEEKDAYPRICE NUMBER NOT NULL,
+   WEEKENDPRICE NUMBER NOT NULL,
+   BOOKEDDATE VARCHAR2(100),
+   INNERPHOTO VARCHAR2(100),
+   CONTENTS CLOB,
+   AMENUTY VARCHAR2(200),
+   FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
+   FOREIGN KEY(CNAME) REFERENCES CAMPING(NAME)
 );
 
-COMMENT ON TABLE SITE IS 'Ä·ÇÎÀå»çÀÌÆ®»ó¼¼Å×ÀÌºí';
-COMMENT ON COLUMN SITE.NUM IS '»çÀÌÆ® °íÀ¯¹øÈ£';
-COMMENT ON COLUMN SITE.CNUM IS 'Ä·ÇÎÀå °íÀ¯¹øÈ£';
-COMMENT ON COLUMN SITE.CNAME IS 'Ä·ÇÎÀå ÀÌ¸§';
-COMMENT ON COLUMN SITE.NAME IS '»çÀÌÆ® ÀÌ¸§';
-COMMENT ON COLUMN SITE.PROPGUESTS IS 'ÀûÁ¤ÀÎ¿ø';
-COMMENT ON COLUMN SITE.MAXGUESTS IS 'ÃÖ´ëÀÎ¿ø';
-COMMENT ON COLUMN SITE.WEEKDAYPRICE IS 'ÁÖÁß°¡°İ';
-COMMENT ON COLUMN SITE.WEEKENDPRICE IS 'ÁÖ¸»°¡°İ';
-COMMENT ON COLUMN SITE.BOOKEDDATE IS '¿¹¾àµÈ³¯Â¥';
-COMMENT ON COLUMN SITE.INNERPHOTO IS '³»ºÎ»çÁø';
-COMMENT ON COLUMN SITE.CONTENTS IS '»ó¼¼³»¿ë';
-COMMENT ON COLUMN SITE.AMENUTY IS 'ºÎ´ë½Ã¼³,ºñÇ°';
+COMMENT ON TABLE SITE IS 'ìº í•‘ì¥ì‚¬ì´íŠ¸ìƒì„¸í…Œì´ë¸”';
+COMMENT ON COLUMN SITE.NUM IS 'ì‚¬ì´íŠ¸ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN SITE.CNUM IS 'ìº í•‘ì¥ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN SITE.CNAME IS 'ìº í•‘ì¥ ì´ë¦„';
+COMMENT ON COLUMN SITE.NAME IS 'ì‚¬ì´íŠ¸ ì´ë¦„';
+COMMENT ON COLUMN SITE.PROPGUESTS IS 'ì ì •ì¸ì›';
+COMMENT ON COLUMN SITE.MAXGUESTS IS 'ìµœëŒ€ì¸ì›';
+COMMENT ON COLUMN SITE.WEEKDAYPRICE IS 'ì£¼ì¤‘ê°€ê²©';
+COMMENT ON COLUMN SITE.WEEKENDPRICE IS 'ì£¼ë§ê°€ê²©';
+COMMENT ON COLUMN SITE.BOOKEDDATE IS 'ì˜ˆì•½ëœë‚ ì§œ';
+COMMENT ON COLUMN SITE.INNERPHOTO IS 'ë‚´ë¶€ì‚¬ì§„';
+COMMENT ON COLUMN SITE.CONTENTS IS 'ìƒì„¸ë‚´ìš©';
+COMMENT ON COLUMN SITE.AMENUTY IS 'ë¶€ëŒ€ì‹œì„¤,ë¹„í’ˆ';
 
 DROP SEQUENCE SITESEQ;
 CREATE SEQUENCE SITESEQ
-	INCREMENT BY 1
-	START WITH 1
-	MINVALUE 1
-	MAXVALUE 10000
-	NOCACHE;
+   INCREMENT BY 1
+   START WITH 1
+   MINVALUE 1
+   MAXVALUE 10000
+   NOCACHE;
 
-// ÁÖ¼Ò´Â Ä·ÇÎÀå¸¶´Ù ÇÏ³ª´Ï±î Ä·ÇÎÀå¿¡ ³Ö°í, 
-Ä·ÇÎÀå ³»¿¡ ¿©·¯ °³ÀÇ site°¡ ÀÖÀ¸´Ï
-¿¹¾à°ü·ÃÇÏ¿© °¢°¢ ÀÎ¿ø°ú °¡°İ, ³»ºÎ»çÁø°ú »ó¼¼³»¿ëÀº siteÅ×ÀÌºí¿¡ ´ã¾Æ¼­
-Ä·ÇÎÀå »ó¼¼È­¸é(site ¿¹¾à)¿¡ ÀÌ Å×ÀÌºí À§ÁÖ·Î ³ÖÀ¸·Á°í¿ä..
-Âò, ÃßÃµ, ¸®ºä´Â °¢ Ä·ÇÎÀå¸¶´Ù ÇÏ³ª·Î ÅëÇÕÇÒ »ı°¢ÀÌ¶ó ¿©±â¿¡´Â ÀÏ´Ü ¾È ³Ö¾ú½À´Ï´Ù
+// ì£¼ì†ŒëŠ” ìº í•‘ì¥ë§ˆë‹¤ í•˜ë‚˜ë‹ˆê¹Œ ìº í•‘ì¥ì— ë„£ê³ , 
+ìº í•‘ì¥ ë‚´ì— ì—¬ëŸ¬ ê°œì˜ siteê°€ ìˆìœ¼ë‹ˆ
+ì˜ˆì•½ê´€ë ¨í•˜ì—¬ ê°ê° ì¸ì›ê³¼ ê°€ê²©, ë‚´ë¶€ì‚¬ì§„ê³¼ ìƒì„¸ë‚´ìš©ì€ siteí…Œì´ë¸”ì— ë‹´ì•„ì„œ
+ìº í•‘ì¥ ìƒì„¸í™”ë©´(site ì˜ˆì•½)ì— ì´ í…Œì´ë¸” ìœ„ì£¼ë¡œ ë„£ìœ¼ë ¤ê³ ìš”..
+ì°œ, ì¶”ì²œ, ë¦¬ë·°ëŠ” ê° ìº í•‘ì¥ë§ˆë‹¤ í•˜ë‚˜ë¡œ í†µí•©í•  ìƒê°ì´ë¼ ì—¬ê¸°ì—ëŠ” ì¼ë‹¨ ì•ˆ ë„£ì—ˆìŠµë‹ˆë‹¤
 -------------------------------------------------------------------------------
 
--- ¼÷¼Ò ¿¹¾à Å×ÀÌºí
+-- ìˆ™ì†Œ ì˜ˆì•½ í…Œì´ë¸”
 
--- num: ·¹ÄÚµå ¹øÈ£; scode: ¼÷¼Ò °íÀ¯ ¹øÈ£; ucode: »ç¿ëÀÚ °íÀ¯ ¹øÈ£;
- (ÀÌ ºÎºĞÀº ¼¼¿µ´ÔÀÌ ÇÏ½Å ºÎºĞ ±×´ë·Î..)
-// site Å×ÀÌºí°ú ¼÷¼Ò °íÀ¯ ¹øÈ£·Î ¿¬°áÇØ¼­ 
-ÁÖÁß,ÁÖ¸»°¡°İ(+ÀûÁ¤ÀÎ¿ø ÃÊ°ú½Ã 1¸¸¿ø) °¡Á®¿Í¼­ ÃÑ¾× ÄÃ·³ ³Ö°í 
-siteÅ×ÀÌºí¿¡ ÀúÀåµÈ(¼±Á¡µÈ) ¿¹¾àµÈ³¯Â¥´Â ºÒ°¡´ÉÇÏ°Ô ÇÏ¸é µÇÁö ¾ÊÀ»±î »ı°¢ÇÕ´Ï´Ù 
+-- num: ë ˆì½”ë“œ ë²ˆí˜¸; scode: ìˆ™ì†Œ ê³ ìœ  ë²ˆí˜¸; ucode: ì‚¬ìš©ì ê³ ìœ  ë²ˆí˜¸;
+ (ì´ ë¶€ë¶„ì€ ì„¸ì˜ë‹˜ì´ í•˜ì‹  ë¶€ë¶„ ê·¸ëŒ€ë¡œ..)
+// site í…Œì´ë¸”ê³¼ ìˆ™ì†Œ ê³ ìœ  ë²ˆí˜¸ë¡œ ì—°ê²°í•´ì„œ 
+ì£¼ì¤‘,ì£¼ë§ê°€ê²©(+ì ì •ì¸ì› ì´ˆê³¼ì‹œ 1ë§Œì›) ê°€ì ¸ì™€ì„œ ì´ì•¡ ì»¬ëŸ¼ ë„£ê³  
+siteí…Œì´ë¸”ì— ì €ì¥ëœ(ì„ ì ëœ) ì˜ˆì•½ëœë‚ ì§œëŠ” ë¶ˆê°€ëŠ¥í•˜ê²Œ í•˜ë©´ ë˜ì§€ ì•Šì„ê¹Œ ìƒê°í•©ë‹ˆë‹¤ 
 
-// ÀúÈñ ¿¹¾à»çÀÌÆ®°¡ Ä·ÇÎÀå À§ÁÖ¶ó '»çÀÌÆ®' ¶ó´Â °ø°£ ´ÜÀ§ÀÇ ÀÌ¸§À» ½è´Âµ¥
-Çò°¥¸®½Ã¸é roomÀ¸·Î »ç¿ëÇØµµ ÁÁ¾Æ¿ä..  
+// ì €í¬ ì˜ˆì•½ì‚¬ì´íŠ¸ê°€ ìº í•‘ì¥ ìœ„ì£¼ë¼ 'ì‚¬ì´íŠ¸' ë¼ëŠ” ê³µê°„ ë‹¨ìœ„ì˜ ì´ë¦„ì„ ì¼ëŠ”ë°
+í—·ê°ˆë¦¬ì‹œë©´ roomìœ¼ë¡œ ì‚¬ìš©í•´ë„ ì¢‹ì•„ìš”..  
