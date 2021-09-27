@@ -85,6 +85,31 @@ $(document).ready(function() {
 	selThemeInit();
 });
 
+function samapleAjax(type, code, callback) {
+	$.ajax({
+		url: "getAddr",
+		type: "POST",
+		data: {
+			addrType : type,
+			addrCode : code
+		},
+		dataType: "json",
+		success: function(data) {
+			console.log(data);
+			if (data.resultCode != 'OK') {
+				callback(null);
+				return;
+			}
+			
+			callback(data);
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+			callback(null);
+		}
+	});
+}
+
 //테마 샐랙트 박스 셋팅
 function selThemeInit() {
 	
@@ -104,18 +129,13 @@ function selInit() {
 	
 	$("#searchAddr , #searchAddr2").append(new Option("선택", ""));
 	
-	/* $.each(selFirstArr, function (i, item) {
-	    $('#searchAddr').append($('<option>', {
-	        value: selFirstArr[i],
-	        text : selFirstArr[i]
-	    }));
-	}); */
-	
-	$.each(addr1, function (i, item) {
-	    $('#searchAddr').append($('<option>', {
-	        value: item.CODE,
-	        text : item.NAME
-	    }));
+	samapleAjax("시도", "", function(data) {
+		$.each(data.body, function (i, item) {
+		    $('#searchAddr').append($('<option>', {
+		        value: item.NO,
+		        text : item.NAME
+		    }));
+		});
 	});
 }
 
@@ -130,20 +150,13 @@ function chageSelOpt() {
 	
 	//셋팅
 	if (selFirstIndex > 0) {
-		$("#searchAddr2").empty(); //두번째 셀렉트박스 선택 나오게 할려면 주석 처리.
-		
-		/* $.each(selSecondArr[selFirstIndex-1], function (i, item) {
-		    $('#searchAddr2').append($('<option>', {
-		        value: selSecondArr[selFirstIndex-1][i],
-		        text : selSecondArr[selFirstIndex-1][i]
-		    }));
-		}); */
-		
-		$.each(addr2[$("#searchAddr option:selected").val()], function (i, item) {
-		    $('#searchAddr2').append($('<option>', {
-		        value: item.CODE,
-		        text : item.NAME
-		    }));
+		samapleAjax("구군", $("#searchAddr option:selected").val(), function(data) {
+			$.each(data.body, function (i, item) {
+			    $('#searchAddr2').append($('<option>', {
+			        value: item.NO,
+			        text : item.NAME
+			    }));
+			});
 		});
 	}	
 }

@@ -6,5 +6,15 @@
 <!-- SqlMapConfig.xml : 별칭 설정 -->
 
 <configuration>
-
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>	
+	
+	<typeAliases>
+		<typeAlias alias="myAddrBean" type="com.my.travelExpedition.model.AddrBean"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/Addr.xml"/>
+	</mappers>
 </configuration>
