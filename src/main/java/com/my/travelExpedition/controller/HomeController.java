@@ -1,4 +1,4 @@
-package com.my.travelExpedition;
+package com.my.travelExpedition.controller;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("myAjaxApiAddrDao")
+@Component("myAddrDao")
 public class AddrDao {
 
 	private static final String NAMESPACE = "com.my.travelExpedition.model.AddrBean";
