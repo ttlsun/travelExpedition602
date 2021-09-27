@@ -148,6 +148,7 @@ create table qna(
   id varchar2(20) not null,
   pw varchar2(20),
   content clob not null,
+  keyword varchar2(100),
   uploaddate date default sysdate,
   editdate date default sysdate,
   editor varchar2(20) not null,
