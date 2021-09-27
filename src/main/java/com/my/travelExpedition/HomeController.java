@@ -290,6 +290,7 @@ public class HomeController {
 			json.put("resultMsg", "성공");
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			json.put("resultCode", "ERROR");
 			json.put("resultMsg", e.getMessage());
 		}

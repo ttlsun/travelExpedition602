@@ -4,7 +4,9 @@
 
 <mapper namespace="com.my.travelExpedition.model.AddrBean">
 
-	<select id="getSidoGugun" parameterType="map" resultType="myAddrBean">
+	<resultMap id="addrBean" 	type="com.my.travelExpedition.model.AddrBean"></resultMap>
+
+	<select id="getSidoGugun" parameterType="map" resultType="addrBean">
 		SELECT SEQ_NO as NO, AR_CODE AS CODE, AR_NAME AS NAME
 		FROM SY_CODE_ADDR
 		WHERE SY_CODE = #{addrType}

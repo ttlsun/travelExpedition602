@@ -1,5 +1,6 @@
 package com.my.travelExpedition.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class AddrDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public List<AddrBean> getSidoGugun(String addrType, String addrCode) {
+	public List<AddrBean> getSidoGugun(String addrType, String addrCode) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("addrType", addrType);
@@ -24,7 +25,9 @@ public class AddrDao {
 		
 		List<AddrBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getSidoGugun", map);
 		
-		return lists;
+		System.out.println("list::" + lists.size());
+		
+		return new ArrayList<>();
 	}
 	
 }
