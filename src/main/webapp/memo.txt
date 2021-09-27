@@ -137,20 +137,20 @@ comment on column event.startdate is '이벤트 끝 날짜';
 comment on column event.readcount is '게시글 조회수';
 
 
---관리자(공지사항+이벤트 이미지) 시퀀스
-drop sequence noticeimgseq;
-create sequence noticeimgseq
+--관리자+사업자+개인(게시글 이미지) 시퀀스
+drop sequence postimgseq;
+create sequence postimgseq
   increment by 1
   start with 1
   minvalue 1
   maxvalue 10000
   nocache;
   
---관리자(공지사항+이벤트 이미지) 테이블
+--관리자+사업자+개인(게시글 이미지) 테이블
 --num : 레코드 번호; postcode : 게시글 고유 번호; imgcode : 이미지 고유 번호; 
 --imgname : 이미지 이름; imgraw : 이미지 raw file;
-drop table noticeimg cascade constraints;
-create table noticeimg(
+drop table postimg cascade constraints;
+create table postimg(
   num number primary key,
   postcode varchar2(20) not null,
   imgcode varchar2(20) unique not null,
@@ -158,12 +158,12 @@ create table noticeimg(
   imgraw blob not null,
   foreign key(postcode) references notice(postcode)
 );
-comment on table noticeimg is '공지사항+이벤트 이미지 테이블';
-comment on column noticeimg.num is '레코드 번호';
-comment on column noticeimg.postcode is '게시글 고유 번호 - 부모 notice';
-comment on column noticeimg.imgcode is '이미지 고유 번호';
-comment on column noticeimg.imgname is '이미지 이름';
-comment on column noticeimg.imgraw is '이미지 raw file';
+comment on table postimg is '게시글 이미지 테이블';
+comment on column postimg.num is '레코드 번호';
+comment on column postimg.postcode is '게시글 고유 번호 - 부모 notice';
+comment on column postimg.imgcode is '이미지 고유 번호';
+comment on column postimg.imgname is '이미지 이름';
+comment on column postimg.imgraw is '이미지 raw file';
 
 
 --관리자+사용자+사업자(문의 게시판) 시퀀스
@@ -200,44 +200,6 @@ comment on column qna.content is '게시글 내용';
 comment on column qna.uploaddate is '게시글 올린 날짜';
 
 
----------------------------------------------------------------
----------------------------------------------------------------
---승민님 파트
---관리자+사업자(사업장 관리) 시퀀스
-drop sequence roomseq;
-create sequence roomseq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
-  
---관리자+사업자(사업장 관리) 테이블
---num : 레코드 번호; ucode : 사용자 구분 코드; rcode : 숙소 고유 번호;
---rname : 숙소 이름; radress : 숙소 주소; rphone : 숙소 번호; guests : 이용 가능 인원; 
---dayprice : 낮시간 비용; nightprice : 밤시간 비용; alldayprice : 1박 비용;
---inform : text로 할지 varchar할지 고민 중;
---amenity : 넓은 의미의 amenity, 부대 시설 및 비품 등;
-drop table rooms cascade constraints;
-create table rooms(
-  num number primary key,
-  ucode varchar2(20) unique not null,
-  rcode varchar2(20) unique not null,
-  rname varchar2(40) not null,
-  radress varchar2(100) not null,
-  rphone varchar2(20) not null,
-  guests number not null,
-  dayprice number not null,
-  nightprice number not null,
-  alldayprice number not null,
-  inform varchar2(4000),
-  amenity varchar2(1000) not null,
-  foreign key(ucode) references users(ucode)
-);
----------------------------------------------------------------
----------------------------------------------------------------
-
-
 --사업자(고객이용관리) 시퀀스
 drop sequence umanageseq;
 create sequence umanageseq
@@ -256,6 +218,10 @@ create table usermanage(
   num number primary key,
   rcode varchar2(20) unique not null,
   ucode varchar2(20) unique not null,
+  bookername varchar2(40) not null,
+  bookerphone varchar2(20) not null,
+  bookeremail varchar2(30),
+  bookercomment varchar2(1000),
   startdate date default sysdate,
   enddate date default sysdate,
   nop number not null,
@@ -270,6 +236,10 @@ comment on table usermanage is '고객이용관리 테이블';
 comment on column usermanage.num is '레코드 번호';
 comment on column usermanage.rcode is '숙소 고유 번호 - 부모 rooms';
 comment on column usermanage.ucode is '사용자 고유 번호(개인) - 부모 users';
+comment on column usermanage.bookername is '예약자 성명';
+comment on column usermanage.bookerphone is '예약자 전화번호';
+comment on column usermanage.bookeremail is '예약자 이메일';
+comment on column usermanage.bookercomment is '예약자 요청사항';
 comment on column usermanage.startdate is '사용 시작일';
 comment on column usermanage.enddate is '사용 마지막일';
 comment on column usermanage.nop is '이용할 고객 수';
@@ -630,20 +600,20 @@ CREATE SEQUENCE SITESEQ
    MAXVALUE 10000
    NOCACHE;
 
-// 주소는 캠핑장마다 하나니까 캠핑장에 넣고, 
-캠핑장 내에 여러 개의 site가 있으니
-예약관련하여 각각 인원과 가격, 내부사진과 상세내용은 site테이블에 담아서
-캠핑장 상세화면(site 예약)에 이 테이블 위주로 넣으려고요..
-찜, 추천, 리뷰는 각 캠핑장마다 하나로 통합할 생각이라 여기에는 일단 안 넣었습니다
+--// 주소는 캠핑장마다 하나니까 캠핑장에 넣고, 
+--캠핑장 내에 여러 개의 site가 있으니
+--예약관련하여 각각 인원과 가격, 내부사진과 상세내용은 site테이블에 담아서
+--캠핑장 상세화면(site 예약)에 이 테이블 위주로 넣으려고요..
+--찜, 추천, 리뷰는 각 캠핑장마다 하나로 통합할 생각이라 여기에는 일단 안 넣었습니다
 -------------------------------------------------------------------------------
 
 -- 숙소 예약 테이블
 
 -- num: 레코드 번호; scode: 숙소 고유 번호; ucode: 사용자 고유 번호;
- (이 부분은 세영님이 하신 부분 그대로..)
-// site 테이블과 숙소 고유 번호로 연결해서 
-주중,주말가격(+적정인원 초과시 1만원) 가져와서 총액 컬럼 넣고 
-site테이블에 저장된(선점된) 예약된날짜는 불가능하게 하면 되지 않을까 생각합니다 
-
-// 저희 예약사이트가 캠핑장 위주라 '사이트' 라는 공간 단위의 이름을 썼는데
-헷갈리시면 room으로 사용해도 좋아요..  
+-- (이 부분은 세영님이 하신 부분 그대로..)
+--// site 테이블과 숙소 고유 번호로 연결해서 
+--주중,주말가격(+적정인원 초과시 1만원) 가져와서 총액 컬럼 넣고 
+--site테이블에 저장된(선점된) 예약된날짜는 불가능하게 하면 되지 않을까 생각합니다 
+--
+--// 저희 예약사이트가 캠핑장 위주라 '사이트' 라는 공간 단위의 이름을 썼는데
+--헷갈리시면 room으로 사용해도 좋아요..  
