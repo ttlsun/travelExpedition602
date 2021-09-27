@@ -42,7 +42,6 @@ comment on column users.regidate is '회원가입일';
 comment on column users.editdate is '수정일자';
 
 
-
 --개인(결제수단) 시퀀스
 drop sequence payseq;
 create sequence payseq
@@ -192,54 +191,6 @@ comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구�
 comment on column postimg.imgcode is '이미지 고유 번호';
 comment on column postimg.imgname is '이미지 이름';
 comment on column postimg.imgraw is '이미지 raw file';
-
-
---사업자(고객이용관리) 시퀀스
-drop sequence umanageseq;
-create sequence umanageseq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
-  
---개인+사업자(고객이용관리) 테이블
-drop table usermanage cascade constraints;
-create table usermanage(
-  num number primary key,
-  rcode varchar2(20) unique not null,
-  id varchar2(20) not null,
-  bookername varchar2(40) not null,
-  bookerphone varchar2(20) not null,
-  bookeremail varchar2(30),
-  bookercomment varchar2(1000),
-  startdate date default sysdate,
-  enddate date default sysdate,
-  nop number not null,
-  totalprice number not null,
-  paycode varchar2(20) not null,
-  requestdate date default sysdate,
-  editdate date default sysdate,
-  editor varchar2(20) not null,
-  status varchar2(20) not null,
-  foreign key(rcode) references rooms(rcode),
-  foreign key(id) references users(id)
-);
-comment on table usermanage is '고객이용관리 테이블';
-comment on column usermanage.num is '레코드 번호';
-comment on column usermanage.rcode is '숙소 고유 번호 - 부모 rooms';
-comment on column usermanage.id is '사용자 아이디 - 부모 users';
-comment on column usermanage.bookername is '예약자 성명';
-comment on column usermanage.bookerphone is '예약자 전화번호';
-comment on column usermanage.bookeremail is '예약자 이메일';
-comment on column usermanage.bookercomment is '예약자 요청사항';
-comment on column usermanage.startdate is '사용 시작일';
-comment on column usermanage.enddate is '사용 마지막일';
-comment on column usermanage.nop is '이용할 고객 수';
-comment on column usermanage.totalprice is '결제 총액';
-comment on column usermanage.paycode is '결제 수단 고유 번호 = pay 테이블 paycode(구분)+num(레코드번호)';
-comment on column usermanage.requestdate is '요청일자';
-comment on column usermanage.status is '현재 상태(예약중, 예약 확인, 입금 완료, 이용 중, 이용 완료 등)';
 
 
 --개인(찜/관심목록) 시퀀스
