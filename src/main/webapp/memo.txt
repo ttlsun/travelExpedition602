@@ -1,0 +1,600 @@
+1. 세영
+--세영님 파트
+--기본 유저 시퀀스
+--nocache 장점 : 버퍼 메모리 절약; 단점 : CPU 과도한 사용;
+drop sequence userseq;
+create sequence userseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+--기본 유저 테이블
+--num : 레코드 번호; ucode : 사용자 구분 코드;
+--id : 아이디; pw : 비밀번호; name : 관리자, 사업체 이름, 개인회원 이름(실명);
+--email : 이메일; zipcode : 우편번호; address : 주소1, 2; phone : 번호; startdate : 사이트시작일, 사업시작일, 회원생일;
+drop table users cascade constraints;
+create table users(
+  num number primary key,
+  ucode varchar2(20) unique not null,
+  id varchar2(20) unique not null,
+  pw varchar2(20) not null,
+  name varchar2(40) not null,
+  email varchar2(30) unique not null,
+  zipcode number not null,
+  address1 varchar2(50) not null,
+  address2 varchar2(50) not null,
+  phone varchar2(20) not null,
+  startdate date default sysdate
+);
+
+comment on table users is '사용자 정보';
+comment on column users.num is '레코드 번호';
+comment on column users.ucode is '사용자 구분 코드';
+comment on column users.id is '아이디';
+comment on column users.pw is '비밀번호';
+comment on column users.name is '관리자, 사업체 이름, 개인회원 실명';
+comment on column users.email is '이메일 주소';
+comment on column users.zipcode is '우편번호';
+comment on column users.address1 is '주소 대분류';
+comment on column users.address2 is '주소 소분류';
+comment on column users.phone is '번호';
+comment on column users.startdate is '사이트시작일, 사업시작일, 회원생일';
+
+
+--개인(결제수단) 시퀀스
+drop sequence payseq;
+create sequence payseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+--개인(결제수단) 테이블
+--num : 레코드 번호; ucode : 사용자 고유 번호; paycode : 결제수단 고유 번호;
+--paydetail : 결제 수단 상세 정보(카드 번호 등);
+drop table pay cascade constraints;
+create table pay(
+  num number primary key,
+  ucode varchar2(20) unique not null,
+  paycode varchar2(20) unique not null,
+  paydetail varchar2(20) not null,
+  foreign key(ucode) references users(ucode)
+);
+comment on table pay is '결제수단 등록 테이블';
+comment on column pay.num is '레코드 번호';
+comment on column pay.ucode is '사용자 고유 번호 - 부모 users';
+comment on column pay.paycode is '결제수단 고유 번호';
+comment on column pay.paydetail is '결제수단 상세 정보(카드 번호 등)';
+
+
+--관리자(공지사항+이벤트) 시퀀스
+drop sequence noticeseq;
+create sequence noticeseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+--관리자(공지사항+이벤트) 테이블
+--num : 레코드 번호; ucode : 사용자 구분 코드; postcode : 게시글 고유 번호;
+--content : 게시글 내용, text 쓸지 varchar쓸지 고민 중;
+--uploaddate : 게시글 올린 날짜(혹은 수정된 날짜);
+drop table notice cascade constraints;
+create table notice(
+  num number primary key,
+  ucode varchar2(20) unique not null,
+  postcode varchar2(20) unique not null,
+  content varchar2(4000),
+  uploaddate date default sysdate,
+  readcount number default 0,
+  foreign key(ucode) references users(ucode)
+);
+comment on table notice is '공지사항+이벤트 테이블';
+comment on column notice.num is '레코드 번호';
+comment on column notice.ucode is '사용자 고유 번호(관리자번호) - 부모 users';
+comment on column notice.postcode is '게시글 고유 번호';
+comment on column notice.content is '게시글 내용';
+comment on column notice.uploaddate is '게시글 올린 날짜';
+comment on column notice.readcount is '게시글 조회수';
+
+
+--관리자(공지사항+이벤트 이미지) 시퀀스
+drop sequence noticeimgseq;
+create sequence noticeimgseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--관리자(공지사항+이벤트 이미지) 테이블
+--num : 레코드 번호; postcode : 게시글 고유 번호; imgcode : 이미지 고유 번호; 
+--imgname : 이미지 이름; imgraw : 이미지 raw file;
+drop table noticeimg cascade constraints;
+create table noticeimg(
+  num number primary key,
+  postcode varchar2(20) not null,
+  imgcode varchar2(20) unique not null,
+  imgname varchar2(40),
+  imgraw blob not null,
+  foreign key(postcode) references notice(postcode)
+);
+comment on table noticeimg is '공지사항+이벤트 이미지 테이블';
+comment on column noticeimg.num is '레코드 번호';
+comment on column noticeimg.postcode is '게시글 고유 번호 - 부모 notice';
+comment on column noticeimg.imgcode is '이미지 고유 번호';
+comment on column noticeimg.imgname is '이미지 이름';
+comment on column noticeimg.imgraw is '이미지 raw file';
+
+
+--관리자+사용자+사업자(문의 게시판) 시퀀스
+drop sequence qnaseq;
+create sequence qnaseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--관리자+사용자+사업자(문의 게시판) 테이블
+--num : 레코드 번호; ucode : 사용자 구분 코드; postcode : 게시글 고유 번호; pw : 게시글 비밀번호;
+--content : text로 할지 varchar할지 고민 중;
+--uploaddate : 게시글 업로드 일자;
+drop table qna cascade constraints;
+create table qna(
+  num number primary key,
+  ucode varchar2(20) unique not null,
+  postcode varchar2(20) unique not null,
+  pw varchar2(20),
+  content varchar2(4000),
+  uploaddate date default sysdate,
+  ref number not null,
+  restep number not null,
+  relevel number not null,
+  foreign key(ucode) references users(ucode)
+);
+comment on table qna is '문의 게시판 테이블';
+comment on column qna.num is '레코드 번호';
+comment on column qna.postcode is '게시글 고유 번호';
+comment on column qna.pw is '게시글 비밀번호';
+comment on column qna.content is '게시글 내용';
+comment on column qna.uploaddate is '게시글 올린 날짜';
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+--승민님 파트
+--관리자+사업자(사업장 관리) 시퀀스
+drop sequence roomseq;
+create sequence roomseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--관리자+사업자(사업장 관리) 테이블
+--num : 레코드 번호; ucode : 사용자 구분 코드; rcode : 숙소 고유 번호;
+--rname : 숙소 이름; radress : 숙소 주소; rphone : 숙소 번호; guests : 이용 가능 인원; 
+--dayprice : 낮시간 비용; nightprice : 밤시간 비용; alldayprice : 1박 비용;
+--inform : text로 할지 varchar할지 고민 중;
+--amenity : 넓은 의미의 amenity, 부대 시설 및 비품 등;
+drop table rooms cascade constraints;
+create table rooms(
+  num number primary key,
+  ucode varchar2(20) unique not null,
+  rcode varchar2(20) unique not null,
+  rname varchar2(40) not null,
+  radress varchar2(100) not null,
+  rphone varchar2(20) not null,
+  guests number not null,
+  dayprice number not null,
+  nightprice number not null,
+  alldayprice number not null,
+  inform varchar2(4000),
+  amenity varchar2(1000) not null,
+  foreign key(ucode) references users(ucode)
+);
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+--사업자(고객이용관리) 시퀀스
+drop sequence umanageseq;
+create sequence umanageseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--개인+사업자(고객이용관리) 테이블
+--num : 레코드 번호; rcode : 숙소 고유 번호; ucode : 사용자 고유 번호(개인);
+--startdate : 사용 시작일; enddate : 사용 마지막; nop : 이용 고객 수;
+--totalprice : 총액; status : 현재 상태(예약중, 예약 확인, 입금 완료, 이용 중, 이용 완료 등);
+drop table usermanage cascade constraints;
+create table usermanage(
+  num number primary key,
+  rcode varchar2(20) unique not null,
+  ucode varchar2(20) unique not null,
+  startdate date default sysdate,
+  enddate date default sysdate,
+  nop number not null,
+  totalprice number not null,
+  paycode varchar2(20) not null,
+  status varchar2(20) not null,
+  foreign key(rcode) references rooms(rcode),
+  foreign key(ucode) references users(ucode),
+  foreign key(paycode) references pay(paycode)
+);
+comment on table usermanage is '고객이용관리 테이블';
+comment on column usermanage.num is '레코드 번호';
+comment on column usermanage.rcode is '숙소 고유 번호 - 부모 rooms';
+comment on column usermanage.ucode is '사용자 고유 번호(개인) - 부모 users';
+comment on column usermanage.startdate is '사용 시작일';
+comment on column usermanage.enddate is '사용 마지막일';
+comment on column usermanage.nop is '이용할 고객 수';
+comment on column usermanage.totalprice is '결제 총액';
+comment on column usermanage.paycode is '결제 수단 고유 번호 - 부모 pay';
+comment on column usermanage.status is '현재 상태(예약중, 예약 확인, 입금 완료, 이용 중, 이용 완료 등)';
+
+
+--개인(찜/관심목록) 시퀀스
+drop sequence likeseq;
+create sequence likeseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+--개인(찜/관심목록) 테이블 : 숙소, 관광지, 커뮤니티
+--num : 레코드 번호; ucode : 사용자 고유 번호; lcode : likecode, 숙소+관광지+커뮤니티 게시글 코드;
+--likedate : 찜한 날짜;
+drop table likes cascade constraints;
+create table likes(
+  num number primary key,
+  ucode varchar2(20) not null,
+  lcode varchar2(20) not null,
+  likedate date default sysdate,
+  foreign key(ucode) references users(ucode),
+  foreign key(lcode) references notice(postcode),
+  foreign key(lcode) references qna(postcode)
+);
+comment on table likes is '찜/관심목록 테이블';
+comment on column likes.num is '레코드 번호';
+comment on column likes.ucode is '사용자 고유 번호 - 부모 users';
+comment on column likes.lcode is '게시글 코드 - 부모 숙소관광지커뮤니티 게시글 번호';
+comment on column likes.likedate is '찜한 날짜';
+
+
+
+
+2. 관형
+-------------------------------------------------------------------
+--관형님 파트
+
+drop sequence tour_seq;
+create sequence tour_seq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+
+drop table touristspot;
+
+create table touristspot(
+	tnum number not null primary key,
+	tcategory varchar2(45) not null,
+	ttitle varchar2(60) not null,
+	tcomments varchar2(750),
+	tinputid varchar2(30) not null,
+	tinputdate date default sysdate,
+	taddress1 varchar2(75) not null,
+	taddress2 varchar2(75),
+	tprice number default 0,
+	tdiscount varchar2(30) default '0',
+	timage varchar2(60),
+	tpoint number default '0' 
+);
+
+comment on table touristspot is '관광지 게시판';
+comment on column touristspot.tnum is '관광지 번호';
+comment on column touristspot.tcategory is '관광지 카테고리';
+comment on column touristspot.ttitle is '관광지 제목';
+comment on column touristspot.tcomments is '관광지 내용';
+comment on column touristspot.tinputid is '관광지 등록 아이디';
+comment on column touristspot.tinputdate is '관광지 등록 날짜';
+comment on column touristspot.taddress1 is '관광지 주소1';
+comment on column touristspot.taddress2 is '관광지 주소2';
+comment on column touristspot.tprice is '관광지 가격';
+comment on column touristspot.tdiscount is '관광지 할인';
+comment on column touristspot.timage is '관광지 이미지';
+comment on column touristspot.tpoint is '관광지 포인트';
+
+commit;
+
+
+
+
+
+3. 현선
+--현선님 파트
+-- 커뮤니티테이블
+DROP TABLE COMMUNITY;
+
+CREATE TABLE COMMUNITY ( 
+	NUM NUMBER NOT NULL PRIMARY KEY,
+	REVIEW_NUM NUMBER NOT NULL,
+	REVIEW_TYPE VARCHAR2(2) NOT NULL,
+	IMGURL VARCHAR2(60) NOT NULL,
+	TITLE VARCHAR2(200) NOT NULL,
+	SUMMARY VARCHAR2(200) NOT NULL,
+	CONTENTS CLOB,
+	HITS NUMBER DEFAULT '0' NULL,
+	RECOMMEND NUMBER DEFAULT '0' NULL,
+	STEAMED  NUMBER DEFAULT '0' NULL,
+	STAR_RANKING  NUMBER DEFAULT '0' NULL,
+	REG_KEYWORD VARCHAR2(600) DEFAULT NULL,
+	STATUS VARCHAR2(2) DEFAULT '01' NOT NULL,
+	REG_ID VARCHAR2(45) NULL ,
+	REG_DATE DATE DEFAULT SYSDATE NULL ,
+	MOD_ID VARCHAR2(45) NULL,
+	MOD_DATE DATE NULL 
+);
+
+COMMENT ON TABLE COMMUNITY IS '커뮤니티테이블';
+COMMENT ON COLUMN COMMUNITY.NUM IS '커뮤니티 고유번호';
+COMMENT ON COLUMN COMMUNITY.REVIEW_NUM IS '후기 번호(캠핑/글램핑번호 or 관광지번호)';
+COMMENT ON COLUMN COMMUNITY.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기) ';
+COMMENT ON COLUMN COMMUNITY.IMGURL IS '대표이미지 파일명';
+COMMENT ON COLUMN COMMUNITY.TITLE IS '제목';
+COMMENT ON COLUMN COMMUNITY.SUMMARY IS '한줄요약';
+COMMENT ON COLUMN COMMUNITY.CONTENTS IS '내용';
+COMMENT ON COLUMN COMMUNITY.HITS IS '조회수';
+COMMENT ON COLUMN COMMUNITY.RECOMMEND IS '추천수(좋아요)';
+COMMENT ON COLUMN COMMUNITY.STEAMED IS '찜수';
+COMMENT ON COLUMN COMMUNITY.STAR_RANKING IS '별등급';
+COMMENT ON COLUMN COMMUNITY.REG_KEYWORD IS '등록키워드';
+COMMENT ON COLUMN COMMUNITY.STATUS IS '커뮤니티상태값(01:노출/02:비노출)';
+COMMENT ON COLUMN COMMUNITY.REG_ID IS '등록아이디';
+COMMENT ON COLUMN COMMUNITY.REG_DATE IS '등록날짜';
+COMMENT ON COLUMN COMMUNITY.MOD_ID IS '수정아이디';
+COMMENT ON COLUMN COMMUNITY.MOD_DATE IS '수정날짜';
+
+DROP SEQUENCE COMMUNITY_SEQ;
+CREATE SEQUENCE COMMUNITY_SEQ
+  INCREMENT BY 1
+  START WITH 1
+  MINVALUE 1
+  MAXVALUE 10000
+  NOCACHE;
+  
+--------------------------------------------------
+
+-- 댓글테이블
+
+DROP TABLE REPLY;
+
+CREATE TABLE REPLY ( 
+	NUM NUMBER NOT NULL PRIMARY KEY,
+	REVIEW_NUM NUMBER NOT NULL,
+	REVIEW_TYPE VARCHAR2(2) NOT NULL,
+	CONTENTS CLOB,
+	REG_ID VARCHAR2(45) NULL ,
+	REG_DATE DATE DEFAULT SYSDATE NULL
+);
+
+COMMENT ON TABLE REPLY IS '댓글 테이블';
+COMMENT ON COLUMN REPLY.NUM IS '댓글 고유번호';
+COMMENT ON COLUMN REPLY.REVIEW_NUM IS '후기 번호(캠핑/글램핑번호 or 관광지번호)';
+COMMENT ON COLUMN REPLY.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기) ';
+COMMENT ON COLUMN REPLY.CONTENTS IS '내용';
+COMMENT ON COLUMN REPLY.REG_ID IS '등록아이디';
+COMMENT ON COLUMN REPLY.REG_DATE IS '등록날짜';
+
+DROP SEQUENCE REPLY_SEQ;
+CREATE SEQUENCE REPLY_SEQ
+  INCREMENT BY 1
+  START WITH 1
+  MINVALUE 1
+  MAXVALUE 10000000
+  NOCACHE;
+  
+--------------------------------------------------
+
+-- 평가 등급 테이블 (저장용도)
+
+DROP TABLE RATING;
+
+CREATE TABLE RATING ( 
+	REVIEW_NUM NUMBER NOT NULL,
+	REVIEW_TYPE VARCHAR2(2) NOT NULL,
+	RATING_TYPE VARCHAR2(2) NOT NULL,
+	STAR_RANKING  NUMBER DEFAULT '0' NULL,
+	REG_ID VARCHAR2(45) NULL ,
+	REG_DATE DATE DEFAULT SYSDATE NULL,
+	MOD_ID VARCHAR2(45) NULL,
+	MOD_DATE DATE NULL 
+);
+
+CREATE UNIQUE INDEX RATING_PK ON RATING
+(REVIEW_NUM, REVIEW_TYPE, RATING_TYPE, REG_ID)
+NOLOGGING;
+
+ALTER TABLE RATING ADD (
+  CONSTRAINT RATING_PK
+  PRIMARY KEY
+  (REVIEW_NUM, REVIEW_TYPE, RATING_TYPE, REG_ID)
+  USING INDEX RATING_PK
+  ENABLE VALIDATE);
+
+COMMENT ON TABLE RATING IS '좋아요찜별 테이블';
+COMMENT ON COLUMN RATING.REVIEW_NUM IS '커뮤니티 후기 고유번호';
+COMMENT ON COLUMN RATING.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기) ';
+COMMENT ON COLUMN RATING.RATING_TYPE IS '구분값(좋아요,찜,별)) ';
+COMMENT ON COLUMN RATING.STAR_RANKING IS '별갯수 ';
+COMMENT ON COLUMN RATING.REG_ID IS '등록아이디';
+COMMENT ON COLUMN RATING.REG_DATE IS '등록날짜';
+COMMENT ON COLUMN RATING.MOD_ID IS '수정아이디';
+COMMENT ON COLUMN RATING.MOD_DATE IS '수정날짜';
+
+DROP SEQUENCE RATING_SEQ;
+CREATE SEQUENCE RATING_SEQ
+  INCREMENT BY 1
+  START WITH 1
+  MINVALUE 1
+  MAXVALUE 10000
+  NOCACHE;
+  
+--------------------------------------------------
+
+
+
+
+
+
+4. 승민
+
+-- 캠핑장 목록 테이블
+
+-- num: 캠핑장 고유번호; name: 캠핑장 이름; district: 구역;
+-- ccode: 캠핑구분코드(01:일반야영장/02:자동차캠핑장/03:글램핑/04:카라반);
+-- theme: 테마(숲/해변/호수,계곡/도심/섬); tag: 태그(#);
+-- introduction: 소개글; outphoto: 외부전경사진;
+-- postcode: 우편번호; address1,2,3,4: 주소1(시), 2(군,구), 3(동,길), 4(좌표); contact: 연락처;
+-- regdate: 등록일; regid: 등록자id; readcount: 조회수; upcount: 추천수;
+-- likecount: 찜갯수; reviewcount: 리뷰수; starscore: 평균별점;
+
+DROP TABLE CAMPING;
+
+CREATE TABLE CAMPING (
+	NUM NUMBER PRIMARY KEY,
+	NAME VARCHAR2(60) NOT NULL,
+	DISTRICT VARCHAR2(20) NOT NULL,
+	CCODE VARCHAR2(30) NOT NULL,
+	THEME VARCHAR2(30) NOT NULL,
+	TAG VARCHAR2(120) NOT NULL,
+	INTRODUCTION VARCHAR2(300),
+	OUTPHOTO VARCHAR2(100),
+	POSTCODE VARCHAR2(15),
+	ADDRESS1 VARCHAR2(150) NOT NULL,
+	ADDRESS2 VARCHAR2(150) NOT NULL,
+	ADDRESS3 VARCHAR3(150) NOT NULL,
+	ADDRESS4 VARCHAR4(150) NOT NULL,
+	CONTACT VARCHAR2(20) NOT NULL,
+	REGDATE DATE DEFAULT SYSDATE,
+	REGID VARCHAR2(20) NOT NULL,
+	READCOUNT NUMBER DEFAULT 0,
+	UPCOUNT NUMBER DEFAULT 0,
+	LIKECOUNT NUMBER DEFAULT 0,
+	REVIEWCOUNT NUMBER DEFAULT 0,
+	STARSCORE NUMBER DEFAULT 0
+);
+
+COMMENT ON TABLE CAMPING IS '캠핑장목록테이블';
+COMMENT ON COLUMN CAMPING.NUM IS '캠핑장 고유번호';
+COMMENT ON COLUMN CAMPING.NAME IS '캠핑장 이름';
+COMMENT ON COLUMN CAMPING.DISTRICT IS '구역';
+COMMENT ON COLUMN CAMPING.CCODE IS '카테고리(일반/자동차캠핑장/글램핑/카라반)';
+COMMENT ON COLUMN CAMPING.THEME IS '테마(숲/해변/호수,계곡/도심/섬)';
+COMMENT ON COLUMN CAMPING.TAG IS '태그(#)'
+COMMENT ON COLUMN CAMPING.INTRODUCTION IS '한줄 소개글';
+COMMENT ON COLUMN CAMPING.OUTPHOTO IS '외부사진';
+COMMENT ON COLUMN CAMPING.POSTCODE IS '우편번호';
+COMMENT ON COLUMN CAMPING.ADDRESS1 IS '캠핑장주소1(시)';
+COMMENT ON COLUMN CAMPING.ADDRESS2 IS '캠핑장주소2(군구)';
+COMMENT ON COLUMN CAMPING.ADDRESS3 IS '캠핑장주소3(동길)';
+COMMENT ON COLUMN CAMPING.ADDRESS4 IS '캠핑장좌표';
+COMMENT ON COLUMN CAMPING.CONTACT IS '캠핑장연락처';
+COMMENT ON COLUMN CAMPING.REGDATE IS '등록일';
+COMMENT ON COLUMN CAMPING.REGID IS '등록자id';
+COMMENT ON COLUMN CAMPING.READCOUNT IS '조회수';
+COMMENT ON COLUMN CAMPING.UPCOUNT IS '추천수';
+COMMENT ON COLUMN CAMPING.LIKECOUNT IS '찜갯수';
+COMMENT ON COLUMN CAMPING.REVIEWCOUNT IS '리뷰수';
+COMMENT ON COLUMN CAMPING.STARSCORE IS '평균별점';
+
+DROP SEQUENCE CAMPINGSEQ;
+CREATE SEQUENCE CAMPINGSEQ
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 10000
+	NOCACHE;
+
+// 태그는 다 정해서 넣은 다음, 캠핑장 등록할 때 복수선택
+-------------------------------------------------------------------------------
+
+-- 캠핑장 상세 사이트(방) 테이블
+
+-- num: 사이트번호; name: 사이트 이름;
+-- cnum: 캠핑장번호(camping 테이블과 연결); cname: 캠핑장이름(camping 테이블과 연결);
+-- propguests: 적정인원; maxguests: 최대인원;
+-- weekdayprice: 주중가격; weekendprice: 주말가격;
+-- bookeddatd: 예약된날짜; innerphoto: 내부사진;
+-- contents: 내용; amenity: 부대시설 및 비품;
+
+DROP TABLE SITE;
+
+CREATE TABLE SITE (
+	NUM NUMBER PRIMARY KEY,
+	NAME VARCHAR2(60) NOT NULL,
+	CNUM NUMBER NOT NULL,
+	CNAME VARCHAR2(60) NOT NULL,
+	PROPGUESTS NUMBER NOT NULL,
+	MAXGUESTS NUMBER NOT NULL,
+	WEEKDAYPRICE NUMBER NOT NULL,
+	WEEKENDPRICE NUMBER NOT NULL,
+	BOOKEDDATE VARCHAR2(100),
+	INNERPHOTO VARCHAR2(100),
+	CONTENTS CLOB,
+	AMENUTY VARCHAR2(200),
+	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
+	FOREIGN KEY(CNAME) REFERENCES CAMPING(NAME)
+);
+
+COMMENT ON TABLE SITE IS '캠핑장사이트상세테이블';
+COMMENT ON COLUMN SITE.NUM IS '사이트 고유번호';
+COMMENT ON COLUMN SITE.CNUM IS '캠핑장 고유번호';
+COMMENT ON COLUMN SITE.CNAME IS '캠핑장 이름';
+COMMENT ON COLUMN SITE.NAME IS '사이트 이름';
+COMMENT ON COLUMN SITE.PROPGUESTS IS '적정인원';
+COMMENT ON COLUMN SITE.MAXGUESTS IS '최대인원';
+COMMENT ON COLUMN SITE.WEEKDAYPRICE IS '주중가격';
+COMMENT ON COLUMN SITE.WEEKENDPRICE IS '주말가격';
+COMMENT ON COLUMN SITE.BOOKEDDATE IS '예약된날짜';
+COMMENT ON COLUMN SITE.INNERPHOTO IS '내부사진';
+COMMENT ON COLUMN SITE.CONTENTS IS '상세내용';
+COMMENT ON COLUMN SITE.AMENUTY IS '부대시설,비품';
+
+DROP SEQUENCE SITESEQ;
+CREATE SEQUENCE SITESEQ
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 10000
+	NOCACHE;
+
+// 주소는 캠핑장마다 하나니까 캠핑장에 넣고, 
+캠핑장 내에 여러 개의 site가 있으니
+예약관련하여 각각 인원과 가격, 내부사진과 상세내용은 site테이블에 담아서
+캠핑장 상세화면(site 예약)에 이 테이블 위주로 넣으려고요..
+찜, 추천, 리뷰는 각 캠핑장마다 하나로 통합할 생각이라 여기에는 일단 안 넣었습니다
+-------------------------------------------------------------------------------
+
+-- 숙소 예약 테이블
+
+-- num: 레코드 번호; scode: 숙소 고유 번호; ucode: 사용자 고유 번호;
+ (이 부분은 세영님이 하신 부분 그대로..)
+// site 테이블과 숙소 고유 번호로 연결해서 
+주중,주말가격(+적정인원 초과시 1만원) 가져와서 총액 컬럼 넣고 
+site테이블에 저장된(선점된) 예약된날짜는 불가능하게 하면 되지 않을까 생각합니다 
+
+// 저희 예약사이트가 캠핑장 위주라 '사이트' 라는 공간 단위의 이름을 썼는데
+헷갈리시면 room으로 사용해도 좋아요..  
