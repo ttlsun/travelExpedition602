@@ -193,6 +193,7 @@ drop table postimg cascade constraints;
 create table postimg(
   num number primary key,
   postcode varchar2(20) not null,
+  postnum number not null,
   imgname varchar2(40),
   imgraw varchar2(500) not null,
   uploaddate date default sysdate,
@@ -202,7 +203,8 @@ create table postimg(
 );
 comment on table postimg is '게시글 이미지 테이블';
 comment on column postimg.num is '레코드 번호';
-comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구분(자바단)+번호(해당 테이블 레코드 번호)';
+comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구분(어느 게시판?)';
+comment on column postimg.postnum is '+번호(해당 테이블 레코드 번호)';
 comment on column postimg.imgname is '이미지 이름';
 comment on column postimg.imgraw is '이미지 raw file';
 
