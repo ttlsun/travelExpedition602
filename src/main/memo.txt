@@ -245,47 +245,73 @@ comment on column likes.likedate is '찜한 날짜';
 -------------------------------------------------------------------
 --관형님 파트
 
-drop sequence tour_seq;
-create sequence tour_seq
-   increment by 1
-   start with 1
-   minvalue 1
-   nocache;
+DROP SEQUENCE TOUR_SEQ;
+CREATE SEQUENCE TOUR_SEQ
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	MAXVALUE 10000
+	NOCACHE;
 
-
-drop table touristspot;
-
-create table touristspot(
-   tnum number not null primary key,
-   tcategory varchar2(45) not null,
-   ttitle varchar2(60) not null,
-   tcomments varchar2(750),
-   tinputid varchar2(30) not null,
-   tinputdate date default sysdate,
-   taddress1 varchar2(75) not null,
-   taddress2 varchar2(75),
-   tprice number default 0,
-   tdiscount varchar2(30) default '0',
-   timage varchar2(60),
-   tpoint number default '0' 
+DROP TABLE TOURLIST;
+CREATE TABLE CAMPING(
+	NUM NUMBER PRIMARY KEY,
+	NAME VARCHAR2(100) UNIQUE NOT NULL,
+	THEMECODE VARCHAR2(100) NOT NULL,
+	PRICE NUMBER,
+	DISCOUNT VARCHAR2(30),
+	POINT NUMBER,
+	TAG VARCHAR2(200) NOT NULL,
+	SUMMARY VARCHAR2(200),
+	IMGURL VARCHAR2(200),
+	INTRODUCTION CLOB,
+	POSTCODE VARCHAR2(15),
+	ADDRESS1 VARCHAR2(150) NOT NULL,
+	ADDRESS2 VARCHAR2(150) NOT NULL,
+	ADDRESS3 VARCHAR2(150) NOT NULL,
+	ADDRESS4 VARCHAR2(150) NOT NULL,
+	LATITUDE VARCHAR2(100) NOT NULL,
+	LONGITUDE VARCHAR2(100) NOT NULL,
+	CONTACT VARCHAR2(30) NOT NULL,
+	REGDATE DATE DEFAULT SYSDATE,
+	REGID VARCHAR2(50) NOT NULL,
+	MODDATE DATE DEFAULT SYSDATE,
+	MODID VARCHAR2(50) NOT NULL,
+	READCOUNT NUMBER DEFAULT 0,
+	UPCOUNT NUMBER DEFAULT 0,
+	LIKECOUNT NUMBER DEFAULT 0,
+	REVIEWCOUNT NUMBER DEFAULT 0,
+	STARSCORE NUMBER DEFAULT 0
 );
 
-comment on table touristspot is '관광지 게시판';
-comment on column touristspot.tnum is '관광지 번호';
-comment on column touristspot.tcategory is '관광지 카테고리';
-comment on column touristspot.ttitle is '관광지 제목';
-comment on column touristspot.tcomments is '관광지 내용';
-comment on column touristspot.tinputid is '관광지 등록 아이디';
-comment on column touristspot.tinputdate is '관광지 등록 날짜';
-comment on column touristspot.taddress1 is '관광지 주소1';
-comment on column touristspot.taddress2 is '관광지 주소2';
-comment on column touristspot.tprice is '관광지 가격';
-comment on column touristspot.tdiscount is '관광지 할인';
-comment on column touristspot.timage is '관광지 이미지';
-comment on column touristspot.tpoint is '관광지 포인트';
-
-commit;
-
+COMMENT ON TABLE TOURLIST IS '관광지 테이블';
+COMMENT ON COLUMN TOURLIST.NUM IS '관광지 고유번호';
+COMMENT ON COLUMN TOURLIST.NAME IS '관광지 이름';
+COMMENT ON COLUMN TOURLIST.THEMECODE IS '관광지 테마(숲/해변/호수,계곡/도심/섬)';
+COMMENT ON COLUMN TOURLIST.PRICE IS '관광지 가격';
+COMMENT ON COLUMN TOURLIST.DISCOUNT IS '관광지 할인가';
+COMMENT ON COLUMN TOURLIST.POINT IS '관광지 포인트';
+COMMENT ON COLUMN TOURLIST.TAG IS '태그(#)';
+COMMENT ON COLUMN TOURLIST.SUMMARY IS '관광지 한줄 요약';
+COMMENT ON COLUMN TOURLIST.IMGURL IS '관광지 대표이미지';
+COMMENT ON COLUMN TOURLIST.INTRODUCTION IS '관광지 소개글';
+COMMENT ON COLUMN TOURLIST.POSTCODE IS '우편번호';
+COMMENT ON COLUMN TOURLIST.ADDRESS1 IS '관광지주소1(시)';
+COMMENT ON COLUMN TOURLIST.ADDRESS2 IS '관광지주소2(군구)';
+COMMENT ON COLUMN TOURLIST.ADDRESS3 IS '관광지주소3(동길)';
+COMMENT ON COLUMN TOURLIST.ADDRESS4 IS '관광지주소4(상세주소)';
+COMMENT ON COLUMN TOURLIST.LATITUDE IS '관광지위도';
+COMMENT ON COLUMN TOURLIST.LONGITUDE IS '관광지경도';
+COMMENT ON COLUMN TOURLIST.CONTACT IS '관광지연락처';
+COMMENT ON COLUMN TOURLIST.REGDATE IS '관광지 등록일';
+COMMENT ON COLUMN TOURLIST.REGID IS '관광지 등록자id';
+COMMENT ON COLUMN TOURLIST.MODDATE IS '관광지 수정일';
+COMMENT ON COLUMN TOURLIST.MODID IS '관광지 수정자id';
+COMMENT ON COLUMN TOURLIST.READCOUNT IS '관광지 조회수';
+COMMENT ON COLUMN TOURLIST.UPCOUNT IS '관광지 추천수';
+COMMENT ON COLUMN TOURLIST.LIKECOUNT IS '관광지 찜갯수';
+COMMENT ON COLUMN TOURLIST.REVIEWCOUNT IS '관광지 리뷰수';
+COMMENT ON COLUMN TOURLIST.STARSCORE IS '관광지 평균별점';
 
 
 
