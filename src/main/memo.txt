@@ -193,7 +193,6 @@ drop table postimg cascade constraints;
 create table postimg(
   num number primary key,
   postcode varchar2(20) not null,
-  imgcode varchar2(20) unique not null,
   imgname varchar2(40),
   imgraw varchar2(500) not null,
   uploaddate date default sysdate,
@@ -204,7 +203,6 @@ create table postimg(
 comment on table postimg is '게시글 이미지 테이블';
 comment on column postimg.num is '레코드 번호';
 comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구분(자바단)+번호(해당 테이블 레코드 번호)';
-comment on column postimg.imgcode is '이미지 고유 번호';
 comment on column postimg.imgname is '이미지 이름';
 comment on column postimg.imgraw is '이미지 raw file';
 
@@ -609,7 +607,7 @@ CREATE TABLE RESERVATION(
 	NUM NUMBER PRIMARY KEY,
 	CNUM NUMBER NOT NULL,
 	RNUM NUMBER NOT NULL,
-	UCODE VARCHAR2(20) NOT NULL,
+	id VARCHAR2(20) NOT NULL,
 	CHECKINDATE DATE NOT NULL,
 	CHECKOUTDATE DATE NOT NULL,
 	GUESTS NUMBER NOT NULL,
@@ -621,14 +619,14 @@ CREATE TABLE RESERVATION(
 	STATUS VARCHAR2(100),
 	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
 	FOREIGN KEY(RNUM) REFERENCES ROOM(NUM),
-	FOREIGN KEY(UCODE) REFERENCES USERS(UCODE)
+	FOREIGN KEY(id) REFERENCES USERS(id)
 );
 
 COMMENT ON TABLE RESERVATION IS 'ROOM예약테이블';
 COMMENT ON COLUMN RESERVATION.NUM IS '예약 고유번호';
 COMMENT ON COLUMN RESERVATION.CNUM IS '캠핑장 고유번호';
 COMMENT ON COLUMN RESERVATION.RNUM IS '방 고유번호';
-COMMENT ON COLUMN RESERVATION.UCODE IS '사용자고유번호';
+COMMENT ON COLUMN RESERVATION.id IS '사용자 아이디';
 COMMENT ON COLUMN RESERVATION.CHECKINDATE IS '체크인날짜';
 COMMENT ON COLUMN RESERVATION.CHECKOUTDATE IS '체크아웃날짜';
 COMMENT ON COLUMN RESERVATION.GUESTS IS '이용인원';
