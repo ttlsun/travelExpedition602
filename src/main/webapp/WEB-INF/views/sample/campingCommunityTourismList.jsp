@@ -110,14 +110,6 @@ function samapleAjax(type, code, callback) {
 	});
 }
 
-//검색 버튼 클릭시,
-function search() {
-	var addr1 =  $("#searchAddr option:selected").text() ; //시
-	var addr2 =  $("#searchAddr2 option:selected").text() ; //구군
-	
-}
-
-
 //테마 샐랙트 박스 셋팅
 function selThemeInit() {
 	
@@ -140,8 +132,8 @@ function selInit() {
 	samapleAjax("시도", "", function(data) {
 		$.each(data.body, function (i, item) {
 		    $('#searchAddr').append($('<option>', {
-		        value: item.NO,
-		        text : item.NAME
+		        value: item,
+		        text : item
 		    }));
 		});
 	});
@@ -161,8 +153,8 @@ function chageSelOpt() {
 		samapleAjax("구군", $("#searchAddr option:selected").val(), function(data) {
 			$.each(data.body, function (i, item) {
 			    $('#searchAddr2').append($('<option>', {
-			        value: item.NO,
-			        text : item.NAME
+			        value: item,
+			        text : item
 			    }));
 			});
 		});
@@ -197,30 +189,35 @@ function goDetail() {
 	<header><h2 align="center" class="text-primary"> 캠핑/관광지/후기 리스트 공통예제 화면</h2></header>
 	
 	<div class="form-group rounded">
-		<form action="" >
+		<form action="sampleCCTList" method="post">
+			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+			
+			<!-- 테스트데이터 : 보는용도로 사용(넣지마세요..) -->
+			<input type="text" class="form-control" value="${pageInfo.params}">
+			<!-- //테스트데이터 : 보는용도로 사용(넣지마세요..) -->
+			
 			<div class="">
 				<dl>
 					<dt><label for="searchAddr">지역</label></dt>
 					<dd>
-						<select id="searchAddr" class="form-control45" onChange="chageSelOpt()"></select>
+						<select id="searchAddr" name="address1" class="form-control45" onChange="chageSelOpt()"></select>
 						<span style="padding-left: 3.4%;"></span>
-						<select id="searchAddr2" class="form-control50" ></select>
+						<select id="searchAddr2" name="address2" class="form-control50" ></select>
 					</dd>
 				</dl>
 				<dl>
 					<dt><label for="searchTheme">테마</label></dt>
-					<dd><select id="searchTheme" class="form-control"></select></dd>
+					<dd><select id="searchTheme" name="themecode" class="form-control"></select></dd>
 				</dl>
 				<dl>
-					<dt><label for="whatColumnSearch">검색</label></dt>
+					<dt><label for="searchWhatColumn">검색</label></dt>
 					<dd>
-						<select name="whatColumnSearch" id="whatColumnSearch" class="form-control">
+						<select name="whatColumn" id="searchWhatColumn" class="form-control">
 							<option value="">전체</option>
 							<option value="name">캠핑장이름</option>
 						</select>
 						
 						<div align="left" style="padding-top: 5px;">
-							<input type="hidden" id="whatColumn" name="whatColumn" placeholder="지역/테마/검색 선택">
 							<input type="text" class="form-control50" name="keyword" placeholder="검색">
 							<input type="submit" class="btn btn-default" value="검색" onclick="return search()">
 						</div>

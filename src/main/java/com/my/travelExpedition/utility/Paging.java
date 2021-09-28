@@ -1,5 +1,8 @@
 package com.my.travelExpedition.utility;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class Paging {
 
 	// public static Paging instance = new Paging();
@@ -19,10 +22,20 @@ public class Paging {
 	private String url = ""; // 예시 ==> http://localhost:8989/MyServlet/list.do
 	private String pagingHtml = "";// 하단의 숫자 페이지 링크
 	// private String pagingStatus = ""; //상단 우측의 현재 페이지 위치 표시
+	// private String whatColumn = ""; //키워드
+	// private String keyword = ""; //검색단어
 	// 검색을 위한 변수 추가
-	private String whatColumn = ""; // 검색 모드(작성자, 글제목, 전체 검색은 all) 등등
-	private String keyword = ""; // 검색할 단어
+	private String params = ""; // 파라미터 추가
+
 	
+	public String getParams() {
+		return params;
+	}
+
+	public void setParams(String params) {
+		this.params = params;
+	}
+
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -121,51 +134,54 @@ public class Paging {
 
 	public String getPagingHtml() {
 		// System.out.println("pagingHtml:"+pagingHtml);
-
 		return pagingHtml;
-//			pagingHtml:
-//				&nbsp;<font color='red'>1</font>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=2&pageSize=2&whatColumn=null&keyword=null'>2</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=3&pageSize=2&whatColumn=null&keyword=null'>3</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=4&pageSize=2&whatColumn=null&keyword=null'>4</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=5&pageSize=2&whatColumn=null&keyword=null'>5</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=6&pageSize=2&whatColumn=null&keyword=null'>6</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=7&pageSize=2&whatColumn=null&keyword=null'>7</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=8&pageSize=2&whatColumn=null&keyword=null'>8</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=9&pageSize=2&whatColumn=null&keyword=null'>9</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=10&pageSize=2&whatColumn=null&keyword=null'>10</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=11&pageSize=2&whatColumn=null&keyword=null'>다음</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=22&pageSize=2&whatColumn=null&keyword=null'>맨 끝</a>&nbsp;
-
 	}
 
 	public void setPagingHtml(String pagingHtml) {
 		this.pagingHtml = pagingHtml;
 	}
-
-	public String getWhatColumn() {
-		return whatColumn;
+	
+	/**
+	 * 페이지 정보 생성
+	 * @param map : 넘어온 파라미터들
+	 * @param _pageSize : 페이징 사이즈 
+	 * @param totalCount : 페이지 총갯수
+	 * @param url : 페이지정보
+	 */
+	public Paging(Map<String, String> map, String _pageSize, int totalCount, String url) {
+		this(map.get("pageNumber"), _pageSize, totalCount, url, "", "");
+		
+		StringBuilder sb = new StringBuilder();
+		
+		Iterator<String> iter = map.keySet().iterator();
+		System.out.println("list : 넘어온 파라미터들 ------------------------");
+		while (iter.hasNext()) {
+			String key = iter.next();
+			String value = (String) map.get(key);
+			System.out.println(key + " : " + value);
+			
+			if (value != null && !value.equals("")) {
+				sb.append("&").append(key).append("=").append(value);
+			}
+		}
+		System.out.println("-------------------------------------------");
+		this.params = sb.toString();
+		
+		//값 받아서 다시 그리기.
+		this.pagingHtml = getPagingHtml(url);
 	}
-
-	public void setWhatColumn(String whatColumn) {
-		this.whatColumn = whatColumn;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
 	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String whatColumn, String keyword) {
-
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
-
-			System.out.println("_pageNumber:" + _pageNumber); // null
+			//System.out.println("_pageNumber:" + _pageNumber); // null
 			_pageNumber = "1";
 		}
 		this.pageNumber = Integer.parseInt(_pageNumber);
-
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			_pageSize = "5"; // 한 페이지에 보여줄 레코드 갯수
 		}
 		this.pageSize = Integer.parseInt(_pageSize);
-
 		this.limit = pageSize;
-
 		this.totalCount = totalCount;
-
 		this.totalPage = (int) Math.ceil((double) this.totalCount / this.pageSize);
 		// ceil(7.0/2) => 3.5=> 4
 
@@ -198,12 +214,10 @@ public class Paging {
 
 		// System.out.println("pageNumber2:"+pageNumber+"/totalPage2:"+totalPage);
 		this.url = url; // /ex/list.ab
-		this.whatColumn = whatColumn;
-		this.keyword = keyword;
+		this.params = "&whatColumn=" + whatColumn + "&keyword=" + keyword;
 		// System.out.println("whatColumn:"+whatColumn+"/keyword:"+keyword);
 
 		this.pagingHtml = getPagingHtml(url);
-
 	}
 
 	public String getPagingHtml(String url) { // 페이징 문자열을 만든다.
@@ -211,7 +225,7 @@ public class Paging {
 
 		String result = ""; // 페이징 html 조립할 변수.
 		// added_param 변수 : 검색 관련하여 추가되는 파라미터 리스트
-		String added_param = "&whatColumn=" + whatColumn + "&keyword=" + keyword; // &whatColumn=singer&keyword=아
+		String added_param = params; // &whatColumn=singer&keyword=아
 
 		result += "<ul class='pagination pagination-sm'>";
 		if (this.beginPage != 1) { // 앞쪽, pageSize:한 화면에 보이는 레코드 수

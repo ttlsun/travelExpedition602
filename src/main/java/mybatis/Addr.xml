@@ -8,7 +8,11 @@
 		SELECT SEQ_NO as NO, AR_CODE AS CODE, AR_NAME AS NAME
 		FROM SY_CODE_ADDR
 		WHERE SY_CODE = #{addrType}
-		<if test="addrType == 'A2'"> AND PARENT_SEQ_NO = #{addrCode} </if>
+		<if test="addrType == 'A2'">
+			AND PARENT_SEQ_NO = (
+				SELECT SEQ_NO FROM SY_CODE_ADDR WHERE SY_CODE = 'A1' AND AR_NAME=#{addrCode}
+			)
+		</if>
 		ORDER BY VIEW_ORDER
 	</select>
 

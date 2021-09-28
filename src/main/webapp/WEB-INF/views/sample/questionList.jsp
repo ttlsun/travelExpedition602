@@ -26,17 +26,18 @@ $(document).ready(function() {
 	
 	<div class="form-horizontal rounded">
 		<form action="">
-			<div class="">
+			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+			<div>
 				<dl>
-					<dt><label for="keyword">검색</label></dt>
+					<dt><label for="searchWhatColumn">검색</label></dt>
 					<dd>
-						<select name="whatColumn" class="form-control">
-							<option value="all">전체 검색</option>
-							<option value="">제목</option>
+						<select name="whatColumn" id="searchWhatColumn" class="form-control">
+							<option value="">전체 검색</option>
+							<option value="title">제목</option>
 						</select>
 						
 						<div align="left" style="padding-top: 5px;">
-							<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색">
+							<input type="text" class="form-control" name="keyword" placeholder="검색">
 						</div>
 						<div align="right" style="padding-top: 5px;">
 							<input type="submit" class="btn btn-default" value="검색">

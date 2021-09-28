@@ -44,7 +44,7 @@ function mapViewAddressSearchPopupOpen(elementId, callback) {
 
 			data.fullAddr = fullAddr;
 			
-			//console.log(data);sigunguCode
+			//console.log(data);
 			
 			callback(data);
 		},

@@ -48,18 +48,24 @@ function goDelete() {
 	<header><h2 align="center" class="text-primary">리스트 화면</h2></header>
 	
 	<div class="form-horizontal rounded">
-		<form action="">
-			<div class="">
+		<form action="sampleList">
+			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+			
+			<!-- 테스트데이터 : 보는용도로 사용(넣지마세요..) -->
+			<input type="text" class="form-control" value="${pageInfo.params}">
+			<!-- //테스트데이터 : 보는용도로 사용(넣지마세요..) -->
+			
+			<div>
 				<dl>
 					<dt><label for="keyword">검색</label></dt>
 					<dd>
 						<select name="whatColumn" class="form-control">
-							<option value="all">전체 검색</option>
-							<option value="">이름</option>
+							<option value="">전체 검색</option>
+							<option value="name">이름</option>
 						</select>
 						
 						<div align="left" style="padding-top: 5px;">
-							<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색">
+							<input type="text" class="form-control" name="keyword" placeholder="검색">
 						</div>
 						<div align="right" style="padding-top: 5px;">
 							<input type="submit" class="btn btn-default" value="검색">

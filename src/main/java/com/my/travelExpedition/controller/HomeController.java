@@ -1,8 +1,10 @@
 package com.my.travelExpedition.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.travelExpedition.model.AddrBean;
 import com.my.travelExpedition.model.AddrDao;
 import com.my.travelExpedition.model.SampleFileUploadBean;
+import com.my.travelExpedition.utility.Paging;
 import com.my.travelExpedition.utility.WebUtil;
 
 import net.sf.json.JSONArray;
@@ -47,8 +50,24 @@ public class HomeController {
      */
     
     @RequestMapping(value = "/sampleList")
-	public String samplelistView() {
-		return "sample/list";
+    public ModelAndView samplelistView(HttpServletRequest request, @RequestParam Map<String, String> map) {
+		
+    	//기존 아래 파라미터는.. 리스트 셋트메뉴로 가지고 온 것들은 Map<String, String> map 형태로 받아서, pageInfo 에 map 으로 넣어주기때문에 뺐습니다.
+//    	@RequestParam(value = "whatColumn",required = false) String whatColumn, 
+//		@RequestParam(value = "keyword",required = false) String keyword,
+//		@RequestParam(value = "pageNumber",required = false) String pageNumber
+    	
+    	ModelAndView mav = new ModelAndView("sample/list"); 
+		
+		int totalCount = 10;
+		
+		String pageUrl = request.getContextPath()+ "/sample/noticeList"; //페이지 URL
+									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
+		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
+		
+		mav.addObject("pageInfo", pageInfo);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/sampleDetail")
@@ -73,9 +92,20 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/sampleCampingList")
-	public String sampleCampingListView() {
-		return "sample/campingList";
+	public ModelAndView sampleCampingListView(HttpServletRequest request, @RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView("sample/campingList");
+		
+		int totalCount = 10;
+		
+		String pageUrl = request.getContextPath()+ "/sample/campingList"; //페이지 URL
+									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
+		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		
+		mav.addObject("pageInfo", pageInfo);
+		
+		return mav;
 	}
+	
 	
 	@RequestMapping(value = "/sampleCampingDetail")
 	public String sampleCampingDetailView() {
@@ -93,8 +123,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/sampleTourismList")
-	public String sampleTourismListView() {
-		return "sample/tourismList";
+	public ModelAndView sampleTourismListView(HttpServletRequest request, @RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView("sample/tourismList");
+		
+		int totalCount = 10;
+		
+		String pageUrl = request.getContextPath()+ "/sample/campingList"; //페이지 URL
+									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
+		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		
+		mav.addObject("pageInfo", pageInfo);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "/sampleTourismDetail")
@@ -109,9 +149,19 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/sampleNoticeList")
-  	public String sampleNoticeListView() {
-  		return "sample/noticeList";
-  	}
+	public ModelAndView sampleNoticeListView(HttpServletRequest request, @RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView("sample/noticeList");
+		
+		int totalCount = 10;
+		
+		String pageUrl = request.getContextPath()+ "/sample/noticeList"; //페이지 URL
+									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
+		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
+		
+		mav.addObject("pageInfo", pageInfo);
+		
+		return mav;
+	}
 
 	@RequestMapping(value = "/sampleNoticeDetail")
 	public String sampleNoticeDetailView() {
@@ -175,17 +225,8 @@ public class HomeController {
 		
 		ModelAndView mav = new ModelAndView("sample/communityList");
 		
-//		mav.addObject("pageInfo", pageInfo);
-//		mav.addObject("totalCount", totalCount);
-//		mav.addObject("lists", lists);
-		
 		return mav;
 	}
-	
-//	@RequestMapping(value = "/sampleCommunityRegister")
-//	public String sampleCommunityRegisterView(a) {
-//		return "sample/communityRegister";
-//	}
 	
 	@RequestMapping(value = "/sampleCommunityRegister", method = RequestMethod.GET)
 	public ModelAndView sampleCommunityRegisterView() {
@@ -287,8 +328,17 @@ public class HomeController {
 	 */
 	
 	@RequestMapping(value = "/sampleCCTList")
-  	public String sampleCCTListView() {
-  		return "sample/campingCommunityTourismList";
+  	public ModelAndView sampleCCTListView(HttpServletRequest request, @RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView("sample/campingCommunityTourismList");
+		
+		int totalCount = 10;
+		
+		String pageUrl = request.getContextPath()+ "/sample/campingCommunityTourismList"; //페이지 URL
+		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		
+		mav.addObject("pageInfo", pageInfo);
+		
+		return mav;
 	}
 	
 	/**
@@ -315,12 +365,13 @@ public class HomeController {
 				System.out.println("lists : " + lists.size());
 				
 				for(int i =0; i< lists.size(); i++) {
-					JSONObject  data = new JSONObject();
+//					JSONObject  data = new JSONObject(); //우편번호 코드로 받을시 사용.(지금은 불필요하는듯 하여 주석처리.)
 //					System.out.println(lists.get(i).getCode() + " ," + lists.get(i).getName());
-					data.put("NO", lists.get(i).getNo());
-					data.put("CODE", lists.get(i).getCode());
-					data.put("NAME", lists.get(i).getName());
-					jsonArray.add(data);
+//					data.put("NO", lists.get(i).getNo());
+//					data.put("CODE", lists.get(i).getCode());
+//					data.put("NAME", lists.get(i).getName());
+//					jsonArray.add(data);
+					jsonArray.add(lists.get(i).getName()); //시도이름만 추출.
 				}
 				
 			} else {
@@ -328,11 +379,12 @@ public class HomeController {
 				//System.out.println("lists : " + lists.size());
 				
 				for(int i =0; i< lists.size(); i++) {
-					JSONObject  data = new JSONObject();
-					data.put("NO", lists.get(i).getNo());
-					data.put("CODE", lists.get(i).getCode());
-					data.put("NAME", lists.get(i).getName());
-					jsonArray.add(data);
+//					JSONObject  data = new JSONObject();
+//					data.put("NO", lists.get(i).getNo());
+//					data.put("CODE", lists.get(i).getCode());
+//					data.put("NAME", lists.get(i).getName());
+//					jsonArray.add(data);
+					jsonArray.add(lists.get(i).getName()); //구군 이름만 추출.
 				}
 				
 			}
