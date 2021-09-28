@@ -24,8 +24,6 @@ $(document).ready(function() {
 	//지도를 생성합니다
 	map = mapViewInit('map');
 	
-	//테마 샐랙트 박스 셋팅.
-	selThemeInit();
 });
 
 function addSerach(fullAddr) {
