@@ -29,7 +29,7 @@ create table users(
 );
 comment on table users is '사용자 정보';
 comment on column users.num is '레코드 번호';
-comment on column users.ucode is '사용자 구분';
+comment on column users.ucode is '사용자 구분(admin:관리자/business:사업자/customer:개인회원)';
 comment on column users.id is '아이디';
 comment on column users.pw is '비밀번호';
 comment on column users.name is '관리자, 사업체 이름, 개인회원 실명';
@@ -203,7 +203,7 @@ create table postimg(
 );
 comment on table postimg is '게시글 이미지 테이블';
 comment on column postimg.num is '레코드 번호';
-comment on column postimg.postcode is '게시글 고유 번호 = 게시글 구분(어느 게시판?)';
+comment on column postimg.postcode is '게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
 comment on column postimg.postnum is '+번호(해당 테이블 레코드 번호)';
 comment on column postimg.imgname is '이미지 이름';
 comment on column postimg.imgraw is '이미지 raw file';
@@ -224,6 +224,7 @@ create table likes(
   num number primary key,
   id varchar2(20) not null,
   lcode varchar2(20) not null,
+  
   likedate date default sysdate,
   foreign key(id) references users(id)
 );
