@@ -223,15 +223,16 @@ drop table likes cascade constraints;
 create table likes(
   num number primary key,
   id varchar2(20) not null,
-  lcode varchar2(20) not null,
-  
+  postcode varchar2(20) not null,
+  postnum number not null,
   likedate date default sysdate,
   foreign key(id) references users(id)
 );
 comment on table likes is '찜/관심목록 테이블';
 comment on column likes.num is '레코드 번호';
 comment on column likes.id is '사용자 아이디 - 부모 users';
-comment on column likes.lcode is '게시글 코드 = 어느 게시판 게시글에서 눌렀는지+해당 게시글 번호';
+comment on column likes.postcode is '게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
+comment on column likes.postnum is '+번호(해당 테이블 레코드 번호)';
 comment on column likes.likedate is '찜한 날짜';
 
 
