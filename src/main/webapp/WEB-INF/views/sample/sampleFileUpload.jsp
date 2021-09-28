@@ -32,15 +32,13 @@ function inputSave() {
 		<tr>
 			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td>
-				<input type="file" name="imgFile" value="">
-				<input type="hidden" class="" id="imgUrl" name="imgUrl" value="" accept=".jpg, .jpeg, .png, .gif">
+				<input type="file" name="imgFile" value="" accept=".jpg, .jpeg, .png, .gif">
 			</td>
 		</tr>
 		<tr>
 			<td><label for="multipleImgFile"><span class="redFont"> * </span> 여럿 이미지 올릴거(multiple 적용) </label> </td>
 			<td>
 				<input type="file" multiple name="multipleImgFile" value="" accept=".jpg, .jpeg, .png, .gif">
-				<input type="hidden" class="" id="multipleImgFileUrl" name="multipleImgFileUrl" value="">
 			</td>
 		</tr>
 		<tr>
