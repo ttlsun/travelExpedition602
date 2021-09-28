@@ -1,3 +1,5 @@
+--여러개 이미지 넣는 게 필요한 테이블에서 게시글 이미지 번호 가져오는 컬럼 : postimgnum(postimg num 들 가져오는 칼럼)
+
 --세영님 파트
 --기본 유저 시퀀스
 --nocache 장점 : 버퍼 메모리 절약; 단점 : CPU 과도한 사용;
@@ -17,14 +19,16 @@ create table users(
   id varchar2(20) unique not null,
   pw varchar2(20) not null,
   name varchar2(40) not null,
+  gender varchar2(10) not null,
   email varchar2(30) unique not null,
   birth date default sysdate,
-  zipcode number,
-  address1 varchar2(50),
+  postcode number,
+  address1 varchar2(50), --주소 4개로(다른 테이블 참고)
   address2 varchar2(50),
   phone varchar2(20) not null,
-  regidate date default sysdate,
+  regidate date default sysdate, --승민님이랑 관형님 걸로 바꾸기 (세영, 현선)
   editdate date default sysdate,
+  editor varchar2(20),
   status varchar2(50) not null
 );
 comment on table users is '사용자 정보';
@@ -33,6 +37,7 @@ comment on column users.ucode is '사용자 구분(admin:관리자/business:사�
 comment on column users.id is '아이디';
 comment on column users.pw is '비밀번호';
 comment on column users.name is '관리자, 사업체 이름, 개인회원 실명';
+gender
 comment on column users.email is '이메일 주소';
 comment on column users.birth is '사이트시작일, 사업시작일, 개인회원 생일';
 comment on column users.zipcode is '우편번호';
@@ -41,6 +46,7 @@ comment on column users.address2 is '주소 소분류';
 comment on column users.phone is '번호';
 comment on column users.regidate is '회원가입일';
 comment on column users.editdate is '수정일자';
+comment on column users.editor is '수정한 사람';
 comment on column users.status is '회원상태';
 
 
@@ -59,7 +65,8 @@ create table pay(
   num number primary key,
   id varchar2(20) not null,
   paycode varchar2(20) not null,
-  paydetail varchar2(20) not null,
+  paydetail varchar2(20),
+  --cvc 코드
   regidate date default sysdate,
   editdate date default sysdate,
   foreign key(id) references users(id)
@@ -86,7 +93,7 @@ create table notice(
   num number primary key,
   id varchar2(20) not null,
   title varchar(200) not null,
-  content clob not null,
+  contents clob not null,
   uploaddate date default sysdate,
   editdate date default sysdate,
   editor varchar2(20) not null,
@@ -117,7 +124,7 @@ create table event(
   num number primary key,
   id varchar2(20) not null,
   title varchar(200) not null,
-  content clob not null,
+  contents clob not null,
   uploaddate date default sysdate,
   editdate date default sysdate,
   editor varchar2(20) not null,
@@ -153,7 +160,7 @@ create table qna(
   id varchar2(20) not null,
   pw varchar2(20),
   title varchar(200) not null,
-  content clob not null,
+  contents clob not null,
   keyword varchar2(100),
   uploaddate date default sysdate,
   editdate date default sysdate,
@@ -192,8 +199,8 @@ create sequence postimgseq
 drop table postimg cascade constraints;
 create table postimg(
   num number primary key,
-  postcode varchar2(20) not null,
-  postnum number not null,
+  postcode varchar2(20) not null, --articlecode???? 정해서 일단 카톡방에 물어보고 수정
+  postnum number not null, --이름 위에 거랑 비슷하게
   imgname varchar2(40),
   imgraw varchar2(500) not null,
   uploaddate date default sysdate,
@@ -223,8 +230,8 @@ drop table likes cascade constraints;
 create table likes(
   num number primary key,
   id varchar2(20) not null,
-  postcode varchar2(20) not null,
-  postnum number not null,
+  postcode varchar2(20) not null, --이름변경
+  postnum number not null, --변경
   likedate date default sysdate,
   foreign key(id) references users(id)
 );
@@ -256,17 +263,17 @@ CREATE SEQUENCE TOUR_SEQ
 	NOCACHE;
 
 DROP TABLE TOURLIST;
-CREATE TABLE CAMPING(
+CREATE TABLE CAMPING( --테이블 이름 변경
 	NUM NUMBER PRIMARY KEY,
 	NAME VARCHAR2(100) UNIQUE NOT NULL,
 	THEMECODE VARCHAR2(100) NOT NULL,
 	PRICE NUMBER,
 	DISCOUNT VARCHAR2(30),
-	POINT NUMBER,
+	POINT NUMBER, --아쉽지만 제거
 	TAG VARCHAR2(200) NOT NULL,
 	SUMMARY VARCHAR2(200),
 	IMGURL VARCHAR2(200),
-	INTRODUCTION CLOB,
+	INTRODUCTION CLOB, --contents로 변경
 	POSTCODE VARCHAR2(15),
 	ADDRESS1 VARCHAR2(150) NOT NULL,
 	ADDRESS2 VARCHAR2(150) NOT NULL,
@@ -283,7 +290,7 @@ CREATE TABLE CAMPING(
 	UPCOUNT NUMBER DEFAULT 0,
 	LIKECOUNT NUMBER DEFAULT 0,
 	REVIEWCOUNT NUMBER DEFAULT 0,
-	STARSCORE NUMBER DEFAULT 0
+	STARSCORE NUMBER DEFAULT 0 --삭제
 );
 
 COMMENT ON TABLE TOURLIST IS '관광지 테이블';
@@ -336,11 +343,11 @@ CREATE TABLE COMMUNITY (
    TITLE VARCHAR2(200) NOT NULL,
    SUMMARY VARCHAR2(200) NOT NULL,
    CONTENTS CLOB,
-   HITS NUMBER DEFAULT '0' NULL,
+   HITS NUMBER DEFAULT '0' NULL, --readcount로 이름 변경
    RECOMMEND NUMBER DEFAULT '0' NULL,
-   STEAMED  NUMBER DEFAULT '0' NULL,
+   STEAMED  NUMBER DEFAULT '0' NULL, --like table 이름 바꾸기
    STAR_RANKING  NUMBER DEFAULT '0' NULL,
-   REG_KEYWORD VARCHAR2(600) DEFAULT NULL,
+   REG_KEYWORD VARCHAR2(600) DEFAULT NULL, --다른사람들 이걸로 변경
    STATUS VARCHAR2(2) DEFAULT '01' NOT NULL,
    REG_ID VARCHAR2(45) NULL ,
    REG_DATE DATE DEFAULT SYSDATE NULL ,
@@ -385,9 +392,9 @@ CREATE TABLE REPLY (
    NUM NUMBER NOT NULL PRIMARY KEY,
    REVIEW_NUM NUMBER NOT NULL,
    REVIEW_TYPE VARCHAR2(2) NOT NULL,
-   CONTENTS CLOB,
-   REG_ID VARCHAR2(45) NULL ,
-   REG_DATE DATE DEFAULT SYSDATE NULL
+   CONTENTS CLOB, --varchar2()로 변경
+   REG_ID VARCHAR2(45) NULL , ----
+   REG_DATE DATE DEFAULT SYSDATE NULL -------
 );
 
 COMMENT ON TABLE REPLY IS '댓글 테이블';
@@ -436,9 +443,9 @@ ALTER TABLE RATING ADD (
 
 COMMENT ON TABLE RATING IS '좋아요찜별 테이블';
 COMMENT ON COLUMN RATING.REVIEW_NUM IS '커뮤니티 후기 고유번호';
-COMMENT ON COLUMN RATING.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기) ';
+COMMENT ON COLUMN RATING.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기)';
 COMMENT ON COLUMN RATING.RATING_TYPE IS '구분값(좋아요,찜,별)) ';
-COMMENT ON COLUMN RATING.STAR_RANKING IS '별갯수 ';
+COMMENT ON COLUMN RATING.STAR_RANKING IS '별갯수';
 COMMENT ON COLUMN RATING.REG_ID IS '등록아이디';
 COMMENT ON COLUMN RATING.REG_DATE IS '등록날짜';
 COMMENT ON COLUMN RATING.MOD_ID IS '수정아이디';
@@ -480,12 +487,12 @@ DROP TABLE CAMPING;
 CREATE TABLE CAMPING(
 	NUM NUMBER PRIMARY KEY,
 	NAME VARCHAR2(100) NOT NULL,
-	TYPECODE VARCHAR2(100) NOT NULL,
-	THEMECODE VARCHAR2(10) NOT NULL,
-	TAG VARCHAR2(200) NOT NULL,
+	TYPECODE VARCHAR2(100) NOT NULL, --camptype 이름변경
+	THEMECODE VARCHAR2(10) NOT NULL, --관형님과 상의
+	TAG VARCHAR2(200) NOT NULL, --reg_keyword 현선님 테이블 참고해 명칭 변경
 	SUMMARY VARCHAR2(200),
 	IMGURL VARCHAR2(200),
-	INTRODUCTION CLOB,
+	INTRODUCTION CLOB, --contents
 	POSTCODE VARCHAR2(15),
 	ADDRESS1 VARCHAR2(150) NOT NULL,
 	ADDRESS2 VARCHAR2(150) NOT NULL,
@@ -493,16 +500,16 @@ CREATE TABLE CAMPING(
 	ADDRESS4 VARCHAR2(150) NOT NULL,
 	LATITUDE VARCHAR2(100) NOT NULL,
 	LONGITUDE VARCHAR2(100) NOT NULL,
-	CONTACT VARCHAR2(30) NOT NULL,
+	CONTACT VARCHAR2(30) NOT NULL, --세영 phone 이름 바꾸기
 	REGDATE DATE DEFAULT SYSDATE,
 	REGID VARCHAR2(50) NOT NULL,
 	MODDATE DATE DEFAULT SYSDATE,
 	MODID VARCHAR2(50) NOT NULL,
 	READCOUNT NUMBER DEFAULT 0,
-	UPCOUNT NUMBER DEFAULT 0,
-	LIKECOUNT NUMBER DEFAULT 0,
+	UPCOUNT NUMBER DEFAULT 0, --추천수(현선님거 따라서 이름 변경)
+	LIKECOUNT NUMBER DEFAULT 0, --찜수(현선님거 따라서 이름 변경)
 	REVIEWCOUNT NUMBER DEFAULT 0,
-	STARSCORE NUMBER DEFAULT 0
+	STARSCORE NUMBER DEFAULT 0 --제거
 );
 
 COMMENT ON TABLE CAMPING IS '캠핑장목록테이블';
@@ -553,7 +560,7 @@ CREATE TABLE ROOM(
 	CNUM NUMBER NOT NULL,
 	CNAME VARCHAR2(100) NOT NULL,
 	IMGURL VARCHAR2(200),
-	DETAILIMG VARCHAR2(600),
+	DETAILIMG VARCHAR2(600), --이미지 테이블 고유번호
 	CONTENTS CLOB,
 	PROPGUESTS NUMBER NOT NULL,
 	MAXGUESTS NUMBER NOT NULL,
@@ -561,7 +568,7 @@ CREATE TABLE ROOM(
 	WEEKENDPRICE NUMBER NOT NULL,
 	OPTIONS VATCHAR2(200), 
 	AMENITY VARCHAR2(200),
-	BOOKABLEDATE VARCHAR2(100),
+	BOOKABLEDATE VARCHAR2(100), --일단 고민해보고 이따가 같이 얘기하기
 	REGDATE DATE DEFAULT SYSDATE,
 	REGID VARCHAR2(50) NOT NULL,
 	MODDATE DATE DEFAULT SYSDATE,
