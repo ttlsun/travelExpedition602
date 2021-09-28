@@ -19,16 +19,18 @@ create table users(
   id varchar2(20) unique not null,
   pw varchar2(20) not null,
   name varchar2(40) not null,
-  gender varchar2(10) not null,
+  gender varchar2(10),
   email varchar2(30) unique not null,
   birth date default sysdate,
   postcode number,
-  address1 varchar2(50), --주소 4개로(다른 테이블 참고)
-  address2 varchar2(50),
-  phone varchar2(20) not null,
-  regidate date default sysdate, --승민님이랑 관형님 걸로 바꾸기 (세영, 현선)
-  editdate date default sysdate,
-  editor varchar2(20),
+  address1 varchar2(150) not null,
+  address2 varchar2(150) not null,
+  address3 varchar2(150) not null,
+  address4 varchar2(150) not null,
+  contact varchar2(30) not null,
+  regdate date default sysdate,
+  moddate date,
+  modid varchar2(20),
   status varchar2(50) not null
 );
 comment on table users is '사용자 정보';
@@ -37,16 +39,18 @@ comment on column users.ucode is '사용자 구분(admin:관리자/business:사�
 comment on column users.id is '아이디';
 comment on column users.pw is '비밀번호';
 comment on column users.name is '관리자, 사업체 이름, 개인회원 실명';
-gender
+comment on column users.gender is '사용자 성별';
 comment on column users.email is '이메일 주소';
 comment on column users.birth is '사이트시작일, 사업시작일, 개인회원 생일';
-comment on column users.zipcode is '우편번호';
-comment on column users.address1 is '주소 대분류';
-comment on column users.address2 is '주소 소분류';
-comment on column users.phone is '번호';
-comment on column users.regidate is '회원가입일';
-comment on column users.editdate is '수정일자';
-comment on column users.editor is '수정한 사람';
+comment on column users.postcode is '우편번호';
+comment on column users.address1 is '캠핑장주소1(시)';
+comment on column users.address2 is '캠핑장주소2(군구)';
+comment on column users.address3 is '캠핑장주소3(동길)';
+comment on column users.address4 is '캠핑장주소4(상세주소)';
+comment on column users.contact is '번호';
+comment on column users.regdate is '회원가입일';
+comment on column users.moddate is '수정일자';
+comment on column users.modid is '수정한 사람';
 comment on column users.status is '회원상태';
 
 
@@ -66,9 +70,10 @@ create table pay(
   id varchar2(20) not null,
   paycode varchar2(20) not null,
   paydetail varchar2(20),
-  --cvc 코드
-  regidate date default sysdate,
-  editdate date default sysdate,
+  cvc number,
+  regdate date default sysdate,
+  moddate date,
+  modid varchar2(20),
   foreign key(id) references users(id)
 );
 comment on table pay is '결제수단 등록 테이블';
@@ -76,6 +81,7 @@ comment on column pay.num is '레코드 번호';
 comment on column pay.id is '사용자 아이디 - 부모 users';
 comment on column pay.paycode is '결제수단 구분';
 comment on column pay.paydetail is '결제수단 상세 정보(카드 번호 등)';
+comment on column pay.cvc is '카드-cvc';
 
 
 --관리자(공지사항) 시퀀스
@@ -94,9 +100,10 @@ create table notice(
   id varchar2(20) not null,
   title varchar(200) not null,
   contents clob not null,
-  uploaddate date default sysdate,
-  editdate date default sysdate,
-  editor varchar2(20) not null,
+  postimgnum number,
+  regdate date default sysdate,
+  moddate date,
+  modid varchar2(20),
   readcount number default 0,
   foreign key(id) references users(id)
 );
@@ -104,8 +111,9 @@ comment on table notice is '공지사항 테이블';
 comment on column notice.num is '레코드 번호';
 comment on column notice.id is '사용자 아이디 - 부모 users';
 comment on column notice.title is '게시글 제목';
-comment on column notice.content is '게시글 내용';
-comment on column notice.uploaddate is '게시글 올린 날짜';
+comment on column notice.contents is '게시글 내용';
+comment on column notice.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
+comment on column notice.regdate is '게시글 올린 날짜';
 comment on column notice.readcount is '게시글 조회수';
 
 
@@ -125,9 +133,10 @@ create table event(
   id varchar2(20) not null,
   title varchar(200) not null,
   contents clob not null,
-  uploaddate date default sysdate,
-  editdate date default sysdate,
-  editor varchar2(20) not null,
+  postimgnum number,
+  regdate date default sysdate,
+  moddate date,
+  modid varchar2(20),
   startdate date default sysdate,
   enddate date default sysdate,
   readcount number default 0,
@@ -137,10 +146,11 @@ comment on table event is '이벤트 테이블';
 comment on column event.num is '레코드 번호';
 comment on column event.id is '사용자 아이디 - 부모 users';
 comment on column event.title is '게시글 제목';
-comment on column event.content is '게시글 내용';
-comment on column event.uploaddate is '게시글 올린 날짜';
+comment on column event.contents is '게시글 내용';
+comment on column event.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
+comment on column event.regdate is '게시글 올린 날짜';
 comment on column event.startdate is '이벤트 시작 날짜';
-comment on column event.startdate is '이벤트 끝 날짜';
+comment on column event.enddate is '이벤트 끝 날짜';
 comment on column event.readcount is '게시글 조회수';
 
 
@@ -161,10 +171,11 @@ create table qna(
   pw varchar2(20),
   title varchar(200) not null,
   contents clob not null,
-  keyword varchar2(100),
-  uploaddate date default sysdate,
-  editdate date default sysdate,
-  editor varchar2(20) not null,
+  postimgnum number,
+  reg_keyword varchar2(100),
+  regdate date default sysdate,
+  moddate date,
+  modid varchar2(20),
   status varchar2(50),
   ref number not null,
   restep number not null,
@@ -175,11 +186,12 @@ comment on table qna is '문의 게시판 테이블';
 comment on column qna.num is '레코드 번호';
 comment on column qna.pw is '게시글 비밀번호';
 comment on column qna.title is '게시글 제목';
-comment on column qna.content is '게시글 내용';
-comment on column qna.keyword is '문의글 키워드';
-comment on column qna.uploaddate is '게시글 올린 날짜';
-comment on column qna.editdate is '게시글 수정일자';
-comment on column qna.editor is '게시글 수정자';
+comment on column qna.contents is '게시글 내용';
+comment on column qna.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
+comment on column qna.reg_keyword is '문의글 키워드';
+comment on column qna.regdate is '게시글 올린 날짜';
+comment on column qna.moddate is '게시글 수정일자';
+comment on column qna.modid is '게시글 수정자';
 comment on column qna.status is '답변 여부';
 comment on column qna.ref is 'num 칼럼값. 부모글 체크';
 comment on column qna.restep is '원본에 답글 달린 갯수';
@@ -199,21 +211,21 @@ create sequence postimgseq
 drop table postimg cascade constraints;
 create table postimg(
   num number primary key,
-  postcode varchar2(20) not null, --articlecode???? 정해서 일단 카톡방에 물어보고 수정
-  postnum number not null, --이름 위에 거랑 비슷하게
+  acode varchar2(20) not null,
+  anum number not null,
   imgname varchar2(40),
   imgraw varchar2(500) not null,
-  uploaddate date default sysdate,
-  uploader varchar2(20) not null,
-  editdate date default sysdate,
-  editor varchar2(20) not null
+  regdate date default sysdate,
+  regid varchar2(20) not null,
+  moddate date,
+  modid varchar2(20)
 );
 comment on table postimg is '게시글 이미지 테이블';
 comment on column postimg.num is '레코드 번호';
-comment on column postimg.postcode is '게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
-comment on column postimg.postnum is '+번호(해당 테이블 레코드 번호)';
+comment on column postimg.acode is 'articlecode. 게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
+comment on column postimg.anum is 'articlenum. +번호(해당 테이블 레코드 번호)';
 comment on column postimg.imgname is '이미지 이름';
-comment on column postimg.imgraw is '이미지 raw file';
+comment on column postimg.imgraw is '이미지 url';
 
 
 --개인(찜/관심목록) 시퀀스
@@ -230,17 +242,17 @@ drop table likes cascade constraints;
 create table likes(
   num number primary key,
   id varchar2(20) not null,
-  postcode varchar2(20) not null, --이름변경
-  postnum number not null, --변경
-  likedate date default sysdate,
+  acode varchar2(20) not null,
+  anum number not null,
+  regdate date default sysdate,
   foreign key(id) references users(id)
 );
 comment on table likes is '찜/관심목록 테이블';
 comment on column likes.num is '레코드 번호';
 comment on column likes.id is '사용자 아이디 - 부모 users';
-comment on column likes.postcode is '게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)';
-comment on column likes.postnum is '+번호(해당 테이블 레코드 번호)';
-comment on column likes.likedate is '찜한 날짜';
+comment on column likes.acode is '게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)';
+comment on column likes.anum is '+번호(해당 테이블 레코드 번호)';
+comment on column likes.regdate is '찜한 날짜';
 
 
 
@@ -283,9 +295,9 @@ CREATE TABLE CAMPING( --테이블 이름 변경
 	LONGITUDE VARCHAR2(100) NOT NULL,
 	CONTACT VARCHAR2(30) NOT NULL,
 	REGDATE DATE DEFAULT SYSDATE,
-	REGID VARCHAR2(50) NOT NULL,
+	REGID VARCHAR2(20) NOT NULL,
 	MODDATE DATE DEFAULT SYSDATE,
-	MODID VARCHAR2(50) NOT NULL,
+	MODID VARCHAR2(20) NOT NULL,
 	READCOUNT NUMBER DEFAULT 0,
 	UPCOUNT NUMBER DEFAULT 0,
 	LIKECOUNT NUMBER DEFAULT 0,
@@ -344,9 +356,9 @@ CREATE TABLE COMMUNITY (
    TITLE VARCHAR2(200) NOT NULL,
    SUMMARY VARCHAR2(200) NOT NULL,
    CONTENTS CLOB,
-   READCOUNT NUMBER DEFAULT '0' NULL, --readcount로 이름 변경
+   READCOUNT NUMBER DEFAULT '0' NULL,
    RECOMMEND NUMBER DEFAULT '0' NULL,
-   STEAMED  NUMBER DEFAULT '0' NULL, --like table 이름 바꾸기
+   STEAMED NUMBER DEFAULT '0' NULL,
    STAR_RANKING  NUMBER DEFAULT '0' NULL,
    REG_KEYWORD VARCHAR2(600) DEFAULT NULL, --다른사람들 이걸로 변경
    STATUS VARCHAR2(2) DEFAULT '01' NOT NULL,
@@ -394,7 +406,7 @@ CREATE TABLE REPLY (
    NUM NUMBER NOT NULL PRIMARY KEY,
    REVIEW_NUM NUMBER NOT NULL,
    REVIEW_TYPE VARCHAR2(2) NOT NULL,
-   CONTENTS VARCHAR2(400), --varchar2()로 변경
+   CONTENTS VARCHAR2(400),
    REGID VARCHAR2(20) NOT NULL,
    REGDATE DATE DEFAULT SYSDATE
 );
@@ -502,7 +514,7 @@ CREATE TABLE CAMPING(
 	ADDRESS4 VARCHAR2(150) NOT NULL,
 	LATITUDE VARCHAR2(100) NOT NULL,
 	LONGITUDE VARCHAR2(100) NOT NULL,
-	CONTACT VARCHAR2(30) NOT NULL, --세영 phone 이름 바꾸기
+	CONTACT VARCHAR2(30) NOT NULL,
 	REGDATE DATE DEFAULT SYSDATE,
 	REGID VARCHAR2(20) NOT NULL,
 	MODDATE DATE,
@@ -570,9 +582,9 @@ CREATE TABLE ROOM(
 	AMENITY VARCHAR2(200),
 	BOOKABLEDATE VARCHAR2(100), --일단 고민해보고 이따가 같이 얘기하기
 	REGDATE DATE DEFAULT SYSDATE,
-	REGID VARCHAR2(50) NOT NULL,
+	REGID VARCHAR2(20) NOT NULL,
 	MODDATE DATE,
-	MODID VARCHAR2(50),
+	MODID VARCHAR2(20),
 	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
 	FOREIGN KEY(CNAME) REFERENCES CAMPING(NAME)
 );
