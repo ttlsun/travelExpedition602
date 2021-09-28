@@ -233,13 +233,13 @@ function fileSelectChange(event) {
 		<tr>
 			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td colspan="3">
-				<input type="file" multiple name="imgFile" value="">
+				<input type="file" name="imgFile" value="" accept=".jpg, .jpeg, .png, .gif">
 			</td>
 		</tr>
 		<tr>
 			<td><label for="multipleImgFile"><span class="redFont"> * </span> 관광지 이미지들(여러장 올리기) </label> </td>
 			<td colspan="3">
-				<input type="file" multiple name="multipleImgFile" value="">
+				<input type="file" multiple name="multipleImgFile" value="" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" class="" id="multipleImgFileNum" name="" value="">
 			</td>
 		</tr>
