@@ -174,13 +174,9 @@ function fileSelectChange(event) {
 		</tr>
 		<tr>
 			<td><label for="tcategory"><span class="redFont"> * </span> 관광지 구분 </label> </td>
-			<td>
+			<td colspan="3">
 				<select class="form-control" id="theme" name="">
 				</select>
-			</td>
-			<td><label for="tprice"><span class="redFont"> * </span> 가격 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="tprice" name="" value="" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
@@ -188,9 +184,9 @@ function fileSelectChange(event) {
 			<td>
 				<input type="text" class="form-control" id="tdiscount" name="" value="" placeholder="입력해주세요.">
 			</td>
-			<td><label for="tpoint"><span class="redFont"> * </span> 적립 포인트</label> </td>
+			<td><label for="tprice"><span class="redFont"> * </span> 가격 </label> </td>
 			<td>
-				<input type="text" class="form-control" id="tpoint" name="" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-control" id="tprice" name="" value="" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
