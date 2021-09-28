@@ -231,7 +231,7 @@ create table likes(
 comment on table likes is '찜/관심목록 테이블';
 comment on column likes.num is '레코드 번호';
 comment on column likes.id is '사용자 아이디 - 부모 users';
-comment on column likes.postcode is '게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
+comment on column likes.postcode is '게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)';
 comment on column likes.postnum is '+번호(해당 테이블 레코드 번호)';
 comment on column likes.likedate is '찜한 날짜';
 
