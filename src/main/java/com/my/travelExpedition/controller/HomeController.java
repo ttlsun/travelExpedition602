@@ -2,18 +2,23 @@ package com.my.travelExpedition.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.model.AddrBean;
 import com.my.travelExpedition.model.AddrDao;
+import com.my.travelExpedition.model.SampleFileUploadBean;
 import com.my.travelExpedition.utility.WebUtil;
 
 import net.sf.json.JSONArray;
@@ -24,6 +29,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Autowired
 	private AddrDao addrDao;
@@ -164,13 +171,57 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/sampleCommunityList")
-	public String sampleCommunityListView() {
-		return "sample/communityList";
+	public ModelAndView sampleCommunityListView() throws Exception {
+		
+		ModelAndView mav = new ModelAndView("sample/communityList");
+		
+//		mav.addObject("pageInfo", pageInfo);
+//		mav.addObject("totalCount", totalCount);
+//		mav.addObject("lists", lists);
+		
+		return mav;
 	}
 	
-	@RequestMapping(value = "/sampleCommunityRegister")
-	public String sampleCommunityRegisterView() {
-		return "sample/communityRegister";
+//	@RequestMapping(value = "/sampleCommunityRegister")
+//	public String sampleCommunityRegisterView(a) {
+//		return "sample/communityRegister";
+//	}
+	
+	@RequestMapping(value = "/sampleCommunityRegister", method = RequestMethod.GET)
+	public ModelAndView sampleCommunityRegisterView() {
+		ModelAndView mav = new ModelAndView("sample/communityRegister");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/sampleCommunityRegister", method = RequestMethod.POST)
+	public ModelAndView registerPost(ModelAndView mav,
+									@Valid SampleFileUploadBean bean,
+									BindingResult result) {
+		try {
+			if (result.hasErrors()) {
+				System.out.println("유효성 검사 오류");
+				mav.setViewName("sample/communityRegister");
+				return mav;
+			}
+			
+			//대표이미지 파일 업로드
+			String uploadFile = WebUtil.fileUpload(servletContext, bean.getImgFile(), null);
+			System.out.println("uploadFile:" + uploadFile);
+			
+			String[] uploadFileList = WebUtil.fileUpload(servletContext, bean.getMultipleImgFile(), null);
+			for (String str : uploadFileList) {
+				System.out.println("file : " + str);
+			}
+			
+			mav.setViewName("sample/communityRegister");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.setViewName("sample/communityRegister");
+			System.out.println("내부 오류");
+		}
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "/sampleCommunityDetail")
@@ -296,5 +347,70 @@ public class HomeController {
 		
 		WebUtil.jsonSend(json, response);
 	}
+	
+	/**
+	 * 지도관련 샘플 view
+	 * @return
+	 */
+	@RequestMapping(value = "/mapRegister")
+	public ModelAndView mapRegisterView() {
+		ModelAndView mav = new ModelAndView("sample/mapRegister");
+		return mav;
+	}
+	
+	/**
+	 * 파일 업로드 샘플 view
+	 * @return
+	 */
+	@RequestMapping(value = "/sampleFileUpload", method = RequestMethod.GET)
+	public ModelAndView sampleFileUploalView() {
+		ModelAndView mav = new ModelAndView("sample/sampleFileUpload");
+		return mav;
+	}
+	
+	/**
+	 * 파일 업로드 처리 샘플 view
+	 * @return
+	 */
+	@RequestMapping(value = "/sampleFileUpload", method = RequestMethod.POST)
+	public ModelAndView sampleFileUploalPost(ModelAndView mav,@Valid SampleFileUploadBean bean,
+											 BindingResult result) {
+		
+		try {
+			if (result.hasErrors()) {
+				System.out.println("유효성 검사 오류");
+				mav.setViewName("sample/sampleFileUpload");
+				return mav;
+			}
+			
+			System.out.println("파일업로드 시작 ===============");
+			
+			//대표이미지 파일 업로드
+			String uploadFile = WebUtil.fileUpload(servletContext, bean.getImgFile(), null);
+			System.out.println("uploadFile:" + uploadFile);
+			
+			//여러개 이미지 파일 업로드
+			String[] uploadFileList = WebUtil.fileUpload(servletContext, bean.getMultipleImgFile(), null);
+			System.out.println("uploadFileList :" + uploadFileList.length);
+			for (String str : uploadFileList) {
+				System.out.println("uploadFileList(여러개 이미지 파일 업로드) : " + str);
+			}
+			
+			System.out.println("파일업로드 끝 ===============");
+			
+			//수정테이블에서는 이미지명저장할 컬럼에 (WebUtil.fileUpload ( servletContext ,업로드할 파일이미지명 , 기존파일이미지명));
+			//bean.setImage(WebUtil.fileUpload(servletContext, bean.getImgFile(), basicImgUrl));
+			
+			mav.setViewName("main");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.setViewName("sample/sampleFileUpload");
+			System.out.println("내부 오류");
+		}
+		
+		return mav;
+	}
+	
 	
 }

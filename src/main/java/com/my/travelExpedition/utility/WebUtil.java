@@ -15,6 +15,8 @@ import net.sf.json.JSONObject;
 
 public class WebUtil {
 	
+	private static final String UPLOADEDFILE = "/resources/uploaded_file"; //업로드파일위치.
+	
 	/**
 	 * 파일 업로드
 	 * @param servlet
@@ -29,7 +31,7 @@ public class WebUtil {
 	public static String[] fileUpload(ServletContext servlet, MultipartFile[] multipartFile, String[] dbfileName) throws Exception {
 		// 원본 파일 있으면 삭제
 		if (dbfileName != null && dbfileName.length > 0) {
-			String uploadPath = servlet.getRealPath("/resources/file_upload");
+			String uploadPath = servlet.getRealPath(UPLOADEDFILE);
 			
 			for (int i = 0; i < dbfileName.length; i++) {
 				File dbFile = new File(uploadPath + "/" + dbfileName[i]);
@@ -37,6 +39,12 @@ public class WebUtil {
 			}
 		}
 		
+		if (multipartFile == null) {
+			System.out.println("multipartFile null");
+			return new String[0];
+		}
+		
+		System.out.println("multipartFile:::" + multipartFile.length);
 		String[] fileNames = new String[multipartFile.length];
 		
 		for (int i = 0; i < multipartFile.length; i++) {
@@ -48,12 +56,12 @@ public class WebUtil {
 	public static String fileUpload(ServletContext servlet, MultipartFile multipartFile, String dbfileName) throws Exception {
 		// 수정화면에서 파일을 선택하지 않았을때 기존 파일명 리턴
 		
-		System.out.println("multipartFile : " + multipartFile.getSize()) ;
+		//System.out.println("multipartFile : " + multipartFile.getSize()) ;
 		if (multipartFile == null || multipartFile.getSize() == 0)
 			return dbfileName;
 		
 		try {
-			String uploadPath = servlet.getRealPath("/resources/file_upload");
+			String uploadPath = servlet.getRealPath(UPLOADEDFILE);
 			System.out.println("uploadPath : " + uploadPath);
 
 			File folder = new File(uploadPath);
@@ -76,12 +84,13 @@ public class WebUtil {
 			
 //			System.out.println("확장자:" + exec);
 			switch (exec.toLowerCase()) {
-				case "jpg": case "gif": case "png": case "pdf":
+				case "jpg": case "jpeg": case "gif": case "png": case "pdf":
 					break;
 				default:
 					throw new FileUploadException("업로드할 수 없는 파일 형식 입니다");
 			}
 			
+			//currentTimeMillis 
 			fileName = System.currentTimeMillis() + "_" + fileName;
 			// 최대 30-4(.확장자) byte 까지 짜르기
 			fileName = StringUtil.substringByBytes(fileName, 0, 26) + "." + exec;

@@ -231,8 +231,14 @@ function fileSelectChange(event) {
 		<tr>
 			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td colspan="3">
-				<input type="file" class="" id="imgFile" name="" value="" accept="image/*" onchange="fileSelectChange(event);">
-				<input type="hidden" class="" id="imgUrl" name="" value="">
+				<input type="file" multiple name="imgFile" value="">
+			</td>
+		</tr>
+		<tr>
+			<td><label for="multipleImgFile"><span class="redFont"> * </span> 근처 캠핑 이미지들(여러장 올리기) </label> </td>
+			<td colspan="3">
+				<input type="file" multiple name="multipleImgFile" value="">
+				<input type="hidden" class="" id="multipleImgFileNum" name="" value="">
 			</td>
 		</tr>
 		<tr>

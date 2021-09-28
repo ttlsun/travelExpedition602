@@ -110,6 +110,14 @@ function samapleAjax(type, code, callback) {
 	});
 }
 
+//검색 버튼 클릭시,
+function search() {
+	var addr1 =  $("#searchAddr option:selected").text() ; //시
+	var addr2 =  $("#searchAddr2 option:selected").text() ; //구군
+	
+}
+
+
 //테마 샐랙트 박스 셋팅
 function selThemeInit() {
 	

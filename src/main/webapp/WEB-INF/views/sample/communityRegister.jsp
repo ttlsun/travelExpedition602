@@ -53,7 +53,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary">후기 등록 화면</h2></header>
 	
-	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<form:form commandName="communityBean" name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
@@ -97,8 +97,16 @@ function goList() {
 		<tr>
 			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td>
-				<input type="file" multiple class="" id="imgFile" name="imgFile" value="">
+				<input type="file" multiple name="imgFile" value="">
 				<input type="hidden" class="" id="imgUrl" name="imgUrl" value="">
+			</td>
+		</tr>
+		<tr>
+			<td><label for="multipleImgFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
+			<td>
+				<input type="file" multiple name="multipleImgFile" value="">
+				<input type="hidden" class="" id="multipleImgFileUrl" name="multipleImgFileUrl" value="">
+				<input type="hidden" class="" id="multipleImgFileNum" name="" value="">
 			</td>
 		</tr>
 		<tr>
@@ -121,7 +129,7 @@ function goList() {
 			</td>
 		</tr>
 	</table>
-	</form>
+	</form:form>
 </div>  
 </article>
 </section>
