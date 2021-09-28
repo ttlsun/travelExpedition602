@@ -24,7 +24,8 @@ create table users(
   address2 varchar2(50),
   phone varchar2(20) not null,
   regidate date default sysdate,
-  editdate date default sysdate
+  editdate date default sysdate,
+  status varchar2(50) not null
 );
 comment on table users is '사용자 정보';
 comment on column users.num is '레코드 번호';
@@ -40,6 +41,7 @@ comment on column users.address2 is '주소 소분류';
 comment on column users.phone is '번호';
 comment on column users.regidate is '회원가입일';
 comment on column users.editdate is '수정일자';
+comment on column users.status is '회원상태';
 
 
 --개인(결제수단) 시퀀스
@@ -83,6 +85,7 @@ drop table notice cascade constraints;
 create table notice(
   num number primary key,
   id varchar2(20) not null,
+  title varchar(200) not null,
   content clob not null,
   uploaddate date default sysdate,
   editdate date default sysdate,
@@ -93,6 +96,7 @@ create table notice(
 comment on table notice is '공지사항 테이블';
 comment on column notice.num is '레코드 번호';
 comment on column notice.id is '사용자 아이디 - 부모 users';
+comment on column notice.title is '게시글 제목';
 comment on column notice.content is '게시글 내용';
 comment on column notice.uploaddate is '게시글 올린 날짜';
 comment on column notice.readcount is '게시글 조회수';
@@ -112,6 +116,7 @@ drop table event cascade constraints;
 create table event(
   num number primary key,
   id varchar2(20) not null,
+  title varchar(200) not null,
   content clob not null,
   uploaddate date default sysdate,
   editdate date default sysdate,
@@ -124,6 +129,7 @@ create table event(
 comment on table event is '이벤트 테이블';
 comment on column event.num is '레코드 번호';
 comment on column event.id is '사용자 아이디 - 부모 users';
+comment on column event.title is '게시글 제목';
 comment on column event.content is '게시글 내용';
 comment on column event.uploaddate is '게시글 올린 날짜';
 comment on column event.startdate is '이벤트 시작 날짜';
@@ -146,11 +152,13 @@ create table qna(
   num number primary key,
   id varchar2(20) not null,
   pw varchar2(20),
+  title varchar(200) not null,
   content clob not null,
   keyword varchar2(100),
   uploaddate date default sysdate,
   editdate date default sysdate,
   editor varchar2(20) not null,
+  status varchar2(50),
   ref number not null,
   restep number not null,
   relevel number not null,
@@ -159,8 +167,16 @@ create table qna(
 comment on table qna is '문의 게시판 테이블';
 comment on column qna.num is '레코드 번호';
 comment on column qna.pw is '게시글 비밀번호';
+comment on column qna.title is '게시글 제목';
 comment on column qna.content is '게시글 내용';
+comment on column qna.keyword is '문의글 키워드';
 comment on column qna.uploaddate is '게시글 올린 날짜';
+comment on column qna.editdate is '게시글 수정일자';
+comment on column qna.editor is '게시글 수정자';
+comment on column qna.status is '답변 여부';
+comment on column qna.ref is 'num 칼럼값. 부모글 체크';
+comment on column qna.restep is '원본에 답글 달린 갯수';
+comment on column qna.relevel is '답글의 답글 등 판별';
 
 
 --관리자+사업자+개인(게시글 이미지) 시퀀스
@@ -179,7 +195,7 @@ create table postimg(
   postcode varchar2(20) not null,
   imgcode varchar2(20) unique not null,
   imgname varchar2(40),
-  imgraw blob not null,
+  imgraw varchar2(500) not null,
   uploaddate date default sysdate,
   uploader varchar2(20) not null,
   editdate date default sysdate,
@@ -431,11 +447,11 @@ CREATE SEQUENCE CAMPINGSEQ
 	MAXVALUE 10000
 	NOCACHE;
 
-DROP TABLE CAMPING CASCADE CONSTRAINTS;
+DROP TABLE CAMPING;
 
 CREATE TABLE CAMPING(
 	NUM NUMBER PRIMARY KEY,
-	NAME VARCHAR2(100) UNIQUE NOT NULL,
+	NAME VARCHAR2(100) NOT NULL,
 	TYPECODE VARCHAR2(100) NOT NULL,
 	THEMECODE VARCHAR2(10) NOT NULL,
 	TAG VARCHAR2(200) NOT NULL,
@@ -466,7 +482,7 @@ COMMENT ON COLUMN CAMPING.NUM IS '캠핑장 고유번호';
 COMMENT ON COLUMN CAMPING.NAME IS '캠핑장 이름';
 COMMENT ON COLUMN CAMPING.TYPECODE IS '캠핑장 유형 구분코드(일반/자동차캠핑장/글램핑/카라반)';
 COMMENT ON COLUMN CAMPING.THEMECODE IS '테마(숲/해변/호수,계곡/도심/섬)';
-COMMENT ON COLUMN CAMPING.TAG IS '태그(#)';
+COMMENT ON COLUMN CAMPING.TAG IS '태그(#)'
 COMMENT ON COLUMN CAMPING.SUMMARY IS '한줄 요약';
 COMMENT ON COLUMN CAMPING.IMGURL IS '대표이미지';
 COMMENT ON COLUMN CAMPING.INTRODUCTION IS '소개글';
@@ -500,11 +516,11 @@ CREATE SEQUENCE ROOMSEQ
 	MAXVALUE 10000
 	NOCACHE;
 
-DROP TABLE ROOM CASCADE CONSTRAINTS;
+DROP TABLE ROOM;
 
 CREATE TABLE ROOM(
 	NUM NUMBER PRIMARY KEY,
-	NAME VARCHAR2(100) UNIQUE NOT NULL,
+	NAME VARCHAR2(100) NOT NULL,
 	TYPECODE VARCHAR2(20) NOT NULL,
 	CNUM NUMBER NOT NULL,
 	CNAME VARCHAR2(100) NOT NULL,
@@ -515,7 +531,7 @@ CREATE TABLE ROOM(
 	MAXGUESTS NUMBER NOT NULL,
 	WEEKDAYPRICE NUMBER NOT NULL,
 	WEEKENDPRICE NUMBER NOT NULL,
-	OPTIONS VARCHAR2(200),
+	OPTIONS VATCHAR2(200), 
 	AMENITY VARCHAR2(200),
 	BOOKABLEDATE VARCHAR2(100),
 	REGDATE DATE DEFAULT SYSDATE,
@@ -539,8 +555,8 @@ COMMENT ON COLUMN ROOM.PROPGUESTS IS '적정인원';
 COMMENT ON COLUMN ROOM.MAXGUESTS IS '최대인원';
 COMMENT ON COLUMN ROOM.WEEKDAYPRICE IS '주중가격';
 COMMENT ON COLUMN ROOM.WEEKENDPRICE IS '주말가격';
-COMMENT ON COLUMN ROOM.OPTIONS IS '시설정보';
-COMMENT ON COLUMN ROOM.AMENITY IS '비품';
+COMMENT ON COLUMN ROOM.OPTION IS '시설정보';
+COMMENT ON COLUMN ROOM.AMENUTY IS '비품';
 COMMENT ON COLUMN ROOM.BOOKABLEDATE IS '예약가능날짜';
 COMMENT ON COLUMN ROOM.REGDATE IS '등록일';
 COMMENT ON COLUMN ROOM.REGID IS '등록자id';
@@ -561,13 +577,13 @@ CREATE SEQUENCE RESERVSEQ
 	MAXVALUE 10000
 	NOCACHE;
 
-DROP TABLE RESERVATION CASCADE CONSTRAINTS;
+DROP TABLE RESERVATION;
 
 CREATE TABLE RESERVATION(
 	NUM NUMBER PRIMARY KEY,
 	CNUM NUMBER NOT NULL,
 	RNUM NUMBER NOT NULL,
-	ID VARCHAR2(20) NOT NULL,
+	UCODE VARCHAR2(20) NOT NULL,
 	CHECKINDATE DATE NOT NULL,
 	CHECKOUTDATE DATE NOT NULL,
 	GUESTS NUMBER NOT NULL,
@@ -579,14 +595,14 @@ CREATE TABLE RESERVATION(
 	STATUS VARCHAR2(100),
 	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM),
 	FOREIGN KEY(RNUM) REFERENCES ROOM(NUM),
-	FOREIGN KEY(ID) REFERENCES USERS(ID)
+	FOREIGN KEY(UCODE) REFERENCES USERS(UCODE)
 );
 
 COMMENT ON TABLE RESERVATION IS 'ROOM예약테이블';
 COMMENT ON COLUMN RESERVATION.NUM IS '예약 고유번호';
 COMMENT ON COLUMN RESERVATION.CNUM IS '캠핑장 고유번호';
 COMMENT ON COLUMN RESERVATION.RNUM IS '방 고유번호';
-COMMENT ON COLUMN RESERVATION.ID IS '사용자ID';
+COMMENT ON COLUMN RESERVATION.UCODE IS '사용자고유번호';
 COMMENT ON COLUMN RESERVATION.CHECKINDATE IS '체크인날짜';
 COMMENT ON COLUMN RESERVATION.CHECKOUTDATE IS '체크아웃날짜';
 COMMENT ON COLUMN RESERVATION.GUESTS IS '이용인원';
