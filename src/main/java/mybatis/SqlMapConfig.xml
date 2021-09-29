@@ -13,8 +13,8 @@
 	<typeAliases>
 		<typeAlias alias="myAddrBean" type="com.my.travelExpedition.model.AddrBean"/>
 		<typeAlias alias="myCampingBean" type="user.camping.model.CampingBean"/>
-		<typeAlias alias="myRoomBean" type="user.camping.model.RoomBean"/>
-		<typeAlias alias="myReservationBean" type="user.camping.model.ReservationBean"/>
+		<typeAlias alias="myRoomBean" type="user.room.model.RoomBean"/>
+		<typeAlias alias="myReservationBean" type="user.reservation.model.ReservationBean"/>
 		<typeAlias alias="myUsersBean" type="user.users.model.UsersBean"/>
 		<typeAlias alias="myPayBean" type="user.pay.model.PayBean"/>
 		<typeAlias alias="myAdminNoticeBean" type="admin.notice.model.AdminNoticeBean"/>
