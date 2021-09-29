@@ -1,6 +1,6 @@
-package user.notice.model;
+package admin.event.model;
 
-public class NoticeBean {
+public class AdminEventBean {
 	private int num; //pk
 	private String id; //20, not null, fk(users.id)
 	private String title; //200, not null
@@ -9,13 +9,15 @@ public class NoticeBean {
 	private String regdate; //sysdate
 	private String moddate;
 	private String modid; //20
+	private String startdate; //sysdate
+	private String enddate; //sysdate
 	private int readcount; //0
 	
-	public NoticeBean() {
+	public AdminEventBean() {
 		super();
 	}
-	public NoticeBean(int num, String id, String title, String contents, int postimgnum, String regdate,
-			String moddate, String modid, int readcount) {
+	public AdminEventBean(int num, String id, String title, String contents, int postimgnum, String regdate,
+			String moddate, String modid, String startdate, String enddate, int readcount) {
 		super();
 		this.num = num;
 		this.id = id;
@@ -25,6 +27,8 @@ public class NoticeBean {
 		this.regdate = regdate;
 		this.moddate = moddate;
 		this.modid = modid;
+		this.startdate = startdate;
+		this.enddate = enddate;
 		this.readcount = readcount;
 	}
 	
@@ -84,6 +88,20 @@ public class NoticeBean {
 		this.modid = modid;
 	}
 	
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
 	public int getReadcount() {
 		return readcount;
 	}
