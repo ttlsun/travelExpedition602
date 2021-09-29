@@ -69,10 +69,6 @@ function navActive(activeName) {
          	
           	<!-- 세영 : (예정)로그인/회원가입 구현 완료 후, 로그인x면 로그인 & 로그인o면 로그아웃 -->
           	<li data-nav="login"><a href=""> 님 로그아웃 </a></li>
-
-			<!-- 샘플 :추후 삭제 예정 -->
-          	<li data-nav="sample"><a href="${contextPath}/sampleList"> 샘플소스보기 </a></li>
-          	<!-- // 샘플 -->
           	
         </ul>
       </div>
