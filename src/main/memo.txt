@@ -1,3 +1,18 @@
+--select * from users; --회원테이블
+--select * from pay; --개인(결제수단) 테이블
+--select * from notice; --공지사항 테이블
+--select * from event; -- 이벤트 테이블
+--select * from qna; --문의 테이블
+--select * from postimg; -- 이미지 관리 테이블
+--select * from likes; -- 좋아요 테이블 
+--select * from TOURLIST; -- 관광지 테이블
+--select * from COMMUNITY; -- 후기테이블
+--select * from REPLY; -- 후기댓글 테이블
+--select * from RATING; -- 등급 테이블 (일단 후기만 좋아요/찜/별등급 관리 테이블로 사용)
+--select * from CAMPING; -- 캠핑 테이블
+--select * from ROOM; -- 객실(룸)테이블
+--select * from RESERVATION; --예약테이블
+
 --여러개 이미지 넣는 게 필요한 테이블에서 게시글 이미지 번호 가져오는 컬럼 : postimgnum(postimg num 들 가져오는 칼럼)
 
 --세영님 파트
@@ -275,7 +290,7 @@ CREATE SEQUENCE TOUR_SEQ
 	NOCACHE;
 
 DROP TABLE TOURLIST;
-CREATE TABLE CAMPING( --테이블 이름 변경
+CREATE TABLE TOURLIST( --테이블 이름 변경
 	NUM NUMBER PRIMARY KEY,
 	NAME VARCHAR2(100) UNIQUE NOT NULL,
 	THEMECODE VARCHAR2(100) NOT NULL,
@@ -301,8 +316,7 @@ CREATE TABLE CAMPING( --테이블 이름 변경
 	READCOUNT NUMBER DEFAULT 0,
 	UPCOUNT NUMBER DEFAULT 0,
 	LIKECOUNT NUMBER DEFAULT 0,
-	REVIEWCOUNT NUMBER DEFAULT 0,
-	STARSCORE NUMBER DEFAULT 0 --삭제
+	REVIEWCOUNT NUMBER DEFAULT 0
 );
 
 COMMENT ON TABLE TOURLIST IS '관광지 테이블';
@@ -332,7 +346,6 @@ COMMENT ON COLUMN TOURLIST.READCOUNT IS '관광지 조회수';
 COMMENT ON COLUMN TOURLIST.UPCOUNT IS '관광지 추천수';
 COMMENT ON COLUMN TOURLIST.LIKECOUNT IS '관광지 찜갯수';
 COMMENT ON COLUMN TOURLIST.REVIEWCOUNT IS '관광지 리뷰수';
-COMMENT ON COLUMN TOURLIST.STARSCORE IS '관광지 평균별점';
 
 
 
@@ -522,7 +535,7 @@ CREATE TABLE CAMPING(
 	READCOUNT NUMBER DEFAULT 0,
 	RECOMMEND NUMBER DEFAULT 0,
 	STEAMED NUMBER DEFAULT 0,
-	REVIEWCOUNT NUMBER DEFAULT 0,
+	REVIEWCOUNT NUMBER DEFAULT 0
 );
 
 COMMENT ON TABLE CAMPING IS '캠핑장목록테이블';
@@ -578,7 +591,7 @@ CREATE TABLE ROOM(
 	MAXGUESTS NUMBER NOT NULL,
 	WEEKDAYPRICE NUMBER NOT NULL,
 	WEEKENDPRICE NUMBER NOT NULL,
-	OPTIONS VATCHAR2(200), 
+	OPTIONS VARCHAR2(200),
 	AMENITY VARCHAR2(200),
 	BOOKABLEDATE VARCHAR2(100), --일단 고민해보고 이따가 같이 얘기하기
 	REGDATE DATE DEFAULT SYSDATE,
