@@ -12,9 +12,36 @@
 	
 	<typeAliases>
 		<typeAlias alias="myAddrBean" type="com.my.travelExpedition.model.AddrBean"/>
+		<typeAlias alias="myCampingBean" type="user.camping.model.CampingBean"/>
+		<typeAlias alias="myRoomBean" type="user.camping.model.RoomBean"/>
+		<typeAlias alias="myReservationBean" type="user.camping.model.ReservationBean"/>
+		<typeAlias alias="myUsersBean" type="user.users.model.UsersBean"/>
+		<typeAlias alias="myPayBean" type="user.pay.model.PayBean"/>
+		<typeAlias alias="myAdminNoticeBean" type="admin.notice.model.AdminNoticeBean"/>
+		<typeAlias alias="myAdminEventBean" type="admin.event.model.AdminEventBean"/>
+		<typeAlias alias="myAdminQnaBean" type="admin.qna.model.AdminQnaBean"/>
+		<typeAlias alias="myQnaBean" type="user.qna.model.QnaBean"/>
+		<typeAlias alias="myPostimgBean" type="user.postimg.model.PostimgBean"/>
+		<typeAlias alias="myLikeBean" type="user.like.model.LikeBean"/>
+		<typeAlias alias="myTourBean" type="user.tour.model.TourBean"/>
+		<typeAlias alias="myCommunityBean" type="user.community.model.CommunityBean"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/Addr.xml"/>
+		<mapper resource="mybatis/Camping.xml"/>
+		<mapper resource="mybatis/Room.xml"/>
+		<mapper resource="mybatis/Reservation.xml"/>
+		<mapper resource="mybatis/Users.xml"/>
+		<mapper resource="mybatis/Pay.xml"/>
+		<mapper resource="mybatis/AdminNotice.xml"/>
+		<mapper resource="mybatis/AdminEvent.xml"/>
+		<mapper resource="mybatis/AdminQna.xml"/>
+		<mapper resource="mybatis/Qna.xml"/>
+		<mapper resource="mybatis/Postimg.xml"/>
+		<mapper resource="mybatis/Like.xml"/>
+		<mapper resource="mybatis/Tour.xml"/>
+		<mapper resource="mybatis/Community.xml"/>
 	</mappers>
 </configuration>
+
