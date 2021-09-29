@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 
 
-<!-- kakao api start -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}"></script>
-<!-- kakao api end -->
-
 <div class="" align="center" style="margin-top: 5%; background: #fbfbfb; padding: 40px;">
 <hr>
 	<span> 
