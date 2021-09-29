@@ -1,0 +1,86 @@
+From d8f4125e8e25c70693857d8ffdeaab1d912bfc29 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=EC=A3=BC=EC=A0=95?= <jju@mannaplanet.co.kr>
+Date: Fri, 24 Sep 2021 22:39:40 +0900
+Subject: [PATCH] =?UTF-8?q?=EA=B8=B0=EB=B3=B8=ED=8C=8C=EC=9D=BC=20?=
+ =?UTF-8?q?=EC=97=85=EB=8D=B0=EC=9D=B4=ED=8A=B8?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .classpath | 14 ++++++++------
+ .project   |  7 +------
+ 2 files changed, 9 insertions(+), 12 deletions(-)
+
+diff --git a/.classpath b/.classpath
+index acace74..8a0fc7b 100644
+--- a/.classpath
++++ b/.classpath
+@@ -6,17 +6,19 @@
+ 			<attribute name="maven.pomderived" value="true"/>
+ 		</attributes>
+ 	</classpathentry>
+-	<classpathentry including="**/*.java" kind="src" path="src/main/resources"/>
++	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
++		<attributes>
++			<attribute name="maven.pomderived" value="true"/>
++		</attributes>
++	</classpathentry>
+ 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+ 		<attributes>
+ 			<attribute name="optional" value="true"/>
+ 			<attribute name="maven.pomderived" value="true"/>
+ 		</attributes>
+ 	</classpathentry>
+-	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
++	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+ 		<attributes>
+-			<attribute name="module" value="true"/>
+ 			<attribute name="maven.pomderived" value="true"/>
+ 		</attributes>
+ 	</classpathentry>
+@@ -26,9 +28,9 @@
+ 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+ 		</attributes>
+ 	</classpathentry>
+-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+ 		<attributes>
+-			<attribute name="owner.project.facets" value="jst.web"/>
++			<attribute name="maven.pomderived" value="true"/>
+ 		</attributes>
+ 	</classpathentry>
+ 	<classpathentry kind="output" path="target/classes"/>
+diff --git a/.project b/.project
+index e39abfe..084db28 100644
+--- a/.project
++++ b/.project
+@@ -20,11 +20,6 @@
+ 			<arguments>
+ 			</arguments>
+ 		</buildCommand>
+-		<buildCommand>
+-			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+ 		<buildCommand>
+ 			<name>org.eclipse.wst.validation.validationbuilder</name>
+ 			<arguments>
+@@ -37,11 +32,11 @@
+ 		</buildCommand>
+ 	</buildSpec>
+ 	<natures>
++		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
+ 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
+ 		<nature>org.eclipse.jdt.core.javanature</nature>
+ 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+ 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+ 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
+-		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+ 	</natures>
+ </projectDescription>
+-- 
+2.31.1.windows.1
+
