@@ -114,9 +114,9 @@
 		
 		<!-- hibernate validator -->
 		<dependency>
-			<groupId>org.hibernate.validator</groupId>
+			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.8.Final</version>
+			<version>4.2.0.Final</version>
 		</dependency>
 		
 		<!-- JAXB 용 API 클래스. JAXB에 대해 컴파일하는 데 필요 -->
