@@ -40,9 +40,16 @@ public class HomeController {
 	
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
-        logger.info("메인 화면입니다"); //아직 로그는 쌓진 않음..
+        logger.info("메인 화면입니다");
         return "main";
     }
+    
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String homeView() {
+        logger.info("샘플 화면입니다"); //아직 로그는 쌓진 않음..
+        return "home";
+    }
+    
     
     /**
      * 회원 샘플 View.
