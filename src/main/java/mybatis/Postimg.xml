@@ -47,9 +47,9 @@
 		AND ANUM = #{anum}
 	</update>
 	
-	<delete id="deletePostimgData" parameterType="int">
-		DELETE FROM POSTIMG WHERE NUM = #{num}
-	</delete>
 	
+	<delete id="deletePostimgData" parameterType="int">
+		DELETE FROM POSTIMG WHERE ACODE = #{acode} AND ANUM = #{anum}
+	</delete>
 
 </mapper>

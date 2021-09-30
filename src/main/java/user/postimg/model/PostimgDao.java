@@ -38,17 +38,7 @@ public class PostimgDao {
 		System.out.println("map : acode : " + map.get("acode")
 							+ ", anum(각테이블 고유번호값): :"+ map.get("anum"));
 		
-		List<PostimgBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getPostimgList", map);
-		
-		//System.out.println("lists:" + lists.toString());
-		
-		//내 해당테이블 고유번호에 묶여있는 이미지들 다 삭제하기.
-		int cnt =-1;
-		Map<String, Integer> imgMap = new HashMap<String, Integer>();
-		for(int i = 0; i < lists.size(); i++) {
-			imgMap.put("num", lists.get(i).getNum()); //이미지고유번호
-			cnt = sqlSessionTemplate.delete(NAMESPACE + ".deletePostimgData", imgMap);
-		}
+		int cnt = sqlSessionTemplate.delete(NAMESPACE + ".deletePostimgData", map);
 		
 		return cnt;
 	}
