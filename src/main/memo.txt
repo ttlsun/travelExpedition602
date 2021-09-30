@@ -115,7 +115,6 @@ create table notice(
   id varchar2(20) not null,
   title varchar(200) not null,
   contents clob not null,
-  postimgnum number,
   regdate date default sysdate,
   moddate date,
   modid varchar2(20),
@@ -127,7 +126,6 @@ comment on column notice.num is '레코드 번호';
 comment on column notice.id is '사용자 아이디 - 부모 users';
 comment on column notice.title is '게시글 제목';
 comment on column notice.contents is '게시글 내용';
-comment on column notice.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
 comment on column notice.regdate is '게시글 올린 날짜';
 comment on column notice.readcount is '게시글 조회수';
 
@@ -148,7 +146,6 @@ create table event(
   id varchar2(20) not null,
   title varchar(200) not null,
   contents clob not null,
-  postimgnum number,
   regdate date default sysdate,
   moddate date,
   modid varchar2(20),
@@ -162,7 +159,6 @@ comment on column event.num is '레코드 번호';
 comment on column event.id is '사용자 아이디 - 부모 users';
 comment on column event.title is '게시글 제목';
 comment on column event.contents is '게시글 내용';
-comment on column event.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
 comment on column event.regdate is '게시글 올린 날짜';
 comment on column event.startdate is '이벤트 시작 날짜';
 comment on column event.enddate is '이벤트 끝 날짜';
@@ -186,7 +182,6 @@ create table qna(
   pw varchar2(20),
   title varchar(200) not null,
   contents clob not null,
-  postimgnum number,
   reg_keyword varchar2(100),
   regdate date default sysdate,
   moddate date,
@@ -199,10 +194,10 @@ create table qna(
 );
 comment on table qna is '문의 게시판 테이블';
 comment on column qna.num is '레코드 번호';
+comment on column qna.id is '게시글등록자';
 comment on column qna.pw is '게시글 비밀번호';
 comment on column qna.title is '게시글 제목';
 comment on column qna.contents is '게시글 내용';
-comment on column qna.postimgnum is '이미지파일고유번호(여럿이미지넣을테이블번호)';
 comment on column qna.reg_keyword is '문의글 키워드';
 comment on column qna.regdate is '게시글 올린 날짜';
 comment on column qna.moddate is '게시글 수정일자';
@@ -229,7 +224,7 @@ create table postimg(
   acode varchar2(20) not null,
   anum number not null,
   imgname varchar2(40),
-  imgraw varchar2(500) not null,
+  imgraw varchar2(500),
   regdate date default sysdate,
   regid varchar2(20) not null,
   moddate date,
@@ -240,7 +235,7 @@ comment on column postimg.num is '레코드 번호';
 comment on column postimg.acode is 'articlecode. 게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
 comment on column postimg.anum is 'articlenum. +번호(해당 테이블 레코드 번호)';
 comment on column postimg.imgname is '이미지 이름';
-comment on column postimg.imgraw is '이미지 url';
+comment on column postimg.imgraw is '이미지 url'; -- 일단 보류.
 
 
 --개인(찜/관심목록) 시퀀스
@@ -360,10 +355,9 @@ DROP TABLE COMMUNITY;
 
 CREATE TABLE COMMUNITY ( 
    NUM NUMBER NOT NULL PRIMARY KEY,
-   REVIEW_NUM NUMBER NOT NULL,
+   REVIEW_NUM NUMBER NULL,
    REVIEW_TYPE VARCHAR2(2) NOT NULL,
    IMGURL VARCHAR2(60) NOT NULL,
-   POSTIMGNUM NUMBER,
    TITLE VARCHAR2(200) NOT NULL,
    SUMMARY VARCHAR2(200) NOT NULL,
    CONTENTS CLOB,
@@ -384,7 +378,6 @@ COMMENT ON COLUMN COMMUNITY.NUM IS '커뮤니티 고유번호';
 COMMENT ON COLUMN COMMUNITY.REVIEW_NUM IS '후기 번호(캠핑/글램핑고유번호 or 관광지고유번호)';
 COMMENT ON COLUMN COMMUNITY.REVIEW_TYPE IS '후기구분값(01:캠핑/글램핑후기, 02:관광지후기) ';
 COMMENT ON COLUMN COMMUNITY.IMGURL IS '대표이미지 파일명';
-COMMENT ON COLUMN COMMUNITY.POSTIMGNUM IS '이미지파일고유번호(여럿이미지넣을테이블번호)';
 COMMENT ON COLUMN COMMUNITY.TITLE IS '제목';
 COMMENT ON COLUMN COMMUNITY.SUMMARY IS '한줄요약';
 COMMENT ON COLUMN COMMUNITY.CONTENTS IS '내용';
@@ -583,7 +576,6 @@ CREATE TABLE ROOM(
 	CNUM NUMBER NOT NULL,
 	CNAME VARCHAR2(100) NOT NULL,
 	IMGURL VARCHAR2(60),
-	POSTIMGNUM NUMBER,
 	CONTENTS CLOB,
 	PROPGUESTS NUMBER NOT NULL,
 	MAXGUESTS NUMBER NOT NULL,
@@ -607,7 +599,6 @@ COMMENT ON COLUMN ROOM.ROOM_TYPE IS '방타입';
 COMMENT ON COLUMN ROOM.CNUM IS '캠핑장 고유번호';
 COMMENT ON COLUMN ROOM.CNAME IS '캠핑장 이름';
 COMMENT ON COLUMN ROOM.IMGURL IS '대표이미지';
-COMMENT ON COLUMN ROOM.POSTIMGNUM IS '상세이미지';
 COMMENT ON COLUMN ROOM.CONTENTS IS '상세내용';
 COMMENT ON COLUMN ROOM.PROPGUESTS IS '적정인원';
 COMMENT ON COLUMN ROOM.MAXGUESTS IS '최대인원';
