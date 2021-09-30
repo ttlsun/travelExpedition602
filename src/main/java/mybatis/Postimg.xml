@@ -10,6 +10,7 @@
 		SELECT 
 			NUM , 
 			ACODE , 
+			ANUM , 
 			IMGNAME
 		FROM POSTIMG
 		WHERE 1=1
@@ -36,6 +37,19 @@
 		)
 	</insert>
 	
+	<update id="updatePostimgData">
+		UPDATE POSTIMG
+		<set>
+			IMGNAME = #{imgname}
+		</set>
+		WHERE NUM = #{num}
+		AND ACODE = #{acode}
+		AND ANUM = #{anum}
+	</update>
+	
+	<delete id="deletePostimgData" parameterType="int">
+		DELETE FROM POSTIMG WHERE NUM = #{num}
+	</delete>
 	
 
 </mapper>
