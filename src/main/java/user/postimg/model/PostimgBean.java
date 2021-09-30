@@ -90,4 +90,12 @@ public class PostimgBean {
 	public void setModid(String modid) {
 		this.modid = modid;
 	}
+	@Override
+	public String toString() {
+		return "PostimgBean [num=" + num + ", acode=" + acode + ", anum=" + anum + ", imgname=" + imgname + ", imgraw="
+				+ imgraw + ", regdate=" + regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid
+				+ "]";
+	}
+	
+	
 }

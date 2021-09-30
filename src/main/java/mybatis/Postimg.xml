@@ -6,4 +6,36 @@
 <!-- Postimg.xml -->
 <mapper namespace="user.postimg.model.PostimgBean">
 
+	<select id="getPostimgList" parameterType="map" resultType="user.postimg.model.PostimgBean">
+		SELECT 
+			NUM , 
+			ACODE , 
+			IMGNAME
+		FROM POSTIMG
+		WHERE 1=1
+		AND ACODE = #{acode}
+		AND ANUM = #{anum}
+		ORDER BY NUM DESC
+	</select>
+
+	<insert id="insertPostimgData">
+		INSERT INTO POSTIMG
+		(
+			NUM,
+			ACODE,
+			ANUM,
+			IMGNAME,
+			REGID
+		)
+		values(
+			POSTIMGSEQ.NEXTVAL,
+			#{acode} ,
+			#{anum} ,
+			#{imgname}, 
+			#{regid}
+		)
+	</insert>
+	
+	
+
 </mapper>
