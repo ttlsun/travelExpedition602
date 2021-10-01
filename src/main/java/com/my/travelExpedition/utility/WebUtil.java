@@ -28,6 +28,31 @@ public class WebUtil {
 		return fileUpload(servlet, multipartFile, null);
 	}
 	
+	
+	public static String[] deletefileUpload(ServletContext servlet, String dbfileName) throws Exception {
+		// 원본 파일 있으면 삭제
+		if (dbfileName != null && !dbfileName.equals("")) {
+			String uploadPath = servlet.getRealPath(UPLOADEDFILE);
+			
+			File dbFile = new File(uploadPath + "/" + dbfileName);
+			dbFile.delete();
+		}
+		return null;
+	}
+	
+	public static String[] deletefileUpload(ServletContext servlet, String[] dbfileName) throws Exception {
+		// 원본 파일 있으면 삭제
+		if (dbfileName != null && dbfileName.length > 0) {
+			String uploadPath = servlet.getRealPath(UPLOADEDFILE);
+			
+			for (int i = 0; i < dbfileName.length; i++) {
+				File dbFile = new File(uploadPath + "/" + dbfileName[i]);
+				dbFile.delete();
+			}
+		}
+		return null;
+	}
+	
 	public static String[] fileUpload(ServletContext servlet, MultipartFile[] multipartFile, String[] dbfileName) throws Exception {
 		// 원본 파일 있으면 삭제
 		if (dbfileName != null && dbfileName.length > 0) {
@@ -48,6 +73,7 @@ public class WebUtil {
 		String[] fileNames = new String[multipartFile.length];
 		
 		for (int i = 0; i < multipartFile.length; i++) {
+			System.out.println(i + ":" + multipartFile[i].getOriginalFilename());
 			fileNames[i] = fileUpload(servlet, multipartFile[i], null);
 		}
 		return fileNames;
@@ -61,6 +87,7 @@ public class WebUtil {
 			return dbfileName;
 		
 		try {
+			
 			String uploadPath = servlet.getRealPath(UPLOADEDFILE);
 			System.out.println("uploadPath : " + uploadPath);
 
@@ -121,13 +148,13 @@ public class WebUtil {
 	 * @param result
 	 */
 	public static void resultErrorConvert(BindingResult result) {
-//		System.out.println("----------- Error Start -----------");
+		System.out.println("----------- Error Start -----------");
 		for (FieldError error : result.getFieldErrors()) {
 			System.out.println(error.getField() + ":" + error.getCode() + ":" + ":" + error.getDefaultMessage());
 //			result.rejectValue(error.getField(), error.getCode(), MessageUtils.getMessage(error));
 //			result.rejectValue(error.getCode(), "aaa");
 		}
-//		System.out.println("----------- Error End -----------");
+		System.out.println("----------- Error End -----------");
 	}
 	
 	/**
@@ -137,9 +164,9 @@ public class WebUtil {
 	 * @return true:모두제외 false:제외목록없음
 	 */
 	public static boolean isResultErrorIgnore(BindingResult result, String[] fieldName) {
-//		System.out.println("----------- Error Start -----------");
+		System.out.println("----------- Error Start -----------");
 		for (FieldError error : result.getFieldErrors()) {
-//			System.out.println(error.getField() + ":" + error.getCode() + ":" + ":" + error.getDefaultMessage());
+			System.out.println(error.getField() + ":" + error.getCode() + ":" + ":" + error.getDefaultMessage());
 			
 			boolean isIgnore = false;
 			for (String field : fieldName) {
@@ -149,12 +176,14 @@ public class WebUtil {
 				}
 			}
 			
-			if (isIgnore)
+			if (isIgnore) {
+				System.out.println(error.getField() + " 제외");
 				continue;
+			}
 			
 			return false;
 		}
-//		System.out.println("----------- Error End -----------");
+		System.out.println("----------- Error End -----------");
 		
 		return true;
 	}
