@@ -11,12 +11,13 @@
 			NUM , 
 			ACODE , 
 			ANUM , 
-			IMGNAME
+			IMGNAME,
+			IMGRAW
 		FROM POSTIMG
 		WHERE 1=1
 		AND ACODE = #{acode}
 		AND ANUM = #{anum}
-		ORDER BY NUM DESC
+		ORDER BY NUM
 	</select>
 
 	<insert id="insertPostimgData">
@@ -26,13 +27,15 @@
 			ACODE,
 			ANUM,
 			IMGNAME,
+			IMGRAW,
 			REGID
 		)
-		values(
+		VALUES(
 			POSTIMGSEQ.NEXTVAL,
 			#{acode} ,
 			#{anum} ,
 			#{imgname}, 
+			#{imgraw},
 			#{regid}
 		)
 	</insert>
