@@ -68,7 +68,7 @@ public class HomeController {
 		
 		int totalCount = 10;
 		
-		String pageUrl = request.getContextPath()+ "/sample/noticeList"; //페이지 URL
+		String pageUrl = request.getContextPath()+ "/sampleList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
 		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
 		
@@ -104,7 +104,7 @@ public class HomeController {
 		
 		int totalCount = 10;
 		
-		String pageUrl = request.getContextPath()+ "/sample/campingList"; //페이지 URL
+		String pageUrl = request.getContextPath()+ "/sampleCampingList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
 		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
 		
@@ -135,7 +135,7 @@ public class HomeController {
 		
 		int totalCount = 10;
 		
-		String pageUrl = request.getContextPath()+ "/sample/campingList"; //페이지 URL
+		String pageUrl = request.getContextPath()+ "/sampleTourismList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
 		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
 		
@@ -161,7 +161,7 @@ public class HomeController {
 		
 		int totalCount = 10;
 		
-		String pageUrl = request.getContextPath()+ "/sample/noticeList"; //페이지 URL
+		String pageUrl = request.getContextPath()+ "/sampleNoticeList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
 		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
 		
