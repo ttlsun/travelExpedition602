@@ -60,13 +60,6 @@ function goList() {
 	}
 }
 
-//여럿 파일 선택시 , 선택 파일 길이 반환.
-function updateFileChage(filePath) {
-	var filePathLen = filePath.length;
-	//alert(filePathLen);
-	$('#multipleImgurlNum').val(filePathLen);
-}
-
 </script>
 
 <section class="container">
@@ -76,9 +69,9 @@ function updateFileChage(filePath) {
 	
 	<form:form commandName="community" name="myForm" action="communityRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="regid" value="member02">
-	<input type="text" name="reviewnum" value="${reviewnum}">
+	<input type="hidden" name="reviewnum" value="${reviewnum}">
 	<input type="hidden" name="reservationnum" value="${reservationnum}">
-	<input type="text" name="reviewType" value="${reviewType}">
+	<input type="hidden" name="reviewType" value="${reviewType}">
 	<input type="hidden" name="type" id="type" value="${type}">
 	
 	<table class="table table-bordered">
@@ -135,7 +128,7 @@ function updateFileChage(filePath) {
 		<tr>
 			<td><label for="multipleUpdateFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
 			<td>
-				<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" onchange="updateFileChage(this.value)">
+				<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 				<input type="hidden" name="imgname" value="${community.imgname}">
 				<form:errors cssClass="errMessage" path="imgname"/>
 			</td>
