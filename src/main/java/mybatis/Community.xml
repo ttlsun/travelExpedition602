@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user.community.model.CommunityBean">
+
+	<!-- 후기 리스트 -->
+	<select id="getCommunityList" parameterType="map" resultType="myCommunityBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+				REVIEW_NUM,
+				(CASE	REVIEW_TYPE
+								WHEN '01' THEN '캠핑/글램핑 후기' 
+								WHEN '02' THEN '관광지 후기' 
+								WHEN '03' THEN '커뮤니티 후기' 
+		        END) AS REVIEW_TYPE,
+				IMGURL,
+				RESERVATION_NUM,
+				TITLE,
+				SUMMARY,
+				READCOUNT,
+				RECOMMEND,
+				STEAMED,
+				STAR_RANKING,
+				REG_KEYWORD,
+				(CASE	STATUS
+								WHEN '01' THEN '노출' 
+								WHEN '02' THEN '비노출' 
+		        END) AS STATUS,
+				REGID,
+				REGDATE
+		FROM COMMUNITY
+		WHERE 1=1
+		<if test="status == '01'">
+			AND STATUS = #{status}
+		</if>
+		<if test="regid != null">
+			AND REGID = #{regid}
+		</if>
+		<if test="reviewtype != null">
+			AND REVIEW_TYPE = #{reviewtype}
+		</if>
+		<if test="reviewtypeNotIn != null">
+			AND REVIEW_TYPE not in (#{reviewtypeNotIn})
+		</if>
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		<if test="whatColumn == 'summary'">
+ 			AND SUMMARY LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		ORDER BY NUM DESC
+	</select>
+
+	<!-- 후기 총갯수 -->
+	<select id="getCommunityListTotalCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*) AS CNT FROM COMMUNITY
+		WHERE 1=1
+		<if test="status == '01'">
+			AND STATUS = #{status}
+		</if>
+		<if test="regid != null">
+			AND REGID = #{regid}
+		</if>
+		<if test="reviewtype != null">
+			AND REVIEW_TYPE = #{reviewtype}
+		</if>
+		<if test="reviewtypeNotIn != null">
+			AND REVIEW_TYPE not in (#{reviewtypeNotIn})
+		</if>
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		<if test="whatColumn == 'summary'">
+ 			AND SUMMARY LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<!-- 후기상세 -->
+	<select id="getCommunityDetail" parameterType="int" resultType="myCommunityBean">
+		SELECT 
+				NUM,
+				REVIEW_NUM,
+				RESERVATION_NUM,
+				REVIEW_TYPE,
+				IMGURL,
+				TITLE,
+				SUMMARY,
+				CONTENTS,
+				READCOUNT,
+				RECOMMEND,
+				STEAMED,
+				STAR_RANKING,
+				REG_KEYWORD,
+				STATUS,
+				REGID,
+				REGDATE
+		FROM COMMUNITY
+		WHERE NUM = #{num}
+	</select>
+	
+	<!-- 후기고유번호 시퀀스 가져오기. -->
+	<select id="getCommunityMaxNum" resultType="int">
+		SELECT COMMUNITY_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 후기등록 : COMMUNITY_SEQ.NEXTVAL, -->
+	<insert id="insertCommunity" parameterType="myCommunityBean">
+		INSERT INTO COMMUNITY
+		(
+			NUM,
+			RESERVATION_NUM,
+			REVIEW_NUM,
+			REVIEW_TYPE,
+			IMGURL,
+			TITLE,
+			SUMMARY,
+			CONTENTS,
+			READCOUNT,
+			RECOMMEND,
+			STEAMED,
+			STAR_RANKING,
+			REG_KEYWORD,
+			STATUS,
+			REGID,
+			REGDATE
+		)
+		values(
+			#{num} ,
+			#{reservationnum} ,
+			#{reviewnum} ,
+			#{reviewtype} ,
+			#{imgurl} ,
+			#{title} ,
+			#{summary},
+			#{contents},
+			0,
+			0,
+			0,
+			#{starranking},
+			#{regkeyword},
+			'01',
+			#{regid},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- 후기 수정 -->
+	<update id="updateCommunity" parameterType="myCommunityBean">
+		UPDATE COMMUNITY
+		<set>
+			TITLE = 		#{title},
+			IMGURL= 		#{imgurl},
+			SUMMARY = 		#{summary},
+			CONTENTS = 		#{contents},
+			<if test="reviewtype != '03'">
+			STAR_RANKING =  #{starranking},
+			</if>
+			REG_KEYWORD = 	#{regkeyword},
+			MODID = 		#{modid},
+			MODDATE =		SYSDATE
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="updateCommunityUpcount">
+		UPDATE COMMUNITY
+		<set>
+			<if test=" readcount  != null and  readcount  != ''"> READCOUNT = READCOUNT+1 </if>
+			<if test=" recommend  != null and  recommend  != ''"> RECOMMEND = RECOMMEND+1 </if>
+			<if test=" steamed  != null and  steamed  != ''"> STEAMED = STEAMED+1 </if>
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 삭제안하고, 후기 상태값 변경 (01:노출/ 02:비노출) -->
+	<update id="updateCommunityStatusChange">
+		UPDATE COMMUNITY
+		<set>
+			STATUS = #{status}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 후기 삭제 (혹시몰라서 만듦 : 상태값:00 일경우에만 삭제하게 설정.) -->
+	<delete id="deleteCommunity" parameterType="int">
+		DELETE FROM COMMUNITY WHERE NUM = #{num}
+	</delete>
+	
+	<!-- 후기 댓글 리스트 -->
+	<select id="getCommunityReplyList" parameterType="map" resultType="myCommunityReplyBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+				REVIEW_NUM,
+				REVIEW_TYPE,
+				CONTENTS,
+				REGID,
+				(SELECT NAME FROM USERS T1 , REPLY T2 WHERE T1.ID = T2.REGID) AS REGNAME,
+				REGDATE
+		FROM REPLY
+		WHERE REVIEW_NUM = ${reviewnum}
+ 		ORDER BY NUM DESC
+	</select>
+
+	<!-- 후기 댓글 총갯수 -->
+	<select id="getCommunityReplyListTotalCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*) AS CNT FROM REPLY
+		WHERE REVIEW_NUM = ${reviewnum}
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertCommunityReply" parameterType="myCommunityReplyBean">
+		INSERT INTO REPLY
+		(
+			NUM,
+			REVIEW_NUM,
+			REVIEW_TYPE,
+			CONTENTS,
+			REGID,
+			REGDATE
+		)
+		values(
+			REPLY_SEQ.NEXTVAL,
+			#{reviewnum} ,
+			#{reviewtype} ,
+			#{contents},
+			#{regid},
+			SYSDATE
+		)
+	</insert>
+	
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteCommunityReply" parameterType="int">
+		DELETE FROM REPLY 
+		WHERE NUM = #{num}
+	</delete>
+	
+	<!--모든 댓글 삭제 -->
+	<delete id="deleteAllCommunityReply" parameterType="int">
+		DELETE FROM REPLY 
+		WHERE REVIEW_NUM = #{reviewnum}
+	</delete>
+	
+	<!-- 별등급(평균)  -->
+	<select id="getStarAVG" resultType="int">
+		SELECT 	ROUND(AVG(STAR_RANKING)) SVGSTAR
+		FROM 	COMMUNITY
+		WHERE 	REVIEW_NUM = #{reviewnum}
+		AND 	REVIEW_TYPE = #{reviewtype}
+	</select>
+	
+	<!-- 리뷰수 업뎃 -->
+	<update id="updateReviewCount">
+		UPDATE 
+			<if test="reviewtype == '01'">
+				CAMPING
+			</if>
+			<if test="reviewtype == '02'">
+				COMMUNITY
+			</if>
+		<set>
+			REVIEWCOUNT = REVIEWCOUNT+1
+		</set>
+		WHERE NUM = #{reviewnum}
+	</update>
+	
+	<!-- 리뷰수 삭제 업뎃 -->
+	<update id="deleteUpdateReviewCount">
+		UPDATE 
+			<if test="reviewtype == '01'">
+				CAMPING
+			</if>
+			<if test="reviewtype == '02'">
+				COMMUNITY
+			</if>
+		<set>
+			REVIEWCOUNT = REVIEWCOUNT-1
+		</set>
+		WHERE NUM = #{reviewnum}
+	</update>
+	
+</mapper>

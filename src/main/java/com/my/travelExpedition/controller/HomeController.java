@@ -70,7 +70,7 @@ public class HomeController {
 		
 		String pageUrl = request.getContextPath()+ "/sampleList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
-		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
+		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		
 		mav.addObject("pageInfo", pageInfo);
 		
@@ -163,7 +163,7 @@ public class HomeController {
 		
 		String pageUrl = request.getContextPath()+ "/sampleNoticeList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
-		Paging pageInfo = new Paging(map, "5", totalCount, pageUrl);
+		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		
 		mav.addObject("pageInfo", pageInfo);
 		

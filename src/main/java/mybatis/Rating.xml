@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Postimg.xml -->
+<mapper namespace="user.rating.model.RatingBean">
+
+	<!-- 좋아요, 찜, 별 리스트 -->
+	<select id="getRatingList" parameterType="map" resultType="user.rating.model.RatingBean">
+		SELECT 
+			REVIEW_NUM,
+			REVIEW_TYPE,
+			RATING_TYPE,
+			STAR_RANKING,
+			REGID
+		FROM RATING
+		WHERE 1=1
+		AND REVIEW_NUM = #{reviewnum}
+		AND REVIEW_TYPE = #{reviewtype}
+		<if test="regid != null">
+			AND REGID = #{regid}
+		</if>
+		ORDER BY REVIEW_NUM DESC, REGDATE DESC 
+	</select>
+
+	<!-- 좋아요,찜, 별 등 insert -->
+	<insert id="insertRatingData">
+		INSERT INTO RATING
+		(
+			REVIEW_NUM,
+			REVIEW_TYPE,
+			RATING_TYPE,
+			STAR_RANKING,
+			REGID,
+			REGDATE
+		)
+		VALUES(
+			#{reviewnum} ,
+			#{reviewtype} ,
+			#{ratingtype}, 
+			#{starranking},
+			#{regid},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- 별등급 변경일 경우에만, update -->
+	<update id="updateRatingData">
+		UPDATE RATING
+		<set>
+			STAR_RANKING = #{starranking},
+			MODID = #{modid},
+			MODDATE = SYSDATE
+		</set>
+		WHERE REVIEW_NUM = #{reviewnum}
+		AND RATING_TYPE = '03'
+		AND REGID = #{modid}
+	</update>
+	
+	<!-- 추천(좋아요) , 찜을 뺄때 사용. -->
+	<delete id="deleteRatingData" parameterType="int">
+		DELETE FROM RATING 
+		WHERE REVIEW_NUM  = #{reviewnum}
+		AND REVIEW_TYPE = #{reviewtype}
+		AND REGID = #{regid}
+	</delete>
+	
+	<!-- 찜 총갯수, 추천 총갯수, 별등급 총갯수, 별등급(평균) -->
+	<select id="getcommunityRatingSum" resultType="admin.community.model.CommunityRatingBean">
+	SELECT REVIEW_TYPE,
+	    SUM(DECODE(RATING_TYPE, '01', 1, 0)) GOOD,
+	    SUM(DECODE(RATING_TYPE, '02', 1, 0)) JJEM,
+	    SUM(DECODE(RATING_TYPE, '03', STAR_RANKING, 0)) STAR_SUM,
+	    SUM(DECODE(RATING_TYPE, '03', 1, 0)) STAR_CNT ,
+	    ROUND((SUM(DECODE(RATING_TYPE, '03', STAR_RANKING, 0)) / SUM(DECODE(RATING_TYPE, '03', 1, 0)))) AS STAR_AVG
+	    FROM  RATING 
+	GROUP BY REVIEW_TYPE
+	</select>
+
+</mapper>
