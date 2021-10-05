@@ -35,15 +35,22 @@ function navActive(activeName) {
         	<li data-nav="camping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
-           			<li><a href="#">캠핑/글램핑 관리</a></li>
-	            	<li><a href="#">관광지 관리</a></li>
+           			<li><a href="${contextPath}/campingList.ad">캠핑/글램핑 관리</a></li>
+	            	<li><a href="${contextPath}/tourList.ad">관광지 관리</a></li>
 	         	</ul>
          	</li>
-        	<li data-nav="community"><a href="#">후기커뮤니티관리 </a></li>
-        	
+         	
+         	<li data-nav="community" class="dropdown">
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 후기커뮤니티공간<b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="${contextPath}/communityList.ad">후기커뮤니티관리</a></li>
+           			<li><a href="${contextPath}/communityRatingList.ad">후기관련 통계</a></li>
+	         	</ul>
+         	</li>
+         	
         	<!-- 세영 : (0927)공지 이벤 위치 변경 -->
-          	<li data-nav="notice"><a href="#">공지사항관리 </a></li>
-          	<li data-nav="event"><a href="#">이벤트관리 </a></li>
+          	<li data-nav="notice"><a href="${contextPath}/noticeList.ad">공지사항관리 </a></li>
+          	<li data-nav="event"><a href="${contextPath}/eventList.ad">이벤트관리 </a></li>
           	
           	<li data-nav="qandA" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Q &amp; A 관리 <b class="caret"></b></a>

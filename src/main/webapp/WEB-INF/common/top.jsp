@@ -31,21 +31,28 @@ function navActive(activeName) {
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
-        	<li data-nav="introduction"><a href=""> 여행자들 소개 </a></li>
+        	<li data-nav="introduction"><a href="${contextPath}/introduction.do"> 여행자들 소개 </a></li>
         	
         	<li data-nav="camping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
-           			<li><a href="#">캠핑/글램핑</a></li>
-	            	<li><a href="#">관광지</a></li>
+           			<li><a href="${contextPath}/campingList.do">캠핑/글램핑</a></li>
+	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>
 	         	</ul>
          	</li>
         	
-        	<li data-nav="community"><a href="#">후기커뮤니티공간 </a></li>
-          	
+        	<li data-nav="community" class="dropdown">
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 후기커뮤니티공간<b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="${contextPath}/communityList.do">모든 후기</a></li>
+           			<li><a href="${contextPath}/reviewCommunityList.do">방문 후기</a></li>
+           			<li><a href="${contextPath}/reservationCommunityList.do">MY 후기</a></li>
+	         	</ul>
+         	</li>
+        	
           	<!-- 세영 : (0927)공지 이벤 위치 변경 -->
-          	<li data-nav="notice"><a href="#">공지사항 </a></li>
-          	<li data-nav="event"><a href="#">이벤트 </a></li>
+          	<li data-nav="notice"><a href="${contextPath}/noticeList.do">공지사항 </a></li>
+          	<li data-nav="event"><a href="${contextPath}/eventList.do">이벤트 </a></li>
           	
           	<li data-nav="qandA" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Q &amp; A <b class="caret"></b></a>
