@@ -6,4 +6,43 @@
 <!-- Like.xml -->
 <mapper namespace="user.like.model.LikeBean">
 
+	<select id="getLikesList" parameterType="map" resultType="myLikeBean">
+		SELECT 
+			NUM,
+			ID,
+			ACODE,
+			ANUM,
+			REGDATE
+		FROM LIKES
+		WHERE 1=1
+		AND ACODE = #{acode}
+		AND ANUM = #{anum}
+		AND ID = #{id}
+		ORDER BY NUM DESC, REGDATE DESC 
+	</select>
+	
+	<insert id="insertLikesData">
+		INSERT INTO LIKES
+		(
+			NUM,
+			ID,
+			ACODE,
+			ANUM,
+			REGDATE
+		)
+		VALUES(
+			LIKESEQ.NEXTVAL,
+			#{id} ,
+			#{acode}, 
+			#{anum},
+			SYSDATE
+		)
+	</insert>
+
+	<delete id="deleteLikesData" parameterType="int">
+		DELETE FROM LIKES 
+		WHERE ANUM  = #{anum}
+		AND ACODE = #{acode}
+	</delete>
+
 </mapper>

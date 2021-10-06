@@ -45,7 +45,8 @@ function goDelete(num) {
 
 //별 , 좋아요 등록 
 function goRatingRegister(ratingtype) {
-	var regid = "customer02"; // 페이지 진입한 유저 아이디.
+	var regid = "customer01"; // 페이지 진입한 유저 아이디.
+	
 	$.ajax({
 		url: "communityRatingRegister.do",
 		type: "POST",
@@ -69,7 +70,12 @@ function goRatingRegister(ratingtype) {
 				return;
 			}
 			
+			if(ratingtype != 01){
+				likesRegister();
+			}
+			
 			location.reload();
+			
 		},
 		error: function(msg, error) {
 			console.log("처리오류");
@@ -78,9 +84,32 @@ function goRatingRegister(ratingtype) {
 	
 }
 
+//likes 테이블에도 insert 하기.
+function likesRegister() {
+	var regid = "customer01"; // 페이지 진입한 유저 아이디.
+	$.ajax({
+		url: "communityLikesRegister.do",
+		type: "POST",
+		data: {
+			num : $('#num').val(),
+			regid : regid
+		},
+		dataType: "json",
+		success: function(data) {
+			if (data.resultCode != 'OK') {
+				//alert(data.resultMsg);
+				return;
+			}
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+		}
+	});
+}
+
 //댓글 등록.
 function goReplyRegister() {
-	var regid = "customer02"; // 페이지 진입한 유저 아이디.
+	var regid = "customer01"; // 페이지 진입한 유저 아이디.
 	
 	//댓글 길이 체크
 	if(!isInputLen("후기댓글","content",2,300)){

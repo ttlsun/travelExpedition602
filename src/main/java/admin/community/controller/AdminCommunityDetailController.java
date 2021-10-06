@@ -20,6 +20,7 @@ import com.my.travelExpedition.utility.WebUtil;
 import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.community.model.CommunityReplyBean;
+import user.like.model.LikeDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
 import user.rating.model.RatingDao;
@@ -42,6 +43,9 @@ public class AdminCommunityDetailController {
 	
 	@Autowired
 	private RatingDao ratingDao;
+	
+	@Autowired
+	private LikeDao likeDao;
 	
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
@@ -123,6 +127,11 @@ public class AdminCommunityDetailController {
 					map.put("reviewnum", map.get("reviewnum"));
 					communityDao.deleteUpdateReviewCount(map);
 				}
+				
+				//likes 테이블 삭제.
+				map.put("anum", map.get("num")); 
+				map.put("acode", "3"); //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
+				likeDao.deleteLikesData(map);
 				
 				int num = Integer.parseInt((String)map.get("num"));
 				//System.out.println("num::::" + num);

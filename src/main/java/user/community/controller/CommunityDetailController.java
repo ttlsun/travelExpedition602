@@ -20,6 +20,7 @@ import net.sf.json.JSONObject;
 import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.community.model.CommunityReplyBean;
+import user.like.model.LikeDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
 import user.rating.model.RatingDao;
@@ -34,6 +35,7 @@ public class CommunityDetailController {
 	public static final String COMMAND_REPLY_REGISTER = "/communityReplyRegister.do";
 	public static final String COMMAND_REPLY_DELETE = "/communityReplyDelete.do";
 	
+	public static final String COMMAND_LIKES_REGISTER = "/communityLikesRegister.do";
 	public static final String COMMAND_RATING_REGISTER = "/communityRatingRegister.do";
 	public static final String COMMAND_RATING_DELETE = "/communityRatingDelete.do";
 	
@@ -45,6 +47,9 @@ public class CommunityDetailController {
 	
 	@Autowired
 	private RatingDao ratingDao;
+	
+	@Autowired
+	private LikeDao likeDao;
 	
 	@RequestMapping(value = COMMAND)
     public ModelAndView communityListView(HttpServletRequest request,
@@ -156,7 +161,33 @@ public class CommunityDetailController {
 			}
 			
 			communityDao.updateCommunityUpcount(map);
+		
+			json.put("resultCode", "OK");
+			json.put("resultMsg", "성공");
 			
+		} catch (Exception e) {
+			json.put("resultCode", "ERROR");
+			json.put("resultMsg", e.getMessage());
+		}
+		
+		WebUtil.jsonSend(json, response);
+	}
+	
+	//likes테이블에도 insert 해주기
+	@RequestMapping(value = COMMAND_LIKES_REGISTER)
+	public void doJsonlikesRegister(HttpServletResponse response,@RequestParam Map<String, Object> map) throws Exception {
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			//likes 테이블에 저장.
+			map.put("id", map.get("regid"));
+			map.put("anum", map.get("num"));
+			map.put("acode", "3"); //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
+			
+			likeDao.insertLikesData(map);
+		
 			json.put("resultCode", "OK");
 			json.put("resultMsg", "성공");
 			
