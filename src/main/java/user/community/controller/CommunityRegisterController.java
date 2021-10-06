@@ -116,7 +116,7 @@ public class CommunityRegisterController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("acode", "6");
 			map.put("anum", maxNum);
-			map.put("regid", "member02");
+			map.put("regid", bean.getRegid());
 			
 			//이미지테이블에 이미지들 저장.
 			String[] uploadFileList = WebUtil.fileUpload(servletContext, bean.getMultipleUpdateFile(), null);

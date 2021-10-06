@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.event.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,46 +19,46 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
-import admin.notice.model.AdminNoticeBean;
-import admin.notice.model.AdminNoticeDao;
+import admin.event.model.AdminEventBean;
+import admin.event.model.AdminEventDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
 
 @Controller
-public class AdminNoticeUpdateController {
+public class AdminEventUpdateController {
 
-	public static final String COMMAND = "/noticeUpdate.ad";
-	public static final String GETPAGE = "admin/notice/noticeUpdateForm";
-	public static final String GOTOPAGE = "redirect:/noticeList.ad";
+	public static final String COMMAND = "/eventUpdate.ad";
+	public static final String GETPAGE = "admin/event/eventUpdateForm";
+	public static final String GOTOPAGE = "redirect:/eventList.ad";
 	
 	@Autowired
 	private ServletContext servletContext;
 	
 	@Autowired
-	private AdminNoticeDao adminNoticeDao;
+	private AdminEventDao adminEventDao;
 	
 	@Autowired
 	private PostimgDao postimgDao;
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
-    public ModelAndView adminNoticeUpdateView(HttpServletRequest request,
+    public ModelAndView adminEventUpdateView(HttpServletRequest request,
     										@RequestParam Map<String, String> map) {
 		
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
-		Map<String, Object> noticeMap = new HashMap<String, Object>();
-		noticeMap.put("num", map.get("num"));
-		AdminNoticeBean notice = adminNoticeDao.getNoticeDetail(noticeMap);
+		Map<String, Object> eventMap = new HashMap<String, Object>();
+		eventMap.put("num", map.get("num"));
+		AdminEventBean event = adminEventDao.getEventDetail(eventMap);
 		
 		//여럿 파일 이미지들(이미지관리테이블) 조회
 		Map<String, Object> imgMap = new HashMap<String, Object>();
-		imgMap.put("acode", "1"); //공지사항 구분자값
+		imgMap.put("acode", "2"); //이벤트 구분자값
 		imgMap.put("anum", map.get("num")); 
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
 		//System.out.println("lists:" + lists.toString());
 		
 		mav.addObject("pageNumber", map.get("pageNumber"));
-		mav.addObject("notice", notice); //공지사항 상세
+		mav.addObject("event", event); //이벤트 상세
 		mav.addObject("imgList", imgList); //이미지리스트
 		
 		return mav;
@@ -67,20 +67,20 @@ public class AdminNoticeUpdateController {
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
 	public ModelAndView doActionPost(ModelAndView mav,
 									@RequestParam(value = "pageNumber") String pageNumber,
-									@ModelAttribute("notice") @Valid AdminNoticeBean bean,
+									@ModelAttribute("event") @Valid AdminEventBean bean,
 									BindingResult result) {
 		
 		try {
 			
 			//이미지 파일 리스트 불러오기.
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("acode", "1"); //공지사항 구분자값
+			map.put("acode", "2"); //이벤트 구분자값
 			map.put("anum", bean.getNum()); 
 			List<PostimgBean> imgList = postimgDao.getPostimgList(map);
 			
 			mav.addObject("num", bean.getNum());
 			mav.addObject("pageNumber", pageNumber);
-			mav.addObject("imgList", imgList);
+			mav.addObject("lists", imgList);
 			
 			//불필요한 유효성검사 제외 후 기본적인 유효성검사.
 			if(result.hasErrors()
@@ -120,14 +120,14 @@ public class AdminNoticeUpdateController {
 						postimgDao.insertPostimgData(map);
 					}
 				}else {
-					//파일 수정을 안했을경우, 수정 내역 업뎃.
+					//이벤트관련 수정했을경우, 이미지에도 수정관련 업뎃.(파일수정시, 기존파일 삭제후 다시 로직으로 구현하여, 파일 수정안했을경우에 수정관련 업뎃쌓아준다.)
 					map.put("modid", bean.getModid()); //수정자아이디
 					postimgDao.updatePostimgData(map);
 				}
 			}
 			
-			//공지사항 테이블 업뎃
-			cnt = adminNoticeDao.updateData(bean);
+			//이벤트 테이블 업뎃
+			cnt = adminEventDao.updateData(bean);
 			
 			String msg = cnt < 0 ? "수정 실패" : "수정 성공";
 			System.out.println(msg);

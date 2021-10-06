@@ -419,7 +419,8 @@ function goAjaxDelete(url, numData , type) {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<c:if test="${community.regid eq 'member02'}">
+		<!-- 테스트때문에 customer01 로 박아뒀지만 로긴 관련 로직 추가되면 변경예정 -->
+		<c:if test="${community.regid eq 'customer01'}">
 			<input type="submit" class="btn btn-primary" value="수정" onclick="goUpdate()">
 			<input type="submit" class="btn btn-primary" value="삭제" onclick="return goDelete(${community.num})">
 		</c:if>

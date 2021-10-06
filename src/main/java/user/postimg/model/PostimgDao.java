@@ -29,8 +29,9 @@ public class PostimgDao {
 	}
 	
 	public int updatePostimgData(Map<String, Object> map) {
-		System.out.println("map : acode : " + map.get("acode") 
-						+ ",imgname(이미지명) :"+ map.get("imgname"));
+		System.out.println("map : modid : " + map.get("modid") +
+							"map : acode : " + map.get("acode") +
+							"map : anum : " + map.get("anum")	);
 		int cnt = sqlSessionTemplate.update(NAMESPACE + ".updatePostimgData", map);
 		return cnt;
 	}

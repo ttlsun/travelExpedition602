@@ -66,7 +66,7 @@ function goList() {
 	<header><h2 align="center" class="text-primary">후기 수정 화면</h2></header>
 	
 	<form:form commandName="community" name="myForm" action="communityUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="hidden" name="modid" value="member02">
+	<input type="hidden" name="modid" value="customer01">
 	<input type="hidden" name="reviewnum" value="${community.reviewnum}">
 	<input type="hidden" name="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" value="${community.num}">

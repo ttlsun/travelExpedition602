@@ -43,10 +43,10 @@
 	<update id="updatePostimgData">
 		UPDATE POSTIMG
 		<set>
-			IMGNAME = #{imgname}
+			MODDATE = SYSDATE,
+			MODID = #{modid}
 		</set>
-		WHERE NUM = #{num}
-		AND ACODE = #{acode}
+		WHERE ACODE = #{acode}
 		AND ANUM = #{anum}
 	</update>
 	

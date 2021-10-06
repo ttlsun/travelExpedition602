@@ -5,5 +5,123 @@
 
 <!-- AdminEvent.xml -->
 <mapper namespace="admin.event.model.AdminEventBean">
+	
+	<!-- 진행중인 이벤트 리스트 -->
+	<select id="getEventList" parameterType="map" resultType="myAdminEventBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				REGDATE,
+				STARTDATE,
+				ENDDATE,
+				READCOUNT
+		FROM EVENT
+		WHERE 1=1
+		<choose>
+			<when test="type == '01'">
+ 				<![CDATA[ AND ENDDATE >=  TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD') || '000000', 'YYYYMMDDHH24MISS') ]]>
+ 			</when>
+ 			<when test="type == '02'">
+ 				<![CDATA[ AND ENDDATE <  TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD') || '000000', 'YYYYMMDDHH24MISS') ]]>
+ 			</when>
+ 		</choose>
+		<if test="whatColumn =! null and whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		ORDER BY NUM DESC
+	</select>
+
+	<!--  진행중인 이벤트 총갯수 -->
+	<select id="getEventListTotalCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*) AS CNT FROM EVENT
+		WHERE 1=1
+		<choose>
+			<when test="type == '01'">
+ 				<![CDATA[ AND ENDDATE >=  TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD') || '000000', 'YYYYMMDDHH24MISS') ]]>
+ 			</when>
+ 			<when test="type == '02'">
+ 				<![CDATA[ AND ENDDATE <  TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD') || '000000', 'YYYYMMDDHH24MISS') ]]>
+ 			</when>
+ 		</choose>
+		<if test="whatColumn =! null and whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<!-- 이벤트 상세 -->
+	<select id="getEventDetail" parameterType="int" resultType="myAdminEventBean">
+		SELECT 
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE,
+				TO_CHAR(STARTDATE,'YYYY-MM-DD') AS STARTDATE,
+				TO_CHAR(ENDDATE,'YYYY-MM-DD') AS ENDDATE,
+				READCOUNT
+		FROM EVENT
+		WHERE NUM = #{num}
+	</select>
+	
+	<!-- 고유번호 시퀀스 가져오기. -->
+	<select id="getEventMaxNum" resultType="int">
+		SELECT EVENTSEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 이벤트 등록 -->
+	<insert id="insertEvent" parameterType="myAdminEventBean">
+		INSERT INTO EVENT
+		(
+			NUM,
+			ID,
+			TITLE,
+			CONTENTS,
+			REGDATE,
+			STARTDATE,
+			ENDDATE,
+			READCOUNT
+		)
+		values(
+			#{num} ,
+			#{id} ,
+			#{title} ,
+			#{contents},
+			SYSDATE,
+			#{startdate},
+			#{enddate},
+			0
+		)
+	</insert>
+	
+	<!-- 이벤트 수정 -->
+	<update id="updateEvent" parameterType="myAdminEventBean">
+		UPDATE EVENT
+		<set>
+			TITLE = 		#{title},
+			CONTENTS = 		#{contents},
+			MODID = 		#{modid},
+			MODDATE =		SYSDATE,
+			STARTDATE = 	#{startdate},
+			ENDDATE = 		#{enddate}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="updateEventUpcount">
+		UPDATE EVENT
+		<set>
+			READCOUNT = READCOUNT+1
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 이벤트 삭제 -->
+	<delete id="deleteEvent" parameterType="int">
+		DELETE FROM EVENT WHERE NUM = #{num}
+	</delete>
 
 </mapper>

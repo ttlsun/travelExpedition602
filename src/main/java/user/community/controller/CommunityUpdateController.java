@@ -63,7 +63,7 @@ public class CommunityUpdateController {
 		imgMap.put("acode", "6"); //커뮤니티 구분자값
 		imgMap.put("anum", num); 
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
-		System.out.println("imgList:" + imgList.toString());
+		//System.out.println("imgList:" + imgList.toString());
 		
 		mav.addObject("type", type);
 		mav.addObject("pageNumber", pageNumber);
@@ -123,7 +123,7 @@ public class CommunityUpdateController {
 //					Map<String, Object> map = new HashMap<String, Object>();
 //					map.put("acode", "6"); //커뮤니티. 
 //					map.put("anum", bean.getNum());
-					map.put("regid", "member01"); //아이디
+					map.put("regid", bean.getModid()); //아이디
 //					
 					// 기존파일 삭제를 위해 이미지테이블을 조회한다.
 					List<PostimgBean> postImglists = postimgDao.getPostimgList(map);
@@ -144,6 +144,10 @@ public class CommunityUpdateController {
 						map.put("imgname", tmp);
 						postimgDao.insertPostimgData(map);
 					}
+				}else {
+					//후기관련 수정했을경우, 이미지에도 수정관련 업뎃.(파일수정시, 기존파일 삭제후 다시 생성 로직으로 구현하여, 파일 수정안했을경우에 수정관련 업뎃쌓아준다.)
+					map.put("modid", bean.getModid()); //수정자아이디
+					postimgDao.updatePostimgData(map);
 				}
 			}
 			
