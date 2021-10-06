@@ -5,5 +5,28 @@
 
 <!-- Users.xml -->
 <mapper namespace="user.users.model.UsersBean">
-
+	<insert id="registerUsers">
+		insert into users(num, ucode, id, pw, name, gender, email, birth, postcode, address1, address2, address3, address4, contact, regdate, status)
+		values(userseq.nextval, #{ucode}, #{id}, #{pw}, #{name}, #{gender}, #{email}, to_date(#{birth}), #{postcode}, #{address1}, #{address2}, #{address3}, #{address4}, #{contact}, sysdate, #{status});
+	</insert>
+	
+	<select id="idCheck" parameterType="String" resultType="myUsersBean">
+		select id from users where id = #{id}
+	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="myUsersBean">
+		select email from users where email = #{email}
+	</select>
+	
+	<select id="findId" parameterType="myUsersBean" resultType="myUsersBean">
+		select id from users where name = #{name} and email = #{email}
+	</select>
+	
+	<select id="findPw" parameterType="myUsersBean" resultType="myUsersBean">
+		select pw from users where id = #{id} and email = #{email}
+	</select>
+	
+	<select id="login" parameterType="myUsersBean" resultType="myUsersBean">
+		select * from users where id = #{id} and pw = #{pw}
+	</select>
 </mapper>

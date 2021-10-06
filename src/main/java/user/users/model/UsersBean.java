@@ -1,19 +1,52 @@
 package user.users.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UsersBean {
+	//xml에서 삽입하는 값 (sequence)
 	private int num; //pk
+	
+	@NotEmpty(message="계정유형을 선택하세요") //select ~ option
 	private String ucode; //20, not null
+
+	@NotNull(message="아이디를 입력하세요") //input text
+	@Pattern(regexp="^[_0-9a-zA-Z-]{5,20}$", message="아이디 형식을 확인해주세요") //영어소문자,숫자,-_ 5~20자
 	private String id; //20, unique, not null
+	
+	@NotNull(message="비밀번호를 입력하세요") //input text
+	@Pattern(regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^~*+=-])(?=.*[0-9]).{5,20}$", message="비밀번호 형식을 확인해주세요") //영어대소문자,숫자,특수문자 5~20자
 	private String pw; //20, not null
+	
+	@NotNull(message="이름을 입력하세요") //input text
+	@Pattern(regexp="^[0-9a-zA-Zㄱ-ㅎ가-힣\\[{<(\\]}>)]{2,40}$", message="이름 형식을 확인해주세요")//영어대소문자,한글,숫자,괄호 2~40자
 	private String name; //40, not null
+	//개인회원만 입력하는 값
 	private String gender; //10
+	
+	@NotNull(message="이메일을 입력하세요")
+	@Pattern(regexp="^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[_0-9a-zA-Z-]+)*", message="이메일 형식을 확인해주세요")//이메일 형식
+	@Max(value=30, message="이메일은 30자까지 작성 가능합니다")//최대 30글자
 	private String email; //30, unique, not null
 	private String birth; //sysdate
+	//사업자만 입력하는 값
 	private int postcode;
+	//사업자만 입력하는 값
 	private String address1; //150, not null
+	//사업자만 입력하는 값
 	private String address2; //150, not null
+	//사업자만 입력하는 값
+	//Controller에서 삽입하는 값
 	private String address3; //150, not null
+	//사업자만 입력하는 값
+	//Controller에서 삽입하는 값
 	private String address4; //150, not null
+	@NotNull(message="연락처를 입력해주세요")
+	@Max(value=30, message="연락처는 30자까지 작성 가능합니다")//최대 30글자
 	private String contact; //30, not null
 	private String regdate; //sysdate
 	private String moddate;
