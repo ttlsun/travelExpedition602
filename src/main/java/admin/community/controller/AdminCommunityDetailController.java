@@ -118,10 +118,10 @@ public class AdminCommunityDetailController {
 					map.put("regid", map.get("regid")); 
 					ratingDao.deleteRatingData(map);
 					
-					//캠핑 or 관광지 리뷰수 올려주기.
+					//캠핑 or 관광지 리뷰수 삭제하기.
 					System.out.println("reviewnum:" + map.get("reviewnum") +",reviewtype :" + map.get("reviewtype"));
 					map.put("reviewnum", map.get("reviewnum"));
-					communityDao.updateReviewCount(map);
+					communityDao.deleteUpdateReviewCount(map);
 				}
 				
 				int num = Integer.parseInt((String)map.get("num"));
