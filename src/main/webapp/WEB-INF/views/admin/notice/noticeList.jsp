@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../../../common/admin/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %> 
 <style type="text/css">
 	th,td{
 		text-align: center;
@@ -13,13 +13,13 @@ $(document).ready(function() {
 	navActive('notice');
 	
 	//메타태그 설정.
-	$("#metaTitle").attr("content", "공지사항");
-	$("#metaDescription").attr("content", "공지사항 리스트");
-	$("#metaKeywords").attr("content", "#공지사항");
+	$("#metaTitle").attr("content", "관리자 공지사항");
+	$("#metaDescription").attr("content", "관리자 공지사항 리스트");
 });
 
-
-function goInsert() {
+//등록페이지이동 버튼
+function goRegister() {
+	location.href= "${contextPath}/noticeRegister.ad";
 }
 
 </script>
@@ -30,8 +30,8 @@ function goInsert() {
 	<header><h2 align="center" class="text-primary"> 공지사항 </h2></header>
 	
 	<div class="form-horizontal rounded">
-		<form action="sampleNoticeList">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+		<form action="noticeList.ad">
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>
@@ -54,7 +54,7 @@ function goInsert() {
 	</div>
 	
 	<div align="right" style="padding-top: 2%;">
-		<input type="button" class="btn btn-primary" value="추가하기" onclick="goInsert()">
+		<input type="button" class="btn btn-primary" value="공지사항 등록" onclick="goRegister()">
 	</div>
 	
 	<table class="table table-bordered" style="margin-top: 3%;">
@@ -68,18 +68,34 @@ function goInsert() {
 		</thead>
 		
 		<tbody>
-		<tr>
-			<td>번호</td>
-			<td><a href="#">제목</a></td>
-			<td>2021-09-23</td>
-		</tr>
+			<!-- list가 없을 경우 -->
+			<c:if test="${empty lists}">
+			<tr>
+				<td colspan="3" align="center"> 해당 공지사항 레코드가 없습니다.</td>
+			</tr>
+			</c:if>
+			
+			<c:forEach var="list" items="${lists}">
+				<tr>
+					<td>${list.rownum}</td>
+					<td>
+						<a href="noticeDetail.ad?num=${list.num}&pageNumber=${pageInfo.pageNumber}">${list.title}</a>
+					</td>
+					<td>
+						<fmt:parseDate var="fmtDate" value="${list.regdate}" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate var="regdate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
+						${regdate}
+					</td>
+				</tr>
+			</c:forEach>
+		
 		</tbody>
 		
 	</table>
 	
 	<!-- 페이징 -->
 	<div class="paginationCenter" align="center">
-		${pageInfo.pagingHtml}
+		${pageInfo.pagingHtml} 
 	</div>
 	
 </div>   

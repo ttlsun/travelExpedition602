@@ -34,14 +34,14 @@ create table users(
   id varchar2(20) unique not null,
   pw varchar2(20) not null,
   name varchar2(40) not null,
-  gender varchar2(10),
+  gender varchar2(10) null,
   email varchar2(30) unique not null,
   birth date default sysdate,
   postcode number,
-  address1 varchar2(150) not null,
-  address2 varchar2(150) not null,
-  address3 varchar2(150) not null,
-  address4 varchar2(150) not null,
+  address1 varchar2(150) null,
+  address2 varchar2(150) null,
+  address3 varchar2(150) null,
+  address4 varchar2(150) null,
   contact varchar2(30) not null,
   regdate date default sysdate,
   moddate date,
@@ -66,7 +66,7 @@ comment on column users.contact is '번호';
 comment on column users.regdate is '회원가입일';
 comment on column users.moddate is '수정일자';
 comment on column users.modid is '수정한 사람';
-comment on column users.status is '회원상태';
+comment on column users.status is '회원상태(가입완료, 회원탈퇴, 탈퇴보류중)';
 
 
 --개인(결제수단) 시퀀스
@@ -97,6 +97,9 @@ comment on column pay.id is '사용자 아이디 - 부모 users';
 comment on column pay.paycode is '결제수단 구분';
 comment on column pay.paydetail is '결제수단 상세 정보(카드 번호 등)';
 comment on column pay.cvc is '카드-cvc';
+comment on column pay.regdate is '등록일';
+comment on column pay.moddate is '수정일';
+comment on column pay.modid is '수정아이디';
 
 
 --관리자(공지사항) 시퀀스
@@ -127,6 +130,8 @@ comment on column notice.id is '사용자 아이디 - 부모 users';
 comment on column notice.title is '게시글 제목';
 comment on column notice.contents is '게시글 내용';
 comment on column notice.regdate is '게시글 올린 날짜';
+comment on column notice.moddate is '게시글 수정 날짜';
+comment on column notice.modid is '게시글 수정 아이디';
 comment on column notice.readcount is '게시글 조회수';
 
 
@@ -163,6 +168,8 @@ comment on column event.regdate is '게시글 올린 날짜';
 comment on column event.startdate is '이벤트 시작 날짜';
 comment on column event.enddate is '이벤트 끝 날짜';
 comment on column event.readcount is '게시글 조회수';
+comment on column event.moddate is '게시글 수정일';
+comment on column event.modid is '게시글 수정아이디';
 
 
 --관리자+사용자+사업자(문의 게시판) 시퀀스
@@ -235,7 +242,11 @@ comment on column postimg.num is '레코드 번호';
 comment on column postimg.acode is 'articlecode. 게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)';
 comment on column postimg.anum is 'articlenum. +번호(해당 테이블 레코드 번호)';
 comment on column postimg.imgname is '이미지 이름';
-comment on column postimg.imgraw is '이미지 url'; -- 일단 보류.
+comment on column postimg.imgraw is '이미지 url';
+comment on column postimg.regdate is '이미지 등록일';
+comment on column postimg.regid is '이미지 등록아이디';
+comment on column postimg.moddate is '이미지 수정일';
+comment on column postimg.modid is '이미지 수정 아이디';
 
 
 --개인(찜/관심목록) 시퀀스

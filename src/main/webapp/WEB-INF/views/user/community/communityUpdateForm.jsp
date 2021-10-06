@@ -58,9 +58,6 @@ function goList() {
 		location.href= "${contextPath}/communityList.do?pageNumber="+${pageNumber};
 	}
 }
-
-
-
 </script>
 
 <section class="container">
@@ -166,7 +163,7 @@ function goList() {
 				  	</div>
 			  	</div>
 				</c:if>
-				<input type="file" multiple id="multipleImgFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" onchange="updateFileChage(this.value)">
+				<input type="file" multiple id="multipleImgFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif">
 			</td>
 		</tr>
 		<tr>

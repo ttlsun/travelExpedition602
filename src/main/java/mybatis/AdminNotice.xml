@@ -6,4 +6,96 @@
 <!-- AdminNotice.xml -->
 <mapper namespace="admin.notice.model.AdminNoticeBean">
 
+	<!-- 공지사항 리스트 -->
+	<select id="getNoticeList" parameterType="map" resultType="myAdminNoticeBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				REGDATE,
+				READCOUNT
+		FROM NOTICE
+		WHERE 1=1
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		ORDER BY NUM DESC
+	</select>
+
+	<!-- 공지사항 총갯수 -->
+	<select id="getNoticeListTotalCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*) AS CNT FROM NOTICE
+		WHERE 1=1
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<!-- 공지사항 상세 -->
+	<select id="getNoticeDetail" parameterType="int" resultType="myAdminNoticeBean">
+		SELECT 
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				REGDATE,
+				READCOUNT
+		FROM NOTICE
+		WHERE NUM = #{num}
+	</select>
+	
+	<!-- 고유번호 시퀀스 가져오기. -->
+	<select id="getNoticeMaxNum" resultType="int">
+		SELECT NOTICESEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="insertNotice" parameterType="myAdminNoticeBean">
+		INSERT INTO NOTICE
+		(
+			NUM,
+			ID,
+			TITLE,
+			CONTENTS,
+			REGDATE,
+			READCOUNT
+		)
+		values(
+			#{num} ,
+			#{id} ,
+			#{title} ,
+			#{contents},
+			SYSDATE,
+			0
+		)
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="myAdminNoticeBean">
+		UPDATE NOTICE
+		<set>
+			TITLE = 		#{title},
+			CONTENTS = 		#{contents},
+			MODID = 		#{modid},
+			MODDATE =		SYSDATE
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="updateNoticeUpcount">
+		UPDATE NOTICE
+		<set>
+			READCOUNT = READCOUNT+1
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM NOTICE WHERE NUM = #{num}
+	</delete>
+
 </mapper>

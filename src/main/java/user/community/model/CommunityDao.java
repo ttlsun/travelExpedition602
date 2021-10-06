@@ -120,4 +120,10 @@ public class CommunityDao {
 		return cnt;
 	}
 	
+	/*캠핑 or 관광지 추천 리스트 뿌리기*/
+	public List<CommunityBean> getRecommendList(Map<String, String> map) {
+		List<CommunityBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getRecommendList", map);
+		return lists;
+	}
+	
 }

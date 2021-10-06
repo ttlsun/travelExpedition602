@@ -364,9 +364,58 @@ function goAjaxDelete(url, numData , type) {
 	</form>
 	
 	
-	<!-- 테마별 추천  -->
-	
-	<!-- // 테마별 추천  -->
+	<!-- 추천  -->
+	<c:choose>
+		<c:when test="${!empty recommendList }">
+		<div class="container"> 
+			<div class="marginPadding10">
+				<label class="text-primary textFontSizeLarge"> 추천 </label>
+			</div>
+	        <div id="carousel-example-generic" class="carousel slide">
+	        
+	            <!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
+	            <ol class="carousel-indicators">
+	              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	            </ol>
+	            
+	             <!-- Carousel items -->
+	             <div class="carousel-inner">
+	                <c:forEach items="${recommendList}" var="list" varStatus="status">
+	                	<div class="item <c:if test="${status.first}"> active </c:if> ">
+	                	<c:choose>
+	                		<c:when test="${community.reviewtype eq '01'}">
+	                			<a href="${contextPath}/campingDetailForm.do?pageNumber=1&num=${list.num}">
+			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
+				                </a>
+	                		</c:when>
+	                		<c:when test="${community.reviewtype eq '02'}">
+	                			<a href="${contextPath}/tourDetailForm.do?pageNumber=1&num=${list.num}">
+			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
+				                </a>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<a href="${contextPath}/campingDetailForm.do?pageNumber=1&num=${list.num}">
+			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
+				                </a>
+	                		</c:otherwise>
+	                	</c:choose>
+	                	</div>
+	                </c:forEach>
+	             </div>
+	            <!-- Controls -->
+	              <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
+	                <span class="icon-prev"></span>
+	              </a>
+	              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
+	                <span class="icon-next"></span>
+	              </a>
+	          </div>
+	  	</div>
+		</c:when>
+	</c:choose>
+	<!-- // 추천  -->
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">

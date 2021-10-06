@@ -78,6 +78,18 @@ public class CommunityDetailController {
 		communityMap.put("readcount","readcount"); //조회수
 		communityDao.updateCommunityUpcount(communityMap);
 		
+		//추천 리스트 뿌리기. (01:캠핑으로 올시, 관광지 추천으로 보여주고, 02:관광지로 올시, 캠핑 추천으로 보여준다. 03:모든후기 올시, 추천X)
+		String recommendType = "";
+		String reviewType = community.getReviewtype();
+		if(reviewType.equals("01")) {
+			recommendType = "02";
+		}else if(reviewType.equals("02")) {
+			recommendType = "01";
+		}
+		
+		map.put("recommendType", recommendType);
+		List<CommunityBean> recommendList = communityDao.getRecommendList(map);
+		
 		mav.addObject("type", map.get("type"));
 		mav.addObject("pageNumber", map.get("pageNumber"));
 		mav.addObject("regid", map.get("regid"));
@@ -87,6 +99,9 @@ public class CommunityDetailController {
 		mav.addObject("replyPageInfo", replyPageInfo); //후기댓글 페이징 정보
 		mav.addObject("replyTotalCount", replyTotalCount); //후기댓글 총 갯수
 		mav.addObject("replyPageNumber", map.get("replyPageNumber")); //후기댓글 페이지
+		mav.addObject("recommendList", recommendList); //추천 리스트
+		
+		System.out.println("recommendList:" + recommendList.size());
 		
 		return mav;
 	}

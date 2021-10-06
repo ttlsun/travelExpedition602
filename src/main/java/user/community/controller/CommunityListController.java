@@ -36,7 +36,7 @@ public class CommunityListController {
 	
 		String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
 		
-		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		List<CommunityBean> lists = communityDao.getCommunityList(pageInfo, map);
 		
 		mav.addObject("pageInfo", pageInfo);

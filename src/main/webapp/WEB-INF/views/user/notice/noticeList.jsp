@@ -26,7 +26,8 @@ $(document).ready(function() {
 	<header><h2 align="center" class="text-primary"> 공지사항 </h2></header>
 	
 	<div class="form-horizontal rounded">
-		<form action="sampleNoticeList">
+		<form action="noticeList.do">
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>
@@ -59,18 +60,34 @@ $(document).ready(function() {
 		</thead>
 		
 		<tbody>
-		<tr>
-			<td>번호</td>
-			<td><a href="#">제목</a></td>
-			<td>2021-09-23</td>
-		</tr>
+			<!-- list가 없을 경우 -->
+			<c:if test="${empty lists}">
+			<tr>
+				<td colspan="3" align="center"> 해당 공지사항 레코드가 없습니다.</td>
+			</tr>
+			</c:if>
+			
+			<c:forEach var="list" items="${lists}">
+				<tr>
+					<td>${list.rownum}</td>
+					<td>
+						<a href="noticeDetail.do?num=${list.num}&pageNumber=${pageInfo.pageNumber}">${list.title}</a>
+					</td>
+					<td>
+						<fmt:parseDate var="fmtDate" value="${list.regdate}" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate var="regdate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
+						${regdate}
+					</td>
+				</tr>
+			</c:forEach>
+		
 		</tbody>
 		
 	</table>
 	
 	<!-- 페이징 -->
 	<div class="paginationCenter" align="center">
-	<%-- 	${pageInfo.pagingHtml} --%>
+		${pageInfo.pagingHtml}
 	</div>
 	
 </div>   
