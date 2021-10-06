@@ -45,7 +45,7 @@ function goDelete(num) {
 
 //별 , 좋아요 등록 
 function goRatingRegister(ratingtype) {
-	var regid = "member05"; // 페이지 진입한 유저 아이디.
+	var regid = "customer02"; // 페이지 진입한 유저 아이디.
 	$.ajax({
 		url: "communityRatingRegister.do",
 		type: "POST",
@@ -80,9 +80,15 @@ function goRatingRegister(ratingtype) {
 
 //댓글 등록.
 function goReplyRegister() {
-	var regid = "member01"; // 페이지 진입한 유저 아이디.
+	var regid = "customer02"; // 페이지 진입한 유저 아이디.
+	
+	//댓글 길이 체크
+	if(!isInputLen("후기댓글","content",2,300)){
+		return false;
+	}
+	
 	if (!confirm('후기 댓글 등록 하시겠습니까?')){
-		return;
+		return false;
 	}
 	
 	$.ajax({

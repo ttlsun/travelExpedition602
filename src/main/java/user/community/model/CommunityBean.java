@@ -2,6 +2,7 @@ package user.community.model;
 
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,9 +29,11 @@ public class CommunityBean {
 	private MultipartFile[] multipleUpdateFile; // 파일업로드 여러개
 
 	@NotBlank(message = "필수 입력사항")
+	@Length(min = 2, max = 150, message = "타이틀 한글 2~150자 입력")
 	private String title;
 
 	@NotBlank(message = "필수 입력사항")
+	@Length(min = 2, max = 150, message = "한줄요약 한글 2~150자 입력")
 	private String summary;
 
 	@NotBlank(message = "필수 입력사항")

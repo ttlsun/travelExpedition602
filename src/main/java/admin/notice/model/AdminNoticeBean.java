@@ -2,6 +2,7 @@ package admin.notice.model;
 
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,7 @@ public class AdminNoticeBean {
 	private String id; // 20, not null, fk(users.id)
 
 	@NotEmpty(message = "필수 선택사항")
+	@Length(min = 2, max = 150, message = "타이틀 한글 2~150자 입력")
 	private String title; // 200, not null
 
 	@NotEmpty(message = "필수 선택사항")
