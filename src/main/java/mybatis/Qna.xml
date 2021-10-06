@@ -5,5 +5,168 @@
 
 <!-- Qna.xml -->
 <mapper namespace="user.qna.model.QnaBean">
+	
+	<!-- 문의 리스트 -->
+	<select id="getQnaList" resultType="myQnaBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY REF DESC, RESTEP ASC) AS ROW_NUM,
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				REG_KEYWORD,
+				REGDATE,
+				STATUS,
+				REF,
+				RESTEP,
+				RELEVEL
+		FROM QNA
+		WHERE 1=1
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		<if test="whatColumn == 'regkeyword'">
+ 			AND REG_KEYWORD LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+
+	<!-- 문의 총갯수 -->
+	<select id="getQnaListTotalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT FROM QNA
+		WHERE 1=1
+		<if test="whatColumn == 'title'">
+ 			AND TITLE LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		<if test="whatColumn == 'regkeyword'">
+ 			AND REG_KEYWORD LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<!-- 문의 상세 -->
+	<select id="getQnaDetail" parameterType="int" resultType="myQnaBean">
+		SELECT 
+				NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				REG_KEYWORD,
+				REGDATE,
+				STATUS,
+				REF,
+				RESTEP,
+				RELEVEL
+		FROM QNA
+		WHERE NUM = #{num}
+	</select>
+	
+	<!-- 문의고유번호 시퀀스 가져오기. -->
+	<select id="getQnaMaxNum" resultType="int">
+		SELECT QNASEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 회원 문의 등록 -->
+	<insert id="insertQna" parameterType="myQnaBean">
+		INSERT INTO QNA
+		(
+			NUM,
+			ID,
+			PW,
+			TITLE,
+			CONTENTS,
+			REG_KEYWORD,
+			REGDATE,
+			STATUS,
+			REF,
+			RESTEP,
+			RELEVEL
+		)
+		values(
+			#{num},
+			#{id} ,
+			#{pw} ,
+			#{title} ,
+			#{contents},
+			#{regkeyword},
+			SYSDATE,
+			'01',
+			#{ref},
+			0,
+			0
+		)
+	</insert>
+	
+	<!-- 문의 답글 등록 -->
+	<insert id="insertQnaRef" parameterType="myQnaBean">
+		INSERT INTO QNA
+		(
+			NUM,
+			ID,
+			TITLE,
+			CONTENTS,
+			REG_KEYWORD,
+			REGDATE,
+			STATUS,
+			REF,
+			RESTEP,
+			RELEVEL
+		)
+		values(
+			#{num},
+			#{id} ,
+			#{title} ,
+			#{contents},
+			#{regkeyword},
+			SYSDATE,
+			#{status},
+			#{ref},
+			#{restep} +1,
+			#{relevel} +1
+		)
+	</insert>
+	
+	<!-- 비번확인  -->
+	<select id="getPwData" parameterType="int" resultType="String">
+		SELECT PW FROM QNA WHERE NUM= #{num}
+	</select>
+	
+	<!-- 답글 갯수 update -->
+	<update id="updateQnaRef" parameterType="myQnaBean">
+		 UPDATE QNA 
+		 <set>
+		 	RESTEP= RESTEP+1 
+		 </set>
+		 WHERE REF= #{ref} 
+		 AND RESTEP <![CDATA[ > ]]> #{reStep}
+	</update>
+	
+	<!-- 문의 수정 -->
+	<update id="updateQna" parameterType="myQnaBean">
+		UPDATE QNA
+		<set>
+			TITLE = 		#{title},
+			CONTENTS = 		#{contents},
+			REG_KEYWORD = 	#{regkeyword},
+			MODID = 		#{modid},
+			MODDATE =		SYSDATE
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 답변시, 상태 업뎃 -->
+	<update id="updateQnaStatus">
+		UPDATE QNA
+		<set>
+			MODDATE = SYSDATE,
+			MODID = #{modid},
+			STATUS = #{status}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 문의 삭제 -->
+	<delete id="deleteQna" parameterType="int">
+		DELETE FROM QNA WHERE NUM = #{num}
+	</delete>
+	
 
 </mapper>

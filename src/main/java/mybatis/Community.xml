@@ -50,7 +50,6 @@
  		<if test="whatColumn == 'summary'">
  			AND SUMMARY LIKE '%'|| #{keyword} || '%'
  		</if>
- 		ORDER BY NUM DESC
 	</select>
 
 	<!-- 후기 총갯수 -->
@@ -282,6 +281,7 @@
 		</set>
 		WHERE NUM = #{reviewnum}
 	</update>
+	
 	
 	<!-- 추천 리스트 조회 -->
 	<select id="getRecommendList" parameterType="map" resultType="myCommunityBean">

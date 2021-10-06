@@ -68,14 +68,21 @@
 	
 	<!-- 찜 총갯수, 추천 총갯수, 별등급 총갯수, 별등급(평균) -->
 	<select id="getcommunityRatingSum" resultType="admin.community.model.CommunityRatingBean">
-	SELECT REVIEW_TYPE,
-	    SUM(DECODE(RATING_TYPE, '01', 1, 0)) GOOD,
-	    SUM(DECODE(RATING_TYPE, '02', 1, 0)) JJEM,
-	    SUM(DECODE(RATING_TYPE, '03', STAR_RANKING, 0)) STAR_SUM,
-	    SUM(DECODE(RATING_TYPE, '03', 1, 0)) STAR_CNT ,
-	    ROUND((SUM(DECODE(RATING_TYPE, '03', STAR_RANKING, 0)) / SUM(DECODE(RATING_TYPE, '03', 1, 0)))) AS STAR_AVG
-	    FROM  RATING 
-	GROUP BY REVIEW_TYPE
+		SELECT 	REVIEW_TYPE,
+				GOOD, 
+				JJEM, 
+				STAR_SUM, 
+				STAR_CNT
+	        	,ROUND(STAR_SUM / DECODE(STAR_CNT, 0, 1, STAR_CNT)) AS STAR_AVG 
+	      FROM (
+				  SELECT REVIEW_TYPE,
+				        SUM(DECODE(RATING_TYPE, '01', 1, 0)) GOOD,
+				        SUM(DECODE(RATING_TYPE, '02', 1, 0)) JJEM,
+				        SUM(DECODE(RATING_TYPE, '03', STAR_RANKING, 0)) STAR_SUM,
+				        SUM(DECODE(RATING_TYPE, '03', 1, 0)) STAR_CNT 
+				        FROM  RATING
+				  GROUP BY REVIEW_TYPE
+				)
 	</select>
 
 </mapper>

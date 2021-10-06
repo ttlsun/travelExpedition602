@@ -1,16 +1,16 @@
 -- USERS (회원테이블)
 
 -- 관리자
-INSERT INTO USERS(NUM,UCODE,ID,PW,NAME,GENDER,EMAIL,BIRTH,POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,CONTACT,REGDATE,STATUS)
-VALUES(1,'admin','admin','a1234','관리자','','admin@naver.com','2000-10-10','04104','서울','마포구','신촌로','176 중앙빌딩','02-704-1711',SYSDATE);
+INSERT INTO USERS(NUM,UCODE,ID,PW,NAME,EMAIL,BIRTH,POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,CONTACT,REGDATE,STATUS)
+VALUES(1,'admin','admin','a1234','관리자','admin@naver.com','2000-10-10','04104','서울','마포구','신촌로','176 중앙빌딩','02-704-1711',SYSDATE,'가입완료');
 
 -- 사업자
 INSERT INTO USERS(NUM,UCODE,ID,PW,NAME,GENDER,EMAIL,BIRTH,POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,CONTACT,REGDATE,STATUS)
-VALUES(2,'business','business01','a1234','사업자1','여','business1@naver.com','2000-10-10','04104','서울','마포구','신촌로','176 중앙빌딩','02-704-1711',SYSDATE,'01');
+VALUES(2,'business','business01','a1234','사업자1','여','business1@naver.com','2000-10-10','04104','서울','마포구','신촌로','176 중앙빌딩','02-704-1711',SYSDATE,'가입완료');
 
 -- 일반회원
 INSERT INTO USERS(NUM,UCODE,ID,PW,NAME,GENDER,EMAIL,BIRTH,POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,CONTACT,REGDATE,STATUS)
-VALUES(3,'customer','customer01','a1234','일반회원1','남','customer1@naver.com','2000-10-10','','','','','','010-4000-4000',SYSDATE,'01');
+VALUES(3,'customer','customer01','a1234','일반회원1','남','customer1@naver.com','2000-10-10','','','','','','010-4000-4000',SYSDATE,'가입완료');
 
 
 

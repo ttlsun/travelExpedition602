@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>  
 <style type="text/css">
 	th,td{
 		text-align: center;
@@ -13,15 +13,14 @@ $(document).ready(function() {
 	navActive('qna');
 	
 	//메타태그 설정.
-	$("#metaTitle").attr("content", "문의");
-	$("#metaDescription").attr("content", "문의리스트");
-	$("#metaKeywords").attr("content", "#여행자들602호 문의리스트,#문의");
+	$("#metaTitle").attr("content", "관리자 문의와 답변 리스트");
+	$("#metaDescription").attr("content", "관리자 문의와 답변 리스트");
 	
 });
 
 //등록페이지이동 버튼
 function goRegister() {
-	location.href= "${contextPath}/qnaRegister.do";
+	location.href= "${contextPath}/qnaRegister.ad";
 }
 </script>
 
@@ -40,6 +39,7 @@ function goRegister() {
 						<select name="whatColumn" id="searchWhatColumn" class="form-control">
 							<option value="">전체 검색</option>
 							<option value="title">제목</option>
+							<option value="regkeyword">등록키워드</option>
 						</select>
 						
 						<div align="left" style="padding-top: 5px;">
@@ -54,16 +54,13 @@ function goRegister() {
 		</form>
 	</div>
 	
-	<div align="right" style="padding-top: 2%;">
-		<input type="button" class="btn btn-primary" value="문의 등록" onclick="goRegister()">
-	</div>
-	
-	<table class="table table-bordered" style="margin-top: 3%;">
+	<table class="table table-bordered" style="margin-top: 5%;">
 		<caption>레코드 총 갯수 : </caption>
 		<thead>
 			<tr class="active">
 				<th width="6%">번호</th>
 				<th>제목</th>
+				<th width="14%">등록키워드</th>
 				<th width="14%">답변상태</th>
 				<th width="14%">등록자</th>
 				<th width="14%">등록일</th>
@@ -92,10 +89,11 @@ function goRegister() {
 						</c:otherwise>
 					</c:choose>
 					
-					<a href="qnaDetail.do?num=${list.num}&pageNumber=${pageInfo.pageNumber}">
+					<a href="qnaDetail.ad?num=${list.num}&pageNumber=${pageInfo.pageNumber}">
 						${list.title}
 					</a>
 				</td> 
+				<td>${list.regkeyword}</td>
 				<td>
 					<c:choose>
 						<c:when test="${list.status eq '01'}">답변 대기</c:when>
@@ -124,4 +122,5 @@ function goRegister() {
 </div>   
 </article>
 </section>
-<%@ include file="../../../common/bottom.jsp" %>
+
+<%@ include file="../../../common/admin/bottom.jsp" %>

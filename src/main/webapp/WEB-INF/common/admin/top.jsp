@@ -57,10 +57,10 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
          	
-          	<li data-nav="qandA" class="dropdown">
+          	<li data-nav="qna" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Q &amp; A 관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
-	            	<li><a href="#">문의</a></li>
+	            	<li><a href="${contextPath}/qnaList.ad">문의</a></li>
 	         	</ul>
          	</li>
           	

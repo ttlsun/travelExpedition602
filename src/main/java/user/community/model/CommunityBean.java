@@ -45,6 +45,7 @@ public class CommunityBean {
 	private int starranking;
 
 	@NotBlank(message = "필수 입력사항")
+	@Length(min = 2, max = 150, message = "키워드 한글 2~150자 입력")
 	private String regkeyword;
 
 	private String status;

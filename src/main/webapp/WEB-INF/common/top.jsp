@@ -59,12 +59,12 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
           	
-          	<li data-nav="qandA" class="dropdown">
+          	<li data-nav="qna" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Q &amp; A <b class="caret"></b></a>
             	<ul class="dropdown-menu">
             		<!-- 세영 : (0927)문의 질문 위치 변경 -->
-            		<li><a href="#">문의하기</a></li>
-           			<li><a href="${contextPath}/qnaList.do">자주 묻는 질문</a></li>
+            		<li><a href="${contextPath}/qnaList.do">문의하기</a></li>
+           			<li><a href="${contextPath}/faqList.do">자주 묻는 질문</a></li>
 	         	</ul>
          	</li>
          	
@@ -80,7 +80,7 @@ function navActive(activeName) {
          	</li>
          	
           	<!-- 세영 : (예정)로그인/회원가입 구현 완료 후, 로그인x면 로그인 & 로그인o면 로그아웃 -->
-          	<li data-nav="login"><a href=""> 님 로그아웃 </a></li>
+          	<li data-nav="login"><a href="${contextPath}/login.do"> 님 로그아웃 </a></li>
           	
         </ul>
       </div>
