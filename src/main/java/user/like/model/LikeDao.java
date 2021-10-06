@@ -31,7 +31,7 @@ public class LikeDao {
 	
 	public int deleteLikesData(Map<String, Object> map) {
 		System.out.println("map ACODE(게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티) ) : " 
-							+ map.get("reviewtype") 
+							+ map.get("acode") 
 							+ ", ANUM: "  + map.get("anum") 
 							+ ", ID: "  + map.get("id"));
 		int cnt = sqlSessionTemplate.delete(NAMESPACE + ".deleteLikesData", map);
