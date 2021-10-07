@@ -4,7 +4,7 @@
 
 <mapper namespace="user.common.model.KeywordBean">
 
-	<select id="getKeywordList" parameterType="map" resultType="myKeywordBean">
+	<select id="getKeywordList" resultType="myKeywordBean">
 		SELECT 
 				NUM, ACODE, TAG
 		FROM KEYWORD
