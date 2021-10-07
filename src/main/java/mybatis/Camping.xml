@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Camping.xml -->
+<mapper namespace="user.camping.model.CampingBean">
+	
+	<insert id="insertCamping" parameterType="myCampingBean">
+		INSERT INTO CAMPING(
+			NUM, NAME, CAMP_TYPE, THEMECODE, REG_KEYWORD, 
+			SUMMARY, IMGURL, CONTENTS,
+			POSTCODE, ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, 
+			LATITUDE, LONGITUDE,
+			CONTACT, REGDATE, REGID, MODDATE,
+			READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT
+		)
+		VALUES(
+			CAMPINGSEQ.NEXTVAL, #{name}, #{camp_type}, #{themecode}, #{reg_keyword},
+			#{summary}, #{imgurl}, #{contents},
+			#{postcode}, #{address1}, #{address2}, #{address3}, #{address4},
+			#{latitude}, #{longitude},
+			#{contact}, SYSDATE, #{regid}, SYSDATE,
+			0, 0, 0, 0
+		)
+	</insert>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM CAMPING
+		WHERE 1=1
+		<if test="address1 != null">
+			AND ADDRESS1 = #{address1}
+		</if>
+		<if test="address2 != null">
+			AND ADDRESS2 = #{address2}
+		</if>
+		<if test="camp_type != null">
+			AND CAMP_TYPE IN(#{camp_type})
+		</if>
+		<if test="themecode != null">
+			AND THEMECODE IN(#{themecode})
+		</if>
+		<if test="searchName != null">
+			AND NAME LIKE #{searchName}
+		</if>
+	</select>
+	
+	<select id="getCampingList" resultType="myCampingBean">
+		SELECT NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,SUMMARY,IMGURL,
+		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT 
+		FROM CAMPING
+		WHERE 1=1
+		<if test="address1 != null">
+			AND ADDRESS1 = #{address1}
+		</if>
+		<if test="address2 != null">
+			AND ADDRESS2 = #{address2}
+		</if>
+		<if test="camp_type != null">
+			AND CAMP_TYPE IN(#{camp_type})
+		</if>
+		<if test="themecode != null">
+			AND THEMECODE IN(#{themecode})
+		</if>
+		<if test="searchName != null">
+			AND NAME LIKE #{searchName}
+		</if>
+		
+	</select>
+</mapper>

@@ -1,20 +1,40 @@
 package user.camping.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
 public class CampingBean {
 
 	private int num;
+
+	@NotBlank(message = "캠핑장 상호명 입력은 필수입니다.")
 	private String name;
+
+	@NotEmpty(message = "캠핑장 유형을 선택하세요.")
 	private String camp_type;
+
+	@NotEmpty(message = "캠핑장 테마를 선택하세요.")
 	private String themecode;
+
 	private String reg_keyword;
 	private String summary;
+
 	private String imgurl;
+	private MultipartFile updateFile; // 대표이미지명
+
 	private String contents;
 	private int postcode;
+
+	@NotEmpty(message = "캠핑장 주소(시도) 입력은 필수입니다.")
 	private String address1;
+	@NotEmpty(message = "캠핑장 주소(시군구) 입력은 필수입니다.")
 	private String address2;
+	@NotEmpty(message = "캠핑장 주소(동길) 입력은 필수입니다.")
 	private String address3;
+	@NotEmpty(message = "캠핑장 주소(상세주소) 입력은 필수입니다.")
 	private String address4;
+
 	private String latitude;
 	private String longitude;
 	private String contact;
@@ -26,41 +46,6 @@ public class CampingBean {
 	private int recommend;
 	private int steamed;
 	private int reviewcount;
-	
-	public CampingBean() {
-		super();
-	}
-
-	public CampingBean(int num, String name, String camp_type, String themecode, String reg_keyword, String summary,
-			String imgurl, String contents, int postcode, String address1, String address2, String address3,
-			String address4, String latitude, String longitude, String contact, String regdate, String regid,
-			String moddate, String modid, int readcount, int recommend, int steamed, int reviewcount) {
-		super();
-		this.num = num;
-		this.name = name;
-		this.camp_type = camp_type;
-		this.themecode = themecode;
-		this.reg_keyword = reg_keyword;
-		this.summary = summary;
-		this.imgurl = imgurl;
-		this.contents = contents;
-		this.postcode = postcode;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.address4 = address4;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.contact = contact;
-		this.regdate = regdate;
-		this.regid = regid;
-		this.moddate = moddate;
-		this.modid = modid;
-		this.readcount = readcount;
-		this.recommend = recommend;
-		this.steamed = steamed;
-		this.reviewcount = reviewcount;
-	}
 
 	public int getNum() {
 		return num;
@@ -116,6 +101,14 @@ public class CampingBean {
 
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
+	}
+
+	public MultipartFile getUpdateFile() {
+		return updateFile;
+	}
+
+	public void setUpdateFile(MultipartFile updateFile) {
+		this.updateFile = updateFile;
 	}
 
 	public String getContents() {
@@ -253,6 +246,16 @@ public class CampingBean {
 	public void setReviewcount(int reviewcount) {
 		this.reviewcount = reviewcount;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CampingBean [num=" + num + ", name=" + name + ", camp_type=" + camp_type + ", themecode=" + themecode
+				+ ", reg_keyword=" + reg_keyword + ", summary=" + summary + ", imgurl=" + imgurl + ", updateFile="
+				+ updateFile + ", contents=" + contents + ", postcode=" + postcode + ", address1=" + address1
+				+ ", address2=" + address2 + ", address3=" + address3 + ", address4=" + address4 + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", contact=" + contact + ", regdate=" + regdate + ", regid="
+				+ regid + ", moddate=" + moddate + ", modid=" + modid + ", readcount=" + readcount + ", recommend="
+				+ recommend + ", steamed=" + steamed + ", reviewcount=" + reviewcount + "]";
+	}
+
 }

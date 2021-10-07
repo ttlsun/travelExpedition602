@@ -16,7 +16,6 @@ public class RoomBean {
 	private int weekendprice;
 	private String options;
 	private String amenity;
-	private String bookabledate;
 	private String regdate;
 	private String regid;
 	private String moddate;
@@ -28,7 +27,7 @@ public class RoomBean {
 
 	public RoomBean(int num, String name, String room_type, int cnum, String cname, String imgurl, int postingnum,
 			String contents, int propguests, int maxguests, int weekdayprice, int weekendprice, String options,
-			String amenity, String bookabledate, String regdate, String regid, String moddate, String modid) {
+			String amenity, String regdate, String regid, String moddate, String modid) {
 		super();
 		this.num = num;
 		this.name = name;
@@ -44,7 +43,6 @@ public class RoomBean {
 		this.weekendprice = weekendprice;
 		this.options = options;
 		this.amenity = amenity;
-		this.bookabledate = bookabledate;
 		this.regdate = regdate;
 		this.regid = regid;
 		this.moddate = moddate;
@@ -161,14 +159,6 @@ public class RoomBean {
 
 	public void setAmenity(String amenity) {
 		this.amenity = amenity;
-	}
-
-	public String getBookabledate() {
-		return bookabledate;
-	}
-
-	public void setBookabledate(String bookabledate) {
-		this.bookabledate = bookabledate;
 	}
 
 	public String getRegdate() {

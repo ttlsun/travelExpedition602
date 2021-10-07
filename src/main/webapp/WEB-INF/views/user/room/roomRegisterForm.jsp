@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../../../common/top.jsp" %>   
 
-<%@ include file="../../../common/top.jsp" %>
+<section class="container">
+<article>
+<div>
+roomRegister.jsp
+</div>
+</article>
+</section>
 
-campingRegister.jsp<br>
+
 
 <%@ include file="../../../common/bottom.jsp" %>

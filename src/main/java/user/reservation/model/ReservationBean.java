@@ -8,6 +8,7 @@ public class ReservationBean {
 	private String id;
 	private String checkindate;
 	private String checkoutdate;
+	private String regdate;
 	private int guests;
 	private String name;
 	private String phone;
@@ -20,7 +21,7 @@ public class ReservationBean {
 		super();
 	}
 
-	public ReservationBean(int num, int cnum, int rnum, String id, String checkindate, String checkoutdate, int guests,
+	public ReservationBean(int num, int cnum, int rnum, String id, String checkindate, String checkoutdate, String regdate, int guests,
 			String name, String phone, String email, String requested, int totalprice, String status) {
 		super();
 		this.num = num;
@@ -29,6 +30,7 @@ public class ReservationBean {
 		this.id = id;
 		this.checkindate = checkindate;
 		this.checkoutdate = checkoutdate;
+		this.regdate = regdate;
 		this.guests = guests;
 		this.name = name;
 		this.phone = phone;
@@ -85,7 +87,15 @@ public class ReservationBean {
 	public void setCheckoutdate(String checkoutdate) {
 		this.checkoutdate = checkoutdate;
 	}
+	
+	public String getRegdate() {
+		return regdate;
+	}
 
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
 	public int getGuests() {
 		return guests;
 	}

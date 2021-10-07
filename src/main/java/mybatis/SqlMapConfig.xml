@@ -28,7 +28,7 @@
 		<typeAlias alias="myQnaBean" type="user.qna.model.QnaBean"/>
 		<typeAlias alias="myPostimgBean" type="user.postimg.model.PostimgBean"/>
 		<typeAlias alias="myLikeBean" type="user.like.model.LikeBean"/>
-		<typeAlias alias="myTourBean" type="user.Tour.model.TourBean"/>
+		<typeAlias alias="myTourBean" type="user.tour.model.TourBean"/>
 		<typeAlias alias="myCommunityBean" type="user.community.model.CommunityBean"/>
 		<typeAlias alias="myCommunityReplyBean" type="user.community.model.CommunityBean"/>
 	</typeAliases>
@@ -45,6 +45,10 @@
 		<mapper resource="mybatis/Like.xml"/>
 		<mapper resource="mybatis/Tour.xml"/>
 		<mapper resource="mybatis/Community.xml"/>
+		<mapper resource="mybatis/Camping.xml"/>
+		<mapper resource="mybatis/Room.xml"/>
+		<mapper resource="mybatis/Reservation.xml"/>
+		<mapper resource="mybatis/Rating.xml"/>
 	</mappers>
 </configuration>
 
