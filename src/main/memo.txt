@@ -194,9 +194,9 @@ create table qna(
   moddate date,
   modid varchar2(20),
   status varchar2(50),
-  ref number not null,
-  restep number not null,
-  relevel number not null,
+  ref number DEFAULT 0,
+  restep number DEFAULT 0,
+  relevel number DEFAULT 0,
   foreign key(id) references users(id)
 );
 comment on table qna is '문의 게시판 테이블';
@@ -209,7 +209,7 @@ comment on column qna.reg_keyword is '문의글 키워드';
 comment on column qna.regdate is '게시글 올린 날짜';
 comment on column qna.moddate is '게시글 수정일자';
 comment on column qna.modid is '게시글 수정자';
-comment on column qna.status is '답변 여부';
+comment on column qna.status is '답변 여부(01:답변 대기 / 02:보류 / 03:답변 완료)';
 comment on column qna.ref is 'num 칼럼값. 부모글 체크';
 comment on column qna.restep is '원본에 답글 달린 갯수';
 comment on column qna.relevel is '답글의 답글 등 판별';
