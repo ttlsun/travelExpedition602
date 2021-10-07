@@ -1,8 +1,6 @@
 package user.users.model;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,7 +28,6 @@ public class UsersBean {
 	
 	@NotNull(message="이메일을 입력하세요")
 	@Pattern(regexp="^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[_0-9a-zA-Z-]+)*", message="이메일 형식을 확인해주세요")//이메일 형식
-	@Max(value=30, message="이메일은 30자까지 작성 가능합니다")//최대 30글자
 	private String email; //30, unique, not null
 	private String birth; //sysdate
 	//사업자만 입력하는 값
@@ -45,8 +42,8 @@ public class UsersBean {
 	//사업자만 입력하는 값
 	//Controller에서 삽입하는 값
 	private String address4; //150, not null
+	
 	@NotNull(message="연락처를 입력해주세요")
-	@Max(value=30, message="연락처는 30자까지 작성 가능합니다")//최대 30글자
 	private String contact; //30, not null
 	private String regdate; //sysdate
 	private String moddate;

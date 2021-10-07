@@ -11,6 +11,13 @@
 <!-- 주소 관련 js -->
 <script src="${js}/mapview-1.0.0.js"></script>
 <script type="text/javascript">
+	var use1 = "";
+	var isIdCheck = false;
+	var isIdChange = false;
+	var use2 = "";
+	var isEmailCheck = false;
+	var isEmailChange = false;
+	
 	$(document).ready(function() {
 		//메뉴 on 유지.
 		navActive('member');
@@ -39,7 +46,6 @@
 				
 				$('#ucodeCustomer1').attr('colspan', ''); //css로 하면 테이블 모양 깨짐
 				$('#ucodeCustomer1').css('width', '30%');
-				
 			} else { // 사업자
 				$('#ucodeCustomer2_2').hide();
 				$('#ucodeCustomer2').hide();
@@ -47,91 +53,14 @@
 				
 				$('#ucodeCustomer1').css('width', '');
 				$('#ucodeCustomer1').attr('colspan', '3'); //css로 하면 테이블 모양 깨짐
-				
 			} 
 		});
 		
-		var use1 = "";
-		var isIdCheck = false;
-		var isIdChange = false;
-		$('#idDuplicateCheck').click(function(){
-			isIdCheck = true;
-			isIdChange = false;
-			
-			var id = $('#id').val();
-			
-			if(id == ""){
-				alert("아이디를 입력한 다음 확인해주세요");
-				$('#id').focus();
-				return;
-			}
-			
-			$.ajax({
-				url : "idDupCheck.do",
-				type : "post",
-				dataType : "text",
-				contentType : "text/plain; charset=utf-8;",
-				data : id,
-				success : function(data){
-					if(data == "0"){
-						/* console.log("아이디 없음");
-						alert("사용할 수 있는 아이디입니다."); */
-						$('#idDupCheckResult').html("<font color=green>사용 가능한 아이디입니다</font>");
-						$('#idDupCheckResult').show();
-						use1 = "possible";
-					} else{
-						/* console.log("아이디 있음");
-						alert("중복된 아이디가 존재합니다."); */
-						$('#idDupCheckResult').html("<font color=red>중복된 아이디입니다</font>");
-						$('#idDupCheckResult').show();
-						use1 = "impossible";
-					}
-				}
-			}); //ajax
-		}); //iddupcheck
 		$('#id').keydown(function(){
 			$('#idDupCheckResult').css('display', 'none');
 			isIdChange = true;
 		});
-		
-		var use2 = "";
-		var isEmailCheck = false;
-		var isEmailChange = false;
-		$('#emailDuplicateCheck').click(function(){
-			isEmailCheck = true;
-			isEmailChange = false;
-			
-			var email = $('#email').val();
-			
-			if(email == ""){
-				alert("이메일을 입력한 다음 확인해주세요");
-				$('#email').focus();
-				return;
-			}
-			
-			$.ajax({
-				url : "emailDupCheck.do",
-				type : "post",
-				dataType : "text",
-				contentType : "text/plain; charset=utf-8;",
-				data : id,
-				success : function(data){
-					if(data == 0){
-						/* console.log("이메일 없음");
-						alert("사용할 수 있는 이메일입니다."); */
-						$('#emailDupCheckResult').html("<font color=green>사용 가능한 이메일입니다</font>");
-						$('#emailDupCheckResult').show();
-						use2 = "possible";
-					} else{
-						/* console.log("이메일 있음");
-						alert("중복된 이메일이 존재합니다."); */
-						$('#emailDupCheckResult').html("<font color=red>중복된 이메일입니다</font>");
-						$('#emailDupCheckResult').show();
-						use2 = "impossible";
-					}
-				}
-			}); //ajax
-		}); //emaildupcheck
+
 		$('#email').keydown(function(){
 			$('#emailDupCheckResult').css('display', 'none');
 			isEmailChange = true;
@@ -150,6 +79,84 @@
 			//창 닫기.
 			$('#myModal').modal('hide');
 		});
+	}
+	
+	function idDupCheck(){
+		isIdCheck = true;
+		isIdChange = false;
+		
+		var id = $('#id').val();
+		if(id == ""){
+			alert("아이디를 입력한 다음 확인해주세요");
+			$('#id').focus();
+			return;
+		}
+		
+		$.ajax({
+			url : "idDupCheck.do",
+			type : "post",
+			data : id,
+			dataType : "json",
+			success : function(data){
+				//alert("data.resultCode : "+data.resultCode);
+				
+				if(data.resultCode == "0"){
+					/* console.log("아이디 없음");
+					alert("사용할 수 있는 아이디입니다."); */
+					$('#idDupCheckResult').html("<font color=green>사용 가능한 아이디입니다</font>");
+					$('#idDupCheckResult').show();
+					use1 = "possible";
+				} else{
+					/* console.log("아이디 있음");
+					alert("중복된 아이디가 존재합니다."); */
+					$('#idDupCheckResult').html("<font color=red>중복된 아이디입니다</font>");
+					$('#idDupCheckResult').show();
+					use1 = "impossible";
+				}
+			},
+			error: function(request, status, error){
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("아이디 중복확인 에러 발생");
+			}
+		}); //ajax
+	}
+	
+	function emailDupCheck(){
+		isEmailCheck = true;
+		isEmailChange = false;
+		
+		var email = $('#email').val();
+		if(email == ""){
+			alert("이메일을 입력한 다음 확인해주세요");
+			$('#email').focus();
+			return;
+		}
+		
+		$.ajax({
+			url : "emailDupCheck.do",
+			type : "post",
+			data : email,
+			dataType : "json",
+			success : function(data){
+				if(data.resultCode == "0"){
+					/* console.log("이메일 없음");
+					alert("사용할 수 있는 이메일입니다."); */
+					$('#emailDupCheckResult').html("<font color=green>사용 가능한 이메일입니다</font>");
+					$('#emailDupCheckResult').show();
+					use2 = "possible";
+				} else{
+					/* console.log("이메일 있음");
+					alert("중복된 이메일이 존재합니다."); */
+					$('#emailDupCheckResult').html("<font color=red>중복된 이메일입니다</font>");
+					$('#emailDupCheckResult').show();
+					use2 = "impossible";
+				}
+			},
+			error: function(request, status, error){
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("이메일 중복확인 에러 발생");
+			}
+		}); //ajax
 	}
 
 	function input() {
@@ -185,8 +192,6 @@
 		if (!confirm('등록 하시겠습니까?')) {
 			return false;
 		}
-		
-		return true;
 	}
 </script>
 
@@ -252,7 +257,7 @@
 						</td>
 						<td colspan="3">
 							<input type="text" class="form-control"	id="id" name="id" maxlength="20" placeholder="아이디 입력(영어소문자,숫자,-_가능)">
-							<input type="button" class="btn btn-primary" id="idDuplicateCheck" value="중복확인">
+							<input type="button" class="btn btn-primary" id="idDuplicateCheck" value="중복확인" onClick="idDupCheck();">
 							<span id="idDupCheckResult" style="display:none;">아이디 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="id"/>
 						</td>
@@ -298,7 +303,7 @@
 						</td>
 						<td colspan="3">
 							<input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="이메일 입력">
-							<input type="button" class="btn btn-primary" id="emailDuplicateCheck" value="중복확인">
+							<input type="button" class="btn btn-primary" id="emailDuplicateCheck" value="중복확인" onClick="emailDupCheck();">
 							<span id="emailDupCheckResult" style="display:none;">이메일 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="email"/>
 						</td>
