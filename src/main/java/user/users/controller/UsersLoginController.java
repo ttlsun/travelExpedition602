@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,7 +35,7 @@ public class UsersLoginController {
 	}
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
-	public ModelAndView doPost(@Valid UsersBean users, BindingResult result, ModelAndView mav,
+	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, ModelAndView mav,
 							   PrintWriter pw, HttpServletResponse response, HttpSession session) throws IOException {
 		System.out.println(this.getClass()); //추후 삭제 가능
 		

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,7 @@ public class UsersRegisterController {
 	//userRegisterForm.jsp 에서 유효성 검사 성공하면 action usersRegister.do(POST) 요청
 	//@Valid UsersBean users, BindingResult result
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
-	public ModelAndView doPost(@Valid UsersBean users, BindingResult result,
+	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result,
 							   ModelAndView mav, PrintWriter pw, HttpServletResponse response) throws IOException {
 		System.out.println(this.getClass()); //추후 삭제 가능
 		
