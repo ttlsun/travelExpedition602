@@ -12,6 +12,7 @@
 --select * from CAMPING; -- 캠핑 테이블
 --select * from ROOM; -- 객실(룸)테이블
 --select * from RESERVATION; --예약테이블
+--select * from KEYWORD -- 키워드(태그)테이블
 
 --여러개 이미지 넣는 게 필요한 테이블에서 게시글 이미지 번호 가져오는 컬럼 : postimgnum(postimg num 들 가져오는 칼럼)
 
@@ -686,11 +687,13 @@ CREATE SEQUENCE KEYWORDSEQ
   MAXVALUE 10000
   NOCACHE;
   
+  
 --키워드(태그) 테이블
 DROP TABLE KEYWORD CASCADE CONSTRAINTS;
 CREATE TABLE KEYWORD(
   NUM NUMBER PRIMARY KEY,
   ACODE VARCHAR2(20) NOT NULL,
+  TAG VARCHAR2(100) NOT NULL,
   REGDATE DATE DEFAULT SYSDATE,
   REGID VARCHAR2(20) NOT NULL,
   MODDATE DATE,
@@ -699,7 +702,8 @@ CREATE TABLE KEYWORD(
 
 COMMENT ON TABLE KEYWORD IS '키워드(태그) 테이블';
 COMMENT ON COLUMN KEYWORD.NUM IS '레코드 번호';
-COMMENT ON COLUMN KEYWORD.ACODE IS 'articlecode 게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)';
+COMMENT ON COLUMN KEYWORD.ACODE IS 'ARTICLECODE. 게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)';
+COMMENT ON COLUMN KEYWORD.TAG IS '키워드 명칭';
 COMMENT ON COLUMN KEYWORD.REGDATE IS '키워드 등록일';
 COMMENT ON COLUMN KEYWORD.REGID IS '키워드 등록아이디';
 COMMENT ON COLUMN KEYWORD.MODDATE IS '키워드 수정일';
