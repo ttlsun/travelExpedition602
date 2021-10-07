@@ -1,10 +1,11 @@
 package user.tour.controller;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,33 +14,42 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.Paging;
 
+import user.tour.model.TourBean;
 import user.tour.model.TourDao;
 
 @Controller
 public class TourListController {
 
-	private final String command = "/tourList.do";
-	private final String getPage = "redirect:/user.";
+	private static final String COMMAND = "/tourList.do";
+	private static final String GETPAGE = "user/tour/tourList";
 	
-	@RequestMapping(value=command, method=RequestMethod.GET)
-	public ModelAndView tourList(@RequestParam(value="whatColumn", required=false) String whatColumn,
-			@RequestParam(value="keyword", required=false) String keyword,
-			@RequestParam(value="pageNumber", required=false) String pageNumber,
-			HttpServletRequest request) {
+	
+	@Autowired
+	private TourDao tourDao;
+	
+	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
+	public ModelAndView tourListView(ModelAndView mav,
+									@RequestParam Map<String,String> map,
+									HttpServletRequest request) {
+		
+		System.out.println("dasdjklasjdlkasdjlk");
 		
 		
+		int totalCount = tourDao.getTotalCount(map);
+		String pageUrl = request.getContextPath() + COMMAND;
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("whatColumn", whatColumn); 
-		map.put("keyword", "%"+keyword+"%");
-		int totalCount = TourDao.getTotalCount(map);
-		String url = request.getContextPath() + command;
+		Paging pageInfo = new Paging(map,"10",totalCount, pageUrl);
 		
 		
-		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword, null);
+		List<TourBean> lists = tourDao.getTourList(pageInfo,map);
 		
-		ModelAndView mav = new ModelAndView();
+		mav.addObject("pageInfo", pageInfo);
+		mav.addObject("totalCount", totalCount);
+		mav.addObject("lists", lists);
 		
+		mav.setViewName(GETPAGE);
 		return mav;
 	}
 }
+	
+

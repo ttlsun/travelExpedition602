@@ -212,6 +212,16 @@ public class TourBean {
 	public void setReviewcount(int reviewcount) {
 		this.reviewcount = reviewcount;
 	}
+	@Override
+	public String toString() {
+		return "TourBean [num=" + num + ", name=" + name + ", themecode=" + themecode + ", price=" + price
+				+ ", discount=" + discount + ", reg_keyword=" + reg_keyword + ", summary=" + summary + ", imgurl="
+				+ imgurl + ", contents=" + contents + ", postcode=" + postcode + ", address1=" + address1
+				+ ", address2=" + address2 + ", address3=" + address3 + ", address4=" + address4 + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", contact=" + contact + ", regdate=" + regdate + ", regid="
+				+ regid + ", moddate=" + moddate + ", modid=" + modid + ", readcount=" + readcount + ", recommend="
+				+ recommend + ", steamed=" + steamed + ", reviewcount=" + reviewcount + "]";
+	}
 	
 	
 }
