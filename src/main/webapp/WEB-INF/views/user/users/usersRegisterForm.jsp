@@ -10,9 +10,6 @@
 
 <!-- 주소 관련 js -->
 <script src="${js}/mapview-1.0.0.js"></script>
-<!-- ajax -->
-<script src="${js}/jquery.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		//메뉴 on 유지.
@@ -36,17 +33,21 @@
 			// ucodeCustomer2 : 개인회원 show 사업자 hide
 			// ucodeBusiness1 : 사업자 show 개인회원 hide
 			if (selectVal == "customer") { // 개인회원
-				$('#ucodeCustomer1').css('colspan', '');
-				$('#ucodeCustomer1').css('width', '30%');
-				$('#ucodeCustomer2').show();
-				
 				$('#ucodeBusiness1').hide();
-			} else { // 사업자
-				$('#ucodeCustomer1').css('width', '');
-				$('#ucodeCustomer1').css('colspan', '3');
-				$('#ucodeCustomer2').hide();
+				$('#ucodeCustomer2').show();
+				$('#ucodeCustomer2_2').show();
 				
+				$('#ucodeCustomer1').attr('colspan', ''); //css로 하면 테이블 모양 깨짐
+				$('#ucodeCustomer1').css('width', '30%');
+				
+			} else { // 사업자
+				$('#ucodeCustomer2_2').hide();
+				$('#ucodeCustomer2').hide();
 				$('#ucodeBusiness1').show();
+				
+				$('#ucodeCustomer1').css('width', '');
+				$('#ucodeCustomer1').attr('colspan', '3'); //css로 하면 테이블 모양 깨짐
+				
 			} 
 		});
 		
@@ -222,20 +223,21 @@
 								<span class="redFont"> * </span> 이름
 							</label>
 						</td>
-						<td id="ucodeCustomer1" colspan="3">
-							<input type="text" class="form-control" id="name" name="name" placeholder="사업체 이름, 개인회원 실명 입력(영어대소문자,한글,숫자,괄호가능 2~40자)">
+						<td id="ucodeCustomer1" width="30%">
+							<input type="text" class="form-control" id="name" name="name" size="30%" maxlength="40" placeholder="사업체 이름, 개인회원 실명(영어대소문자,한글,숫자,괄호가능)">
 							<form:errors cssClass="errMessage" path="name"/>
 						</td>
 						
-						<td id="ucodeCustomer2" width="20%" style="border-bottom: none; display: none;">
+						<td id="ucodeCustomer2" width="20%" style="border-bottom: none; text-align: center;">
 							<label for="gender1">
 								<span class="redFont"> * </span> 성별
 							</label>
 						</td>
-						<td id="ucodeCustomer2" style="border-bottom: none; display: none;">
+						<td id="ucodeCustomer2_2" style="border-bottom: none; text-align: center;">
 							<label for="gender1">
 								<input type="radio" id="gender1" name="gender" value="남성"> 남성
 							</label>
+							&nbsp;&nbsp;
 							<label for="gender2">
 								<input type="radio" id="gender2" name="gender" value="여성"> 여성
 							</label>
@@ -249,29 +251,29 @@
 							</label>
 						</td>
 						<td colspan="3">
-							<input type="text" class="form-control"	id="id" name="id" placeholder="아이디 입력(영어소문자,숫자,-_가능 5~20자)">
+							<input type="text" class="form-control"	id="id" name="id" maxlength="20" placeholder="아이디 입력(영어소문자,숫자,-_가능)">
 							<input type="button" class="btn btn-primary" id="idDuplicateCheck" value="중복확인">
 							<span id="idDupCheckResult" style="display:none;">아이디 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="id"/>
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td width="20%">
 							<label for="pw">
 								<span class="redFont"> * </span> 비번
 							</label>
 						</td>
-						<td>
-							<input type="text" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력(영어대소문자,숫자,특수문자포함 5~20자)">
+						<td width="30%">
+							<input type="password" class="form-control" id="pw" name="pw" maxlength="20">
 							<form:errors cssClass="errMessage" path="pw"/>
 						</td>
-						<td>
+						<td width="20%">
 							<label for="rePw">
 								<span class="redFont"> * </span> 비번 재확인
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="rePw" placeholder="비밀번호 확인 입력">
+							<input type="password" class="form-control" id="rePw" maxlength="20">
 						</td>
 					</tr>
 					<tr id="ucodeBusiness1" style="border-bottom: none; display: none;">
@@ -280,26 +282,22 @@
 								<span class="redFont"> * </span> 사업장 주소
 							</label>
 						</td>
-						<td style="border: none;">
+						<td style="border: none;" colspan="3">
 							<input type="text" class="form-control40" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호 입력">
 							<input type="button" class="btn btn-primary" id="searchPostcode" value="우편번호찾기" data-toggle="modal" data-target="#myModal">
-						</td>
-						<td>
+							<br>
 							<input type="text" style="background-color: white;"	class="form-control" id="address1" name="address1" placeholder="사업장 주소" readonly="readonly">
-						</td>
-						<td>
 							<input type="text" class="form-control" id="address2" name="address2" placeholder="상세주소 입력">
-						</td>
 					</tr>
 					<tr>
 						<!-- 이메일 중복확인 -->
-						<td colspan="3">
+						<td>
 							<label for="email">
 								<span class="redFont"> * </span> 이메일
 							</label>
 						</td>
-						<td>
-							<input type="text" class="form-control" id="email" name="email" placeholder="이메일 입력">
+						<td colspan="3">
+							<input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="이메일 입력">
 							<input type="button" class="btn btn-primary" id="emailDuplicateCheck" value="중복확인">
 							<span id="emailDupCheckResult" style="display:none;">이메일 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="email"/>
@@ -312,7 +310,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="contact" name="contact" placeholder="핸드폰 번호 입력(01000000000)">
+							<input type="text" class="form-control" id="contact" name="contact" maxlength="30" placeholder="핸드폰 번호 입력(01000000000)">
 							<form:errors cssClass="errMessage" path="contact"/>
 						</td>
 						<td>

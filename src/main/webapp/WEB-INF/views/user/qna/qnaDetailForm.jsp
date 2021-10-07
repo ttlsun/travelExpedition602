@@ -38,7 +38,7 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">${qna.title} 상세 화면</h2></header>
+	<header><h2 align="center" class="text-primary">${qna.title} </h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">

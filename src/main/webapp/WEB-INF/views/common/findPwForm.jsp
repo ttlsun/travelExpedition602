@@ -34,14 +34,14 @@ function findIdBtn(){
 		<div class="form-group">
 			<label for="id" class="col-xs-2 col-lg-2 control-label text-primary">ID : </label> 
 			<div class="col-xs-10 col-lg-10">
-				<input type="text" name="id" id="id" maxlength="40" class="form-control" placeholder="아이디를 입력하세요">
+				<input type="text" name="id" id="id" maxlength="20" class="form-control" placeholder="아이디를 입력하세요">
 				<form:errors cssClass="errMessage" path="id"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="email" class="col-xs-2 col-lg-2 control-label text-primary">이메일 : </label> 
 			<div class="col-xs-10 col-lg-10">
-				<input type="text" name="email" id="email" maxlength="8" class="form-control" placeholder="이메일을 입력하세요">
+				<input type="text" name="email" id="email" maxlength="20" class="form-control" placeholder="이메일을 입력하세요">
 				<form:errors cssClass="errMessage" path="email"/>
 			</div>
 		</div>

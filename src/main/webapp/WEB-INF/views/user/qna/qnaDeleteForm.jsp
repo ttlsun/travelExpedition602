@@ -64,7 +64,7 @@ function goList() {
  <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">${qna.title} 상세 화면</h2></header>
+	<header><h2 align="center" class="text-primary"> 삭제 화면</h2></header>
 	
 	<form:form commandName="qna" name="myForm" id="myForm" action="" method="post" class="form-horizontal">
 		<input type="hidden" name="pageNumber" value="${pageNumber}">
