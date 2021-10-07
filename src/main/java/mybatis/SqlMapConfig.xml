@@ -26,6 +26,7 @@
 		<typeAlias alias="myRoomBean" type="user.room.model.RoomBean"/>
 		<typeAlias alias="myTourBean" type="user.tour.model.TourBean"/>
 		<typeAlias alias="myUsersBean" type="user.users.model.UsersBean"/>
+		<typeAlias alias="myKeywordBean" type="user.common.model.KeywordBean"/>
 	</typeAliases>
 	
 	<mappers>
@@ -44,6 +45,7 @@
 		<mapper resource="mybatis/Room.xml"/>
 		<mapper resource="mybatis/Tour.xml"/>
 		<mapper resource="mybatis/Users.xml"/>
+		<mapper resource="mybatis/Keyword.xml"/>
 	</mappers>
 </configuration>
 

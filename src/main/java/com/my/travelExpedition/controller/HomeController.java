@@ -26,6 +26,8 @@ import com.my.travelExpedition.utility.WebUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 
 @Controller
 public class HomeController {
@@ -38,6 +40,9 @@ public class HomeController {
 	@Autowired
 	private AddrDao addrDao;
 	
+	@Autowired
+	private KeywordDao keywordDao;
+	
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
         logger.info("메인 화면입니다");
@@ -48,6 +53,17 @@ public class HomeController {
     public String homeView() {
         logger.info("샘플 화면입니다"); //아직 로그는 쌓진 않음..
         return "home";
+    }
+    
+    @RequestMapping(value = "/sampleKeywordList", method = RequestMethod.GET)
+    public ModelAndView keywordListView() {
+    	ModelAndView mav = new ModelAndView("sample/keywordList"); 
+    	
+    	String acode = "1"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+    	mav.addObject("keywordLists", keywordLists);
+    	
+        return mav;
     }
     
     

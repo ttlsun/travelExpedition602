@@ -3,10 +3,7 @@
 
 <%@ include file="../common/css_script_js.jsp" %>   
 
-<script type="text/javascript" >
-//테마별
-var selThemeArr = new Array('해변','섬','산','숲','계곡','강','호수','도심');
-
+<script type="text/javascript">
 //메뉴바 탭 누를때 active
 function navActive(activeName) {
 	for (var i = 0; i < $('.navbar-nav li').length; i++) {

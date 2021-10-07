@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user.common.model.KeywordBean">
+
+	<select id="getKeywordList" parameterType="map" resultType="myKeywordBean">
+		SELECT 
+				NUM, ACODE, TAG
+		FROM KEYWORD
+		WHERE ACODE = #{acode}
+	</select>
+
+</mapper>

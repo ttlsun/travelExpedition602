@@ -21,6 +21,9 @@
 				<br><br>[기본샘플(공통) - 파일업로드]
 				<br><a href="${contextPath}/sampleFileUpload">파일업로드 페이지(1개, 여러개 둘다)</a>
 				
+				<br><br>[기본샘플(공통) - 키워드리스트]
+				<br><a href="${contextPath}/sampleKeywordList">키워드 리스트</a>
+				
 				<br><br>[기본샘플(공통) - 지도/주소]
 				<br><a href="${contextPath}/mapRegister">지도/주소관련 샘플</a>
 				
