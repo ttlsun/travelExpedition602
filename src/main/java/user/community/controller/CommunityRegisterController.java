@@ -47,16 +47,20 @@ public class CommunityRegisterController {
 	
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
-	public ModelAndView communityRegisterView(@RequestParam(value = "type",required = false) String type,
-											  @RequestParam(value = "reviewtype") String reviewtype,
-											  @RequestParam(value = "reviewnum",required = false) String reviewnum,
-											  @RequestParam(value = "reservationnum",required = false) String reservationnum) {
+	public ModelAndView communityRegisterView(HttpServletRequest request,
+											  @RequestParam(value = "type",required = false) String type,
+											  @RequestParam(value = "reviewtype") String reviewtype) {
 		ModelAndView mav = new ModelAndView(GETPAGE);
+		
+		//리뷰고유번호 (캠핑번호 or 관광지 번호)
+		String reviewnum = request.getParameter("reviewnum") == null ? "0" : request.getParameter("reviewnum");
+		//예약 번호
+		String reservationnum = request.getParameter("reservationnum") == null ? "0" : request.getParameter("reservationnum");
 		
 		mav.addObject("reviewType", reviewtype); //리뷰타입 (01:캠핑/글램핑,02:관광지,03:커뮤니티후기)
 		mav.addObject("reviewnum", reviewnum); //리뷰고유번호 (캠핑번호 or 관광지 번호)
 		mav.addObject("reservationnum", reservationnum); //예약자번호
-		mav.addObject("type", type); //페이지 타입.
+		mav.addObject("type", type); //페이지 타입.(1:모든후기,2:방문후기 , 3:My후기)
 		
 		return mav;
 	}
