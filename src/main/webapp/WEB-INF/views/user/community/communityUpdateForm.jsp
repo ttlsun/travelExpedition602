@@ -148,7 +148,7 @@ function goList() {
 				             <div class="carousel-inner">
 				                <c:forEach items="${lists}" var="list" varStatus="status">
 				                	<div class="item <c:if test="${status.first}"> active </c:if> ">
-				                	<img src="${fileImg}/${list.imgname}" style="height: 100px;  display: block; margin: 0px auto;" alt="First slide" >
+				                		<img src="${fileImg}/${list.imgname}" style="height: 100px;  display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
 					                </div>
 				                </c:forEach>
 				             </div>

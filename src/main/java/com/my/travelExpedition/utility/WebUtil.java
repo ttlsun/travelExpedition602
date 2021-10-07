@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
 
 public class WebUtil {
 	
-	private static final String UPLOADEDFILE = "/resources/uploaded_file"; //업로드파일위치.
+	private static final String UPLOADEDFILE = "/resources/images/uploaded_file"; //업로드파일위치.
 	
 	/**
 	 * 파일 업로드

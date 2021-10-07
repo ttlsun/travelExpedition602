@@ -11,6 +11,6 @@
 <c:set var ="css"  value= "${contextPath}/resources/css"/>
 <c:set var ="js"  value= "${contextPath}/resources/js"/>
 <c:set var ="images"  value= "${contextPath}/resources/images"/>
-<c:set var ="fileImg"  value= "${contextPath}/resources/uploaded_file"/>
+<c:set var ="fileImg"  value= "${images}/uploaded_file"/>
 
 <c:set var ="kakaoKey" value= "ba21c1a87325273e2407c038da74ea9c&libraries=services"/>

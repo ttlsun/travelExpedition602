@@ -38,19 +38,19 @@ VALUES(EVENTSEQ.NEXTVAL,'admin','종료된단순이벤트','종료된 단순이�
 
 --POSTIMG (이미지 테이블)
 INSERT INTO POSTIMG(NUM,ACODE,ANUM,IMGNAME,IMGRAW,REGDATE,REGID)
-VALUES (POSTIMGSEQ.NEXTVAL,'1',1,'1.jpg','/resources/uploaded_file',SYSDATE,'admin');
+VALUES (POSTIMGSEQ.NEXTVAL,'1',1,'1.jpg','/resources/images/uploaded_file',SYSDATE,'admin');
 
 INSERT INTO POSTIMG(NUM,ACODE,ANUM,IMGNAME,IMGRAW,REGDATE,REGID)
-VALUES (POSTIMGSEQ.NEXTVAL,'2',1,'1.jpg','/resources/uploaded_file',SYSDATE,'admin');
+VALUES (POSTIMGSEQ.NEXTVAL,'2',1,'1.jpg','/resources/images/uploaded_file',SYSDATE,'admin');
 
 INSERT INTO POSTIMG(NUM,ACODE,ANUM,IMGNAME,IMGRAW,REGDATE,REGID)
-VALUES (POSTIMGSEQ.NEXTVAL,'2',2,'1.jpg','/resources/uploaded_file',SYSDATE,'admin');
+VALUES (POSTIMGSEQ.NEXTVAL,'2',2,'1.jpg','/resources/images/uploaded_file',SYSDATE,'admin');
 
 INSERT INTO POSTIMG(NUM,ACODE,ANUM,IMGNAME,IMGRAW,REGDATE,REGID)
-VALUES (POSTIMGSEQ.NEXTVAL,'6',1,'1.jpg','/resources/uploaded_file',SYSDATE,'customer01');
+VALUES (POSTIMGSEQ.NEXTVAL,'6',1,'1.jpg','/resources/images/uploaded_file',SYSDATE,'customer01');
 
 INSERT INTO POSTIMG(NUM,ACODE,ANUM,IMGNAME,IMGRAW,REGDATE,REGID)
-VALUES (POSTIMGSEQ.NEXTVAL,'6',1,'1.jpg','/resources/uploaded_file',SYSDATE,'customer01');
+VALUES (POSTIMGSEQ.NEXTVAL,'6',1,'1.jpg','/resources/images/uploaded_file',SYSDATE,'customer01');
 
 --COMMUNITY (후기테이블)
 -- 일반 캠핑 후기등록 (REVIEW_TYPE :01 :캠핑)

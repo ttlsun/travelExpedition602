@@ -23,7 +23,7 @@ public class PostimgDao {
 		System.out.println("map acode(구분값:1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티 ) : " + map.get("acode") 
 						+ ",imgname(이미지명) :"+ map.get("imgname"));
 		
-		map.put("imgraw", "/resources/uploaded_file");
+		map.put("imgraw", "/resources/images/uploaded_file");
 		int cnt = sqlSessionTemplate.insert(NAMESPACE + ".insertPostimgData", map);
 		return cnt;
 	}
