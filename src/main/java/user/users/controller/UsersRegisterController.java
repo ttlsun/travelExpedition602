@@ -19,7 +19,7 @@ import user.users.model.UsersDao;
 @Controller
 public class UsersRegisterController {
 	private final String COMMAND = "/usersReigster.do";
-	private final String GETPAGE = "usersRegisterForm"; //views/user/users/usersRegisterForm.jsp
+	private final String GETPAGE = "user/users/usersRegisterForm"; //views/user/users/usersRegisterForm.jsp
 	private final String GOTOPAGE = "login.do"; //로그인 화면
 	
 	@Autowired
@@ -41,6 +41,9 @@ public class UsersRegisterController {
 		System.out.println(this.getClass()); //추후 삭제 가능
 		
 		pw = response.getWriter();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		if(result.hasErrors()) {
 			mav.setViewName(GETPAGE);
 			pw.println("<script>alert('회원가입에 실패했습니다');</script>");

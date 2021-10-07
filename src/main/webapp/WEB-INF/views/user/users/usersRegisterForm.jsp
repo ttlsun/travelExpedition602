@@ -10,9 +10,6 @@
 
 <!-- 주소 관련 js -->
 <script src="${js}/mapview-1.0.0.js"></script>
-<!-- ajax -->
-<script src="${js}/jquery.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		//메뉴 on 유지.
@@ -223,7 +220,7 @@
 							</label>
 						</td>
 						<td id="ucodeCustomer1" colspan="3">
-							<input type="text" class="form-control" id="name" name="name" placeholder="사업체 이름, 개인회원 실명 입력(영어대소문자,한글,숫자,괄호가능 2~40자)">
+							<input type="text" class="form-control" id="name" name="name" maxlength="40" placeholder="사업체 이름, 개인회원 실명 입력(영어대소문자,한글,숫자,괄호가능 2~40자)">
 							<form:errors cssClass="errMessage" path="name"/>
 						</td>
 						
@@ -249,7 +246,7 @@
 							</label>
 						</td>
 						<td colspan="3">
-							<input type="text" class="form-control"	id="id" name="id" placeholder="아이디 입력(영어소문자,숫자,-_가능 5~20자)">
+							<input type="text" class="form-control"	id="id" name="id" maxlength="20" placeholder="아이디 입력(영어소문자,숫자,-_가능 5~20자)">
 							<input type="button" class="btn btn-primary" id="idDuplicateCheck" value="중복확인">
 							<span id="idDupCheckResult" style="display:none;">아이디 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="id"/>
@@ -262,7 +259,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력(영어대소문자,숫자,특수문자포함 5~20자)">
+							<input type="password" class="form-control" id="pw" name="pw" maxlength="20">
 							<form:errors cssClass="errMessage" path="pw"/>
 						</td>
 						<td>
@@ -271,7 +268,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="rePw" placeholder="비밀번호 확인 입력">
+							<input type="password" class="form-control" id="rePw" maxlength="20">
 						</td>
 					</tr>
 					<tr id="ucodeBusiness1" style="border-bottom: none; display: none;">
@@ -299,7 +296,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="email" name="email" placeholder="이메일 입력">
+							<input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="이메일 입력">
 							<input type="button" class="btn btn-primary" id="emailDuplicateCheck" value="중복확인">
 							<span id="emailDupCheckResult" style="display:none;">이메일 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="email"/>
@@ -312,7 +309,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="contact" name="contact" placeholder="핸드폰 번호 입력(01000000000)">
+							<input type="text" class="form-control" id="contact" name="contact" maxlength="30" placeholder="핸드폰 번호 입력(01000000000)">
 							<form:errors cssClass="errMessage" path="contact"/>
 						</td>
 						<td>

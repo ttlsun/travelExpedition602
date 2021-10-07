@@ -19,7 +19,7 @@ import user.users.model.UsersDao;
 @Controller
 public class UsersFindIdController {
 	private final String COMMAND = "/usersFindId.do";
-	private final String GETPAGE = "findIdForm"; //views/common/findIdForm.jsp
+	private final String GETPAGE = "common/findIdForm"; //views/common/findIdForm.jsp
 	private final String GOTOPAGE = "login.do"; //redirect?
 	
 	@Autowired
@@ -38,6 +38,9 @@ public class UsersFindIdController {
 		System.out.println(this.getClass()); //추후 삭제 가능
 		
 		pw = response.getWriter();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		//name, email
 		if(result.hasErrors()) {
 			mav.setViewName(GETPAGE);

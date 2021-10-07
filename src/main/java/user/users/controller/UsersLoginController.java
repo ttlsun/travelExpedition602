@@ -20,7 +20,7 @@ import user.users.model.UsersDao;
 @Controller
 public class UsersLoginController {
 	private final String COMMAND = "/login.do";
-	private final String GETPAGE = "loginForm"; //views/common/loginForm.jsp
+	private final String GETPAGE = "common/loginForm"; //views/common/loginForm.jsp
 	private final String GOTOPAGE = "main"; //메인 화면
 	
 	@Autowired
@@ -39,6 +39,9 @@ public class UsersLoginController {
 		System.out.println(this.getClass()); //추후 삭제 가능
 		
 		pw = response.getWriter();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		//id, pw(userpw, dbpw)
 		if(result.hasErrors()) {
 			mav.setViewName(GETPAGE);

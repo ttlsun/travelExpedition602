@@ -37,7 +37,7 @@ $(document).ready(function() {
 		<div class="form-group">
 			<label for="email" class="col-xs-2 col-lg-2 control-label text-primary">이메일 : </label> 
 			<div class="col-xs-10 col-lg-10">
-				<input type="text" name="email" id="email" maxlength="8" class="form-control" placeholder="이메일을 입력하세요">
+				<input type="text" name="email" id="email" maxlength="30" class="form-control" placeholder="이메일을 입력하세요">
 				<form:errors cssClass="errMessage" path="email"/>
 			</div>
 		</div>

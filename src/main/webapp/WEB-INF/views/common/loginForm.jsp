@@ -46,14 +46,14 @@
 						<div class="form-group">
 							<label for="id" class="col-xs-2 col-lg-2 control-label text-primary">ID : </label>
 							<div class="col-xs-10 col-lg-10">
-								<input type="text" name="id" id="id" maxlength="40"	class="form-control" placeholder="아이디를 입력하세요">
+								<input type="text" name="id" id="id" maxlength="20"	class="form-control" placeholder="아이디를 입력하세요">
 								<form:errors css="errMessage" path="id"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="pw" class="col-xs-2 col-lg-2 control-label text-primary">비밀번호 : </label>
 							<div class="col-xs-10 col-lg-10">
-								<input type="password" name="pw" id="pw" maxlength="8" class="form-control" placeholder="비밀번호를 입력하세요">
+								<input type="password" name="pw" id="pw" maxlength="20" class="form-control" placeholder="비밀번호를 입력하세요">
 								<form:errors css="errMessage" path="pw"/>
 							</div>
 						</div>
