@@ -35,13 +35,13 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
-		<if test="regid != null">
+		<if test="regid != null and regid != ''">
 			AND REGID = #{regid}
 		</if>
-		<if test="reviewtype != null">
+		<if test="reviewtype != null and reviewtype != ''">
 			AND REVIEW_TYPE = #{reviewtype}
 		</if>
-		<if test="reviewtypeNotIn != null">
+		<if test="reviewtypeNotIn != null and reviewtypeNotIn != ''">
 			AND REVIEW_TYPE NOT IN (#{reviewtypeNotIn})
 		</if>
 		<if test="whatColumn == 'title'">
@@ -59,13 +59,13 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
-		<if test="regid != null">
+		<if test="regid != null and regid != ''">
 			AND REGID = #{regid}
 		</if>
-		<if test="reviewtype != null">
+		<if test="reviewtype != null and reviewtype != ''">
 			AND REVIEW_TYPE = #{reviewtype}
 		</if>
-		<if test="reviewtypeNotIn != null">
+		<if test="reviewtypeNotIn != null and reviewtypeNotIn != ''">
 			AND REVIEW_TYPE NOT IN (#{reviewtypeNotIn})
 		</if>
 		<if test="whatColumn == 'title'">
@@ -278,6 +278,36 @@
 			</if>
 		<set>
 			REVIEWCOUNT = REVIEWCOUNT-1
+		</set>
+		WHERE NUM = #{reviewnum}
+	</update>
+	
+	<!-- 캠핑 & 관광지 추천수 업뎃 -->
+	<update id="updateRecommend">
+		UPDATE 
+			<if test="reviewtype == '01'">
+				CAMPING
+			</if>
+			<if test="reviewtype == '02'">
+				COMMUNITY
+			</if>
+		<set>
+			RECOMMEND = RECOMMEND+1
+		</set>
+		WHERE NUM = #{reviewnum}
+	</update>
+	
+	<!-- 캠핑 & 관광지 삭제 업뎃 -->
+	<update id="deleteUpdateRecommend">
+		UPDATE 
+			<if test="reviewtype == '01'">
+				CAMPING
+			</if>
+			<if test="reviewtype == '02'">
+				COMMUNITY
+			</if>
+		<set>
+			RECOMMEND = RECOMMEND-1
 		</set>
 		WHERE NUM = #{reviewnum}
 	</update>

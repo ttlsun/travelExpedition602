@@ -115,6 +115,9 @@ public class AdminCommunityDetailController {
 				// 기존파일 DB에서 삭제
 				postimgDao.deletePostimgData(map);
 				
+				//캠핑 or 관광지 고유번호.
+				int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+				
 				//별등급 삭제.(01,02 일경우에만 등급 테이블 삭제.)
 				if(!map.get("reviewtype").equals("03")) {
 					map.put("reviewnum", map.get("num")); 
@@ -123,9 +126,12 @@ public class AdminCommunityDetailController {
 					ratingDao.deleteRatingData(map);
 					
 					//캠핑 or 관광지 리뷰수 삭제하기.
-					System.out.println("reviewnum:" + map.get("reviewnum") +",reviewtype :" + map.get("reviewtype"));
-					map.put("reviewnum", map.get("reviewnum"));
+					map.put("reviewnum", revieNum);
 					communityDao.deleteUpdateReviewCount(map);
+					
+					//캠핑 or 관광지 테이블에 추천 카운트 삭제하기
+					communityDao.deleteUpdateRecommend(map);
+					
 				}
 				
 				//likes 테이블 삭제.

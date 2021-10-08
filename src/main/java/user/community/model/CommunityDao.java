@@ -120,6 +120,18 @@ public class CommunityDao {
 		return cnt;
 	}
 	
+	/*캠핑 or 관광지 추천수 올려주기 */
+	public int updateRecommend(Map<String, Object> map) {
+		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateRecommend", map);
+		return cnt;
+	}
+	
+	/*캠핑 or 관광지 추천수 내려주기 */
+	public int deleteUpdateRecommend(Map<String, Object> map) {
+		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".deleteUpdateRecommend", map);
+		return cnt;
+	}
+	
 	/*캠핑 or 관광지 추천 리스트 뿌리기*/
 	public List<CommunityBean> getRecommendList(Map<String, String> map) {
 		List<CommunityBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getRecommendList", map);

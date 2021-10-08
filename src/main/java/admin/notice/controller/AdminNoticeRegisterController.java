@@ -48,12 +48,9 @@ public class AdminNoticeRegisterController {
 									BindingResult result) {
 		try {
 			
-			System.out.println("bean:" + bean.toString());
+			//System.out.println("bean:" + bean.toString());
 			
-			//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
-			if(result.hasErrors()
-					&& !WebUtil.isResultErrorIgnore(result, new String[] {"imgname"}))  {
-				
+			if(result.hasErrors())  {
 				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
 				WebUtil.resultErrorConvert(result);
 				System.out.println("유효성 검사 오류 E: ----------------------------------------------");
@@ -77,9 +74,13 @@ public class AdminNoticeRegisterController {
 			for (String str : uploadFileList) {
 				System.out.println("file : " + str);
 				
-				map.put("imgname", str);
-				cnt = postimgDao.insertPostimgData(map);
-				bean.setImgname(str);
+				//파일이 있을경우만, 이미지테이블에 데이터를 쌓는다.
+				if(str != null) {
+					map.put("imgname", str);
+					cnt = postimgDao.insertPostimgData(map);
+					bean.setImgname(str);
+				}
+				
 			}
 			
 			bean.setNum(maxNum);

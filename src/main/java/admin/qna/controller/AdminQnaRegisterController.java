@@ -78,7 +78,7 @@ public class AdminQnaRegisterController {
 			
 			//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
 			if(result.hasErrors()
-					&& !WebUtil.isResultErrorIgnore(result, new String[] {"imgname","pw"}))  {
+					&& !WebUtil.isResultErrorIgnore(result, new String[] {"pw"}))  {
 				
 				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
 				WebUtil.resultErrorConvert(result);

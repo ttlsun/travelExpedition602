@@ -52,6 +52,7 @@ function goRatingRegister(ratingtype) {
 		type: "POST",
 		data: {
 			num : $('#num').val(),
+			reviewnum : $('#reviewnum').val(),
 			reviewtype : $('#reviewtype').val(),
 			ratingtype : ratingtype,
 			regid : regid
@@ -192,6 +193,7 @@ function goAjaxDelete(url, numData , type) {
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${community.num}">
+	<input type="hidden" name="reviewnum" id="reviewnum" value="${community.reviewnum}">
 	<input type="hidden" name="reviewtype" id="reviewtype" value="${community.reviewtype}">
 	<input type="hidden" name="type" id="type" value="${type}">
 	
@@ -290,10 +292,12 @@ function goAjaxDelete(url, numData , type) {
 			${community.contents}
 			</td>
 		</tr>
+		<c:if test="${!empty community.regkeyword}">
 		<tr>
 			<td> 키워드 </td>
 			<td colspan="3"> <span class="text-primary"> ${community.regkeyword} </span> </td>
 		</tr>
+		</c:if>
 	</table>
 	
 	<!-- 후기 사진  -->

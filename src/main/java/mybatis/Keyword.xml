@@ -4,11 +4,95 @@
 
 <mapper namespace="user.common.model.KeywordBean">
 
+	<!-- 회원 키워드 태그 리스트 조회 -->
 	<select id="getKeywordList" resultType="myKeywordBean">
 		SELECT 
-				NUM, ACODE, TAG
+				NUM, TAG
 		FROM KEYWORD
 		WHERE ACODE = #{acode}
 	</select>
+	
+	<!-- 관리자 키워드 태그 리스트 조회 -->
+	<select id="getKeywordsList" resultType="myKeywordBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+	       		(CASE	ACODE
+								WHEN '1' THEN '캠핑/글램핑 ' 
+								WHEN '2' THEN '관광지' 
+								WHEN '3' THEN '커뮤니티' 
+	               				WHEN '4' THEN '문의' 
+		        END) AS ACODE,
+		        TAG,
+		        REGDATE,
+		        REGID
+		FROM KEYWORD
+		WHERE 1=1
+		<if test="acode != null and acode != '' ">
+			AND ACODE = #{acode}
+		</if>
+		<if test="whatColumn == 'tag'">
+ 			AND TAG LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<select id="getKeywordsListTotalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM KEYWORD
+		WHERE 1=1 
+		<if test="acode != null and acode != '' ">
+			AND ACODE = #{acode}
+		</if>
+		<if test="whatColumn == 'tag'">
+ 			AND TAG LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<!-- 관리자 키워드 태그 상세조회 -->
+	<select id="getKeywordsDetail" parameterType="int" resultType="myKeywordBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+	       		ACODE,
+		        TAG,
+		        REGDATE,
+		        REGID,
+		        MODDATE,
+				MODID
+		FROM KEYWORD
+		WHERE NUM = #{num}
+	</select>
+	
+	<insert id="insertKeyword" parameterType="myKeywordBean">
+		INSERT INTO KEYWORD
+		(
+			NUM,
+			ACODE,
+			TAG,
+			REGDATE,
+			REGID
+		)
+		values(
+			KEYWORDSEQ.NEXTVAL ,
+			#{acode} ,
+			#{tag},
+			SYSDATE,
+			#{regid}
+		)
+	</insert>
+	
+	<update id="updateKeyword" parameterType="myKeywordBean">
+		UPDATE KEYWORD
+		<set>
+			TAG	=		#{tag},
+			MODID = 	#{modid},
+			MODDATE =	SYSDATE
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<delete id="deleteKeyword" parameterType="int">
+		DELETE FROM KEYWORD WHERE NUM = #{num}
+	</delete>
 
 </mapper>

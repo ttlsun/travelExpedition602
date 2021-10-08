@@ -42,7 +42,7 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">${notice.title} 상세 화면</h2></header>
+	<header><h2 align="center" class="text-primary">공지사항 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
@@ -57,10 +57,10 @@ function goDelete() {
 			<td>조회수</td>
 			<td>${notice.readcount}</td>
 		</tr>
+		<c:if test="${!empty imgList}">
 		<tr>
 			<td>이미지</td>
 			<td colspan="5">
-				<c:if test="${!empty imgList}">
 				<div class="rounded">
 					<div class="container rounded" style="width: 200px;"> 
 	
@@ -91,9 +91,9 @@ function goDelete() {
 				          </div>
 				  	</div>
 			  	</div>
-				</c:if>
 			</td>
 		</tr>
+		</c:if>
 		<tr>
 			<td colspan="6" style="border-bottom: none;"> 설명 </td>
 		</tr>

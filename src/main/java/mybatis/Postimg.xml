@@ -6,6 +6,7 @@
 <!-- Postimg.xml -->
 <mapper namespace="user.postimg.model.PostimgBean">
 
+	<!-- 이미지 조회 -->
 	<select id="getPostimgList" parameterType="map" resultType="user.postimg.model.PostimgBean">
 		SELECT 
 			NUM , 
@@ -54,5 +55,48 @@
 	<delete id="deletePostimgData" parameterType="int">
 		DELETE FROM POSTIMG WHERE ACODE = #{acode} AND ANUM = #{anum}
 	</delete>
+	
+	
+	<!-- 관리자 이미지 조회 -->
+	<select id="getPostimgLists" resultType="user.postimg.model.PostimgBean">
+		SELECT 
+				ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+				NUM,
+				ANUM,
+	       		(CASE	ACODE
+								WHEN '1' THEN '공지사항 ' 
+								WHEN '2' THEN '이벤트' 
+								WHEN '3' THEN '문의게시판' 
+					            WHEN '4' THEN '캠핑' 
+				                WHEN '5' THEN '관광지' 
+				                WHEN '6' THEN '커뮤니티' 
+		        		END) AS ACODE,
+			    IMGNAME,
+	            IMGRAW,
+	            REGDATE,
+	            REGID,
+	            MODDATE,
+	            MODID
+		FROM POSTIMG
+		WHERE 1=1
+		<if test="acode != null and acode != ''">
+			AND ACODE = #{acode}
+		</if>
+		<if test="whatColumn =! null and whatColumn == 'imgname'">
+ 			AND IMGNAME LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
+	
+	<select id="getPostimgsListTotalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM POSTIMG
+		WHERE 1=1 
+		<if test="acode != null and acode != ''">
+			AND ACODE = #{acode}
+		</if>
+		<if test="whatColumn =! null and whatColumn == 'imgname'">
+ 			AND IMGNAME LIKE '%'|| #{keyword} || '%'
+ 		</if>
+	</select>
 
 </mapper>

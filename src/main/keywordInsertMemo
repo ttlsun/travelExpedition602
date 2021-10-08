@@ -1,43 +1,43 @@
 -- KEYWORD 테이블
 -- 캠핑
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(1,1,'#힐링',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(2,1,'#연인과함께',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(3,1,'#아이와함께',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(4,1,'#친구들과신나게',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(5,1,'#가족과함께',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(6,1,'#반려견동반',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(7,1,'#깨끗한',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(8,1,'#사이트간격이넓은',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(9,1,'#별보기좋은',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(10,1,'#흙바닥',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(11,1,'#파쇄석',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(12,1,'#개인데크',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(13,1,'#오션뷰',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(14,1,'#피톤치드',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#힐링',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#연인과함께',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#아이와함께',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#친구들과신나게',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#가족과함께',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#반려견동반',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#깨끗한',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#사이트간격이넓은',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#별보기좋은',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#흙바닥',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#파쇄석',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#개인데크',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#오션뷰',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,1,'#피톤치드',sysdate,'admin');
 
 -- 관광지
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(15,2,'#허니문',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(16,2,'#시니어여행',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(17,2,'#자연',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(18,2,'#힐링',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(19,2,'#도시',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(20,2,'#문화재',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(21,2,'#산책',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(22,2,'#근교',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(23,2,'#육로일주관광',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(24,2,'#울릉도관광',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(25,2,'#우도관광',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(26,2,'#크루즈',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(27,2,'#사진작가동행',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(28,2,'#가이드동행',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(29,2,'#입장권포함',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#허니문',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#시니어여행',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#자연',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#힐링',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#도시',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#문화재',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#산책',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#근교',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#육로일주관광',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#울릉도관광',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#우도관광',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#크루즈',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#사진작가동행',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#가이드동행',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,2,'#입장권포함',sysdate,'admin');
 
 -- 문의
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(30,4,'#결재',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(31,4,'#환불',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(32,4,'#이용문의',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(33,4,'#가입',sysdate,'admin');
-INSERT INTO KEYWORD (num, acode, tag, regdate , regid) VALUES(34,4,'#탈퇴',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,4,'#결재',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,4,'#환불',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,4,'#이용문의',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,4,'#가입',sysdate,'admin');
+INSERT INTO KEYWORD (NUM, ACODE, TAG, REGDATE , REGID) VALUES(KEYWORDSEQ.NEXTVAL,4,'#탈퇴',sysdate,'admin');
 
 
 commit;

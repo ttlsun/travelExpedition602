@@ -30,6 +30,7 @@ $(document).ready(function() {
 	
 });
 
+//등록버튼
 function inputSave() {
 	
 	if (!confirm('등록 하시겠습니까?')){
@@ -38,6 +39,10 @@ function inputSave() {
 	
 }
 
+//리스트로 이동.
+function goList() {
+	location.href= "${contextPath}/noticeList.ad";
+}
 
 </script>    
  
@@ -68,7 +73,7 @@ function inputSave() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleUpdateFile"><span class="redFont"> * </span> 공지사항 이미지(여러장 올리기) </label> </td>
+				<td><label for="multipleUpdateFile"> 공지사항 이미지(여러장 올리기) </label> </td>
 				<td>
 					<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 					<input type="hidden" name="imgname" value="${notice.imgname}">
@@ -79,8 +84,8 @@ function inputSave() {
 		</div>
 		<div class="marginPadding10" align="center">
 			<input type="submit" class="btn btn-primary" value="등록하기" onclick="return inputSave()">
-			<input type="reset" class="btn btn-primary" value="취소">
-			<input type="button" class="btn btn-primary" value="목록">
+			<input type="reset" class="btn btn-default" value="취소">
+			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
 		</div>
 	</form:form>
 </div>

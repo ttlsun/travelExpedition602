@@ -143,12 +143,12 @@ public class CommunityDetailController {
 		
 		try {
 			
+			//캠핑 or 관광지 고유번호.
+			int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+			
 			//등급별 테이블에 저장.
-			map.put("reviewnum", map.get("num"));
-			map.put("reviewtype", map.get("reviewtype"));
-			map.put("ratingtype", map.get("ratingtype"));
+			map.put("revieNum", map.get("num"));
 			map.put("starranking", "0");
-			map.put("regid", map.get("regid"));
 			ratingDao.insertRatingData(map);
 			
 			String ratingtype = (String)map.get("ratingtype");
@@ -156,6 +156,14 @@ public class CommunityDetailController {
 			//찜,좋아요, 별등급 카운트 올리기.
 			if(ratingtype.equals("01")) {
 				map.put("recommend","01");
+				
+				//캠핑 or 관광지 테이블에 추천 카운트 올려주기.
+				//System.out.println("revieNum:" + revieNum);
+				if(revieNum != 0) {
+					map.put("reviewnum", revieNum);
+					communityDao.updateRecommend(map);
+				}
+				
 			}else {
 				map.put("steamed","02");
 			}

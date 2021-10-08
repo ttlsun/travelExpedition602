@@ -14,9 +14,11 @@ public class KeywordDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	/*회원 관련 키워드 리스트 조회*/
 	public List<KeywordBean> getKeywordList(String acode) {
 		List<KeywordBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getKeywordList", acode);
 		return lists;
 	}
+	
 	
 }

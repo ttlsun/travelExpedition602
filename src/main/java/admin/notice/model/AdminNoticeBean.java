@@ -24,7 +24,6 @@ public class AdminNoticeBean {
 	private String modid; // 20
 	private int readcount; // 0
 
-	@NotEmpty(message = "필수 선택사항")
 	private String imgname; // 여러개이미지명칭
 	private MultipartFile[] multipleUpdateFile; // 파일업로드 여러개
 

@@ -32,6 +32,14 @@ function navActive(activeName) {
     	<ul class="nav navbar-nav">
         	<li data-nav="main"><a href=""> 여행자들 관리자홈 </a></li>
         	
+        	<li data-nav="keyword" class="dropdown">
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 태그 &amp; 이미지 관리 <b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+           			<li><a href="${contextPath}/keywordList.ad">키워드태그관리</a></li>
+	            	<li><a href="${contextPath}/postimgList.ad">이미지 관리</a></li>
+	         	</ul>
+         	</li>
+        	
         	<li data-nav="camping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">

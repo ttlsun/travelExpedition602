@@ -65,7 +65,7 @@ function inputSave() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleImgFile"><span class="redFont"> * </span> 공지사항 이미지(여러장 올리기) </label> </td>
+				<td><label for="multipleImgFile"> 공지사항 이미지(여러장 올리기) </label> </td>
 				<td>
 					<c:if test="${!empty imgList}">
 					<div class="rounded">
@@ -98,7 +98,7 @@ function inputSave() {
 					          </div>
 					  	</div>
 				  	</div>
-					</c:if>
+				  	</c:if>
 					<input type="file" multiple id="multipleImgFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 				</td>
 			</tr>
@@ -114,7 +114,7 @@ function inputSave() {
 		</div>
 		<div class="marginPadding10" align="center">
 			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
-			<input type="reset" class="btn btn-primary" value="취소">
+			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 		</div>
 	</form:form>
