@@ -24,9 +24,8 @@ public class QnaBean {
 
 	@NotBlank(message = "필수 입력사항입니다.")
 	private String contents; // clob, not null
-
-	@NotBlank(message = "필수 입력사항입니다.")
-	@Size(min = 2, max = 100, message = "키워드 2~100자 입력")
+	
+	@NotEmpty(message = "필수 입력사항입니다.")
 	private String regkeyword; // 100
 
 	private String regdate; // sysdate

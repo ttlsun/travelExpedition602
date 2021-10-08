@@ -1,6 +1,7 @@
 package admin.qna.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 import user.postimg.model.PostimgDao;
 import user.qna.model.QnaBean;
 import user.qna.model.QnaDao;
@@ -37,6 +40,9 @@ public class AdminQnaRegisterController {
 	
 	@Autowired
 	private PostimgDao postimgDao;
+	
+	@Autowired
+	private KeywordDao keywordDao;
 
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
 	public ModelAndView qnaRefRegisterView(ModelAndView mav,
@@ -54,6 +60,10 @@ public class AdminQnaRegisterController {
 		mav.addObject("restep", restep);
 		mav.addObject("relevel", relevel);
 		
+		String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+    	mav.addObject("keywordLists", keywordLists);
+		
 		return mav;
 	}
 	
@@ -67,6 +77,10 @@ public class AdminQnaRegisterController {
 									@ModelAttribute("qna") @Valid QnaBean bean,
 									BindingResult result) {
 		try {
+			
+			String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+	    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+	    	mav.addObject("keywordLists", keywordLists);
 			
 			mav.addObject("num", num);
 			mav.addObject("ref", ref);

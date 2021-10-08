@@ -1,6 +1,7 @@
 package user.qna.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 import user.postimg.model.PostimgDao;
 import user.qna.model.QnaBean;
 import user.qna.model.QnaDao;
@@ -36,10 +39,22 @@ public class QnaRegisterController {
 	
 	@Autowired
 	private PostimgDao postimgDao;
+	
+	@Autowired
+	private KeywordDao keywordDao;
 
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
-    public String qnaRegisterViews() {
-		return GETPAGE;
+    public ModelAndView qnaRegisterViews() {
+		
+		ModelAndView mav = new ModelAndView(GETPAGE);
+		
+		String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+    	//System.out.println("keywordLists:" + keywordLists.toString());
+    	
+    	mav.addObject("keywordLists", keywordLists);
+    	
+		return mav;
 	}
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
@@ -48,10 +63,14 @@ public class QnaRegisterController {
 									BindingResult result) {
 		try {
 			
+			String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+	    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+	    	mav.addObject("keywordLists", keywordLists);
+			
+			//System.out.println("regkeyword:" + bean.getRegkeyword());
+			
 			//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
-			if(result.hasErrors()
-					&& !WebUtil.isResultErrorIgnore(result, new String[] {"imgname"}))  {
-				
+			if(result.hasErrors())  {
 				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
 				WebUtil.resultErrorConvert(result);
 				System.out.println("유효성 검사 오류 E: ----------------------------------------------");

@@ -76,7 +76,7 @@ $(document).ready(function() {
 			<!-- list가 없을 경우 -->
 			<c:if test="${empty lists}">
 			<tr>
-				<td colspan="3" align="center"> 해당 후기 레코드가 없습니다.</td>
+				<td colspan="7" align="center"> 해당 후기 레코드가 없습니다.</td>
 			</tr>
 			</c:if>
 			

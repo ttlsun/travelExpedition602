@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.travelExpedition.utility.WebUtil;
 
 import net.sf.json.JSONObject;
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
 import user.qna.model.QnaBean;
@@ -44,6 +46,9 @@ public class QnaUpdateController {
 	@Autowired
 	private PostimgDao postimgDao;
 	
+	@Autowired
+	private KeywordDao keywordDao;
+	
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
     public ModelAndView qnaUpdateView(HttpServletRequest request,
     								  @RequestParam Map<String, String> map) {
@@ -61,9 +66,15 @@ public class QnaUpdateController {
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
 		//System.out.println("lists:" + lists.toString());
 		
+		//키워드 태그 (키워드 테이블)조회
+		String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+    	//System.out.println("keywordLists:" + keywordLists.toString());
+    	
 		mav.addObject("pageNumber", map.get("pageNumber"));
 		mav.addObject("qna", qna); //문의 상세
 		mav.addObject("imgList", imgList); //이미지리스트
+		mav.addObject("keywordLists", keywordLists); //키워드태그 리스트
 		
 		return mav;
 	}
@@ -109,6 +120,11 @@ public class QnaUpdateController {
 									BindingResult result) {
 		
 		try {
+			
+			//키워드 리스트 불러오기
+			String acode = "4"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+	    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+	    	mav.addObject("keywordLists", keywordLists);
 			
 			//이미지 파일 리스트 불러오기.
 			Map<String, Object> map = new HashMap<String, Object>();
