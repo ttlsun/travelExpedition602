@@ -53,19 +53,19 @@ public class UsersDupCheckController {
 		
 		JSONObject json = new JSONObject();	
 		
-		System.out.println(paramData);
+		//System.out.println(paramData);
 		String email = paramData.trim();
-		System.out.println(email);
+		//System.out.println(email);
 		email = email.replace("=", "");
 		email = email.replace("%40", "@");
-		System.out.println(email);
+		//System.out.println(email);
 		UsersBean usersBean = usersDao.emailCheck(email);
 		
 		if(usersBean != null) {
-			System.out.println("usersBean email: "+usersBean.getEmail());
+			//System.out.println("usersBean email: "+usersBean.getEmail());
 			json.put("resultCode", "-1");
 		} else {
-			System.out.println("usersBean null");
+			//System.out.println("usersBean null");
 			json.put("resultCode", "0");
 		}
 		

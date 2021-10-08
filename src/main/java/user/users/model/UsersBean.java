@@ -8,16 +8,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UsersBean {
 	//xml에서 삽입하는 값 (sequence)
 	private int num; //pk
-	
-	@NotEmpty(message="계정유형을 선택하세요") //select ~ option
 	private String ucode; //20, not null
 
 	@NotNull(message="아이디를 입력하세요") //input text
-	@Pattern(regexp="^[_0-9a-zA-Z-]{5,20}$", message="아이디 형식을 확인해주세요") //영어소문자,숫자,-_ 5~20자
+	@Pattern(regexp="^[_0-9a-z-]{5,20}$", message="아이디 형식을 확인해주세요") //영어소문자,숫자,-_ 5~20자
 	private String id; //20, unique, not null
 	
 	@NotNull(message="비밀번호를 입력하세요") //input text
-	@Pattern(regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^~*+=-])(?=.*[0-9]).{5,20}$", message="비밀번호 형식을 확인해주세요") //영어대소문자,숫자,특수문자 5~20자
+	@Pattern(regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^~*+=-])(?=.*[0-9]).{5,20}$", message="비밀번호 형식을 확인해주세요") //영어,숫자,특수문자 5~20자
 	private String pw; //20, not null
 	
 	@NotNull(message="이름을 입력하세요") //input text
@@ -33,15 +31,15 @@ public class UsersBean {
 	//사업자만 입력하는 값
 	private int postcode;
 	//사업자만 입력하는 값
-	private String address1; //150, not null
+	private String address1; //150, null
 	//사업자만 입력하는 값
-	private String address2; //150, not null
-	//사업자만 입력하는 값
-	//Controller에서 삽입하는 값
-	private String address3; //150, not null
+	private String address2; //150, null
 	//사업자만 입력하는 값
 	//Controller에서 삽입하는 값
-	private String address4; //150, not null
+	private String address3; //150, null
+	//사업자만 입력하는 값
+	//Controller에서 삽입하는 값
+	private String address4; //150, null
 	
 	@NotNull(message="연락처를 입력해주세요")
 	private String contact; //30, not null

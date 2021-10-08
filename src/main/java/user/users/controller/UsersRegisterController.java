@@ -2,6 +2,7 @@ package user.users.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,26 +48,37 @@ public class UsersRegisterController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		if(result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors){ System.out.println(error.getDefaultMessage()); }
+
+			//System.out.println(users.getUcode()+", "+users.getName()+", "+users.getGender()+", "+users.getId()+", "+users.getPw()+", "+users.getPostcode()+", "+users.getEmail()+", "+users.getAddress1()+", "+users.getAddress2()+", "+users.getContact());
 			mav.setViewName(GETPAGE);
-			pw.println("<script>alert('회원가입에 실패했습니다');</script>");
+			pw.println("<script>alert('회원가입에 실패했습니다 - result');</script>");
 		} else {
 			//result에 오류가 없다면, 값 변형 및 추가(getter->split(or something else)->setter || setter)
 			//그대로 들어가는 값 ucode, name, gender, id, pw, postcode, email
 			//변형해야 하는 값 address1, address2, contact(-가 들어있을 경우)
 			//추가해야 하는 값 status="가입완료"
-			String[] address_tmp = users.getAddress1().split(" ");
-			String address1 = address_tmp[0];
-			String address2 = address_tmp[1];
-			String address3 = address_tmp[2];
-			String address4 = "";
-			for(int i=3; i<address_tmp.length; i++) {
-				address4 += address_tmp[i]+" ";
+			if(users.getAddress1() != "") {
+				String[] address_tmp = users.getAddress1().split(" ");
+				String address1 = address_tmp[0];
+				String address2 = address_tmp[1];
+				String address3 = address_tmp[2];
+				String address4 = "";
+				for(int i=3; i<address_tmp.length; i++) {
+					address4 += address_tmp[i]+" ";
+				}
+				address4 += users.getAddress2();
+				users.setAddress1(address1);
+				users.setAddress2(address2);
+				users.setAddress3(address3);
+				users.setAddress4(address4);
+			} else {
+				users.setAddress1("");
+				users.setAddress2("");
+				users.setAddress3("");
+				users.setAddress4("");
 			}
-			address4 += users.getAddress2();
-			users.setAddress1(address1);
-			users.setAddress2(address2);
-			users.setAddress3(address3);
-			users.setAddress4(address4);
 			
 			if(users.getContact().contains("-")) {
 				String[] contact_tmp = users.getContact().split("-");
@@ -80,7 +93,7 @@ public class UsersRegisterController {
 			
 			//usersDao에서 registerUsers(), return int(cnt)
 			int cnt = -1;
-			cnt = usersDao.registerUsers(users);
+			cnt = usersDao.registerUsers(users); //여기서 오류 발생중
 			
 			//성공(-1아님)이면 gotoPage, 실패(-1)면 getPage
 			if(cnt != -1) {
@@ -88,7 +101,7 @@ public class UsersRegisterController {
 				pw.println("<script>alert('회원가입에 성공했습니다');</script>");
 			} else {
 				mav.setViewName(GETPAGE);
-				pw.println("<script>alert('회원가입에 실패했습니다');</script>");
+				pw.println("<script>alert('회원가입에 실패했습니다 - dao');</script>");
 			}
 		}
 		pw.flush();

@@ -5,9 +5,9 @@
 
 <!-- Users.xml -->
 <mapper namespace="user.users.model.UsersBean">
-	<insert id="registerUsers">
+	<insert id="registerUsers" parameterType="myUsersBean">
 		insert into users(num, ucode, id, pw, name, gender, email, birth, postcode, address1, address2, address3, address4, contact, regdate, status)
-		values(userseq.nextval, #{ucode}, #{id}, #{pw}, #{name}, #{gender}, #{email}, to_date(#{birth}), #{postcode}, #{address1}, #{address2}, #{address3}, #{address4}, #{contact}, sysdate, #{status});
+		values(userseq.nextval, #{ucode}, #{id}, #{pw}, #{name}, #{gender}, #{email}, to_date(#{birth}), #{postcode}, #{address1}, #{address2}, #{address3}, #{address4}, #{contact}, sysdate, #{status})
 	</insert>
 	
 	<select id="idCheck" parameterType="String" resultType="myUsersBean">

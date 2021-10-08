@@ -53,7 +53,7 @@ public class UsersLoginController {
 			if(usersBean != null) {	//아이디, 비번 모두 만족
 				pw.println("<script>alert('로그인에 성공했습니다');</script>");
 				
-				session.setAttribute("loginUser", usersBean); //유저정보 session 생성 (로그아웃 시 삭제)
+				session.setAttribute("loginInfo", usersBean); //유저정보 session 생성 (로그아웃 시 삭제)
 				session.setMaxInactiveInterval(-1); //세션 시간 무한대로 설정
 				//session.removeAttribute("loginUser"); //위에서 생성한 session 값 삭제
 				//session.invalidate(); //세션 전체 제거
