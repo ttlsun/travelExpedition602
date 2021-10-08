@@ -1,3 +1,4 @@
+<%@page import="user.users.model.UsersBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="init.jsp" %>
@@ -12,6 +13,17 @@
 
 <title> 602호 여행자들</title>
 </head>
+
+<%	
+	request.setCharacterEncoding("UTF-8");
+	//로그인 세션 셋팅. (id,name)
+	UsersBean loginInfo = (UsersBean)session.getAttribute("loginInfo");
+	String userName = loginInfo == null ? "회원" :  loginInfo.getName();
+	String userId = loginInfo == null ? "customer01" :  loginInfo.getId();
+%> 
+
+<c:set var ="userId"  value= "<%=userId%>"/>
+<c:set var ="userName"  value= "<%=userName%>"/>
 
 <%-- 
 <link href="${css}/style.css" rel="stylesheet" type="text/css">

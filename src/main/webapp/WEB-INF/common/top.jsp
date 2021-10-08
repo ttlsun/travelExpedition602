@@ -43,7 +43,10 @@ function navActive(activeName) {
             	<ul class="dropdown-menu">
             		<li><a href="${contextPath}/communityList.do">모든 후기</a></li>
            			<li><a href="${contextPath}/reviewCommunityList.do">방문 후기</a></li>
-           			<li><a href="${contextPath}/reservationCommunityList.do">MY 후기</a></li>
+           			<!-- 회원일경우에만 보여지게 처리 -->
+           			<c:if test="${!empty userId}">
+           				<li><a href="${contextPath}/reservationCommunityList.do">MY 후기</a></li>
+	         		</c:if>
 	         	</ul>
          	</li>
         	
@@ -65,6 +68,8 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
          	
+         	<!-- 회원일경우에만 보여지게 처리 -->
+         	<c:if test="${!empty userId}">
           	<li data-nav="member" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
@@ -75,10 +80,19 @@ function navActive(activeName) {
 	            	<li><a href="#">내 관심 목록</a></li>
 	         	</ul>
          	</li>
+         	</c:if>
          	
           	<!-- 세영 : (예정)로그인/회원가입 구현 완료 후, 로그인x면 로그인 & 로그인o면 로그아웃 -->
-          	<li data-nav="login"><a href="${contextPath}/login.do"> 님 로그아웃 </a></li>
-          	
+          	<li data-nav="login">
+	          	<c:choose>
+	          		<c:when test="${!empty userId}">
+	          			<a href="${contextPath}/logout.do"> ${userName}님 로그아웃 </a>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<a href="${contextPath}/login.do"> 로그인 </a>
+	          		</c:otherwise>
+	          	</c:choose>
+          	</li>
         </ul>
       </div>
 	</nav>
