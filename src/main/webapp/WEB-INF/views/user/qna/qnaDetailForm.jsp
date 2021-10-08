@@ -120,7 +120,7 @@ function goDelete() {
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
 		<!-- 내가 쓴 글이면서 답변이 완료되지 않는것들만 수정,삭제가능 설정. -->
-		<c:if test="${qna.id eq 'customer01' and  qna.status ne '03' and qna.id ne 'admin'}">
+		<c:if test="${qna.id eq userId and qna.status ne '03'}">
 			<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
 			<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
 		</c:if>

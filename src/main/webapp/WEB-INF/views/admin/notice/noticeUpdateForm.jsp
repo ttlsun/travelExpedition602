@@ -50,7 +50,7 @@ function inputSave() {
 <div>
 	<header><h2 align="center" class="text-primary"> 공지사항 수정 </h2></header>
 	<form:form commandName="notice" name="myForm" action="noticeUpdate.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="hidden" name="modid" value="admin">
+	<input type="hidden" name="modid" value="${userId}">
 	<input type="hidden" name="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" value="${notice.num}">
 	

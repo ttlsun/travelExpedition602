@@ -83,7 +83,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 문의 수정 </h2></header>
 	<form:form commandName="qna" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="modid" value="customer01">
+		<input type="hidden" name="modid" value="${userId}">
 		<input type="hidden" name="pageNumber" value="${pageNumber}">
 		<input type="hidden" id="num" name="num" value="${qna.num}">
 		
@@ -155,6 +155,7 @@ function goList() {
 					<form:errors cssClass="errMessage" path="regkeyword"/>
 				</td>
 			</tr> 
+			<c:if test="${!empty qna.pw}">
 			<tr>
 				<td><label for="pw"><span class="redFont"> * </span> 게시글 비밀번호 </label> </td>
 				<td>
@@ -163,6 +164,7 @@ function goList() {
 					<span id="pwChk" class="errMessage"></span>
 				</td>
 			</tr>
+			</c:if>
 		</table>
 		</div>
 		<div class="marginPadding10" align="center">

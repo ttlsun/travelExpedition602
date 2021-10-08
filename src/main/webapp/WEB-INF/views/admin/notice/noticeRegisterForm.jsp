@@ -51,7 +51,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 공지사항 등록 </h2></header>
 	<form:form commandName="notice" name="myForm" action="noticeRegister.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="id" value="admin">
+		<input type="hidden" name="id" value="${userId}">
 		
 		<div class="form-group">
 		<table class="table table-bordered">

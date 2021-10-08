@@ -49,7 +49,7 @@ function goStatus(num) {
 	<input type="hidden" name="num" id="num" value="${community.num}">
 	<input type="hidden" name="status" id="status" value="${community.status}">
 	<input type="hidden" name="imgurl" value="${community.imgurl}">
-	<input type="hidden" name="modid" value="admin">
+	<input type="hidden" name="modid" value="${userId}">
 	<input type="hidden" name="regid" value="${community.regid}">
 	<input type="hidden" name="reviewtype" value="${community.reviewtype}">
 	

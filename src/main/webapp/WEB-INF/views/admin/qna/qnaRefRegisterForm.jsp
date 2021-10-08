@@ -48,7 +48,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 문의 답변 등록 </h2></header>
 	<form:form commandName="qna" name="myForm" action="qnaRefRegister.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="id" value="admin">
+		<input type="hidden" name="id" value="${userId}">
 		<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 		<input type="hidden" name="num" value="${ref}">
 		<input type="hidden" name="ref" value="${ref}">

@@ -12,6 +12,7 @@
 				ROW_NUMBER() OVER(ORDER BY REF DESC, RESTEP ASC) AS ROW_NUM,
 				NUM,
 				ID,
+				PW,
 				TITLE,
 				CONTENTS,
 				REG_KEYWORD,
@@ -28,6 +29,9 @@
  		<if test="whatColumn == 'regkeyword'">
  			AND REG_KEYWORD LIKE '%'|| #{keyword} || '%'
  		</if>
+ 		<if test="whatColumn == 'id'">
+ 			AND ID LIKE '%'|| #{keyword} || '%'
+ 		</if>
 	</select>
 
 	<!-- 문의 총갯수 -->
@@ -39,6 +43,9 @@
  		</if>
  		<if test="whatColumn == 'regkeyword'">
  			AND REG_KEYWORD LIKE '%'|| #{keyword} || '%'
+ 		</if>
+ 		<if test="whatColumn == 'id'">
+ 			AND ID LIKE '%'|| #{keyword} || '%'
  		</if>
 	</select>
 	

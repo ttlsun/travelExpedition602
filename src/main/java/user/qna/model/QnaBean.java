@@ -1,7 +1,5 @@
 package user.qna.model;
 
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -13,9 +11,6 @@ public class QnaBean {
 	private int num; // pk
 	private String id; // 20, not null, fk(users.id)
 	private String name;
-
-	@NotEmpty(message = "필수 선택사항")
-	@Size(min = 2, max = 20, message = "비밀번호 2~20자 입력")
 	private String pw; // 20
 
 	@NotBlank(message = "필수 입력사항입니다.")

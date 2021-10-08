@@ -127,7 +127,9 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<input type="submit" class="btn btn-primary" value="답변하기" onclick="goRef()">
+		<c:if test="${qna.status ne '03'}">
+			<input type="submit" class="btn btn-primary" value="답변하기" onclick="goRef()">
+		</c:if>
 		<input type="submit" class="btn btn-primary" value="삭제" onclick="goDelete()">
 		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>

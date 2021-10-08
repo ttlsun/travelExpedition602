@@ -48,7 +48,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 문의 등록 </h2></header>
 	<form:form commandName="qna" name="myForm" action="qnaRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="id" value="customer01">
+		<input type="hidden" name="id" value="${userId}">
 		<div class="form-group">
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
@@ -88,7 +88,7 @@ function goList() {
 				</td>
 			</tr> 
 			<tr>
-				<td><label for="pw"><span class="redFont"> * </span> 게시글 비밀번호 </label> </td>
+				<td><label for="pw"> 게시글 비밀번호 </label> </td>
 				<td>
 					<input type="text" maxlength="20" class="form-control" name="pw" id="pw" class="form-control input-sm" placeholder="비밀번호 입력." value="${qna.pw}">
 					<form:errors cssClass="errMessage" path="pw"/>

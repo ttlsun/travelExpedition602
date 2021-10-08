@@ -35,7 +35,7 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
-		<if test="regid != null and regid != ''">
+		<if test="regid != null">
 			AND REGID = #{regid}
 		</if>
 		<if test="reviewtype != null and reviewtype != ''">
@@ -59,7 +59,7 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
-		<if test="regid != null and regid != ''">
+		<if test="regid != null">
 			AND REGID = #{regid}
 		</if>
 		<if test="reviewtype != null and reviewtype != ''">

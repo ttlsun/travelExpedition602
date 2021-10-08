@@ -47,7 +47,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 키워드 태그관리 수정 </h2></header>
 	<form:form commandName="keyword" name="myForm" action="keywordUpdate.ad" method="post" class="form-horizontal">
-		<input type="hidden" name="modid" value="admin">
+		<input type="hidden" name="modid" value="${userId}">
 		<input type="hidden" name="num" value="${keyword.num }">
 		
 		<div class="form-group">

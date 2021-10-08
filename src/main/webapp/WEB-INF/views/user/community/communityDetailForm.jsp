@@ -45,7 +45,20 @@ function goDelete(num) {
 
 //별 , 좋아요 등록 
 function goRatingRegister(ratingtype) {
-	var regid = "customer01"; // 페이지 진입한 유저 아이디.
+	var userid = "${userId}"; // 페이지 진입한 유저 아이디.
+	var regid = "${community.regid}" //후기등록자 아이디
+	
+	//자기가 적은 후기는 추천할수 없게 설정.
+	if(userid == regid || regid == "admin"){
+		alert("자신이 적은 후기에 추천/찜 하실 수 없습니다.");
+		return;
+	}
+	
+	//관리자 하지마.. 
+	if(regid == "admin"){
+		alert("관리자는 후기에 추천/찜 하실 수 없습니다.");
+		return;
+	}
 	
 	$.ajax({
 		url: "communityRatingRegister.do",
@@ -87,7 +100,7 @@ function goRatingRegister(ratingtype) {
 
 //likes 테이블에도 insert 하기.
 function likesRegister() {
-	var regid = "customer01"; // 페이지 진입한 유저 아이디.
+	var regid = "${userId}"; // 페이지 진입한 유저 아이디.
 	$.ajax({
 		url: "communityLikesRegister.do",
 		type: "POST",
@@ -110,8 +123,8 @@ function likesRegister() {
 
 //댓글 등록.
 function goReplyRegister() {
-	var regid = "customer01"; // 페이지 진입한 유저 아이디.
-	
+	var regid = "${userId}"; // 페이지 진입한 유저 아이디.
+
 	//댓글 길이 체크
 	if(!isInputLen("후기댓글","content",2,300)){
 		return false;
@@ -345,7 +358,7 @@ function goAjaxDelete(url, numData , type) {
 		<fieldset>
 		<legend class="textAlignLeft">후기 댓글</legend>
 			<div class="form-group">
-				<label for="content" class="col-xs-2 col-lg-2 control-label text-primary">댓글</label> 
+				<label for="content" class="col-xs-2 col-lg-2 control-label text-primary">${userId}댓글</label> 
 				<div class="col-xs-6 col-lg-6">
 					<span>
 						<input type="text" class="form-control" name="content" id="content" value="">
@@ -357,7 +370,7 @@ function goAjaxDelete(url, numData , type) {
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
 					<path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"/>
 					</svg>
-					<span class="visually-hidden">댓글</span>
+					<span class="visually-hidden"> 댓글</span>
 					</button>
 				</div>
 			</div>
@@ -378,12 +391,12 @@ function goAjaxDelete(url, numData , type) {
 				<c:forEach var="replyList" items="${replyLists}">
 				<tr>
 					<td class="tableWidth200" style="border: none;" align="center">
-						<label for="replyNo"> ${replyList.regid } <%-- ${replyList.regname} --%> </label> 
+						<label for="replyNo"> ${replyList.regid } </label> 
 					</td>
 					<td style="border: none;">
 						${replyList.contents}
 					</td>
-					<c:if test="${replyList.regid eq 'member01' }">
+					<c:if test="${replyList.regid eq userId}">
 					<td style="border: none;">
 						<input type="button" class="btn btn-primary" value="X" onclick="return goReplyDelete(${replyList.num})">
 					</td>
@@ -458,8 +471,7 @@ function goAjaxDelete(url, numData , type) {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<!-- 테스트때문에 customer01 로 박아뒀지만 로긴 관련 로직 추가되면 변경예정 -->
-		<c:if test="${community.regid eq 'customer01'}">
+		<c:if test="${community.regid eq userId}">
 			<input type="submit" class="btn btn-primary" value="수정" onclick="goUpdate()">
 			<input type="submit" class="btn btn-primary" value="삭제" onclick="return goDelete(${community.num})">
 		</c:if>

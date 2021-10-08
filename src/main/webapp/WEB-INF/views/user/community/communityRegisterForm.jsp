@@ -68,7 +68,7 @@ function goList() {
 	<header><h2 align="center" class="text-primary">후기 등록 화면</h2></header>
 	
 	<form:form commandName="community" name="myForm" action="communityRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="hidden" name="regid" value="customer01">
+	<input type="hidden" name="regid" value="${userId}">
 	<input type="hidden" name="reviewnum" value="${reviewnum}">
 	<input type="hidden" name="reservationnum" value="${reservationnum}">
 	<input type="hidden" name="reviewType" value="${reviewType}">

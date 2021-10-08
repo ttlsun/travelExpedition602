@@ -66,7 +66,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary"> 이벤트 등록 </h2></header>
 	<form:form commandName="event" name="myForm" action="eventRegister.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
-		<input type="hidden" name="id" value="admin">
+		<input type="hidden" name="id" value="${userId}">
 		<div class="form-group">
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
