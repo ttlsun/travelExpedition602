@@ -79,10 +79,13 @@ function goList() {
 				<td><label for="regkeyword1"><span class="redFont"> * </span>문의 키워드 </label></td>
 				<td>
 					<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
-						<label for="regkeyword_${status.index}" style="color: #337ab7;">
-							&nbsp;
-							<input type="checkbox" name="regkeyword" id="regkeyword_${status.index}" value="${keywordList.tag}" <c:if test="${fn:contains(qna.regkeyword,keywordList.tag)}">checked="checked"</c:if>> ${keywordList.tag}
-						</label>
+						<%-- <c:if test="${keywordList.tag ne '#답변'}"> --%>
+						<c:if test="${!fn:contains(keywordList.tag,'#답변')}">
+							<label for="regkeyword_${status.index}" style="color: #337ab7;">
+								&nbsp;
+								<input type="checkbox" name="regkeyword" id="regkeyword_${status.index}" value="${keywordList.tag}" <c:if test="${fn:contains(qna.regkeyword,keywordList.tag)}">checked="checked"</c:if>> ${keywordList.tag}
+							</label>
+						</c:if>
 					</c:forEach>
 					<form:errors cssClass="errMessage" path="regkeyword"/>
 				</td>
