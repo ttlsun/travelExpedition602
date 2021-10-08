@@ -22,7 +22,7 @@ public class CampingRegisterController {
 	
 	private static final String COMMAND = "/campingRegister.do";
 	private static final String GETPAGE = "user/camping/campingRegisterForm";
-	private static final String GOTOPAGE = "redirect:/roomRegister.do";
+	private static final String GOTOPAGE = "redirect:/campingDetail.do";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -73,7 +73,7 @@ public class CampingRegisterController {
 			}
 			
 			//로그인 세션에 저장되어 있는 id값 넣기
-			campbean.setRegid(campbean.getRegid());
+			campbean.setRegid(campbean.getRegid()+"id");
 			
 			campbean.setLatitude(latitude);
 			campbean.setLongitude(longitude);

@@ -31,15 +31,13 @@ public class CampingListController {
 	public ModelAndView campingList(ModelAndView mav, 
 								  @RequestParam Map<String,String> map,
 								  HttpServletRequest request) {
-		
-		System.out.println(map.get("orderBy")+"/"+map.get("address1")+"/");
-		
+				
 		map.put("orderBy", map.get("orderBy"));
 		map.put("address1", map.get("address1"));
 		map.put("address2", map.get("address2"));
 		map.put("camp_type", map.get("camp_type"));
 		map.put("themecode", map.get("themecode"));
-		map.put("searchName", "%"+map.get("searchName")+"%");
+		map.put("searchName", map.get("searchName"));
 		map.put("searchKeyword", map.get("searchKeyword"));
 		
 		int totalCount = campingDao.getTotalCount(map);

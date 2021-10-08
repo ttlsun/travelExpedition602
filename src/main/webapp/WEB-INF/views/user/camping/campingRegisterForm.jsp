@@ -14,6 +14,8 @@ var map;
 var overlay;
 var marker;
 
+
+
 $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('camping');
@@ -107,7 +109,7 @@ function addrKakao() {
 
 //등록버튼 클릭시
 function inputSave() {
-	if (!confirm('등록 하시겠습니까? 객실 등록 화면으로 이동합니다.')){
+	if (!confirm('등록 하시겠습니까?')){
 		return false;
 	}
 	
@@ -144,14 +146,14 @@ function fileSelectChange(event) {
 			<p align="right"><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
 		</caption>
 		<tr>
-			<td><label for="name"> 캠핑장 이름 <span class="redFont"> * </span></label></td>
+			<td><label for="name"><span class="redFont"> * </span> 캠핑장 이름 </label></td>
 			<td>
 				<input type="text" class="form-control" id="name" name="name" value="${camping.name }" placeholder="캠핑장의 정확한 상호명을 적어주세요.">
 				<form:errors cssClass="errMessage" path="name"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="camp_type"> 캠핑장 유형 <span class="redFont"> * </span></label></td>
+			<td><label for="camp_type"><span class="redFont"> * </span> 캠핑장 유형 </label></td>
 			<td>
 				<p><span class="redFont">해당되는 유형을 모두 선택해주세요.</span></p>
 				<input type="checkbox" id="camp_type" name="camp_type" value="01" 
@@ -166,7 +168,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="themecode"> 캠핑장 테마 <span class="redFont"> * </span></label></td>
+			<td><label for="themecode"><span class="redFont"> * </span> 캠핑장 테마 </label></td>
 			<td>
 				<input type="radio" id="themecode" name="themecode" value="01"
 					<c:if test="${camping.themecode eq '01'}"> checked</c:if>>&nbsp;숲/산&nbsp;
@@ -182,7 +184,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="summary"> 한줄 소개글 <span class="redFont"> * </span></label></td>
+			<td><label for="summary"><span class="redFont"> * </span> 한줄 소개글 </label></td>
 			<td>
 				<input type="text" class="form-control" id="summary" name="summary" value="${camping.summary }" placeholder="목록 외부에 노출됩니다. ex) 숲 속 힐링캠프, 글램퍼스 양평점입니다.">
 			</td>
@@ -206,7 +208,7 @@ function fileSelectChange(event) {
 		</tr>
 		<tr>
 			<td style="border-bottom: none;">
-				<label for="searchZip"> 캠핑장 주소 <span class="redFont"> * </span></label>
+				<label for="searchZip"><span class="redFont"> * </span> 캠핑장 주소 </label>
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
 				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" placeholder="우편번호 입력">
@@ -238,20 +240,20 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="contact"> 캠핑장 연락처 <span class="redFont"> * </span></label></td>
+			<td><label for="contact"><span class="redFont"> * </span> 캠핑장 연락처 </label></td>
 			<td>
 				<input type="text" class="form-control" id="contact" name="contact" value="${camping.contact }" placeholder="고객과 소통할 수 있는 연락처를 적어주세요.">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="imgfile"> 대표 이미지 </label></td>
+			<td><label for="imgfile"><span class="redFont"> * </span> 대표 이미지 </label></td>
 			<td>
 				<input type="file" id="imgFile" name="updateFile" value="" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" name="imgurl" value="${camping.imgurl}">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="contents"> 상세 소개글 <span class="redFont"> * </span></label></td>
+			<td><label for="contents"><span class="redFont"> * </span> 상세 소개글 </label></td>
 			<td colspan="3">
 				<textarea rows="10" cols="3" class="form-control summernote" name="contents">${camping.contents }</textarea>
 			</td>

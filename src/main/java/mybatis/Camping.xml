@@ -6,7 +6,7 @@
 <!-- Camping.xml -->
 <mapper namespace="user.camping.model.CampingBean">
 	
-	<insert id="insertCamping" parameterType="myCampingBean">
+	<insert id="insertData" parameterType="myCampingBean">
 		INSERT INTO CAMPING(
 			NUM, NAME, CAMP_TYPE, THEMECODE, REG_KEYWORD, 
 			SUMMARY, IMGURL, CONTENTS,
@@ -41,7 +41,7 @@
 			AND THEMECODE IN(#{themecode})
 		</if>
 		<if test="searchName != null">
-			AND NAME LIKE #{searchName}
+			AND NAME LIKE %||#{searchName}||%
 		</if>
 	</select>
 	
@@ -49,22 +49,18 @@
 		SELECT NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,SUMMARY,IMGURL,
 		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT 
 		FROM CAMPING
-		WHERE 1=1
-		<if test="address1 != null">
-			AND ADDRESS1 = #{address1}
-		</if>
-		<if test="address2 != null">
-			AND ADDRESS2 = #{address2}
-		</if>
-		<if test="camp_type != null">
-			AND CAMP_TYPE IN(#{camp_type})
-		</if>
-		<if test="themecode != null">
-			AND THEMECODE IN(#{themecode})
-		</if>
-		<if test="searchName != null">
-			AND NAME LIKE #{searchName}
-		</if>
 		
+		
+		
+	</select>
+	
+	<select id="getCampingDetail" resultType="myCampingBean">
+		SELECT * FROM CAMPING
+		WHERE NUM = #{num}
+	</select>
+	
+	<select id="getCampingTypes" resultType="String">
+		SELECT CAMP_TYPE FROM CAMPING
+		WHERE NUM = #{num}
 	</select>
 </mapper>

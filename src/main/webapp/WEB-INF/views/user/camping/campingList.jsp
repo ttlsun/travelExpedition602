@@ -172,7 +172,7 @@ function listOrderBy(){
 			</div>
 			
 			<div align="center">
-				
+				검색초기화 버튼 추가
 			</div>
 		</form>
 	</div>
