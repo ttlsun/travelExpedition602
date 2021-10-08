@@ -7,7 +7,7 @@
 
 function loginBtn() {
 	alert("로그인페이지로 이동합니다"); //추후 login 넣으면 변경예정
-	location.href = "<%= request.getContextPath()%>/main";
+	location.href = "login.do";
 }
 </script>
 
