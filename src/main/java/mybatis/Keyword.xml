@@ -34,6 +34,7 @@
 		<if test="whatColumn == 'tag'">
  			AND TAG LIKE '%'|| #{keyword} || '%'
  		</if>
+ 		ORDER BY NUM DESC
 	</select>
 	
 	<select id="getKeywordsListTotalCnt" resultType="int">

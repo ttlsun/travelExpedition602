@@ -103,9 +103,14 @@ function addrKakao() {
 		else{
 			cutAddr = data.sido+" "+data.sigungu+" "+data.roadname+" ";
 		}
-		var address4 = totalAddr.substr(cutAddr.length,totalAddr.length-1);
+		
+		var roadAddressEnglish = data.roadAddressEnglish;
+		var autoJibunAddressEnglish = data.autoJibunAddressEnglish;
+		alert(roadAddressEnglish);
+		//alert(autoJibunAddressEnglish);
+		//var address4 = totalAddr.substr(cutAddr.length,totalAddr.length-1);
 		//상세주소값 address4 넣기
-		$('input[name="address4"]').val(address4);
+		//$('input[name="address4"]').val(address4);
 		
 		$('#fullAddr').html(data.fullAddr);
 		

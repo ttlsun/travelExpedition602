@@ -3,9 +3,12 @@ package user.like.model;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.my.travelExpedition.utility.Paging;
 
 @Controller("myLikeDao")
 public class LikeDao {
@@ -35,6 +38,19 @@ public class LikeDao {
 							+ ", ANUM: "  + map.get("anum") 
 							+ ", ID: "  + map.get("id"));
 		int cnt = sqlSessionTemplate.delete(NAMESPACE + ".deleteLikesData", map);
+		return cnt;
+	}
+	
+	/*나의 찜 내역 리스트*/
+	public List<LikeBean> getAllLikesList(Paging pageInfo, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset() , pageInfo.getLimit());
+		List<LikeBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getAllLikesList", map, rowBounds);
+		return lists;
+	}
+	
+	/*나의 찜 내역 리스트 cnt */
+	public int getAllLikesListTotalCnt(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(NAMESPACE + ".getAllLikesListTotalCnt", map);
 		return cnt;
 	}
 	

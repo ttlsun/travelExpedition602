@@ -44,5 +44,55 @@
 		WHERE ANUM  = #{anum}
 		AND ACODE = #{acode}
 	</delete>
+	
+	<!-- 모든 찜 내역보여주기 -->
+	<select id="getAllLikesList" resultType="myLikeBean">
+		SELECT 
+			ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+			NUM,ACODE,ANUM,REGDATE,NAME,SUMMARY,THEMECODE
+		 FROM (
+			  SELECT A.NUM, A.ACODE, A.ANUM, A.REGDATE, B.NAME , B.SUMMARY , B.THEMECODE
+			  FROM LIKES A, CAMPING B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '1'
+			  AND A.ID = #{id}
+			  UNION ALL
+			  SELECT A.NUM, A.ACODE, A.ANUM, A.REGDATE, B.NAME , B.SUMMARY , B.THEMECODE
+			  FROM LIKES A, TOURLIST B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '2'
+			  AND A.ID = #{id}
+			  UNION ALL
+			  SELECT A.NUM, A.ACODE, A.ANUM, A.REGDATE, B.TITLE AS NAME , B.SUMMARY , null as THEMECODE
+			  FROM LIKES A, COMMUNITY B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '3'
+			  AND A.ID = #{id}
+		)
+		ORDER BY NUM DESC
+	</select>
+
+	<!-- 모든 찜 총갯수 -->
+	<select id="getAllLikesListTotalCnt" resultType="int">
+		SELECT SUM(CNT) AS CNT FROM (
+			  SELECT COUNT(*) AS CNT
+			  FROM LIKES A, CAMPING B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '1'
+			  AND A.ID = #{id}
+			  UNION ALL
+			  SELECT COUNT(*) AS CNT
+			  FROM LIKES A, TOURLIST B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '2'
+			  AND A.ID = #{id}
+			  UNION ALL
+			  SELECT COUNT(*) AS CNT
+			  FROM LIKES A, COMMUNITY B
+			  WHERE A.NUM = B.NUM
+			  AND A.ACODE = '3'
+			  AND A.ID = #{id}
+		)
+	</select>
 
 </mapper>

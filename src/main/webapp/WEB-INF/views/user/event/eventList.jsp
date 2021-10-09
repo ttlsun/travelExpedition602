@@ -50,7 +50,7 @@ $(document).ready(function() {
 	</div>
 	
 	<table class="table table-bordered" style="margin-top: 3%;">
-		<caption>레코드 총 갯수 : </caption>
+		<caption>레코드 총 갯수 : ${totalCount} </caption>
 		<thead>
 			<tr class="active">
 				<th width="6%">번호</th>

@@ -26,19 +26,35 @@ $(document).ready(function() {
 	//메타태그 설정. (DB에 가져온 값 셋팅)
 	var title = "${campbean.name}"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
 	$("#metaTitle").attr("content", title);
-	$("#metaDescription").attr("content", "캠핑 상세");
-	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
+	$("#metaDescription").attr("content", "${campbean.summary}");
+	$("#metaKeywords").attr("content", "#키워드");
 	
 	//지도를 생성합니다
 	map = mapViewInit('map');
+	// 지도에 올릴 마커를 생성합니다.
+	
 	
 	//주소 값 내려서 받기.
-	var fullAddr = "${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}";
-    var coordsLa = "${campbean.latitude}"; //위도
-    var coordsMa = "${campbean.longitude}"; //경도
+	var addr1 = "${campbean.address1}";
+	var addr2 = "${campbean.address2}";
+	var addr3 = "${campbean.address3}";
+	var addr4 = "${campbean.address4}";
+	
+	//var fullAddr = addr1 +" " + addr2 + " " + addr3 + " " + addr4;
+	var fullAddr = "경기 가평군 북면 노씨터길 12"; //일단 여서 문제..
+	//alert(fullAddr);
+    var coordsLa = "${campbean.longitude}"; //위도 // 값 반대로 넣음.. =ㅂ =; 
+    //alert(coordsLa);
+    var coordsMa = "${campbean.latitude}"; //경도
        
 	addSearch(fullAddr, coordsMa, coordsLa);
+	
+   
 });
+
+function mapOpen() {
+	$('#divAdd').html("");
+}
 
 function addSearch(fullAddr, lat, lng) {
 	
@@ -76,7 +92,7 @@ function goDelete(num,pageNumber) {
 
 //추천관광지 더보기 버튼 클릭시
 function goTourList() {
-	location.href= "${contextPath}/추천관광지";
+	location.href= "${contextPath}/tourList.do";
 }
 
 //객실 등록 버튼
@@ -196,7 +212,7 @@ function goReservation(num){
 				</svg>
               	</a>
               	&nbsp; ${campbean.contact }
-			</td>
+            </td>
 		</tr>
 	</table>
 	</form>
@@ -219,7 +235,7 @@ function goReservation(num){
 			</div>
 			
 			<!-- 객실 리스트 탭 -->
-			<div class="tab-pane active fade in" id="tab2" style="text-align: left;">
+			<div class="tab-pane active fade" id="tab2" style="text-align: left;">
 		   		<h3>객실 리스트</h3>
 		    	<span class="spanFlowRootP10"></span>
 				
@@ -235,7 +251,14 @@ function goReservation(num){
 									<img src="${fileImg}/${room.imgurl}" alt="" title="" width="100%">
 								</td>
 								<td colspan="6">
-									[${room.room_type }객실타입 안뜸]&nbsp;${room.name }
+									[
+									<c:choose>
+											<c:when test="${room.roomtype eq '01'}">일반캠핑장</c:when>
+											<c:when test="${room.roomtype eq '02'}">자동차캠핑장</c:when>
+											<c:when test="${room.roomtype eq '03'}">글램핑</c:when>
+											<c:when test="${room.roomtype eq '04'}">카라반</c:when>
+									</c:choose>
+									]&nbsp;${room.name }
 								</td>
 								<td rowspan="4" width="10%" align="center" style="vertical-align: middle;">
 									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail(${room.num})"><br><br>
@@ -301,16 +324,16 @@ function goReservation(num){
 			</div>
 			
 			<!-- 오시는 길 탭 -->
-		    <div class="tab-pane fade" id="tab4" style="text-align: left;">
+		    <div class="tab-pane fade in" id="tab4" style="text-align: left;" onclick="mapOpen()">
 		      	<h3> 오시는 길</h3>
 				<span>${campbean.name } </span>
 				<p>${fullAddr}</p>
 				
-				<div id="map" style="width:100%;height:350px; "></div>
-			
+				<div id="map" style="height:400px; "></div>
 			</div>
 		</div>
 		<hr>
+		
 	</div>
 	
 	<!-- 추천관광지  -->

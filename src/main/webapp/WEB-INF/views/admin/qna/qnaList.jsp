@@ -31,7 +31,7 @@ function goRegister() {
 	
 	<div class="form-horizontal rounded">
 		<form action="">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>
@@ -56,7 +56,7 @@ function goRegister() {
 	</div>
 	
 	<table class="table table-bordered" style="margin-top: 5%;">
-		<caption>레코드 총 갯수 : </caption>
+		<caption>레코드 총 갯수 : ${totalCount} </caption>
 		<thead>
 			<tr class="active">
 				<th width="6%">번호</th>

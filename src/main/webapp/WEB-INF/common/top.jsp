@@ -30,6 +30,8 @@ function navActive(activeName) {
     	<ul class="nav navbar-nav">
         	<li data-nav="introduction"><a href="${contextPath}/introduction.do"> 여행자들 소개 </a></li>
         	
+        	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
+        	<c:if test="${userCode eq 'business' }">
         	<li data-nav="camping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
@@ -37,6 +39,19 @@ function navActive(activeName) {
 	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>
 	         	</ul>
          	</li>
+         	</c:if>
+         	
+         	<!-- 사용자일경우 : 추후 협의하에 변경 요망-->
+         	<c:if test="${userCode eq 'customer' }">
+         	<li data-nav="camping" class="dropdown">
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 <b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+           			<li><a href="${contextPath}/campingList.do">캠핑/글램핑</a></li>
+	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>
+	         	</ul>
+         	</li>
+         	</c:if>
+        	
         	
         	<li data-nav="community" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 후기커뮤니티공간<b class="caret"></b></a>
@@ -49,7 +64,7 @@ function navActive(activeName) {
 	         		</c:if>
 	         	</ul>
          	</li>
-        	
+         	
           	<li data-nav="notice"><a href="${contextPath}/noticeList.do">공지사항 </a></li>
           	<li data-nav="event" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 이벤트 <b class="caret"></b></a>
@@ -70,14 +85,13 @@ function navActive(activeName) {
          	
          	<!-- 회원일경우에만 보여지게 처리 -->
          	<c:if test="${!empty userId}">
-          	<li data-nav="member" class="dropdown">
+          	<li data-nav="myInfo" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
             		<!-- 세영 : (0927)드랍메뉴 위치&이름 변경 -->
-           			<li><a href="#">마이페이지</a></li>
-	            	<li><a href="#">내 정보 관리</a></li>
-	            	<li><a href="#">내 예약 목록</a></li>
-	            	<li><a href="#">내 관심 목록</a></li>
+           			<li><a href="#">내 정보</a></li>
+	            	<li><a href="${contextPath}/myReservationList.do">내 예약 목록</a></li>
+	            	<li><a href="${contextPath}/myLikesList.do">내 관심 목록</a></li>
 	         	</ul>
          	</li>
          	</c:if>

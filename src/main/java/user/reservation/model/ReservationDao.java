@@ -1,8 +1,14 @@
 package user.reservation.model;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.my.travelExpedition.utility.Paging;
 
 @Component("myReservationDao")
 public class ReservationDao {
@@ -11,5 +17,24 @@ public class ReservationDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	/*나의 캠핑 예약 내역 리스트*/
+	public List<MyReservationBean> getMyReservationList(Paging pageInfo, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset() , pageInfo.getLimit());
+		List<MyReservationBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getMyReservationList", map, rowBounds);
+		return lists;
+	}
+	
+	/*나의 캠핑 예약 리스트 cnt */
+	public int getMyReservationListTotalCnt(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(NAMESPACE + ".getMyReservationListTotalCnt", map);
+		return cnt;
+	}
+	
+	/*나의 캠핑 예약 내역 리스트 상세*/
+	public MyReservationBean getMyReservationDetail(Map<String, Object> map) {
+		MyReservationBean bean = sqlSessionTemplate.selectOne(NAMESPACE + ".getMyReservationDetail", map);
+		return bean;
+	}
 	
 }

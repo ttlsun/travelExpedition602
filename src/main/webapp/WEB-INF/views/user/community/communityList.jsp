@@ -68,6 +68,9 @@ function goDetail(num) {
 		<input type="button" class="btn btn-primary" value="커뮤니티후기등록" onclick="goRegister()">
 	</div>
   
+  	<!-- 현재날짜 -->
+	<c:set var="today" value="<%=new java.util.Date()%>" />
+	<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set>
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>레코드 총 갯수 : ${totalCount} </caption>
 		<thead>
@@ -95,11 +98,6 @@ function goDetail(num) {
 						<!-- 내가 등록한 날짜 -->
 						<fmt:parseDate var="fmtDate" value="${beanCell.regdate}" pattern="yyyy-MM-dd"/>
 						<fmt:formatDate var="regdate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
-						
-						<!-- 현재날짜 -->
-						<c:set var="today" value="<%=new java.util.Date()%>" />
-						<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set>
-														
 					<h3>${beanCell.title}</h3>
 			            <p>
 			            	<span class="spanFlowRootP10">
@@ -119,6 +117,9 @@ function goDetail(num) {
 								</c:if>
 								<c:if test="${beanCell.steamed >= 10}">
 									&nbsp; <span class="label label-warning"> 찜 </span>
+								</c:if>
+								<c:if test="${beanCell.reservationnum > 0}">
+									&nbsp; <span class="label btn-info"> 예약후기 </span>
 								</c:if>
 							</span>
 						</p>

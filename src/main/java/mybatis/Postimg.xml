@@ -85,6 +85,7 @@
 		<if test="whatColumn =! null and whatColumn == 'imgname'">
  			AND IMGNAME LIKE '%'|| #{keyword} || '%'
  		</if>
+ 		ORDER BY NUM DESC
 	</select>
 	
 	<select id="getPostimgsListTotalCnt" resultType="int">

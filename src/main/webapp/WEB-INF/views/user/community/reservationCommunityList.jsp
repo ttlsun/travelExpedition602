@@ -110,6 +110,9 @@ function goDetail(num) {
 								<c:if test="${beanCell.steamed >= 10}">
 									&nbsp; <span class="label label-warning"> 찜 </span>
 								</c:if>
+								<c:if test="${beanCell.reservationnum > 0}">
+									&nbsp; <span class="label btn-info"> 예약후기 </span>
+								</c:if>
 							</span>
 						</p>
 						<p>${beanCell.summary}</p>
