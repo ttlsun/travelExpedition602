@@ -17,29 +17,6 @@ public class ReservationBean {
 	private int totalprice;
 	private String status;
 	
-	public ReservationBean() {
-		super();
-	}
-
-	public ReservationBean(int num, int cnum, int rnum, String id, String checkindate, String checkoutdate, String regdate, int guests,
-			String name, String phone, String email, String requested, int totalprice, String status) {
-		super();
-		this.num = num;
-		this.cnum = cnum;
-		this.rnum = rnum;
-		this.id = id;
-		this.checkindate = checkindate;
-		this.checkoutdate = checkoutdate;
-		this.regdate = regdate;
-		this.guests = guests;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.requested = requested;
-		this.totalprice = totalprice;
-		this.status = status;
-	}
-
 	public int getNum() {
 		return num;
 	}
@@ -151,5 +128,14 @@ public class ReservationBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "ReservationBean [num=" + num + ", cnum=" + cnum + ", rnum=" + rnum + ", id=" + id + ", checkindate="
+				+ checkindate + ", checkoutdate=" + checkoutdate + ", regdate=" + regdate + ", guests=" + guests
+				+ ", name=" + name + ", phone=" + phone + ", email=" + email + ", requested=" + requested
+				+ ", totalprice=" + totalprice + ", status=" + status + "]";
+	}
+	
 	
 }

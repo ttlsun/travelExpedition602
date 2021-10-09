@@ -9,7 +9,8 @@
 	<insert id="insertData" parameterType="myCampingBean">
 		INSERT INTO CAMPING(
 			NUM, NAME, CAMP_TYPE, THEMECODE, REG_KEYWORD, 
-			SUMMARY, IMGURL, CONTENTS,
+			SUMMARY, IMGURL, 
+			OPTIONS, CONTENTS,
 			POSTCODE, ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, 
 			LATITUDE, LONGITUDE,
 			CONTACT, REGDATE, REGID, MODDATE,
@@ -17,7 +18,8 @@
 		)
 		VALUES(
 			CAMPINGSEQ.NEXTVAL, #{name}, #{camp_type}, #{themecode}, #{reg_keyword},
-			#{summary}, #{imgurl}, #{contents},
+			#{summary}, #{imgurl}, 
+			#{options}, #{contents},
 			#{postcode}, #{address1}, #{address2}, #{address3}, #{address4},
 			#{latitude}, #{longitude},
 			#{contact}, SYSDATE, #{regid}, SYSDATE,
@@ -46,7 +48,7 @@
 	</select>
 	
 	<select id="getCampingList" resultType="myCampingBean">
-		SELECT NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,SUMMARY,IMGURL,
+		SELECT NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,SUMMARY,IMGURL,OPTIONS,
 		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT 
 		FROM CAMPING
 		
@@ -63,4 +65,30 @@
 		SELECT CAMP_TYPE FROM CAMPING
 		WHERE NUM = #{num}
 	</select>
+	
+	<update id="updateData">
+		UPDATE CAMPING
+		<set>
+			NAME = #{name},
+			CAMP_TYPE = #{camp_type},
+			THEMECODE = #{themecode},
+			REG_KEYWORD = #{reg_keyword},
+			SUMMARY = #{summary},
+			IMGURL = #{imgurl},
+			OPTIONS = #{options},
+			CONTENTS = #{contents},
+			POSTCODE = #{postcode},
+			ADDRESS1 = #{address1},
+			ADDRESS2 = #{address2},
+			ADDRESS3 = #{address3},
+			ADDRESS4 = #{address4},
+			LATITUDE = #{latitude},
+			LONGITUDE = #{longitude},
+			CONTACT = #{contact},
+			MODDATE = SYSDATE,
+			MODID = #{modid}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
 </mapper>

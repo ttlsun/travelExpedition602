@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="../../../common/top.jsp" %>
 
 <!-- 지도관련 js -->
@@ -13,8 +12,6 @@
 var map;
 var overlay;
 var marker;
-
-
 
 $(document).ready(function() {
 	//메뉴 on 유지.
@@ -49,7 +46,7 @@ $(document).ready(function() {
 	
 });
 
-function addSerach(fullAddr) {
+function addSearch(fullAddr) {
 	mapViewAddressPositionSearch(fullAddr, function(coords) {
 		if (coords == null)
 			return;
@@ -96,6 +93,19 @@ function addrKakao() {
 		$('input[name="address1"]').val(data.sido);
 		$('input[name="address2"]').val(data.sigungu);
 		$('input[name="address3"]').val(data.userSelectedType == 'R' ? data.roadname : data.bname);
+
+		//상세주소값 address4 넣기 위해 전체 주소값에서 자르기
+		var totalAddr = data.roadAddress;
+		var cutAddr = "";
+		if(data.userSelectedType == 'R'){
+			cutAddr = data.sido+" "+data.sigungu+" "+data.roadname+" ";
+		}
+		else{
+			cutAddr = data.sido+" "+data.sigungu+" "+data.roadname+" ";
+		}
+		var address4 = totalAddr.substr(cutAddr.length,totalAddr.length-1);
+		//상세주소값 address4 넣기
+		$('input[name="address4"]').val(address4);
 		
 		$('#fullAddr').html(data.fullAddr);
 		
@@ -103,13 +113,13 @@ function addrKakao() {
 		$('#myModal').modal('hide');
 		
 		//지도 마크업 찍기.
-		addSerach(data.fullAddr);
+		addSearch(data.fullAddr);
 	});
 }
 
 //등록버튼 클릭시
 function inputSave() {
-	if (!confirm('등록 하시겠습니까?')){
+	if (!confirm('등록하시겠습니까?')){
 		return false;
 	}
 	
@@ -143,7 +153,7 @@ function fileSelectChange(event) {
 	<input type="hidden" value="member01" name="regid">
 	<table border="1" class="table table-bordered">
 		<caption>
-			<p align="right"><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
+			<p><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
 		</caption>
 		<tr>
 			<td><label for="name"><span class="redFont"> * </span> 캠핑장 이름 </label></td>
@@ -207,6 +217,12 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
+			<td><label for="options"> 캠핑장 시설 정보 </label></td>
+			<td>
+				<input type="text" class="form-control" id="options" name="options" value="${camping.options }" placeholder="캠핑장 시설 정보를 입력하세요.">
+			</td>
+		</tr>
+		<tr>
 			<td style="border-bottom: none;">
 				<label for="searchZip"><span class="redFont"> * </span> 캠핑장 주소 </label>
 			</td>
@@ -220,13 +236,13 @@ function fileSelectChange(event) {
 			<td rowspan="1" style="border-top: none; border-left: none; border-bottom: none;"></td>
 			<td colspan="3" style="border-top: none; border-left: none; border-bottom: none;">
 				<label style="padding-bottom: 3%;">
-					<input type="text" class="form-control40" id="address1" name="address1" placeholder="시" readonly="readonly">
+					<input type="text" class="form-control40" id="address1" name="address1" value="${camping.address1}" placeholder="시" readonly="readonly">
 					<form:errors cssClass="errMessage" path="address1"/>
-					<input type="text" class="form-control40" id="address2" name="address2" placeholder="구" readonly="readonly">
+					<input type="text" class="form-control40" id="address2" name="address2" value="${camping.address2}" placeholder="구" readonly="readonly">
 					<form:errors cssClass="errMessage" path="address2"/>
-					<input type="text" class="form-control40" id="address3" name="address3" placeholder="동" readonly="readonly">
+					<input type="text" class="form-control40" id="address3" name="address3" value="${camping.address3}" placeholder="동" readonly="readonly">
 					<form:errors cssClass="errMessage" path="address3"/>
-					<input type="text" class="form-control40" id="address4" name="address4" placeholder="상세주소 입력">
+					<input type="text" class="form-control40" id="address4" name="address4" value="${camping.address4}" placeholder="상세주소 입력">
 					<form:errors cssClass="errMessage" path="address4"/>
 					
 					<input type="hidden" class="form-control40" id="coordsMa" name="coordsMa" placeholder="좌표Ma">

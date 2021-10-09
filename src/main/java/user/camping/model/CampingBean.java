@@ -19,10 +19,12 @@ public class CampingBean {
 
 	private String reg_keyword;
 	private String summary;
-
+	
 	private String imgurl;
 	private MultipartFile updateFile; // 대표이미지명
-
+	
+	private String options;
+	
 	private String contents;
 	private int postcode;
 
@@ -49,6 +51,14 @@ public class CampingBean {
 
 	public int getNum() {
 		return num;
+	}
+
+	public String getOptions() {
+		return options;
+	}
+
+	public void setOptions(String options) {
+		this.options = options;
 	}
 
 	public void setNum(int num) {
@@ -251,11 +261,13 @@ public class CampingBean {
 	public String toString() {
 		return "CampingBean [num=" + num + ", name=" + name + ", camp_type=" + camp_type + ", themecode=" + themecode
 				+ ", reg_keyword=" + reg_keyword + ", summary=" + summary + ", imgurl=" + imgurl + ", updateFile="
-				+ updateFile + ", contents=" + contents + ", postcode=" + postcode + ", address1=" + address1
-				+ ", address2=" + address2 + ", address3=" + address3 + ", address4=" + address4 + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", contact=" + contact + ", regdate=" + regdate + ", regid="
-				+ regid + ", moddate=" + moddate + ", modid=" + modid + ", readcount=" + readcount + ", recommend="
-				+ recommend + ", steamed=" + steamed + ", reviewcount=" + reviewcount + "]";
+				+ updateFile + ", options=" + options + ", contents=" + contents + ", postcode=" + postcode
+				+ ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3 + ", address4="
+				+ address4 + ", latitude=" + latitude + ", longitude=" + longitude + ", contact=" + contact
+				+ ", regdate=" + regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid
+				+ ", readcount=" + readcount + ", recommend=" + recommend + ", steamed=" + steamed + ", reviewcount="
+				+ reviewcount + "]";
 	}
+
 
 }

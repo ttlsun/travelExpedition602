@@ -1,53 +1,47 @@
 package user.room.model;
 
+import java.util.Arrays;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
 public class RoomBean {
 	
 	private int num;
+	
+	@NotBlank(message = "객실명 입력은 필수입니다.")
 	private String name;
+	
 	private String room_type;
 	private int cnum;
-	private String cname;
-	private String imgurl;
-	private int postingnum;
+	
+	private String imgurl; // 대표이미지
+	private MultipartFile updateFile; // 대표이미지명
+
+	private String imgname; // 상세이미지(여러장)
+	private MultipartFile[] multipleUpdateFile; // 상세이미지명(여러장)
+
+	private String summary;
 	private String contents;
+	
+	@NotNull(message = "적정인원 입력은 필수입니다.")
 	private int propguests;
+	@NotNull(message = "최대인원 입력은 필수입니다.")
 	private int maxguests;
+	@NotNull(message = "주중 가격 입력은 필수입니다.")
 	private int weekdayprice;
+	@NotNull(message = "주말 가격 입력은 필수입니다.")
 	private int weekendprice;
+	
 	private String options;
 	private String amenity;
 	private String regdate;
 	private String regid;
 	private String moddate;
 	private String modid;
-	
-	public RoomBean() {
-		super();
-	}
-
-	public RoomBean(int num, String name, String room_type, int cnum, String cname, String imgurl, int postingnum,
-			String contents, int propguests, int maxguests, int weekdayprice, int weekendprice, String options,
-			String amenity, String regdate, String regid, String moddate, String modid) {
-		super();
-		this.num = num;
-		this.name = name;
-		this.room_type = room_type;
-		this.cnum = cnum;
-		this.cname = cname;
-		this.imgurl = imgurl;
-		this.postingnum = postingnum;
-		this.contents = contents;
-		this.propguests = propguests;
-		this.maxguests = maxguests;
-		this.weekdayprice = weekdayprice;
-		this.weekendprice = weekendprice;
-		this.options = options;
-		this.amenity = amenity;
-		this.regdate = regdate;
-		this.regid = regid;
-		this.moddate = moddate;
-		this.modid = modid;
-	}
 
 	public int getNum() {
 		return num;
@@ -81,14 +75,6 @@ public class RoomBean {
 		this.cnum = cnum;
 	}
 
-	public String getCname() {
-		return cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
 	public String getImgurl() {
 		return imgurl;
 	}
@@ -96,13 +82,37 @@ public class RoomBean {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
-
-	public int getPostingnum() {
-		return postingnum;
+	
+	public MultipartFile getUpdateFile() {
+		return updateFile;
 	}
 
-	public void setPostingnum(int postingnum) {
-		this.postingnum = postingnum;
+	public void setUpdateFile(MultipartFile updateFile) {
+		this.updateFile = updateFile;
+	}
+
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+
+	public MultipartFile[] getMultipleUpdateFile() {
+		return multipleUpdateFile;
+	}
+
+	public void setMultipleUpdateFile(MultipartFile[] multipleUpdateFile) {
+		this.multipleUpdateFile = multipleUpdateFile;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	public String getContents() {
@@ -192,6 +202,15 @@ public class RoomBean {
 	public void setModid(String modid) {
 		this.modid = modid;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "RoomBean [num=" + num + ", name=" + name + ", room_type=" + room_type + ", cnum=" + cnum + ", imgurl="
+				+ imgurl + ", updateFile=" + updateFile + ", imgname=" + imgname
+				+ ", multipleUpdateFile=" + Arrays.toString(multipleUpdateFile) + ", summary=" + summary + ", contents="
+				+ contents + ", propguests=" + propguests + ", maxguests=" + maxguests + ", weekdayprice="
+				+ weekdayprice + ", weekendprice=" + weekendprice + ", options=" + options + ", amenity=" + amenity
+				+ ", regdate=" + regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid + "]";
+	}
 	
 }

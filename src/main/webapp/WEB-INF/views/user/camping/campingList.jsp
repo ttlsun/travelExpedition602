@@ -104,6 +104,7 @@ function listOrderBy(){
 	
 	<div class="form-group rounded">
 		<form name="myform" action="${contextPath}/campingList.do" method="post">
+		<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
 			<dl>
 				<dt align="center">
 					<input type="button" value="상세검색" class="form-control45">
@@ -144,10 +145,11 @@ function listOrderBy(){
 						<input type="text" class="form-control45" name="searchName" placeholder="이름으로 검색">
 						<span style="padding-left: 3.4%;"></span>
 						<input type="submit" class="btn btn-primary" value="검색하기" onClick="">
+						<input type="reset" class="btn btn-default" value="초기화">
 					</dd>
 				</dl>
 			</div>
-			
+			시설정보 추가
 			<!-- 태그로 검색 아직 해놓지 않음, 배열로 변경 예정 -->
 			<div style="display: block;">
 				<dl>
@@ -170,21 +172,17 @@ function listOrderBy(){
 					</dd>
 				</dl>
 			</div>
-			
-			<div align="center">
-				검색초기화 버튼 추가
-			</div>
 		</form>
 	</div>
 	
 	<table class="table table-bordered" style="">
 		<caption>
-			총 ${totalCount }개 캠핑장이 검색되었습니다. 
-			<button onClick="goRegister()">캠핑장 등록하기(사업자 전용)</button>
+			<span style="text-align: left">총 ${totalCount }개 캠핑장이 검색되었습니다. </span>
+			<input type="button" style="float: right;" class="btn btn-primary" value="캠핑장 등록하기(사업자 전용)" onClick="goRegister()">
 		</caption>
 		<thead>
 			<tr class="active">
-				<td colspan="2" align="left">
+				<td colspan="2" style="text-align: left">
 					<select name="orderBy" id="orderBy" onchange="listOrderBy()">
 						<option value="moddate desc">업데이트순</option>
 						<option value="readcount desc">조회수 높은순</option>
@@ -198,21 +196,21 @@ function listOrderBy(){
 		<tbody>
 			<c:if test="${empty lists}">
 				<tr>
-					<td colspan="" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
+					<td colspan="2" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 			
 			<c:forEach var="bean" items="${lists}">
 				<tr>
 					<td rowspan="2" align="center" class="col-xs-3 col-sm-3 col-md-3">
-						이미지
+						<img src="${fileImg}/${bean.imgurl}" alt="" title="" width="100%">
 					</td>
 					<td height="30px">
 					</td>
 				</tr>
 				<tr>
 					<td height="130px" align="left">
-						<h3><a href="${contextPath }/campingDetail.do?num=${bean.num}">
+						<h3><a href="${contextPath }/campingDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
 							[${bean.address1}&nbsp;${bean.address2}]${bean.name }</a></h3>
 						<p>${bean.summary }</p>
 					</td>
@@ -225,36 +223,7 @@ function listOrderBy(){
 	<div class="paginationCenter" align="center">
 		${pageInfo.pagingHtml}
 	</div>
-	
-	<%-- 	<c:forEach var="beanCell" items="${lists}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*2-1}">
-			<td align="center" class="col-xs-12 col-sm-6 col-md-3 ">
-			
-				<ul class="thumbnail" style="list-style: none; border: none;">
-					<li><img src="${images}/1.jpg" style="height: 100px;" alt="..."></li>
-					<li class="caption">
-					<h3>${beanCell.name} 이런식으로 사용하세요. : 캠핑명칭</h3>
-			            <p>
-			            	<span class="spanFlowRootP10">
-								<b class="redColor">[캠핑/글램핑(구분)/ 테마]</b>
-							</span>
-							<span class="spanFlowRootP10 text-primary textFontSizeLarge">
-							</span>
-							<span class="">
-								&nbsp; <span class="label label-warning"> 추천 </span>
-								&nbsp; <span class="label label-danger"> HOT </span>
-								&nbsp; <span class="label label-default"> NEW </span>
-							</span>
-						</p>
-						<p> 한줄요약 </p>
-			            <p>
-			            	<a href="#" class="btn btn-primary" role="button" onclick="goDetail()" style="text-decoration:none; color: white;">상세보기</a> 
-			            </p>
-					</li>
-				</ul>
-			</td>
-			</c:forEach>
-		</tr> --%>
-	
+		
 </div>
 </article>
 </section>

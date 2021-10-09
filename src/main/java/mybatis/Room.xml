@@ -6,4 +6,40 @@
 <!-- Room.xml -->
 <mapper namespace="user.room.model.RoomBean">
 
+	<insert id="insertData" parameterType="myRoomBean">
+		INSERT INTO ROOM(
+			NUM, NAME, ROOM_TYPE,
+			CNUM,
+			IMGURL, SUMMARY, CONTENTS,
+			PROPGUESTS, MAXGUESTS,
+			WEEKDAYPRICE, WEEKENDPRICE,
+			OPTIONS, AMENITY,
+			REGDATE, REGID
+		)
+		VALUES(
+			ROOMSEQ.NEXTVAL, #{name}, #{room_type},
+			#{cnum},
+			#{imgurl}, #{summary}, #{contents},
+			#{propguests}, #{maxguests},
+			#{weekdayprice}, #{weekendprice},
+			#{options}, #{amenity},
+			SYSDATE, #{regid}
+		)
+	</insert>
+	
+	<select id="getRoomMaxNum" resultType="int">
+		SELECT ROOMSEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<select id="getRoomList" resultType="myRoomBean">
+		SELECT 
+			NUM, NAME, ROOM_TYPE,
+			IMGURL, SUMMARY, 
+			PROPGUESTS, MAXGUESTS,
+			WEEKDAYPRICE, WEEKENDPRICE,
+			OPTIONS, AMENITY
+		FROM ROOM
+		WHERE CNUM = #{cnum}
+		ORDER BY NUM ASC
+	</select>
 </mapper>

@@ -35,7 +35,7 @@ public class CampingDao {
 		return lists;
 	}
 
-	public CampingBean getCampingDetail(int num) {
+	public CampingBean getCampingDetail(String num) {
 		CampingBean campbean = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingDetail", num);
 		return campbean;
 	}
@@ -43,6 +43,11 @@ public class CampingDao {
 	public String getCampingTypes(String num) {
 		String camp_type = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingTypes", num);
 		return camp_type;
+	}
+
+	public int updateData(CampingBean campbean) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateData", campbean);
+		return cnt;
 	}
 	
 	
