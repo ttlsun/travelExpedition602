@@ -44,11 +44,7 @@ public class CampingRegisterController {
 									@RequestParam("coordsMa") String latitude,
 									@RequestParam("coordsLa") String longitude
 									) {
-	
-		
-		System.out.println("campbean:" + campbean.toString());
-		
-		try {
+			try {
 			
 			if(result.hasErrors()) {
 				mav.setViewName(GETPAGE);
@@ -77,6 +73,8 @@ public class CampingRegisterController {
 			
 			campbean.setLatitude(latitude);
 			campbean.setLongitude(longitude);
+			
+			System.out.println(campbean.toString());
 			
 			//캠핑장 레코드 insert
 			cnt = campingDao.insertData(campbean);

@@ -28,5 +28,10 @@ public class RoomDao {
 		List<RoomBean> lists = sqlSessionTemplate.selectList(NAMESPACE+".getRoomList", cnum);
 		return lists;
 	}
+
+	public RoomBean getRoomDetail(String num) {
+		RoomBean roombean = sqlSessionTemplate.selectOne(NAMESPACE+".getRoomDetail", num);
+		return roombean;
+	}
 	
 }

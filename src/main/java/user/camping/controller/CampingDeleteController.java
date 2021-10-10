@@ -23,7 +23,8 @@ public class CampingDeleteController {
 	@RequestMapping(value=COMMAND)
 	public ModelAndView campingDelete(ModelAndView mav) {
 		
-		//삭제는 아이디 맞는지 확인, 비밀번호 입력 체크 후 삭제할 수 있도록
+		//삭제는 아이디 맞는지 확인, 비밀번호 입력 체크 후 상태 02:비노출로 변경
+		
 		
 		mav.setViewName(GOTOPAGE);
 		return mav;

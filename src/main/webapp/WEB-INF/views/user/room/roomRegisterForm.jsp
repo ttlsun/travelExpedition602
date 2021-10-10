@@ -52,15 +52,15 @@ function goList() {
 	<header><h2 align="center" class="text-primary">캠핑장 객실 등록</h2></header>
 	
 	<form:form commandName="room" name="myform" action="roomRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<input type="hidden" name="pageNumber" value="${pageNumber }">
 	<table border="1" class="table table-bordered">
-		<input type="hidden" name="pageNumber" value="${pageNumber }">
 		<caption> <span class="redFont"> * </span> 표시는 필수 입력사항입니다. </caption>
 		<tr class="active">
 			<td colspan="4">
 				<label for="cname"><h4>${cname }</h4></label>
 				<input type="hidden" name="cnum" value="${cnum}">
 				<input type="hidden" name="cname" value="${cname }">
-				<input type="hidden" name="camp_type" value="${camp_type }">
+				<input type="hidden" name="camptype" value="${camptype }">
 			</td>
 		</tr>
 		<tr>
@@ -69,25 +69,25 @@ function goList() {
 				<input type="text" class="form-control" id="name" name="name" value="${room.name }" placeholder="객실명을 입력하세요.">
 				<form:errors cssClass="errMessage" path="name"/>
 			</td>
-			<td><label for="room_type"><span class="redFont"> * </span> 객실 타입 </label></td>
+			<td><label for="roomtype"><span class="redFont"> * </span> 객실 타입 </label></td>
 			<td>
-				<c:if test="${fn:contains(camp_type,'01')}">
-					<input type="radio" id="room_type" name="room_type" value="01"
-						<c:if test="${room.room_type eq '01'}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
+				<c:if test="${fn:contains(camptype,'01')}">
+					<input type="radio" id="roomtype" name="roomtype" value="01"
+						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camp_type,'02')}">
-					<input type="radio" id="room_type" name="room_type" value="02"
-						<c:if test="${room.room_type eq '01'}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
+				<c:if test="${fn:contains(camptype,'02')}">
+					<input type="radio" id="roomtype" name="roomtype" value="02"
+						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camp_type,'03')}">
-					<input type="radio" id="room_type" name="room_type" value="03"
-						<c:if test="${room.room_type eq '01'}"> checked</c:if>>&nbsp;글램핑&nbsp;
+				<c:if test="${fn:contains(camptype,'03')}">
+					<input type="radio" id="roomtype" name="roomtype" value="03"
+						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;글램핑&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camp_type,'04')}">
-					<input type="radio" id="room_type" name="room_type" value="04"
-						<c:if test="${room.room_type eq '01'}"> checked</c:if>>&nbsp;카라반&nbsp;
+				<c:if test="${fn:contains(camptype,'04')}">
+					<input type="radio" id="roomtype" name="roomtype" value="04"
+						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;카라반&nbsp;
 				</c:if>
-				<form:errors cssClass="errMessage" path="room_type"/>
+				<form:errors cssClass="errMessage" path="roomtype"/>
 			</td>
 		</tr>
 		<tr>

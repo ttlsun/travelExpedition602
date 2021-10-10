@@ -15,7 +15,7 @@ public class RoomBean {
 	@NotBlank(message = "객실명 입력은 필수입니다.")
 	private String name;
 	
-	private String room_type;
+	private String roomtype;
 	private int cnum;
 	
 	private String imgurl; // 대표이미지
@@ -42,6 +42,7 @@ public class RoomBean {
 	private String regid;
 	private String moddate;
 	private String modid;
+	private String status; //00:완전삭제/01:노출/02:비노출
 
 	public int getNum() {
 		return num;
@@ -59,12 +60,12 @@ public class RoomBean {
 		this.name = name;
 	}
 
-	public String getRoom_type() {
-		return room_type;
+	public String getRoomtype() {
+		return roomtype;
 	}
 
-	public void setRoom_type(String room_type) {
-		this.room_type = room_type;
+	public void setRoomtype(String roomtype) {
+		this.roomtype = roomtype;
 	}
 
 	public int getCnum() {
@@ -202,15 +203,26 @@ public class RoomBean {
 	public void setModid(String modid) {
 		this.modid = modid;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "RoomBean [num=" + num + ", name=" + name + ", room_type=" + room_type + ", cnum=" + cnum + ", imgurl="
-				+ imgurl + ", updateFile=" + updateFile + ", imgname=" + imgname
-				+ ", multipleUpdateFile=" + Arrays.toString(multipleUpdateFile) + ", summary=" + summary + ", contents="
-				+ contents + ", propguests=" + propguests + ", maxguests=" + maxguests + ", weekdayprice="
-				+ weekdayprice + ", weekendprice=" + weekendprice + ", options=" + options + ", amenity=" + amenity
-				+ ", regdate=" + regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid + "]";
+		return "RoomBean [num=" + num + ", name=" + name + ", roomtype=" + roomtype + ", cnum=" + cnum + ", imgurl="
+				+ imgurl + ", updateFile=" + updateFile + ", imgname=" + imgname + ", multipleUpdateFile="
+				+ Arrays.toString(multipleUpdateFile) + ", summary=" + summary + ", contents=" + contents
+				+ ", propguests=" + propguests + ", maxguests=" + maxguests + ", weekdayprice=" + weekdayprice
+				+ ", weekendprice=" + weekendprice + ", options=" + options + ", amenity=" + amenity + ", regdate="
+				+ regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid + ", status=" + status
+				+ "]";
 	}
+
+	
 	
 }

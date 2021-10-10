@@ -26,35 +26,19 @@ $(document).ready(function() {
 	//메타태그 설정. (DB에 가져온 값 셋팅)
 	var title = "${campbean.name}"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
 	$("#metaTitle").attr("content", title);
-	$("#metaDescription").attr("content", "${campbean.summary}");
-	$("#metaKeywords").attr("content", "#키워드");
+	$("#metaDescription").attr("content", "캠핑 상세");
+	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
 	
 	//지도를 생성합니다
 	map = mapViewInit('map');
-	// 지도에 올릴 마커를 생성합니다.
-	
 	
 	//주소 값 내려서 받기.
-	var addr1 = "${campbean.address1}";
-	var addr2 = "${campbean.address2}";
-	var addr3 = "${campbean.address3}";
-	var addr4 = "${campbean.address4}";
-	
-	//var fullAddr = addr1 +" " + addr2 + " " + addr3 + " " + addr4;
-	var fullAddr = "경기 가평군 북면 노씨터길 12"; //일단 여서 문제..
-	//alert(fullAddr);
-    var coordsLa = "${campbean.longitude}"; //위도 // 값 반대로 넣음.. =ㅂ =; 
-    //alert(coordsLa);
-    var coordsMa = "${campbean.latitude}"; //경도
+	var fullAddr = "${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}";
+    var coordsLa = "${campbean.latitude}"; //위도
+    var coordsMa = "${campbean.longitude}"; //경도
        
 	addSearch(fullAddr, coordsMa, coordsLa);
-	
-   
 });
-
-function mapOpen() {
-	$('#divAdd').html("");
-}
 
 function addSearch(fullAddr, lat, lng) {
 	
@@ -92,7 +76,7 @@ function goDelete(num,pageNumber) {
 
 //추천관광지 더보기 버튼 클릭시
 function goTourList() {
-	location.href= "${contextPath}/tourList.do";
+	location.href= "${contextPath}/추천관광지";
 }
 
 //객실 등록 버튼
@@ -101,13 +85,13 @@ function goInsertRoom(pageNumber){
 }
 
 //객실 상세보기 버튼
-function goRoomDetail(num){
-	location.href= "${contextPath}/roomDetail.do?num="+num;	
+function goRoomDetail(num,pageNumber){
+	location.href= "${contextPath}/roomDetail.do?num="+num+"&name=${campbean.name}&pageNumber="+pageNumber;	
 }
 
 //객실 예약 버튼
-function goReservation(num){
-	location.href= "${contextPath}/reservation.do?num="+num;	
+function goReservation(num,pageNumber){
+	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
 </script>
@@ -121,7 +105,7 @@ function goReservation(num){
 		<input type="button" class="btn btn-default" value="수정(사업자 전용)" onclick="goUpdate(${campbean.num},${pageNumber})">
 		<input type="button" class="btn btn-default" value="삭제(사업자 전용)" onclick="goDelete(${campbean.num},${pageNumber})">
 	</div>
-	시설 정보 어디에 추가? 캠핑장 유형|시설정보를 주소 위에?
+	
 	<!-- 캠핑장 타이틀 block -->
 	<form name="campform" action="" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
@@ -129,33 +113,33 @@ function goReservation(num){
 	
 	<table class="table table-bordered" style="border: none;">
 		<tr>
-			<td colspan="2" align="center" style="border: none;">
+			<td colspan="4" align="center" style="border: none;">
 				<span class="text-primary" style="font-size: 30px; border-bottom: none;">
 				${campbean.name }
 				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" style="border: none;">
+			<td colspan="4" align="center" style="border: none;">
 				<img src="${fileImg}/${campbean.imgurl}" alt="" title="" width="60%">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" style="border: none; padding-bottom: 20px;">
+			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
 				<span class="text-primary" style="font-size: 15px;">
 				${campbean.summary }
 				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" style="border: none; padding-bottom: 20px;">
+			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
 				<span class="text-primary" style="font-size: 15px;">
-				${campbean.themecode } 테마,키워드태그
+					<font color="red">!!!!!키워드태그추가!!!!!</font>
 				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border: none; text-align:end;">
+			<td colspan="4" style="border: none; text-align:end;">
 				<c:forEach var="i" begin="1" end="5">
 					<c:choose>
 						<c:when test="${i <= 3}"> <!-- 3으로 적힌 곳을 별등급 받은 숫자 컬럼값으로 셋팅하세요. -->
@@ -173,7 +157,7 @@ function goReservation(num){
 			</td>
 		</tr>
 		<tr>
-			<td align="left" style="border: none; text-align:left;">
+			<td colspan="2" align="left" style="border: none; text-align:left;">
 				<div class="fs-4 mb-3">
              		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
  						<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
@@ -182,7 +166,7 @@ function goReservation(num){
 					조회수 ${campbean.readcount }
            		</div>
 			</td>
-			<td align="right" style="border: none; text-align:end;" width="30%">
+			<td colspan="2" align="right" style="border: none; text-align:end;" width="30%">
 				<button type="button" class="btn outline-secondary" >
 					추천
 			    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
@@ -199,12 +183,57 @@ function goReservation(num){
 			</td>
 		</tr>
 		<tr>
+			<th width="15%">
+				캠핑장 환경
+			</th>
+			<td width="35%">
+				<c:if test="${campbean.themecode eq '01' }">
+					&nbsp;숲/산&nbsp;
+				</c:if>
+				<c:if test="${campbean.themecode eq '02' }">
+					&nbsp;해변/바다&nbsp;
+				</c:if>
+				<c:if test="${campbean.themecode eq '03' }">
+					&nbsp;강/호수/계곡&nbsp;
+				</c:if>
+				<c:if test="${campbean.themecode eq '04' }">
+					&nbsp;도심&nbsp;
+				</c:if>
+				<c:if test="${campbean.themecode eq '05' }">
+					&nbsp;섬&nbsp;
+				</c:if>
+			</td>
+			<th width="15%">
+				캠핑장 유형
+			</th>
+			<td width="35%">
+				<c:if test="${fn:contains(campbean.camptype,'01') }">
+					&nbsp;일반캠핑장&nbsp;
+				</c:if>
+				<c:if test="${fn:contains(campbean.camptype,'02') }">
+					&nbsp;자동차캠핑장&nbsp;
+				</c:if>
+				<c:if test="${fn:contains(campbean.camptype,'03') }">
+					&nbsp;글램핑&nbsp;
+				</c:if>
+				<c:if test="${fn:contains(campbean.camptype,'04') }">
+					&nbsp;카라반&nbsp;
+				</c:if>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				주소
+			</th>
 			<td>
 				<span class="text-primary" style="font-size: 15px;">
 				<c:set var="fullAddr" value="${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}"/>
 				${fullAddr }
 				</span>	
 			</td>
+			<th>
+				문의처
+			</th>
 			<td>
 				<a href="tel:${campbean.contact }" class="text-decoration-none">
                 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
@@ -212,7 +241,7 @@ function goReservation(num){
 				</svg>
               	</a>
               	&nbsp; ${campbean.contact }
-            </td>
+			</td>
 		</tr>
 	</table>
 	</form>
@@ -231,11 +260,11 @@ function goReservation(num){
 			<!-- 상세 정보 탭 -->
 			<div class="tab-pane fade" id="tab1" style="text-align: left;">
 			    <h3>캠핑장 상세 정보</h3>
-			    
+			    <div>${campbean.contents }</div>
 			</div>
 			
 			<!-- 객실 리스트 탭 -->
-			<div class="tab-pane active fade" id="tab2" style="text-align: left;">
+			<div class="tab-pane active fade in" id="tab2" style="text-align: left;">
 		   		<h3>객실 리스트</h3>
 		    	<span class="spanFlowRootP10"></span>
 				
@@ -243,30 +272,39 @@ function goReservation(num){
 					<div align="right">
 						<input type="button" class="btn btn-primary" value="객실 등록하기(사업자 전용)" style="margin-bottom: 10px" onClick="goInsertRoom(${pageNumber})">
 					</div>
-		
+					
 					<c:forEach var="room" items="${lists }">
+					
+					<c:choose>
+						<c:when test="${room.roomtype eq '01' }">
+							<c:set var="rType" value="일반캠핑장"/>
+						</c:when>
+						<c:when test="${room.roomtype eq '02' }">
+							<c:set var="rType" value="자동차캠핑장"/>
+						</c:when>
+						<c:when test="${room.roomtype eq '03' }">
+							<c:set var="rType" value="글램핑"/>
+						</c:when>
+						<c:when test="${room.roomtype eq '04' }">
+							<c:set var="rType" value="카라반"/>
+						</c:when>
+					</c:choose>
+					
 						<table class="table table-bordered">
-							<tr bordercolor="red">
-								<td rowspan="4" width="24%">
+							<tr>
+								<td rowspan="4" width="25%">
 									<img src="${fileImg}/${room.imgurl}" alt="" title="" width="100%">
 								</td>
-								<td colspan="6">
-									[
-									<c:choose>
-											<c:when test="${room.roomtype eq '01'}">일반캠핑장</c:when>
-											<c:when test="${room.roomtype eq '02'}">자동차캠핑장</c:when>
-											<c:when test="${room.roomtype eq '03'}">글램핑</c:when>
-											<c:when test="${room.roomtype eq '04'}">카라반</c:when>
-									</c:choose>
-									]&nbsp;${room.name }
+								<td colspan="6" style="text-align: left;">
+									[${rType}]&nbsp;${room.name }
 								</td>
 								<td rowspan="4" width="10%" align="center" style="vertical-align: middle;">
-									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail(${room.num})"><br><br>
-									<input type="button" value="객실예약" class="btn btn-primary" onClick="goReservation(${room.num})">	
+									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail(${room.num},${pageNumber })"><br><br>
+									<input type="button" value="객실예약" class="btn btn-primary" onClick="goReservation(${room.num},${pageNumber })">	
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">
+								<td colspan="6" style="text-align: left;">
 									${room.summary }
 								</td>
 							</tr>
@@ -324,16 +362,16 @@ function goReservation(num){
 			</div>
 			
 			<!-- 오시는 길 탭 -->
-		    <div class="tab-pane fade in" id="tab4" style="text-align: left;" onclick="mapOpen()">
+		    <div class="tab-pane fade" id="tab4" style="text-align: left;">
 		      	<h3> 오시는 길</h3>
 				<span>${campbean.name } </span>
 				<p>${fullAddr}</p>
 				
-				<div id="map" style="height:400px; "></div>
+				<div id="map" style="width:100%;height:350px; "></div>
+			
 			</div>
 		</div>
 		<hr>
-		
 	</div>
 	
 	<!-- 추천관광지  -->

@@ -14,42 +14,54 @@
 			POSTCODE, ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, 
 			LATITUDE, LONGITUDE,
 			CONTACT, REGDATE, REGID, MODDATE,
-			READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT
+			READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT,
+			STATUS
 		)
 		VALUES(
-			CAMPINGSEQ.NEXTVAL, #{name}, #{camp_type}, #{themecode}, #{reg_keyword},
+			CAMPINGSEQ.NEXTVAL, #{name}, #{camptype}, #{themecode}, #{regkeyword},
 			#{summary}, #{imgurl}, 
 			#{options}, #{contents},
 			#{postcode}, #{address1}, #{address2}, #{address3}, #{address4},
 			#{latitude}, #{longitude},
 			#{contact}, SYSDATE, #{regid}, SYSDATE,
-			0, 0, 0, 0
+			0, 0, 0, 0,
+			'01'
 		)
 	</insert>
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM CAMPING
 		WHERE 1=1
-		<if test="address1 != null">
+		<if test="status == '01'">
+			AND STATUS = #{status}
+		</if>
+		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1}
 		</if>
-		<if test="address2 != null">
+		<if test="address2 != null and address2 != ''">
 			AND ADDRESS2 = #{address2}
 		</if>
-		<if test="camp_type != null">
-			AND CAMP_TYPE IN(#{camp_type})
+		<if test="camptype != null and camptype != ''">
+			AND CAMP_TYPE IN(#{camptype})
 		</if>
-		<if test="themecode != null">
+		<if test="themecode != null and themecode != ''">
 			AND THEMECODE IN(#{themecode})
 		</if>
-		<if test="searchName != null">
+		<if test="searchName != null and searchName != ''">
 			AND NAME LIKE %||#{searchName}||%
 		</if>
 	</select>
 	
 	<select id="getCampingList" resultType="myCampingBean">
-		SELECT NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,SUMMARY,IMGURL,OPTIONS,
-		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT 
+		SELECT 
+			NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,
+			SUMMARY,IMGURL,OPTIONS,
+			POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,
+			READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT,
+			(CASE STATUS
+					WHEN '01' THEN '노출'
+					WHEN '02' THEN '비노출'
+			END) AS STATUS 
 		FROM CAMPING
 		
 		
@@ -70,9 +82,9 @@
 		UPDATE CAMPING
 		<set>
 			NAME = #{name},
-			CAMP_TYPE = #{camp_type},
+			CAMP_TYPE = #{camptype},
 			THEMECODE = #{themecode},
-			REG_KEYWORD = #{reg_keyword},
+			REG_KEYWORD = #{regkeyword},
 			SUMMARY = #{summary},
 			IMGURL = #{imgurl},
 			OPTIONS = #{options},

@@ -41,8 +41,8 @@ public class CampingDao {
 	}
 
 	public String getCampingTypes(String num) {
-		String camp_type = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingTypes", num);
-		return camp_type;
+		String camptype = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingTypes", num);
+		return camptype;
 	}
 
 	public int updateData(CampingBean campbean) {

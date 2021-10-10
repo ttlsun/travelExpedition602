@@ -43,10 +43,10 @@ public class CampingDetailController {
 		CampingBean campbean = campingDao.getCampingDetail(camp_num);
 		mav.addObject("campbean", campbean);
 		
-		//객실 리스트 select
+		//객실 리스트 select(노출값만)
+		//맵으로 바꿔서 status "01" 넣자
 		List<RoomBean> lists = roomDao.getRoomList(camp_num);
 		mav.addObject("lists", lists);
-		
 		
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GETPAGE);

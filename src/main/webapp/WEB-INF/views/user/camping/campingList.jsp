@@ -116,10 +116,10 @@ function listOrderBy(){
 				<dl>
 					<dt><label for="searchType">유형</label></dt>
 					<dd>
-						<label><input type="checkbox" id="searchType" name="camp_type" value="01">&nbsp;일반캠핑장&nbsp;</label>
-						<label><input type="checkbox" id="searchType" name="camp_type" value="02">&nbsp;자동차캠핑장&nbsp;</label>
-						<label><input type="checkbox" id="searchType" name="camp_type" value="03">&nbsp;글램핑&nbsp;</label>
-						<label><input type="checkbox" id="searchType" name="camp_type" value="04">&nbsp;카라반&nbsp;</label>
+						<label><input type="checkbox" id="searchType" name="camptype" value="01">&nbsp;일반캠핑장&nbsp;</label>
+						<label><input type="checkbox" id="searchType" name="camptype" value="02">&nbsp;자동차캠핑장&nbsp;</label>
+						<label><input type="checkbox" id="searchType" name="camptype" value="03">&nbsp;글램핑&nbsp;</label>
+						<label><input type="checkbox" id="searchType" name="camptype" value="04">&nbsp;카라반&nbsp;</label>
 					</dd>
 				</dl>
 				<dl>

@@ -164,18 +164,18 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="camp_type"><span class="redFont"> * </span> 캠핑장 유형 </label></td>
+			<td><label for="camptype"><span class="redFont"> * </span> 캠핑장 유형 </label></td>
 			<td>
 				<p><span class="redFont">해당되는 유형을 모두 선택해주세요.</span></p>
-				<input type="checkbox" id="camp_type" name="camp_type" value="01" 
-					<c:if test="${fn:contains(camping.camp_type,'01')}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
-				<input type="checkbox" id="camp_type" name="camp_type" value="02" 
-					<c:if test="${fn:contains(camping.camp_type,'02')}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
-				<input type="checkbox" id="camp_type" name="camp_type" value="03" 
-					<c:if test="${fn:contains(camping.camp_type,'03')}"> checked</c:if>>&nbsp;글램핑&nbsp;
-				<input type="checkbox" id="camp_type" name="camp_type" value="04" 
-					<c:if test="${fn:contains(camping.camp_type,'04')}"> checked</c:if>>&nbsp;카라반&nbsp;
-				<form:errors cssClass="errMessage" path="camp_type"/>
+				<input type="checkbox" id="camptype" name="camptype" value="01" 
+					<c:if test="${fn:contains(camping.camptype,'01')}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
+				<input type="checkbox" id="camptype" name="camptype" value="02" 
+					<c:if test="${fn:contains(camping.camptype,'02')}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
+				<input type="checkbox" id="camptype" name="camptype" value="03" 
+					<c:if test="${fn:contains(camping.camptype,'03')}"> checked</c:if>>&nbsp;글램핑&nbsp;
+				<input type="checkbox" id="camptype" name="camptype" value="04" 
+					<c:if test="${fn:contains(camping.camptype,'04')}"> checked</c:if>>&nbsp;카라반&nbsp;
+				<form:errors cssClass="errMessage" path="camptype"/>
 			</td>
 		</tr>
 		<tr>
@@ -203,17 +203,17 @@ function fileSelectChange(event) {
 		
 		<!-- 키워드(#) 코드와 문자열 연결하여 배열로 만들것 -->
 		<tr>
-			<td><label for="reg_keyword"> 우리 캠핑장의 키워드(#) </label></td>
+			<td><label for="regkeyword"> 우리 캠핑장의 키워드(#) </label></td>
 			<td>
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
-				<input type="checkbox" id="reg_keyword" name="reg_keyword" value="01" 
-					<c:if test="${fn:contains(camping.reg_keyword,'01')}"> checked</c:if>>&nbsp;힐링&nbsp;
-				<input type="checkbox" id="reg_keyword" name="reg_keyword" value="02" 
-					<c:if test="${fn:contains(camping.reg_keyword,'02')}"> checked</c:if>>&nbsp;연인과함께&nbsp;
-				<input type="checkbox" id="reg_keyword" name="reg_keyword" value="03" 
-					<c:if test="${fn:contains(camping.reg_keyword,'03')}"> checked</c:if>>&nbsp;반려견동반&nbsp;
-				<input type="checkbox" id="reg_keyword" name="reg_keyword" value="04" 
-					<c:if test="${fn:contains(camping.reg_keyword,'04')}"> checked</c:if>>&nbsp;파쇄석&nbsp;
+				<input type="checkbox" id="regkeyword" name="regkeyword" value="01" 
+					<c:if test="${fn:contains(camping.regkeyword,'01')}"> checked</c:if>>&nbsp;힐링&nbsp;
+				<input type="checkbox" id="regkeyword" name="regkeyword" value="02" 
+					<c:if test="${fn:contains(camping.regkeyword,'02')}"> checked</c:if>>&nbsp;연인과함께&nbsp;
+				<input type="checkbox" id="regkeyword" name="regkeyword" value="03" 
+					<c:if test="${fn:contains(camping.regkeyword,'03')}"> checked</c:if>>&nbsp;반려견동반&nbsp;
+				<input type="checkbox" id="regkeyword" name="regkeyword" value="04" 
+					<c:if test="${fn:contains(camping.regkeyword,'04')}"> checked</c:if>>&nbsp;파쇄석&nbsp;
 				
 			</td>
 		</tr>

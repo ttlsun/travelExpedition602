@@ -14,16 +14,18 @@
 			PROPGUESTS, MAXGUESTS,
 			WEEKDAYPRICE, WEEKENDPRICE,
 			OPTIONS, AMENITY,
-			REGDATE, REGID
+			REGDATE, REGID,
+			STATUS
 		)
 		VALUES(
-			ROOMSEQ.NEXTVAL, #{name}, #{room_type},
+			#{num}, #{name}, #{roomtype},
 			#{cnum},
 			#{imgurl}, #{summary}, #{contents},
 			#{propguests}, #{maxguests},
 			#{weekdayprice}, #{weekendprice},
 			#{options}, #{amenity},
-			SYSDATE, #{regid}
+			SYSDATE, #{regid},
+			'01'
 		)
 	</insert>
 	
@@ -39,7 +41,15 @@
 			WEEKDAYPRICE, WEEKENDPRICE,
 			OPTIONS, AMENITY
 		FROM ROOM
-		WHERE CNUM = #{cnum}
+		WHERE 
+			CNUM = #{cnum} AND
+			STATUS = '01'
 		ORDER BY NUM ASC
 	</select>
+	
+	<select id="getRoomDetail" resultType="myRoomBean">
+		SELECT * FROM ROOM
+		WHERE NUM = #{num}
+	</select>
+	
 </mapper>

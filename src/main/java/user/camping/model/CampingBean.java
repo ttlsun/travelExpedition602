@@ -12,12 +12,12 @@ public class CampingBean {
 	private String name;
 
 	@NotEmpty(message = "캠핑장 유형을 선택하세요.")
-	private String camp_type;
+	private String camptype;
 
 	@NotEmpty(message = "캠핑장 테마를 선택하세요.")
 	private String themecode;
 
-	private String reg_keyword;
+	private String regkeyword;
 	private String summary;
 	
 	private String imgurl;
@@ -48,6 +48,7 @@ public class CampingBean {
 	private int recommend;
 	private int steamed;
 	private int reviewcount;
+	private String status; //00:완전삭제/01:노출/02:비노출
 
 	public int getNum() {
 		return num;
@@ -73,12 +74,12 @@ public class CampingBean {
 		this.name = name;
 	}
 
-	public String getCamp_type() {
-		return camp_type;
+	public String getCamptype() {
+		return camptype;
 	}
 
-	public void setCamp_type(String camp_type) {
-		this.camp_type = camp_type;
+	public void setCamptype(String camptype) {
+		this.camptype = camptype;
 	}
 
 	public String getThemecode() {
@@ -89,12 +90,12 @@ public class CampingBean {
 		this.themecode = themecode;
 	}
 
-	public String getReg_keyword() {
-		return reg_keyword;
+	public String getRegkeyword() {
+		return regkeyword;
 	}
 
-	public void setReg_keyword(String reg_keyword) {
-		this.reg_keyword = reg_keyword;
+	public void setRegkeyword(String regkeyword) {
+		this.regkeyword = regkeyword;
 	}
 
 	public String getSummary() {
@@ -257,17 +258,24 @@ public class CampingBean {
 		this.reviewcount = reviewcount;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "CampingBean [num=" + num + ", name=" + name + ", camp_type=" + camp_type + ", themecode=" + themecode
-				+ ", reg_keyword=" + reg_keyword + ", summary=" + summary + ", imgurl=" + imgurl + ", updateFile="
+		return "CampingBean [num=" + num + ", name=" + name + ", camptype=" + camptype + ", themecode=" + themecode
+				+ ", regkeyword=" + regkeyword + ", summary=" + summary + ", imgurl=" + imgurl + ", updateFile="
 				+ updateFile + ", options=" + options + ", contents=" + contents + ", postcode=" + postcode
 				+ ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3 + ", address4="
 				+ address4 + ", latitude=" + latitude + ", longitude=" + longitude + ", contact=" + contact
 				+ ", regdate=" + regdate + ", regid=" + regid + ", moddate=" + moddate + ", modid=" + modid
 				+ ", readcount=" + readcount + ", recommend=" + recommend + ", steamed=" + steamed + ", reviewcount="
-				+ reviewcount + "]";
+				+ reviewcount + ", status=" + status + "]";
 	}
-
 
 }

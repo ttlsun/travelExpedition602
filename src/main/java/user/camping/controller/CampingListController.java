@@ -1,6 +1,5 @@
 package user.camping.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,11 +30,13 @@ public class CampingListController {
 								  @RequestParam Map<String,String> map,
 								  @RequestParam(value="pageNumber", required=false) String pageNumber,
 								  HttpServletRequest request) {
-				
+		//노출만 리스트업
+		map.put("status", "01");
+		
 		map.put("orderBy", map.get("orderBy"));
 		map.put("address1", map.get("address1"));
 		map.put("address2", map.get("address2"));
-		map.put("camp_type", map.get("camp_type"));
+		map.put("camptype", map.get("camptype"));
 		map.put("themecode", map.get("themecode"));
 		map.put("searchName", map.get("searchName"));
 		map.put("searchKeyword", map.get("searchKeyword"));
