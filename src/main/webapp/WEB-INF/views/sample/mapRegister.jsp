@@ -72,26 +72,21 @@ function addrKakao() {
 		
 		var roadAddressAddr = data.roadAddressEnglish.split(",");
 		var autoJibunAddr = data.jibunAddressEnglish.split(",");
-		var addr4 = data.userSelectedType == 'R' ? roadAddressAddr[0] : autoJibunAddr[0];
-		//alert(autoJibunAddr);
-		//alert(roadAddressAddr[0]);
-		//alert(addr4);
 		
-		//상세주소를 남기고 주소를 할경우..
+		//상세주소를 남기고 주소에 넣기.
 		var addr3 = data.userSelectedType == 'R' ? data.bname1 + " "+ data.roadname+" " + roadAddressAddr[0] : data.bname1 + " " +data.bname +" " + autoJibunAddr[0];
 		$('input[name="address3"]').val(addr3);
 		
-		
-		//마지막을 상세주소로 사용할 경우..
-		var addr3 = data.bname1 ;
-		var addr4 = data.userSelectedType == 'R' ? data.roadname+" " + roadAddressAddr[0] : data.bname +" " + autoJibunAddr[0];
+		// (이건 이슈가 있네요.. 몇개 들이 중간에 동이 안들감요..)
+		//var addr3 = data.bname1 ;
+		//var addr4 = data.userSelectedType == 'R' ? data.roadname+" " + roadAddressAddr[0] : data.bname +" " + autoJibunAddr[0];
 		//$('input[name="address3"]').val(addr3); //북면
 		//$('input[name="address4"]').val(addr4); //노씨터길 12
 		
 		
-		//전부다 기입 형태로 ..
-		var addr3 = data.userSelectedType == 'R' ? data.bname1 +" " + data.roadname : data.bname1 +" " + data.bname;
-		var addr4 = data.userSelectedType == 'R' ? roadAddressAddr[0] : autoJibunAddr[0];
+		// 확정인듯요.
+		//var addr3 = data.userSelectedType == 'R' ? data.bname1 +" " + data.roadname : data.bname1 +" " + data.bname;
+		//var addr4 = data.userSelectedType == 'R' ? roadAddressAddr[0] : autoJibunAddr[0];
 		//$('input[name="address3"]').val(addr3); //북면 노씨터길
 		//$('input[name="address4"]').val(addr4); //12
 		

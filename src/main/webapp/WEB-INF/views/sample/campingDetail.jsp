@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="../../common/top.jsp" %>   
+
+<style type="text/css">
+	th,td{
+		text-align: center;
+	}
+</style>
 
 <!-- 지도관련 js -->
 <!-- 지도 마커 css -->
@@ -19,23 +24,13 @@ $(document).ready(function() {
 	navActive('camping');
 	
 	//메타태그 설정. (DB에 가져온 값 셋팅)
-	var title = "캠핑 상세"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
+	var title = "야생화캠핑장"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
 	$("#metaTitle").attr("content", title);
-	$("#metaDescription").attr("content", "한줄요약내용");
+	$("#metaDescription").attr("content", "캠핑 상세");
 	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
-	
-	//지도를 생성합니다
-	map = mapViewInit('map');
-	
-	//주소 값 내려서 받기.
-	var fullAddr = "경기 가평군 북면 노씨터길 12"; //테스트 주소.
-    var coordsLa = "127.536039129141"; //좌표값
-    var coordsMa = "37.9501622932289"; //좌표값
-    
-	addSerach(fullAddr, coordsMa, coordsLa);
 });
 
-function addSerach(fullAddr, lat, lng) {
+function addSearch(fullAddr, lat, lng) {
 	
 	var coords = new kakao.maps.LatLng(lat, lng);
 	
@@ -49,61 +44,75 @@ function addSerach(fullAddr, lat, lng) {
     map.setCenter(coords);
 }
 
+function fnTab(num) {
+	if (num == 4) {
+		if (map == null) {
+			setTimeout(function() {
+				//지도를 생성합니다
+				map = mapViewInit('map');
+				
+				//주소 값 내려서 받기.
+				var fullAddr = "경기 가평군 북면 노씨터길 12";
+			    var coordsLa = "127.536039129141"; //위도
+			    var coordsMa = "37.9501622932289"; //경도
+			       
+				addSearch(fullAddr, coordsMa, coordsLa);
+			}, 300);
+		}
+	}
+}
+
 //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 function closeOverlay() {
     overlay.setMap(null);     
 }
 
-//리스트 버튼 클릭시
-function goList() {
-	location.href= "${contextPath}/sampleCampingList";
-}
-
 </script>
+
+<!-- 승민님이 만드신 화면단에 지도 이상하게 뜬거 수정한 예제.. -->
 
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">캠핑/글램핑 상세 화면</h2></header>
+	<header><h5 align="left" class="text-primary">캠핑장 상세 화면</h5></header>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="수정(사업자 전용)" onclick="goUpdate()">
+		<input type="button" class="btn btn-default" value="삭제(사업자 전용)" onclick="goDelete()">
+	</div>
 	
-	<form name="myForm" action="" method="post" class="form-horizontal">
-	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
-	<input type="hidden" name="num" id="num" value="">
-	
-	<table class="table table-bordered">
+	<!-- 캠핑장 타이틀 block -->
+	<form name="campform" action="" method="post" class="form-horizontal">
+
+	<table class="table table-bordered" style="border: none;">
 		<tr>
-			<td colspan="4" align="center" style="border-bottom: none;">
-				<img src="${images}/1.jpg" alt="" title="" width="30%">
+			<td colspan="4" align="center" style="border: none;">
+				<span class="text-primary" style="font-size: 30px; border-bottom: none;">
+				캠핑명
+				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
-				<span class="text-primary" style="font-size: 25px;">
-				타이틀
-				</span>
+			<td colspan="4" align="center" style="border: none;">
+				<img src="${fileImg}/1.jpg" alt="" title="" width="60%">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
 				<span class="text-primary" style="font-size: 15px;">
-				한줄요약
-				</span>
+				한줄소개
+				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border: none;"> (캠핑 구분) : 일반야영장 / 테마별: 계곡 </td>
-			<td colspan="2" align="right" style="border: none; padding-top: 2%" width="20%">
-				<div class="fs-4 mb-3">
-             		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
- 						<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
- 						<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-				</svg>
-					조회수 1
-           		</div>
+			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
+				<span class="text-primary" style="font-size: 15px;">
+					<font color="red">!!!!!키워드태그추가!!!!!</font>
+				</span>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan="1" style="border: none;">
+			<td colspan="4" style="border: none; text-align:end;">
 				<c:forEach var="i" begin="1" end="5">
 					<c:choose>
 						<c:when test="${i <= 3}"> <!-- 3으로 적힌 곳을 별등급 받은 숫자 컬럼값으로 셋팅하세요. -->
@@ -119,7 +128,18 @@ function goList() {
 					</c:choose>
 				</c:forEach>
 			</td>
-			<td colspan="3" style="border: none; text-align:end;" width="30%">
+		</tr>
+		<tr>
+			<td colspan="2" align="left" style="border: none; text-align:left;">
+				<div class="fs-4 mb-3">
+             		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+ 						<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+ 						<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+				</svg>
+					조회수
+           		</div>
+			</td>
+			<td colspan="2" align="right" style="border: none; text-align:end;" width="30%">
 				<button type="button" class="btn outline-secondary" >
 					추천
 			    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
@@ -127,47 +147,42 @@ function goList() {
 					</svg>
 					1 
 			    </button>
-			    <!-- <button type="button" class="btn outline-secondary" >
-	           		비추천
-	           		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
-					<path d="M8.864 15.674c-.956.24-1.843-.484-1.908-1.42-.072-1.05-.23-2.015-.428-2.59-.125-.36-.479-1.012-1.04-1.638-.557-.624-1.282-1.179-2.131-1.41C2.685 8.432 2 7.85 2 7V3c0-.845.682-1.464 1.448-1.546 1.07-.113 1.564-.415 2.068-.723l.048-.029c.272-.166.578-.349.97-.484C6.931.08 7.395 0 8 0h3.5c.937 0 1.599.478 1.934 1.064.164.287.254.607.254.913 0 .152-.023.312-.077.464.201.262.38.577.488.9.11.33.172.762.004 1.15.069.13.12.268.159.403.077.27.113.567.113.856 0 .289-.036.586-.113.856-.035.12-.08.244-.138.363.394.571.418 1.2.234 1.733-.206.592-.682 1.1-1.2 1.272-.847.283-1.803.276-2.516.211a9.877 9.877 0 0 1-.443-.05 9.364 9.364 0 0 1-.062 4.51c-.138.508-.55.848-1.012.964l-.261.065zM11.5 1H8c-.51 0-.863.068-1.14.163-.281.097-.506.229-.776.393l-.04.025c-.555.338-1.198.73-2.49.868-.333.035-.554.29-.554.55V7c0 .255.226.543.62.65 1.095.3 1.977.997 2.614 1.709.635.71 1.064 1.475 1.238 1.977.243.7.407 1.768.482 2.85.025.362.36.595.667.518l.262-.065c.16-.04.258-.144.288-.255a8.34 8.34 0 0 0-.145-4.726.5.5 0 0 1 .595-.643h.003l.014.004.058.013a8.912 8.912 0 0 0 1.036.157c.663.06 1.457.054 2.11-.163.175-.059.45-.301.57-.651.107-.308.087-.67-.266-1.021L12.793 7l.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315l-.353-.354.353-.354c.047-.047.109-.176.005-.488a2.224 2.224 0 0 0-.505-.804l-.353-.354.353-.354c.006-.005.041-.05.041-.17a.866.866 0 0 0-.121-.415C12.4 1.272 12.063 1 11.5 1z"/>
-					</svg>
-					1
-				</button> -->
-				<button type="button" class="btn outline-secondary" >
+			    <button type="button" class="btn outline-secondary" >
 	           		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
 					  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
 					</svg>
-					찜
-				</button>
-				<button type="button" class="btn outline-secondary" >
-	           		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-					  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-					  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-					</svg>
-					예약
+					찜 1
 				</button>
 			</td>
 		</tr>
 		<tr>
-			<td width="10%">번호</td>
-			<td>1</td>
-			<td width="10%">등록 ID</td>
-			<td> id </td>
+			<th width="15%">
+				캠핑장 환경
+			</th>
+			<td width="35%">
+				숲/산
+			</td>
+			<th width="15%">
+				캠핑장 유형
+			</th>
+			<td width="35%">
+				일반캠핑장
+			</td>
 		</tr>
 		<tr>
-			<td>기준인원</td>
-			<td>1명</td>
-			<td>최대인원</td>
-			<td>4명 </td>
-		</tr>
-		<tr>
-			<td>예약가능날짜</td>
-			<td>2021-09-25~201-09-33</td>
-			<td>캠핑장 연락처</td>
+			<th>
+				주소
+			</th>
 			<td>
-				<!-- tel: 에도 연락처 같이 넣어주기. -->
+				<span class="text-primary" style="font-size: 15px;">
+				<c:set var="fullAddr" value="경기 가평군 북면 노씨터길 12"/>
+				${fullAddr }
+				</span>	
+			</td>
+			<th>
+				문의처
+			</th>
+			<td>
 				<a href="tel:010-4000-4000" class="text-decoration-none">
                 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
 				  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z"/>
@@ -176,62 +191,120 @@ function goList() {
               	&nbsp; 010-4000-4000
 			</td>
 		</tr>
-		<tr>
-			<td>주중 가격</td>
-			<td></td>
-			<td>주말 가격</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>주소</td>
-			<td colspan="3" style="border: none;">
-				<!-- value : 테스트 데이터 -->
-				<c:set var="fullAddr" value="경기 가평군 북면 노씨터길 12"/>
-				${fullAddr} 
-				<div id="map" style="width:100%;height:350px; "></div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4" style="border-bottom: none;"> 설명 </td>
-		</tr>
-		<tr>
-			<td align="center" colspan="4" style="border-top: none;">
-			설명칸
-			</td>
-		</tr>
-		<tr>
-			<td> 키워드 </td>
-			<td colspan="3"> <span class="text-primary"> #후기, #좋아요, #추천 </span> </td>
-		</tr>
 	</table>
 	</form>
-	
-	<!-- 후기 관련 form-->
-	<form name="myForm3" action="" method="post" class="form-horizontal">
-	<!-- 후기 리스트 -->
+
+	<!-- 캠핑장 상세 정보/객실 목록/후기/오시는 길/ 탭 -->
 	<div class="marginPadding10">
-		<div class="form-group">
-			<table class="table table-bordered">
-			<caption>캠핑/글램핑 후기 목록</caption>
-				<tr>
-					<td colspan="3"> 등록된 후기가 없습니다.</td>
-				</tr>
-			</table>
-		</div>
+		<ul class="nav nav-tabs">
+			<li><a href="#tab1" data-toggle="tab">캠핑장 상세 정보</a></li>
+			<li class="active"><a href="#tab2" data-toggle="tab">객실 목록</a></li>
+		    <li><a href="#tab3" data-toggle="tab">캠핑장 후기(0)</a></li>
+		    <li><a href="#tab4" data-toggle="tab" onClick="fnTab(4)">오시는 길</a></li>
+		</ul>
 		
-		<!-- 후기 페이징 -->
-		<div class="paginationCenter" align="center">
-			${pageInfo.pagingHtml} <!-- 후기관련 페이징으로 변경해야함 -->
-		</div>
-		<!-- // 후기 페이징 -->
-		<div align="right"> 
-			<input type="button" class="btn btn-primary" value="후기목록 보러가기" >
-		</div>
-	</div>
-	<!-- // 후기 리스트 -->
+		<div class="tab-content marginPadding10">
+			
+			<!-- 상세 정보 탭 -->
+			<div class="tab-pane fade" id="tab1" style="text-align: left;">
+			    <h3>캠핑장 상세 정보</h3>
+			    <div>정보</div>
+			</div>
+			
+			<!-- 객실 리스트 탭 -->
+			<div class="tab-pane active fade in" id="tab2" style="text-align: left;">
+		   		<h3>객실 리스트</h3>
+		    	<span class="spanFlowRootP10"></span>
+				
+				<form name="roomform" action="" method="post">
+					<div align="right">
+						<input type="button" class="btn btn-primary" value="객실 등록하기(사업자 전용)" style="margin-bottom: 10px" onClick="goInsertRoom()">
+					</div>
+					
+					일반캠핑장
+					
+						<table class="table table-bordered">
+							<tr>
+								<td rowspan="4" width="25%">
+									<img src="${fileImg}/${room.imgurl}" alt="" title="" width="100%">
+								</td>
+								<td colspan="6" style="text-align: left;">
+									[${rType}]&nbsp;${room.name }
+								</td>
+								<td rowspan="4" width="10%" align="center" style="vertical-align: middle;">
+									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail()"><br><br>
+									<input type="button" value="객실예약" class="btn btn-primary" onClick="goReservation()">	
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: left;">
+									룸 한줄요약
+								</td>
+							</tr>
+							<tr>
+								<td width="12%">기준인원</td>
+								<td width="5%">
+									1
+								</td>
+								<td width="12%">최대인원</td>
+								<td width="5%">
+									2
+								</td>
+								<td width="10%">가격</td>
+								<td>
+									1000~2000
+								</td>
+							</tr>
+							<tr>
+								<td>주요시설</td>
+								<td colspan="5">
+									수영장
+								</td>
+							</tr>
+						</table>
+				</form>
+			</div>
+			
+			<!-- 후기 탭-->
+			<div class="tab-pane fade" id="tab3" style="text-align: left;">
+		    	<h3>캠핑장 후기</h3>
+		     	<form name="reviewform" action="" method="post" class="form-horizontal">
 	
-	</form>
-	<!-- // 후기 관련 form-->
+				<div class="marginPadding10">
+					<div class="form-group">
+						<table class="table table-bordered">
+						<caption>캠핑/글램핑 후기 목록</caption>
+							<tr>
+								<td colspan="3"> 등록된 후기가 없습니다.</td>
+							</tr>
+						</table>
+					</div>
+		
+					<!-- 후기 페이징 -->
+					<div class="paginationCenter" align="center">
+						${pageInfo.pagingHtml} <!-- 후기관련 페이징으로 변경해야함 -->
+					</div>
+					<!-- // 후기 페이징 -->
+					
+					<div align="right"> 
+						<input type="button" class="btn btn-primary" value="후기목록 보러가기" >
+					</div>
+				</div>
+				</form>
+			</div>
+			
+			<!-- 오시는 길 탭 -->
+		    <div class="tab-pane fade" id="tab4" style="text-align: left;">
+		      	<h3> 오시는 길</h3>
+				<span>1</span>
+				<p>1</p>
+				
+				<div id="map" style="width:100%;height:350px; "></div>
+			
+			</div>
+		</div>
+		<hr>
+	</div>
 	
 	<!-- 추천관광지  -->
 	<div class="container"> 
@@ -269,16 +342,16 @@ function goList() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="추천 관광지 더보기" onclick="goTourList()">
 	</div>
 	<!-- // 버튼 -->
-</div>  
+</div>
 </article>
 </section>
-<script>
-	$('.carousel').carousel();
-</script>
-<%@ include file="../../common/bottom.jsp" %>  
+
+
+
+<%@ include file="../../common/bottom.jsp" %>
 
 <!-- kakao api start -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
