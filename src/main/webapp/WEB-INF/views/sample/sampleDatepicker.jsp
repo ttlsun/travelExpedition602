@@ -41,17 +41,63 @@ $(document).ready(function() {
     
     addSerach(fullAddr, coordsMa, coordsLa);
     
-    //달력 얻어오기.
-    $( "#startDate" ).datepicker();
+    //달력 얻어오기. (달력 여러개 적용시 class에 주기)
+    $( ".datepicker" ).datepicker({
+	    "dateFormat" : "yy-mm-dd"
+	});
     
     //아이콘 있는 달력.
     $( "#endDate" ).datepicker({
         showOn: "button",
         buttonImage: "${images}/calendar.ico",
         buttonImageOnly: true,
-        buttonText: "Select date"
+        buttonText: "Select date",
+        "dateFormat" : "yy-mm-dd"
     });
+    
+    //승민님이 원하시는 달력이랑 비슷해보임요.. (getDate 호출)
+    var dateFormat = "yy-mm-dd",
+    from = $( "#from" )
+      .datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        showOn: "button",
+        buttonImage: "${images}/calendar.ico",
+        buttonImageOnly: true,
+        buttonText: "Select date",
+        "dateFormat" : "yy-mm-dd"
+      })
+      .on( "change", function() {
+        to.datepicker( "option", "minDate", getDate( this ) );
+      }),
+    to = $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      showOn: "button",
+      buttonImage: "${images}/calendar.ico",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      "dateFormat" : "yy-mm-dd"
+    })
+    .on( "change", function() {
+      from.datepicker( "option", "maxDate", getDate( this ) );
+    });
+    
 });
+
+//달력
+function getDate( element ) {
+    var date;
+    try {
+      date = $.datepicker.parseDate( dateFormat, element.value );
+    } catch( error ) {
+      date = null;
+    }
+
+    return date;
+  }
 
 function addSerach(fullAddr, lat, lng) {
 	
@@ -88,12 +134,21 @@ function closeOverlay() {
 		<tr>
 			<td><label for="startDate"><span class="redFont"> * </span> 예약 가능 시작일자 </label> </td>
 			<td>
-				<input type="text" class="form-control" id="startDate" name="" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-control datepicker" id="startDate" name="" value="" placeholder="입력해주세요.">
 			</td>
 			<td><label for="endDate"><span class="redFont"> * </span> 예약 가능 끝일자  </label> </td>
 			<td>
 				<input type="text" class="form-date-control60" id="endDate" name="" value="" placeholder="입력해주세요.">
 			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="from">From</label></td>
+			<td>
+				<input type="text" class="form-date-control60" id="from" name="from">
+			</td>
+			<td><label for="to">to</label></td>
+			<td><input type="text" class="form-date-control60" id="to" name="to"></td>
 		</tr>
 		
 		<!-- 충돌나는지 확인 여부때문에 .. 같이 둠. -->
