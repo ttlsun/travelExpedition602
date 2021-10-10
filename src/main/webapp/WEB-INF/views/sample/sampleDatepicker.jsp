@@ -10,23 +10,13 @@
 <!-- //지도관련 js -->
 
 
-
- 
-
 <script type="text/javascript" >
 var map;
 var overlay;
 var marker;
 
 $(document).ready(function() {
-	//메뉴 on 유지.
-	navActive('camping');
-	
-	$("#metaTitle").attr("content", "캠핑 객실 등록");
-	$("#metaDescription").attr("content", "캠핑 객실 등록");
-	$("#metaKeywords").attr("content", "#캠핑리스트, #글램핑리스트, #캠핑 객실 등록");
-	
-  	//summernote 선언
+	//summernote 선언
 	$('.summernote').summernote({
 	 	height: 200,   //set editable area's height
 	 	placeholder : "설명 입력해주세요.", //placeholder
@@ -57,7 +47,7 @@ $(document).ready(function() {
     //아이콘 있는 달력.
     $( "#endDate" ).datepicker({
         showOn: "button",
-        buttonImage: "images/calendar.gif",
+        buttonImage: "${images}/calendar.ico",
         buttonImageOnly: true,
         buttonText: "Select date"
     });
@@ -83,60 +73,18 @@ function closeOverlay() {
 }
 
 
-//등록버튼 클릭시
-function inputSave() {
-	if (!confirm('등록 하시겠습니까?')){
-		return false;
-	}
-	
-	return true;	
-}
-
-//리스트 버튼 클릭시
-function goList() {
-	location.href= "${contextPath}/sampleCampingList";
-}
 
 </script>
 
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">캠핑/글램핑 객실 등록 화면</h2></header>
+	<header><h2 align="center" class="text-primary">달력예제</h2></header>
 	
 	<form name="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
-		<tr>
-			<td width="20%">
-				<label for="name"><span class="redFont"> * </span> 캠핑장 이름 </label>
-			</td>
-			<td> 야생화캠핑장 </td>
-			<td><label for="roomName"><span class="redFont"> * </span> 객실 명칭 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="roomName" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td><label for="roomSummary"><span class="redFont"> * </span> 객실 설명 한줄요약 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="roomSummary" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="amenuty"><span class="redFont"> * </span> 부대시설,비품 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="amenuty" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td><label for="propguests"><span class="redFont"> * </span> 기준인원 </label> </td>
-			<td>
-				<input type="text" class="form-control" id="propguests" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="maxguests"><span class="redFont"> * </span> 최대인원</label> </td>
-			<td>
-				<input type="text" class="form-control" id="maxguests" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
+		
 		<tr>
 			<td><label for="startDate"><span class="redFont"> * </span> 예약 가능 시작일자 </label> </td>
 			<td>
@@ -144,19 +92,11 @@ function goList() {
 			</td>
 			<td><label for="endDate"><span class="redFont"> * </span> 예약 가능 끝일자  </label> </td>
 			<td>
-				<input type="text" class="form-control" id="endDate" name="" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-date-control60" id="endDate" name="" value="" placeholder="입력해주세요.">
 			</td>
 		</tr>
-		<tr>
-			<td><label for="weekdayprice"><span class="redFont"> * </span> 주중 가격</label> </td>
-			<td>
-				<input type="text" class="form-control" id="weekdayprice" name="" value="" placeholder="입력해주세요.">
-			</td>
-			<td><label for="weekendprice"><span class="redFont"> * </span> 주말 가격</label> </td>
-			<td>
-				<input type="text" class="form-control" id="weekendprice" name="" value="" placeholder="입력해주세요.">
-			</td>
-		</tr>
+		
+		<!-- 충돌나는지 확인 여부때문에 .. 같이 둠. -->
 		<tr>
 			<td>주소</td>
 			<td colspan="3" style="border: none;">
@@ -167,30 +107,12 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="imgFile"><span class="redFont"> * </span> 룸 대표 타이틀 이미지 </label> </td>
-			<td colspan="3">
-				<input type="file" class="" id="imgFile" name="" value="" accept=".jpg, .jpeg, .png, .gif">
-			</td>
-		</tr>
-		<tr>
-			<td><label for="multipleImgFile"><span class="redFont"> * </span> 룸관련 이미지들(여러장 올리기) </label> </td>
-			<td colspan="3">
-				<input type="file" multiple name="multipleImgFile" value="" accept=".jpg, .jpeg, .png, .gif">
-				<input type="hidden" class="" id="multipleImgFileNum" name="" value="">
-			</td>
-		</tr>
-		<tr>
 			<td><span class="redFont"> * </span> 내용</td>
 			<td colspan="3">
 				<textarea rows="10" cols="3"  class="form-control summernote" name=""></textarea>
 			</td>
 		</tr>
-		<tr>
-			<td><label for="regKeyword">등록 키워드</label></td>
-			<td colspan="3">
-				<input type="text" class="form-control" id="regKeyword" name="" value="" placeholder="#키워드,#입력해주세요.">
-			</td>
-		</tr>
+		
 		<tr>
 			<td colspan="4" align="center">
 				<input type="submit" class="btn btn-primary" value="등록" onclick="return inputSave()">

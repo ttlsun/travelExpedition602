@@ -24,6 +24,9 @@
 				<br><br>[기본샘플(공통) - 키워드리스트]
 				<br><a href="${contextPath}/sampleKeywordList">키워드 리스트</a>
 				
+				<br><br>[기본샘플(공통) - 달력예제]
+				<br><a href="${contextPath}/sampleDatepicker">제이쿼리 UI 달력</a>
+				
 				<br><br>[기본샘플(공통) - 지도/주소]
 				<br><a href="${contextPath}/mapRegister">지도/주소관련 샘플</a>
 				

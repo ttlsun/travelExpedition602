@@ -35,7 +35,8 @@
 <c:set var ="userCode"  value= "<%=userCode%>"/>
 
 <%-- 
-<link href="${css}/style.css" rel="stylesheet" type="text/css">
+해당 링크 : 썸머노트랑 같이 적용시 깨짐현상있음..
+<link href="${css}/style.css" rel="stylesheet" type="text/css"> 
 <link href="${css}/bootstrap.css" rel="stylesheet">
 <link href="${css}/custom2.css" rel="stylesheet">
 <link href="${css}/kfonts2.css" rel="stylesheet"> --%>
@@ -43,6 +44,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/kfonts2.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <!-- 공통으로 쓰일 css -->
 <link href="${css}/common.css" rel="stylesheet">
 
@@ -59,6 +61,7 @@
 
 <!-- 제이쿼리 js -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <!-- 부트스트랩 js -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- 썸머노트 js -->
@@ -67,7 +70,9 @@
 <script type="text/javascript" src="${js}/common.js"></script>
 
 <%-- <script type="text/javascript" src="${js}/jquery.js"></script>
-<script type="text/javascript" src="${js}/bootstrap.min.js"></script> --%>
+<script type="text/javascript" src="${js}/bootstrap.min.js"></script>
+
+ --%>
 <script type="text/javascript" >
 	var inputType; 	//inputType추출 변수
 	

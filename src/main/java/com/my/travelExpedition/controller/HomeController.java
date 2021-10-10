@@ -55,6 +55,13 @@ public class HomeController {
         return "home";
     }
     
+    /*달력 예제*/
+    @RequestMapping(value = "/sampleDatepicker", method = RequestMethod.GET)
+    public String sampleDatepickerView() {
+        return "sample/sampleDatepicker";
+    }
+    
+    /*키워드 테이블 예제*/
     @RequestMapping(value = "/sampleKeywordList", method = RequestMethod.GET)
     public ModelAndView keywordListView() {
     	ModelAndView mav = new ModelAndView("sample/keywordList"); 
@@ -93,7 +100,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/sampleDetail")
+    @RequestMapping(value = "/sampleDetail")
 	public String sampleDetailFormView() {
 		return "sample/detailForm";
 	}
@@ -113,7 +120,12 @@ public class HomeController {
 		return "sample/memberRegister";
 	}
 	
-	
+	/**
+	 * 리스트 얻어오는 예제
+	 * @param request
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value = "/sampleCampingList")
 	public ModelAndView sampleCampingListView(HttpServletRequest request, @RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView("sample/campingList");
@@ -122,7 +134,7 @@ public class HomeController {
 		
 		String pageUrl = request.getContextPath()+ "/sampleCampingList"; //페이지 URL
 									//받아온 파라미터 , 보여줄페이지사이즈(갯수), 리스트총갯수 , 페이지url 
-		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		
 		mav.addObject("pageInfo", pageInfo);
 		
