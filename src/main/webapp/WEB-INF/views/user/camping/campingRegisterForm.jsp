@@ -54,7 +54,6 @@ function addSearch(fullAddr) {
         // 결과값으로 받은 위치를 마커로 표시합니다
         marker = mapViewSetMarker(map, coords, marker);
 
-        
         var coordsLa = coords.La;
         var coordsMa = coords.Ma;
 
@@ -82,38 +81,32 @@ function closeOverlay() {
 }
 
 function addrKakao() {
-	
+	   
 	//상세주소 텍스트 초기화
 	$('#fullAddr').html("");
-	
+	   
 	mapViewAddressSearchPopupOpen('popup_type_kakaoAddr', function(data) {
-		
-		//주소 값 넣기.
-		$('input[name="postcode"]').val(data.zonecode);
-		$('input[name="address1"]').val(data.sido);
-		$('input[name="address2"]').val(data.sigungu);
-		$('input[name="address3"]').val(data.userSelectedType == 'R' ? data.roadname : data.bname);
-
-		//상세주소값 address4 넣기 위해 전체 주소값에서 자르기
-		var totalAddr = data.roadAddress;
-		var cutAddr = "";
-		if(data.userSelectedType == 'R'){
-			cutAddr = data.sido+" "+data.sigungu+" "+data.roadname+" ";
-		}
-		else{
-			cutAddr = data.sido+" "+data.sigungu+" "+data.roadname+" ";
-		}
-		var address4 = totalAddr.substr(cutAddr.length,totalAddr.length-1);
-		//상세주소값 address4 넣기
-		$('input[name="address4"]').val(address4);
-		
-		$('#fullAddr').html(data.fullAddr);
-		
-		//창 닫기.
-		$('#myModal').modal('hide');
-		
-		//지도 마크업 찍기.
-		addSearch(data.fullAddr);
+	      
+	var roadAddressAddr = data.roadAddressEnglish.split(",");
+	var autoJibunAddr = data.jibunAddressEnglish.split(",");
+	
+	//주소 값 넣기
+	var addr3 = data.userSelectedType == 'R' ? data.bname1 +" " + data.roadname : data.bname1 +" " + data.bname;
+	var addr4 = data.userSelectedType == 'R' ? roadAddressAddr[0] : autoJibunAddr[0];
+	$('input[name="postcode"]').val(data.zonecode);
+	$('input[name="address1"]').val(data.sido);
+	$('input[name="address2"]').val(data.sigungu);
+	$('input[name="address3"]').val(addr3); 
+	$('input[name="address4"]').val(addr4);
+	      
+	$('#fullAddr').html(data.fullAddr);
+	      
+	//창 닫기.
+	$('#myModal').modal('hide');
+	      
+	//지도 마크업 찍기.
+	addSearch(data.fullAddr);
+	
 	});
 }
 

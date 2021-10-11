@@ -149,7 +149,6 @@ function listOrderBy(){
 					</dd>
 				</dl>
 			</div>
-			시설정보 추가
 			<!-- 태그로 검색 아직 해놓지 않음, 배열로 변경 예정 -->
 			<div style="display: block;">
 				<dl>
@@ -182,7 +181,7 @@ function listOrderBy(){
 		</caption>
 		<thead>
 			<tr class="active">
-				<td colspan="2" style="text-align: left">
+				<td colspan="3" style="text-align: left">
 					<select name="orderBy" id="orderBy" onchange="listOrderBy()">
 						<option value="moddate desc">업데이트순</option>
 						<option value="readcount desc">조회수 높은순</option>
@@ -196,26 +195,36 @@ function listOrderBy(){
 		<tbody>
 			<c:if test="${empty lists}">
 				<tr>
-					<td colspan="2" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
+					<td colspan="3" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 			
 			<c:forEach var="bean" items="${lists}">
 				<tr>
-					<td rowspan="2" align="center" class="col-xs-3 col-sm-3 col-md-3">
+					<td rowspan="3" align="center" class="col-xs-3 col-sm-3 col-md-3">
 						<img src="${fileImg}/${bean.imgurl}" alt="" title="" width="100%">
 					</td>
-					<td height="30px">
-					</td>
-				</tr>
-				<tr>
-					<td height="130px" align="left">
+					<td colspan="2"align="left">
 						<h3><a href="${contextPath }/campingDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
 							[${bean.address1}&nbsp;${bean.address2}]${bean.name }</a></h3>
 						<p>${bean.summary }</p>
+						<p>#태그키워드 #태그 #키워드</p>
 					</td>
 				</tr>
-		
+				
+				<tr>
+					<td colspan="2" class="text-center">
+						시설정보
+					</td>
+				</tr>
+				<tr>
+					<td class="text-left">
+						 조회수
+					</td>
+					<td class="text-right">
+						추천수, 찜수, 리뷰수
+					</td>
+				</tr>
 		</c:forEach> 
 		</tbody>
 	</table>

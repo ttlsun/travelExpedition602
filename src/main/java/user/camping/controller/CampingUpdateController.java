@@ -50,10 +50,11 @@ public class CampingUpdateController {
 	public ModelAndView campingUpdatePost(ModelAndView mav,
 								@RequestParam(value = "pageNumber") String pageNumber,
 								@RequestParam(value = "originImgUrl") String originImgUrl,
-								@RequestParam("coordsMa") String latitude,
-								@RequestParam("coordsLa") String longitude,
+								@RequestParam("coordsLa") String latitude,
+								@RequestParam("coordsMa") String longitude,
 								@ModelAttribute("camping") @Valid CampingBean campbean,
 								BindingResult result) {
+		//System.out.println("campbean:"+campbean.toString());
 		try {
 		
 		mav.addObject("num", campbean.getNum());

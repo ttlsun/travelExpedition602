@@ -63,6 +63,10 @@
 					WHEN '02' THEN '비노출'
 			END) AS STATUS 
 		FROM CAMPING
+		WHERE 1=1
+		<if test="status == '01'">
+			AND STATUS = #{status}
+		</if>
 		
 		
 		
@@ -73,8 +77,10 @@
 		WHERE NUM = #{num}
 	</select>
 	
-	<select id="getCampingTypes" resultType="String">
-		SELECT CAMP_TYPE FROM CAMPING
+	<select id="getCampingNameAndTypes" resultType="myCampingBean">
+		SELECT 
+			NAME, CAMP_TYPE 
+		FROM CAMPING
 		WHERE NUM = #{num}
 	</select>
 	
@@ -99,6 +105,14 @@
 			CONTACT = #{contact},
 			MODDATE = SYSDATE,
 			MODID = #{modid}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<update id="updateCampingStatusBlind">
+		UPDATE CAMPING
+		<set>
+			STATUS = '02'
 		</set>
 		WHERE NUM = #{num}
 	</update>

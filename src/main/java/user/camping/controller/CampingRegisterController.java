@@ -41,8 +41,8 @@ public class CampingRegisterController {
 	public ModelAndView campingRegisterPost(ModelAndView mav,
 									@ModelAttribute("camping") @Valid CampingBean campbean, 
 									BindingResult result,
-									@RequestParam("coordsMa") String latitude,
-									@RequestParam("coordsLa") String longitude
+									@RequestParam("coordsLa") String latitude,
+									@RequestParam("coordsMa") String longitude
 									) {
 			try {
 			

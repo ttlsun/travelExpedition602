@@ -39,14 +39,19 @@ public class CampingDao {
 		CampingBean campbean = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingDetail", num);
 		return campbean;
 	}
-
-	public String getCampingTypes(String num) {
-		String camptype = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingTypes", num);
-		return camptype;
-	}
-
+	
 	public int updateData(CampingBean campbean) {
 		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateData", campbean);
+		return cnt;
+	}
+
+	public CampingBean getCampingNameAndTypes(int num) {
+		CampingBean campbean = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingNameAndTypes", num);
+		return campbean;
+	}
+
+	public int updateCampingStatusBlind(String num) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateCampingStatusBlind", num);
 		return cnt;
 	}
 	

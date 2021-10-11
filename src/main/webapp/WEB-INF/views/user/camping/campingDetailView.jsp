@@ -28,16 +28,7 @@ $(document).ready(function() {
 	$("#metaTitle").attr("content", title);
 	$("#metaDescription").attr("content", "캠핑 상세");
 	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
-	
-	//지도를 생성합니다
-	map = mapViewInit('map');
-	
-	//주소 값 내려서 받기.
-	var fullAddr = "${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}";
-    var coordsLa = "${campbean.latitude}"; //위도
-    var coordsMa = "${campbean.longitude}"; //경도
-       
-	addSearch(fullAddr, coordsMa, coordsLa);
+
 });
 
 function addSearch(fullAddr, lat, lng) {
@@ -52,6 +43,24 @@ function addSearch(fullAddr, lat, lng) {
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
+}
+
+function fnTab(num) {
+	if (num == 4) {
+		if (map == null) {
+			setTimeout(function() {
+				//지도를 생성합니다
+				map = mapViewInit('map');
+				
+				//주소 값 내려서 받기.
+				var fullAddr = "${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}";
+			    var coordsLa = "${campbean.latitude}"; 
+			    var coordsMa = "${campbean.longitude}"; 
+			       
+				addSearch(fullAddr, coordsMa, coordsLa);
+			}, 300);
+		}
+	}
 }
 
 //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
@@ -81,12 +90,12 @@ function goTourList() {
 
 //객실 등록 버튼
 function goInsertRoom(pageNumber){
-	location.href= "${contextPath}/roomRegister.do?num=${campbean.num}&name=${campbean.name}&pageNumber="+pageNumber;	
+	location.href= "${contextPath}/roomRegister.do?num=${campbean.num}&pageNumber="+pageNumber;	
 }
 
 //객실 상세보기 버튼
 function goRoomDetail(num,pageNumber){
-	location.href= "${contextPath}/roomDetail.do?num="+num+"&name=${campbean.name}&pageNumber="+pageNumber;	
+	location.href= "${contextPath}/roomDetail.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
 //객실 예약 버튼
@@ -252,7 +261,7 @@ function goReservation(num,pageNumber){
 			<li><a href="#tab1" data-toggle="tab">캠핑장 상세 정보</a></li>
 			<li class="active"><a href="#tab2" data-toggle="tab">객실 목록</a></li>
 		    <li><a href="#tab3" data-toggle="tab">캠핑장 후기(${campbean.reviewcount })</a></li>
-		    <li><a href="#tab4" data-toggle="tab">오시는 길</a></li>
+		    <li><a href="#tab4" data-toggle="tab" onClick="fnTab(4)">오시는 길</a></li>
 		</ul>
 		
 		<div class="tab-content marginPadding10">
@@ -355,7 +364,7 @@ function goReservation(num,pageNumber){
 					<!-- // 후기 페이징 -->
 					
 					<div align="right"> 
-						<input type="button" class="btn btn-primary" value="후기목록 보러가기" >
+						<input type="button" class="btn btn-primary" value="후기등록하기" >
 					</div>
 				</div>
 				</form>
@@ -366,9 +375,8 @@ function goReservation(num,pageNumber){
 		      	<h3> 오시는 길</h3>
 				<span>${campbean.name } </span>
 				<p>${fullAddr}</p>
-				
-				<div id="map" style="width:100%;height:350px; "></div>
-			
+					
+				<div id="map" style="width:60%;height:350px; "></div>
 			</div>
 		</div>
 		<hr>
