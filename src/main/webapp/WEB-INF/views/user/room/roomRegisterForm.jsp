@@ -57,10 +57,9 @@ function goList() {
 		<caption> <span class="redFont"> * </span> 표시는 필수 입력사항입니다. </caption>
 		<tr class="active">
 			<td colspan="4">
-				<label for="cname"><h4>${cname }</h4></label>
+				<label for="cname"><h4>${campbean.name }</h4></label>
 				<input type="hidden" name="cnum" value="${cnum}">
-				<input type="hidden" name="cname" value="${cname }">
-				<input type="hidden" name="camptype" value="${camptype }">
+				<input type="hidden" name="campbean" value="${campbean }">
 			</td>
 		</tr>
 		<tr>
@@ -71,21 +70,21 @@ function goList() {
 			</td>
 			<td><label for="roomtype"><span class="redFont"> * </span> 객실 타입 </label></td>
 			<td>
-				<c:if test="${fn:contains(camptype,'01')}">
+				<c:if test="${fn:contains(campbean.camptype,'01')}">
 					<input type="radio" id="roomtype" name="roomtype" value="01"
 						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camptype,'02')}">
+				<c:if test="${fn:contains(campbean.camptype,'02')}">
 					<input type="radio" id="roomtype" name="roomtype" value="02"
-						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
+						<c:if test="${room.roomtype eq '02'}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camptype,'03')}">
+				<c:if test="${fn:contains(campbean.camptype,'03')}">
 					<input type="radio" id="roomtype" name="roomtype" value="03"
-						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;글램핑&nbsp;
+						<c:if test="${room.roomtype eq '03'}"> checked</c:if>>&nbsp;글램핑&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(camptype,'04')}">
+				<c:if test="${fn:contains(campbean.camptype,'04')}">
 					<input type="radio" id="roomtype" name="roomtype" value="04"
-						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;카라반&nbsp;
+						<c:if test="${room.roomtype eq '04'}"> checked</c:if>>&nbsp;카라반&nbsp;
 				</c:if>
 				<form:errors cssClass="errMessage" path="roomtype"/>
 			</td>

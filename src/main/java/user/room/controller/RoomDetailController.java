@@ -30,10 +30,12 @@ public class RoomDetailController {
 	@RequestMapping(value=COMMAND)
 	public ModelAndView roomDetailView(ModelAndView mav,
 							@RequestParam("num") String num,
-							@RequestParam("name") String cname,
 							@RequestParam("pageNumber") String pageNumber) {
-		
+		//객실 상세 정보 가져오기
 		RoomBean roombean = roomDao.getRoomDetail(num);
+		
+		//해당 객실의 캠핑장 이름 가져오기
+		String cname = roomDao.getCampingName(roombean.getCnum());
 		
 		//이미지들 가져오기
 		Map<String, Object> imgMap = new HashMap<String, Object>();

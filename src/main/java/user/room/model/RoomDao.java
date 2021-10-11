@@ -33,5 +33,30 @@ public class RoomDao {
 		RoomBean roombean = sqlSessionTemplate.selectOne(NAMESPACE+".getRoomDetail", num);
 		return roombean;
 	}
+
+	public RoomBean getRoomReserveInfo(String rnum) {
+		RoomBean roombean = sqlSessionTemplate.selectOne(NAMESPACE+".getRoomReserveInfo", rnum);
+		return roombean;
+	}
+
+	public String getCampingName(int cnum) {
+		String cname = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingName", cnum);
+		return cname;
+	}
+
+	public int updateData(RoomBean roombean) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateData", roombean);
+		return cnt;
+	}
+
+	public String getCampingNum(String num) {
+		String cnum = sqlSessionTemplate.selectOne(NAMESPACE+".getCampingNum", num);
+		return cnum;
+	}
+
+	public int updateRoomStatusBlind(String num) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateRoomStatusBlind", num);
+		return cnt;
+	}
 	
 }

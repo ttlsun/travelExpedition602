@@ -1,78 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../../common/top.jsp" %>   
-<!-- 
-<script src="https://unpkg.com/vue-airbnb-style-datepicker@latest/dist/vue-airbnb-style-datepicker.min.js"></script>
-	   <script>
-	    var datepickerOptions = {}
-	    Vue.use(window.AirbnbStyleDatepicker, datepickerOptions)
-	
-	    var app = new Vue({
-	      el: '#app',
-	      data: {
-	        dateFormat: 'YYYY년 MM월 D일',
-	        inputDateOne: '',
-	        inputDateTwo: '',
-	        buttonDateOne: '',
-	        buttonDateTwo: '',
-	        inlineDateOne: '',
-	        sundayDateOne: '',
-	        sundayFirst: false,
-	        alignRight: false,
-	        trigger: false,
-	      },
-	      methods: {
-	        formatDates: function(dateOne, dateTwo) {
-	          var formattedDates = ''
-	          if (dateOne) {
-	            formattedDates =  dateFns.format(dateOne, this.dateFormat)
-	          }
-	          if (dateTwo) {
-	            formattedDates += ' - ' + dateFns.format(dateTwo, this.dateFormat)
-	          }
-	          return formattedDates
-	        },
-	        onClosed: function() {
-	          var datesStr = this.formatDates(this.inputDateOne, this.inputDateTwo)
-	          console.log('Dates Selected: ' + datesStr)
-	          this.trigger = false
-	          $('#dateOne').val(this.buttonDateOne);
-	          $('#dateTwo').val(this.buttonDateTwo);
-	          if(this.buttonDateOne=="" || this.buttonDateTwo ==""){
-	            	alert("날짜를 선택해 주세요.");
-	          }else{
-	          alert("선택하신 날짜는 "+this.buttonDateOne+"~"+this.buttonDateTwo+"입니다.");
-	          }
-	        },
-	        toggleAlign: function() {
-	          this.alignRight = !this.alignRight
-	        },
-	        triggerDatepicker: function() {
-	          this.trigger = !this.trigger
-	        },
-	        onMonthChange: function(dates) {
-	          console.log('months changed', dates)
-	        },
-	        login: function(dateOne, dateTwo){
-	      	  console.log(this.dateOne, this.dateTwo)
-	        },
-	      },
-	    })
-	    
-	    function printTime() {
-	
-	        var clock = document.getElementById("clock");// 출력할 장소 선택
-	        var now = new Date();// 현재시간
-	        var nowTime = "'" + now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate() + "'";
-	        clock.innerHTML = nowTime;// 현재시간을 출력
-	}
-		window.onload = function() {// 페이지가 로딩되면 실행
-		printTime();
-		}
-	  </script>
 
 <script type="text/javascript">
- -->
+
+$(document).ready(function() {
+	
+	$.datepicker.setDefaults({ 
+		showOn: "button",
+	    buttonImage: "${images}/calendar.ico",
+	    buttonImageOnly: true,
+	    buttonText: "Select date",
+		dateFormat : "yy-mm-dd",
+		showMonthAfterYear: true ,
+		yearSuffix: '년',
+		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		
+	});
+	
+	//달력 얻어오기. (달력 여러개 적용시 class에 주기)
+	$( "#startDate" ).datepicker({
+	    minDate: 0,
+	    maxDate: "+3M",
+		onClose: function( selectedDate ) { //시작일(startDate) datepicker가 닫힐때 //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+			$("#endDate").datepicker( "option", "minDate", selectedDate ); }
+		
+	});
+	
+	$( "#endDate" ).datepicker({ });
+});
+
+
 //예약하기(사용자) 버튼 클릭시
 function goReservation(num,pageNumber) {
 	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;
@@ -107,7 +66,6 @@ function goDelete(num,pageNumber) {
 		<h4 align="center" class="text-info">${cname }</h4>
 		<!-- 사용자용 -->
 		<div class="marginPadding10">
-			<input type="button" class="btn btn-primary" value="예약하기(사용자)" onclick="goReservation(${roombean.num},${pageNumber})">
 			<input type="button" class="btn btn-primary" value="문의하기(사용자)" onclick="goQna(${roombean.num})">
 		</div>
 		<!-- 사업자용 -->
@@ -142,8 +100,9 @@ function goDelete(num,pageNumber) {
 					</div>
 				</c:forEach>
 			</div>
-			<!-- 
-			Controls
+		</div>
+			 
+			<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
 				<span class="icon-prev"></span>
 			</a>
@@ -152,83 +111,65 @@ function goDelete(num,pageNumber) {
 			</a>
 		</div>
   	</div>
-  	
+ 
   	<div class="marginPadding10" align="center">
   		<hr>
-  		<article><h4 class="text-info text-center">예약하기</h4></article>
+  		<article><h4 class="text-info text-center">객실 예약</h4></article>
   		
-  		<div>
-  			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 일정체크 & 객실 인원선택 </a>
-						</h4>
-					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-						<div class="panel-body">
-						<div class="row">
-						<div class="col-md-3">
-						
-							달력시작 --><!-- 달력시작 --><!-- 달력시작 --><!-- 달력시작 --><!-- 달력시작 --><!-- 달력시작 --><!-- 달력시작
-			<div id="app" class="app" :class="{'align-right': alignRight}">
-			 <div  class="datepicker-container with-button">
-		        <div class="datepicker-trigger">
-		          <button id="datepicker-button-trigger" >
-		            {{ formatDates(buttonDateOne, buttonDateTwo) || '날짜를 선택해 주세요' }}
-		          </button>
-		          <airbnb-style-datepicker
-		            :trigger-element-id="'datepicker-button-trigger'"
-		            :mode="'range'"
-		            :date-one="buttonDateOne"
-		            :date-two="buttonDateTwo"
-		            :min-date="'2020-04-18'"
-		            :fullscreen-mobile="true"
-		            :months-to-show="2"
-		            :offset-y="10"
-		            :trigger="trigger"
-		            v-on:date-one-selected="function(val) { buttonDateOne = val }"
-		            v-on:date-two-selected="function(val) { buttonDateTwo = val }"
-		            v-on:closed="onClosed"
-		            v-on:previous-month="onMonthChange"
-		            v-on:next-month="onMonthChange"
-		          ></airbnb-style-datepicker>
-		        </div>
-		      </div>
-		    </div>
-  		</div>
-  		</div>
-	
+  		<form name="myForm" action="${contextPath }/reservation.do" method="get" class="form-horizontal">
+  			<input type="hidden" name="num" value="${roombean.num }">
+  			<input type="hidden" name="pageNumber" value="${pageNumber }">
+  			<input type="hidden" name="cname" value="${cname }">
+  			
+			<table border="1" class="table table-bordered">
+				<tr class="text-center">
+					<td width="12%"><label for="startDate">입실일 선택</label></td>
+					<td width="23%">
+						<input type="text" class="form-date-control60" id="startDate" name="checkindate" value="" placeholder="입실일 선택">
+					</td>
+					<td width="12%"><label for="endDate">퇴실일 선택</label> </td>
+					<td width="23%">
+						<input type="text" class="form-date-control60" id="endDate" name="checkoutdate" value="" placeholder="퇴실일 선택">
+					</td>
+					<td width="12%"><label for="guests">이용인원</label></td>
+					<td width="18%">
+						<select class="form-control" id="guests" name="guests">
+							<option value="">선택</option>
+							<c:forEach var="i" begin="1" end="${roombean.maxguests }" varStatus="n">
+								<c:if test="${i != roombean.propguests && i != n.end}">	
+									<option value="${i}">${i}</option>
+								</c:if>
+								<c:if test="${i eq roombean.propguests }">
+									<option value="${i}">${i }&nbsp;[기준인원]</option> 
+								</c:if>
+								<c:if test="${i eq n.end }">
+									<option value="${i}">${i }&nbsp;[최대인원]</option> 
+								</c:if>
+								
+							</c:forEach>
+						</select>
+					</td>
 					
-						<div class="col-md-3">
-					
-					<select class="form-control" name="adult" >
-					  <option value="1">성인 1</option>
-					  <option value="2">성인 2</option>
-					  <option value="3">성인 3</option>
-					</select>
-					</div>
-					
-					<div class="col-md-3">
-		
-					<select class="form-control" name="child" >
-					  <option value="1">어린이 1</option>
-					  <option value="2">어린이 2</option>
-					  <option value="3">어린이 3</option>
-					</select>
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>아코디언 끝
-	<div style="float:right">
-				<input class="btn btn-dark" type="submit" value="예약하기" >
-				</div>
-  	</div> -->
+				</tr>
+				
+				<tr>
+					<td colspan="4" class="textLeft">
+						<span style="font-size: 14px; color: gray;">
+							* 체크인 가능 날짜만 표시됩니다.&nbsp;&nbsp;|&nbsp;
+							* 미성년자 및 아동도 1인 기준으로 체크해주세요.<br>
+							* 객실 기준인원 초과 예약 시, 입실 시 캠핑장 기준에 따른 추가요금이 발생될 수 있습니다.
+						</span>
+					</td>
+					<td colspan="2" class="text-center">
+						<input type="submit" class="btn btn-primary" value="예약하기(사용자)" onclick="goReservation(${roombean.num},${pageNumber})">
+					</td>
+				</tr>
+			</table>
+		</form>
+  		
+  	</div> 
   	
-  	<div class="marginPadding10" align="center">
+  	<div align="center">
   		<hr>
   		<article><h4 class="text-info text-center">객실 소개</h4></article>
   		<div class="marginPadding10">

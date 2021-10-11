@@ -52,4 +52,56 @@
 		WHERE NUM = #{num}
 	</select>
 	
+	<!-- 캠핑장 번호, 객실 번호, 주중/주말가격, 기준인원 가져옴 -->
+	<select id="getRoomReserveInfo" resultType="myRoomBean">
+		SELECT 
+			NUM, NAME, ROOM_TYPE,
+			CNUM,
+			PROPGUESTS,
+			WEEKDAYPRICE,
+			WEEKENDPRICE
+		FROM ROOM
+		WHERE NUM = #{rnum}
+	</select>
+	
+	<select id="getCampingName" resultType="String">
+		SELECT DISTINCT C.NAME
+		FROM CAMPING C, ROOM R
+		WHERE C.NUM = #{cnum}
+	</select>
+	
+	<update id="updateData">
+		UPDATE ROOM
+		<set>
+			NAME = #{name},
+			ROOM_TYPE = #{roomtype},
+			IMGURL = #{imgurl},
+			SUMMARY = #{summary},
+			CONTENTS = #{contents},
+			PROPGUESTS = #{propguests},
+			MAXGUESTS = #{maxguests},
+			WEEKDAYPRICE = #{weekdayprice},
+			WEEKENDPRICE = #{weekendprice},
+			OPTIONS = #{options},
+			AMENITY = #{amenity},
+			MODDATE = SYSDATE,
+			MODID = #{modid}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<select id="getCampingNum" resultType="String">
+		SELECT CNUM
+		FROM ROOM
+		WHERE NUM = #{num}
+	</select>
+	
+	<update id="updateRoomStatusBlind">
+		UPDATE ROOM
+		<set>
+			STATUS = '02'
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
 </mapper>

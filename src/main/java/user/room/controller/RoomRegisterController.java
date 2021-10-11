@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
+import user.camping.model.CampingBean;
 import user.camping.model.CampingDao;
 import user.postimg.model.PostimgDao;
 import user.room.model.RoomBean;
@@ -45,14 +46,13 @@ public class RoomRegisterController {
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
 	public ModelAndView roomRegisterGet(ModelAndView mav,
 								@RequestParam("num") String num,
-								@RequestParam("name") String name,
 								@RequestParam("pageNumber") String pageNumber) {
 		
-		String camptype = campingDao.getCampingTypes(num); //해당 캠핑장 유형
+		//해당 캠핑장 이름, 유형
+		CampingBean campbean = campingDao.getCampingNameAndTypes(Integer.parseInt(num)); 
 		
 		mav.addObject("cnum", num);
-		mav.addObject("cname", name);
-		mav.addObject("camptype", camptype);
+		mav.addObject("campbean", campbean);
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GETPAGE);
 		return mav;
@@ -62,13 +62,12 @@ public class RoomRegisterController {
 	public ModelAndView roomRegisterPost(ModelAndView mav,
 								@ModelAttribute("room") @Valid RoomBean roombean,
 								BindingResult result,
-								@RequestParam("camptype") String camptype,
-								@RequestParam("cname") String cname,
+								@RequestParam("cnum") String cnum,
+								@RequestParam("campbean") String campbean,
 								@RequestParam("pageNumber") String pageNumber) {
 		
-		mav.addObject("cnum", roombean.getCnum());
-		mav.addObject("cname", cname);
-		mav.addObject("camptype", camptype);
+		mav.addObject("cnum", cnum);
+		mav.addObject("campbean", campbean);
 		mav.addObject("pageNumber", pageNumber);
 		
 		System.out.println("roombean:" + roombean.toString());
