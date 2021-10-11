@@ -32,7 +32,6 @@
  		<if test="whatColumn == 'id'">
  			AND ID LIKE '%'|| #{keyword} || '%'
  		</if>
- 		ORDER BY NUM DESC
 	</select>
 
 	<!-- 문의 총갯수 -->
