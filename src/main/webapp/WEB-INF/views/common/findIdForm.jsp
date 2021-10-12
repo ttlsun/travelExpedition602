@@ -14,6 +14,10 @@ $(document).ready(function() {
 	$("#metaDescription").attr("content", "아이디 찾기");
 	$("#metaKeywords").attr("content", "#아이디찾기");
 });
+
+function findPwBtn(){
+	location.href="usersFindPw.do";
+}
 </script>
 
 <section class="container">
@@ -42,6 +46,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 		<div class="form-group"  style="margin:auto; margin-top: 5%; text-align: center;">
+			<input type="button" class="btn btn-primary" value="비밀번호 찾기" onClick="findPwBtn()"> 
 			<input type="submit" class="btn btn-primary" value="아이디 찾기">
 		</div>
 	</fieldset>
