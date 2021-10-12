@@ -7,7 +7,7 @@
 </head>
 <body>
 <%
-	String url = request.getContextPath()+"/login.do"; //로긴으로 이동
+	String url = request.getContextPath()+"/main.do"; //회원 메인으로 이동
 	response.sendRedirect(url); 
 %> 
 </body>
