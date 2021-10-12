@@ -24,7 +24,7 @@ function navActive(activeName) {
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong>〓</strong></small>
         	</button>
-        	<a class="navbar-brand" href="${contextPath}/main"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
+        	<a class="navbar-brand" href="${contextPath}/main.do"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">

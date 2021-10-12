@@ -45,7 +45,7 @@ public class HomeController {
 	
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
-        logger.info("메인 화면입니다");
+        logger.info("샘플 메인 화면입니다");
         return "main";
     }
     
