@@ -62,7 +62,7 @@ function goRatingRegister(ratingtype) {
 	}
 	
 	//관리자 하지마.. 
-	if(regid == "admin"){
+	if(userid == "admin"){
 		alert("관리자는 후기에 추천/찜 하실 수 없습니다.");
 		return;
 	}
@@ -75,7 +75,7 @@ function goRatingRegister(ratingtype) {
 			reviewnum : $('#reviewnum').val(),
 			reviewtype : $('#reviewtype').val(),
 			ratingtype : ratingtype,
-			regid : regid
+			regid : userid
 		},
 		dataType: "json",
 		success: function(data) {
