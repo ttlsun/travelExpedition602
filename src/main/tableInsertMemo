@@ -15,10 +15,10 @@ VALUES(USERSEQ.NEXTVAL,'customer','customer01','aa11!aa','일반회원1','남','
 -- QNA(문의테이블)
 -- 문의
 INSERT INTO QNA(NUM,ID,PW,TITLE,CONTENTS,REG_KEYWORD,REGDATE,STATUS,REF,RESTEP,RELEVEL)
-VALUES(QNASEQ.NEXTVAL,'customer01','a1234','문의합니다.','문의합니다. 어디캠핑장이좋을까요','#캠핑문의',SYSDATE,'01',1,0,0);
+VALUES(QNASEQ.NEXTVAL,'customer01','a1234','문의합니다.','문의합니다. 어디캠핑장이좋을까요','#캠핑문의',SYSDATE,'03',1,0,0);
 -- 답변
 INSERT INTO QNA(NUM,ID,TITLE,CONTENTS,REG_KEYWORD,REGDATE,STATUS,REF,RESTEP,RELEVEL)
-VALUES(QNASEQ.NEXTVAL,'admin','답변합니다.','답변합니다. 모든캠핑장이좋아요','#문의답변#캠핑문의답변',SYSDATE,'01',1,1,1);
+VALUES(QNASEQ.NEXTVAL,'admin','답변합니다.','답변합니다. 모든캠핑장이좋아요','#문의답변#캠핑문의답변',SYSDATE,'03',1,1,1);
 
 
 -- NOTICE(공지사항 테이블)
