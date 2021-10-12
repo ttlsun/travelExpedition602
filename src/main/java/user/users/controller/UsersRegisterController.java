@@ -63,6 +63,8 @@ public class UsersRegisterController {
 				users.setAddress2(address2);
 				users.setAddress3(address3);
 				users.setAddress4(address4);
+				
+				users.setGender("");
 			} else {
 				users.setAddress1("");
 				users.setAddress2("");
