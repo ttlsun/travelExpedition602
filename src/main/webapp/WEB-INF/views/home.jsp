@@ -16,7 +16,12 @@
 				
 				샘플 페이지 연결(샘플보기 - home ) <br>
 				<br>--------------------------------------------------------
+				<br><br><br><br>
 				
+				<span> 관리자 : 메인(<a href="main.ad">관리자 - 메인</a>) </span>
+				<br>
+				<span> 회원 : 메인(<a href="main.do">회원 - 메인</a>) </span>
+				<br><br>
 				
 				<br><br>[기본샘플(공통) - 파일업로드]
 				<br><a href="${contextPath}/sampleFileUpload">파일업로드 페이지(1개, 여러개 둘다)</a>

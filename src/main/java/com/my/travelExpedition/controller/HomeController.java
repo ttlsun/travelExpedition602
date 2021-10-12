@@ -43,12 +43,6 @@ public class HomeController {
 	@Autowired
 	private KeywordDao keywordDao;
 	
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String main() {
-        logger.info("샘플 메인 화면입니다");
-        return "main";
-    }
-    
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String homeView() {
         logger.info("샘플 화면입니다"); //아직 로그는 쌓진 않음..
