@@ -10,9 +10,9 @@ $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('myInfo');
 	
-	$("#metaTitle").attr("content", "${myReservation.name}");
-	$("#metaDescription").attr("content", "${myReservation.summary}");
-	$("#metaKeywords").attr("content", "${myReservation.regkeyword}");
+	$("#metaTitle").attr("content", "my예약내역리스트 상세");
+	$("#metaDescription").attr("content", "my예약내역리스트 상세");
+	$("#metaKeywords").attr("content", "#my예약내역리스트 상세");
 	
 });
 
