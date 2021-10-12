@@ -64,9 +64,12 @@ function goDetail(num) {
 		</form>
 	</div>
 	
+	<!-- 회원 경우만 등록 -->
+	<c:if test="${!empty userId}">
     <div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="커뮤니티후기등록" onclick="goRegister()">
 	</div>
+	</c:if>
   
   	<!-- 현재날짜 -->
 	<c:set var="today" value="<%=new java.util.Date()%>" />

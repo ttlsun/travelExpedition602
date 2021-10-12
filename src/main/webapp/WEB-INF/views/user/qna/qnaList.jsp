@@ -55,9 +55,12 @@ function goRegister() {
 		</form>
 	</div>
 	
+	<!-- 회원만 문의를 쓸수 있게 변경 -->
+	<c:if test="${!empty userId}">
 	<div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="문의 등록" onclick="goRegister()">
 	</div>
+	</c:if>
 	
 	<table class="table table-bordered" style="margin-top: 3%;">
 		<caption>레코드 총 갯수 : ${totalCount} </caption>
@@ -92,7 +95,6 @@ function goRegister() {
 							<img src="${images}/level.gif" height="15px;" alt="level.gif" title="level이미지"/>
 						</c:otherwise>
 					</c:choose>
-					
 					<c:choose>
 						<c:when test="${list.id ne userId and !empty list.pw}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">

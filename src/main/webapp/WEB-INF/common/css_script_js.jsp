@@ -18,9 +18,9 @@
 	request.setCharacterEncoding("UTF-8");
 	//로그인 세션 셋팅. (id,name,구분코드)
 	UsersBean loginInfo = (UsersBean)session.getAttribute("loginInfo");
-	String userName = loginInfo == null ? "회원" :  loginInfo.getName();
-	String userId = loginInfo == null ? "customer01" :  loginInfo.getId();
-	String userCode = loginInfo == null ? "customer" :  loginInfo.getUcode();
+	String userName = loginInfo == null ? "" :  loginInfo.getName();
+	String userId = loginInfo == null ? "" :  loginInfo.getId();
+	String userCode = loginInfo == null ? "" :  loginInfo.getUcode();
 
 	//사업자 회원용.(테스트시, 추후 삭제요망)
 	/* String userName = loginInfo == null ? "사업자회원" :  loginInfo.getName();

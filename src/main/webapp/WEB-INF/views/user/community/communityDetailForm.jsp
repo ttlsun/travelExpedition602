@@ -48,6 +48,13 @@ function goRatingRegister(ratingtype) {
 	var userid = "${userId}"; // 페이지 진입한 유저 아이디.
 	var regid = "${community.regid}" //후기등록자 아이디
 	
+	//회원이 아닐 경우,
+	//로그인 페이지로 안보낼거임..
+	if(userid == null || userid == ""){
+		alert("로그인 후 하시길 바랍니다."); 
+		return false; 
+	}
+	
 	//자기가 적은 후기는 추천할수 없게 설정.
 	if(userid == regid || regid == "admin"){
 		alert("자신이 적은 후기에 추천/찜 하실 수 없습니다.");
@@ -125,6 +132,12 @@ function likesRegister() {
 function goReplyRegister() {
 	var regid = "${userId}"; // 페이지 진입한 유저 아이디.
 
+	//회원이 아닐 경우,
+	if(regid == null || regid == ""){
+		alert("로그인 후 댓글 등록 바랍니다.");
+		return false; 
+	}
+	
 	//댓글 길이 체크
 	if(!isInputLen("후기댓글","content",2,300)){
 		return false;
