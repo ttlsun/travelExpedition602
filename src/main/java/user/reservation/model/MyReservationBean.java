@@ -20,6 +20,7 @@ public class MyReservationBean {
 	private String status;
 
 	/* 캠핑 정보 컬럼 */
+	private int campingnum;
 	private String campingname;
 	private String camptype;
 	private String themecode;
@@ -32,6 +33,7 @@ public class MyReservationBean {
 	private String contact;
 
 	/* 룸 정보 컬럼 */
+	private int roomnum;
 	private String roomname;
 	private String roomtype;
 	private String roomimg;
@@ -166,6 +168,14 @@ public class MyReservationBean {
 		this.status = status;
 	}
 
+	public int getCampingnum() {
+		return campingnum;
+	}
+
+	public void setCampingnum(int campingnum) {
+		this.campingnum = campingnum;
+	}
+
 	public String getCampingname() {
 		return campingname;
 	}
@@ -244,6 +254,14 @@ public class MyReservationBean {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public int getRoomnum() {
+		return roomnum;
+	}
+
+	public void setRoomnum(int roomnum) {
+		this.roomnum = roomnum;
 	}
 
 	public String getRoomname() {

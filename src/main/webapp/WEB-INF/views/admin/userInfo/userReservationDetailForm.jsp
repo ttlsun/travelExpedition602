@@ -98,7 +98,15 @@ function goUpdate() {
 				</c:choose>
 			</td>
 			<td>캠핑장 태마</td>
-			<td>${myReservation.themecode}</td>
+			<td>
+				<c:choose>
+					<c:when test="${myReservation.themecode eq '01'}">&nbsp;숲/산&nbsp;</c:when>
+					<c:when test="${myReservation.themecode eq '02'}">&nbsp;해변/바다&nbsp;</c:when>
+					<c:when test="${myReservation.themecode eq '03'}">&nbsp;강/호수/계곡&nbsp;</c:when>
+					<c:when test="${myReservation.themecode eq '04'}">&nbsp;도심&nbsp;</c:when>
+					<c:when test="${myReservation.themecode eq '05'}">&nbsp;섬&nbsp;</c:when>
+				</c:choose>
+			</td>
 		</tr>
 		<tr>
 			<td>캠핑장 연락처</td>

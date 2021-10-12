@@ -80,6 +80,12 @@ $(document).ready(function() {
 						<b class="redFont"><fmt:formatNumber value="${list.totalprice}" pattern="###,###"/></b> 원
 					</span>
 					</a>
+					<!-- 예약일 끝날짜거나 완료인 상태일경우 예약관련 후기쓰기.  -->
+					<c:if test="${list.checkoutdate <= date or list.status eq '02'}">
+					<span class="spanFlowRootP10">
+						<input type="button" class="btn btn-primary" value="후기쓰기" onclick="location.href='${contextPath}/communityRegister.do?reservationnum=${list.num}&reviewnum=${list.campingnum}&reviewtype=01&type=1'">
+					</span>
+					</c:if>
 				</td>
 			</tr>
 			</c:forEach>
