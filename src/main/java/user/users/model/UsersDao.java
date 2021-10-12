@@ -34,4 +34,16 @@ public class UsersDao {
 	public UsersBean login(UsersBean users) {
 		return sqlSessionTemplate.selectOne(NAMESPACE+".login", users);
 	}
+	
+	public int byeUsers(UsersBean users) {
+		return sqlSessionTemplate.update(NAMESPACE+".byeUsers", users);
+	}
+	
+	public int updateMyInfo(UsersBean users) {
+		return sqlSessionTemplate.update(NAMESPACE+".updateMyInfo", users);
+	}
+	
+	public int updatePw(UsersBean users) {
+		return sqlSessionTemplate.update(NAMESPACE+".updatePw", users);
+	}
 }

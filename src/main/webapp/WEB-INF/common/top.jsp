@@ -85,15 +85,14 @@ function navActive(activeName) {
           	<li data-nav="myInfo" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
-            		<!-- 세영 : (0927)드랍메뉴 위치&이름 변경 -->
-           			<li><a href="#">내 정보</a></li>
+           			<li><a href="${contextPath}/usersMyInfo.do">내 정보</a></li>
 	            	<li><a href="${contextPath}/myReservationList.do">내 예약 목록</a></li>
 	            	<li><a href="${contextPath}/myLikesList.do">내 관심 목록</a></li>
 	         	</ul>
          	</li>
          	</c:if>
          	
-          	<!-- 세영 : (예정)로그인/회원가입 구현 완료 후, 로그인x면 로그인 & 로그인o면 로그아웃 -->
+          	<!-- 로그인x면 로그인 & 로그인o면 로그아웃 -->
           	<li data-nav="login">
 	          	<c:choose>
 	          		<c:when test="${!empty userId}">

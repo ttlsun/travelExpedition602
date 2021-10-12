@@ -56,19 +56,23 @@ public class UsersLoginController {
 			UsersBean usersBean = usersDao.login(users);
 			
 			if(usersBean != null) {	//아이디, 비번 모두 만족
-				System.out.println("로그인 성공");
-				
-				session.setAttribute("loginInfo", usersBean); //유저정보 session 생성 (로그아웃 시 삭제)
-				session.setMaxInactiveInterval(-1); //세션 시간 무한대로 설정
-				//session.removeAttribute("loginInfo"); //위에서 생성한 session 값 삭제
-				//session.invalidate(); //세션 전체 제거
-				
-				if(usersBean.getUcode().equals("admin")) {
-					pw.println("<script>location.replace('main.ad')</script>");
+				if(usersBean.getStatus().equals("탈퇴보류중") || usersBean.getStatus().equals("회원탈퇴")) {
+					pw.println("<script>alert('회원탈퇴 처리한 계정입니다'); history.go(-1);</script>");
 				} else {
-					pw.println("<script>location.replace('main.do')</script>");
+					System.out.println("로그인 성공");
+					
+					session.setAttribute("loginInfo", usersBean); //유저정보 session 생성 (로그아웃 시 삭제)
+					session.setMaxInactiveInterval(-1); //세션 시간 무한대로 설정
+					//session.removeAttribute("loginInfo"); //위에서 생성한 session 값 삭제
+					//session.invalidate(); //세션 전체 제거
+					
+					if(usersBean.getUcode().equals("admin")) {
+						pw.println("<script>location.replace('main.ad');</script>");
+					} else {
+						pw.println("<script>location.replace('main.do');</script>");
+					}
+					//mav.setViewName(GOTOPAGE);
 				}
-				//mav.setViewName(GOTOPAGE);
 			} else {
 				usersBean = usersDao.idCheck(users.getId()); //아이디 중복체크 했을 때
 				

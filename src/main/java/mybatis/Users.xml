@@ -29,4 +29,20 @@
 	<select id="login" parameterType="myUsersBean" resultType="myUsersBean">
 		select * from users where id = #{id} and pw = #{pw}
 	</select>
+	
+	<update id="byeUsers" parameterType="myUsersBean">
+		update users set status = '탈퇴보류중' where id = #{id} and pw = #{pw}
+	</update>
+	
+	<update id="updateMyInfo" parameterType="myUsersBean">
+		update users set
+		name = #{name}, email = #{email}, birth = to_date(#{birth}), postcode = #{postcode},
+		address1 = #{address1}, address2 =  #{address2}, address3 = #{address3}, address4 = #{address4},
+		contact = #{contact}, moddate = sysdate, modid = #{modid}
+		where id = #{id}
+	</update>
+	
+	<update id="updatePw" parameterType="myUsersBean">
+		update users set pw = #{pw} where id = #{id}
+	</update>
 </mapper>

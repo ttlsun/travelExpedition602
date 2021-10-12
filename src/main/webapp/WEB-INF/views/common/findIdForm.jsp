@@ -12,7 +12,7 @@ $(document).ready(function() {
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "아이디찾기");
 	$("#metaDescription").attr("content", "아이디 찾기");
-	$("#metaKeywords").attr("content", "#아이디찾기");
+	$("#metaKeywords").attr("content", "#여행자들602호 아이디찾기");
 });
 
 function findPwBtn(){
