@@ -56,12 +56,18 @@ function goUpdate() {
 			<td>${myReservation.guests}</td>
 			<td><label for="status">예약 진행사항</label></td>
 			<td>
-				<select name="status" id="status" class="form-control">
-					<option value="01" <c:if test="${myReservation.status eq '01'}">selected="selected" </c:if>>예약중</option>
-					<option value="02" <c:if test="${myReservation.status eq '02'}">selected="selected" </c:if>>완료</option>
-					<option value="03" <c:if test="${myReservation.status eq '03'}">selected="selected" </c:if>>보류</option>
-					<option value="04" <c:if test="${myReservation.status eq '04'}">selected="selected" </c:if>>예약취소</option>
-				</select>
+				<!-- 예약완료상태이면, 진행사항 변경 못하게 함. 완료가 아닐경우 상태 변경가능. -->
+				<c:choose>
+					<c:when test="${myReservation.status ne '02'}">
+						<select name="status" id="status" class="form-control">
+							<option value="01" <c:if test="${myReservation.status eq '01'}">selected="selected" </c:if>>예약중</option>
+							<option value="02" <c:if test="${myReservation.status eq '02'}">selected="selected" </c:if>>완료</option>
+							<option value="03" <c:if test="${myReservation.status eq '03'}">selected="selected" </c:if>>보류</option>
+							<option value="04" <c:if test="${myReservation.status eq '04'}">selected="selected" </c:if>>예약취소</option>
+						</select>
+					</c:when>
+					<c:when test="${myReservation.status eq '02'}">완료</c:when>
+				</c:choose>
 			</td>
 			<td>예약 총금액</td>
 			<td>
