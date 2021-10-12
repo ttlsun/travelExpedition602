@@ -47,9 +47,6 @@ public class CommunityDetailController {
 	@Autowired
 	private RatingDao ratingDao;
 	
-	@Autowired
-	private LikeDao likeDao;
-	
 	@RequestMapping(value = COMMAND)
     public ModelAndView communityListView(HttpServletRequest request,
     									  @RequestParam Map<String, String> map) {
@@ -141,20 +138,25 @@ public class CommunityDetailController {
 		JSONObject json = new JSONObject();
 		
 		try {
+			
+			//캠핑 or 관광지 고유번호.
+			int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+			System.out.println("revieNum : " + revieNum);
+			
 			//등급별 테이블에 저장.
 			map.put("reviewnum", map.get("num"));
 			map.put("starranking", "0");
 			ratingDao.insertRatingData(map);
 			
 			String ratingtype = (String)map.get("ratingtype");
-			
+			System.out.println("ratingtype : " + ratingtype);
+
 			//찜,좋아요, 별등급 카운트 올리기.
 			if(ratingtype.equals("01")) {
 				map.put("recommend","01");
 				
-				//캠핑 or 관광지 고유번호.
-				int revieNum = Integer.parseInt((String)map.get("reviewnum"));
-				//System.out.println("revieNum : " + revieNum);
+				//후기 상세 update
+				communityDao.updateCommunityUpcount(map);
 				
 				//캠핑 or 관광지 테이블에 추천 카운트 올려주기.
 				//System.out.println("revieNum:" + revieNum);
@@ -165,9 +167,8 @@ public class CommunityDetailController {
 				
 			}else {
 				map.put("steamed","02");
+				communityDao.updateCommunityUpcount(map);
 			}
-			
-			communityDao.updateCommunityUpcount(map);
 		
 			json.put("resultCode", "OK");
 			json.put("resultMsg", "성공");
