@@ -29,7 +29,7 @@ public class CampingDetailController {
 	public ModelAndView campingDetail(ModelAndView mav,
 							@RequestParam(value="num", required=false) String num,
 							@RequestParam(value="cnum", required=false) String cnum,
-							@RequestParam(value="pageNumber", required=false) String pageNumber) {
+							@RequestParam(value="pageNumber") String pageNumber) {
 		
 		String camp_num = "0";
 		if(cnum != null) {

@@ -67,6 +67,7 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
+		ORDER BY NUM DESC
 		
 		
 		

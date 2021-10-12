@@ -22,7 +22,7 @@ public class CampingRegisterController {
 	
 	private static final String COMMAND = "/campingRegister.do";
 	private static final String GETPAGE = "user/camping/campingRegisterForm";
-	private static final String GOTOPAGE = "redirect:/campingDetail.do";
+	private static final String GOTOPAGE = "redirect:/campingList.do";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -40,9 +40,7 @@ public class CampingRegisterController {
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
 	public ModelAndView campingRegisterPost(ModelAndView mav,
 									@ModelAttribute("camping") @Valid CampingBean campbean, 
-									BindingResult result,
-									@RequestParam("coordsLa") String latitude,
-									@RequestParam("coordsMa") String longitude
+									BindingResult result
 									) {
 			try {
 			
@@ -70,10 +68,7 @@ public class CampingRegisterController {
 			
 			//로그인 세션에 저장되어 있는 id값 넣기
 			campbean.setRegid(campbean.getRegid()+"id");
-			
-			campbean.setLatitude(latitude);
-			campbean.setLongitude(longitude);
-			
+						
 			System.out.println(campbean.toString());
 			
 			//캠핑장 레코드 insert
@@ -97,3 +92,4 @@ public class CampingRegisterController {
 		return mav;
 	}
 }
+

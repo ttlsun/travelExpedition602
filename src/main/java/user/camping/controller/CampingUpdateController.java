@@ -50,11 +50,9 @@ public class CampingUpdateController {
 	public ModelAndView campingUpdatePost(ModelAndView mav,
 								@RequestParam(value = "pageNumber") String pageNumber,
 								@RequestParam(value = "originImgUrl") String originImgUrl,
-								@RequestParam("coordsLa") String latitude,
-								@RequestParam("coordsMa") String longitude,
 								@ModelAttribute("camping") @Valid CampingBean campbean,
 								BindingResult result) {
-		//System.out.println("campbean:"+campbean.toString());
+		System.out.println("campbean:"+campbean.toString());
 		try {
 		
 		mav.addObject("num", campbean.getNum());
@@ -77,10 +75,7 @@ public class CampingUpdateController {
 		
 		//로그인 세션에 저장되어 있는 id값 넣기
 		campbean.setModid(campbean.getModid()+"id");
-		
-		campbean.setLatitude(latitude);
-		campbean.setLongitude(longitude);
-		
+				
 		cnt = campingDao.updateData(campbean);
 		
 		if(cnt != -1) {

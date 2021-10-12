@@ -238,8 +238,8 @@ function fileSelectChange(event) {
 					<input type="text" class="form-control40" id="address4" name="address4" value="${camping.address4}" placeholder="상세주소 입력">
 					<form:errors cssClass="errMessage" path="address4"/>
 					
-					<input type="hidden" class="form-control40" id="coordsMa" name="coordsMa" placeholder="좌표Ma">
-					<input type="hidden" class="form-control40" id="coordsLa" name="coordsLa" placeholder="좌표La">
+					<input type="hidden" class="form-control40" id="coordsMa" name="longitude" placeholder="좌표Ma">
+					<input type="hidden" class="form-control40" id="coordsLa" name="latitude" placeholder="좌표La">
 					
 				</label>
 				
