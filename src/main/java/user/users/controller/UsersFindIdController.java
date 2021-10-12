@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.travelExpedition.utility.WebUtil;
+
 import user.users.model.UsersBean;
 import user.users.model.UsersDao;
 
@@ -22,7 +24,6 @@ import user.users.model.UsersDao;
 public class UsersFindIdController {
 	private final String COMMAND = "/usersFindId.do";
 	private final String GETPAGE = "common/findIdForm"; //views/common/findIdForm.jsp
-	private final String GOTOPAGE = "login.do"; //redirect?
 	
 	@Autowired
 	UsersDao usersDao;
@@ -35,7 +36,7 @@ public class UsersFindIdController {
 	}
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
-	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, ModelAndView mav,
+	public void doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result,
 							   PrintWriter pw, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
@@ -44,9 +45,8 @@ public class UsersFindIdController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		//name, email
-		if(result.hasErrors()) {
-			mav.setViewName(GETPAGE);
-			pw.println("<script>alert('아이디 찾기에 실패했습니다');</script>");
+		if(result.hasErrors() && !WebUtil.isResultErrorIgnore(result, new String[]{"id","pw","contact"})) {
+			pw.println("<script>alert('아이디 찾기에 실패했습니다'); history.go(-1);</script>");
 		} else {
 			UsersBean usersBean = usersDao.findId(users);
 			
@@ -54,16 +54,14 @@ public class UsersFindIdController {
 				String name = users.getName();
 				String id = usersBean.getId();
 				
-				mav.setViewName(GOTOPAGE);
 				pw.println("<script>alert('아이디 찾기에 성공했습니다');</script>");
-				pw.println("<script>alert('"+name+" 님의 아이디는 "+id+" 입니다.');</script>");
+				pw.println("<script>alert('"+name+" 님의 아이디는 "+id+" 입니다.'); location.replace('login.do');</script>");
 			} else {
-				mav.setViewName(GETPAGE);
-				pw.println("<script>alert('아이디 찾기에 실패했습니다');</script>");
+				pw.println("<script>alert('아이디 찾기에 실패했습니다'); history.go(-1);</script>");
 			}
 		}
 		pw.flush();
 		
-		return mav;
+		return;
 	}
 }
