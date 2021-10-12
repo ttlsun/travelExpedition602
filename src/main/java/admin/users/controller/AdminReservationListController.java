@@ -1,4 +1,4 @@
-package user.reservation.controller;
+package admin.users.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -16,13 +16,12 @@ import com.my.travelExpedition.utility.Paging;
 
 import user.reservation.model.MyReservationBean;
 import user.reservation.model.ReservationDao;
-import user.users.model.UsersBean;
 
 @Controller
-public class MyReservationListController {
+public class AdminReservationListController {
 
-	public static final String COMMAND = "/myReservationList.do";
-	public static final String GETPAGE = "user/myInfo/myReservationList";
+	public static final String COMMAND = "/userReservationList.ad";
+	public static final String GETPAGE = "admin/userInfo/userReservationList";
 	
 	@Autowired
 	private ReservationDao reservationDao;
@@ -33,16 +32,12 @@ public class MyReservationListController {
 		
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
-		//세션 아이디 얻어오기.
-		UsersBean loginInfo = (UsersBean)session.getAttribute("loginInfo");
-		String userId = loginInfo == null ? "" :  loginInfo.getId();
-		
-		map.put("id", userId);
 		int totalCount = reservationDao.getMyReservationListTotalCnt(map);
 	
 		String pageUrl = request.getContextPath() + COMMAND; //페이지 URL
 		
 		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
+		//bean 명칭을 잘못만들었네요 ㅠ.ㅠ. 그래도 같이 얻어오는게 좋으니깐 추후 변경해도되고..일단 진행합니다..
 		List<MyReservationBean> lists = reservationDao.getMyReservationList(pageInfo, map);
 		
 		mav.addObject("pageInfo", pageInfo);

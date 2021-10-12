@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>  
 <style type="text/css">
 	th,td{
 		text-align: center;
@@ -13,9 +13,9 @@ $(document).ready(function() {
 	navActive('myInfo');
 	
 	//메타태그 설정.
-	$("#metaTitle").attr("content", "my예약내역리스트 ");
-	$("#metaDescription").attr("content", "my예약내역리스트");
-	$("#metaKeywords").attr("content", "#my예약내역리스트 , #예약내역");
+	$("#metaTitle").attr("content", "관리자 회원 예약내역 리스트 관리");
+	$("#metaDescription").attr("content", "관리자 회원 예약내역 리스트 관리");
+	$("#metaKeywords").attr("content", "#회원 예약내역리스트 , #예약내역");
 });
 
 </script>
@@ -23,16 +23,49 @@ $(document).ready(function() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> MY 예약 내역리스트 </h2></header>
-	<!-- 현재날짜 -->
-	<c:set var="today" value="<%=new java.util.Date()%>" />
-	<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set>
-	
+	<header><h2 align="center" class="text-primary"> 회원 예약 내역리스트 </h2></header>
+
+	<div class="form-horizontal rounded">
+		<form action="userReservationList.ad">
+			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
+			<div>
+				<dl>
+					<dt><label for="searchStatus">진행사항 상태</label></dt>
+					<dd>
+						<select id="searchStatus" name="status" class="form-control">
+							<option value="">선택</option>
+							<option value="01">예약중</option>
+							<option value="02">완료</option>
+							<option value="03">보류</option>
+							<option value="04">예약취소</option>
+						</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="searchWhatColumn">검색</label></dt>
+					<dd>
+						<select name="whatColumn" id="searchWhatColumn" class="form-control">
+							<option value="">전체 검색</option>
+							<option value="id">예약 회원 아이디</option>
+						</select>
+						
+						<div align="left" style="padding-top: 5px;">
+							<input type="text" class="form-control" name="keyword" placeholder="검색">
+						</div>
+						<div align="right" style="padding-top: 5px;">
+							<input type="submit" class="btn btn-default" value="검색">
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</form>
+	</div>
+
 	<table class="table table-bordered" style="margin-top: 3%;">
 		<caption>레코드 총 갯수 : ${totalCount} </caption>
 		<thead>
 			<tr class="active">
-				<th colspan="2"> MY 예약 내역리스트 </th>
+				<th colspan="2"> 회원 예약 내역리스트 </th>
 			</tr>
 		</thead>
 		
@@ -40,7 +73,7 @@ $(document).ready(function() {
 			<!-- list가 없을 경우 -->
 			<c:if test="${empty lists}">
 			<tr>
-				<td colspan="2" align="center"> 해당 MY 예약 내역 레코드가 없습니다.</td>
+				<td colspan="2" align="center"> 해당 회원 예약 내역 레코드가 없습니다.</td>
 			</tr>
 			</c:if>
 			
@@ -50,7 +83,7 @@ $(document).ready(function() {
 					${list.rownum}
 				</td>
 				<td width="90%" class="" style="border-left: none; padding-top: 2%;">
-					<a href="myReservationDetail.do?num=${list.num}&pageNumber=${pageInfo.pageNumber}" style="text-decoration:none;">
+					<a href="userReservationDetail.ad?num=${list.num}&pageNumber=${pageInfo.pageNumber}" style="text-decoration:none;">
 					<span class="textFontSizeLarge">
 						<b class="text-primary" style="padding-top: 2%; font-size: 30px;">
 							${list.campingname}
@@ -58,6 +91,10 @@ $(document).ready(function() {
 						
 						<span class="spanFlowRootP10" style="padding-top: 2%;"> 
 						<b class="text-primary">객실 정보 : </b> ${list.roomname}
+						</span>
+						
+						<span class="spanFlowRootP10" style="padding-top: 2%;"> 
+						<b class="text-primary">예약 회원 정보 : </b> ${list.id}
 						</span>
 					</span>
 					<span class="spanFlowRootP10">
@@ -95,4 +132,4 @@ $(document).ready(function() {
 </div>   
 </article>
 </section>
-<%@ include file="../../../common/bottom.jsp" %>
+<%@ include file="../../../common/admin/bottom.jsp" %>

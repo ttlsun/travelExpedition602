@@ -34,8 +34,7 @@ public class MyReservationDetailController {
 		UsersBean loginInfo = (UsersBean)session.getAttribute("loginInfo");
 		String userId = loginInfo == null ? "" :  loginInfo.getId();
 		
-		//map.put("id", userId);
-		map.put("id", "customer01");
+		map.put("id", userId);
 		MyReservationBean myReservation = reservationDao.getMyReservationDetail(map);
 		
 		mav.addObject("pageNumber", map.get("pageNumber"));

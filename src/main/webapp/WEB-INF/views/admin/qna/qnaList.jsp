@@ -30,7 +30,7 @@ function goRegister() {
 	<header><h2 align="center" class="text-primary"> 문의 리스트 </h2></header>
 	
 	<div class="form-horizontal rounded">
-		<form action="">
+		<form action="qnaList.ad">
 			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>

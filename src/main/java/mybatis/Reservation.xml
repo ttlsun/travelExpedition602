@@ -15,6 +15,7 @@
 			TO_CHAR(T1.CHECKOUTDATE,'YYYY-MM-DD') AS CHECKOUTDATE,
 			TO_CHAR(T1.REGDATE,'YYYY-MM-DD') AS REGDATE,
 			T1.GUESTS,
+			T1.ID,
 			T1.NAME,
 			T1.PHONE,
 			T1.EMAIL,
@@ -22,23 +23,14 @@
 			T1.TOTALPRICE,
 			T1.STATUS,
 			T2.NAME AS CAMPING_NAME,
-			T2.CAMP_TYPE,
-			T2.THEMECODE,
-			T2.IMGURL AS CAMPING_IMGURL,
-			T2.POSTCODE,
-			T2.ADDRESS1 || ' ' || T2.ADDRESS2 || ' ' || T2.ADDRESS3 || ' ' || T2.ADDRESS4 AS ADDR,
-			T2.CONTACT,
-			T3.NAME AS ROOM_NAME,
-			T3.ROOM_TYPE,
-			T3.IMGURL AS ROOM_IMG,
-			T3.PROPGUESTS,
-			T3.MAXGUESTS,
-			T3.WEEKDAYPRICE,
-			T3.WEEKENDPRICE,
-			T3.OPTIONS,
-			T3.AMENITY
+			T3.NAME AS ROOM_NAME
 		FROM RESERVATION T1, CAMPING T2, ROOM T3
-		WHERE T1.ID= #{id}
+		WHERE 1=1
+		<if test="id != null and id != ''"> AND T1.ID= #{id} </if>
+		<if test="status != null and status != ''"> AND T1.STATUS= #{status} </if>
+		<if test="whatColumn == 'id'">
+ 			AND T1.ID LIKE '%'|| #{keyword} || '%'
+ 		</if>
 		AND T1.CNUM = T2.NUM
 		AND T1.RNUM = T3.NUM
 		AND T2.NUM = T3.CNUM
@@ -48,7 +40,12 @@
 	<select id="getMyReservationListTotalCnt" resultType="int">
 		SELECT COUNT(*) COUNT
 		FROM RESERVATION T1, CAMPING T2, ROOM T3
-		WHERE T1.ID= #{id}
+		WHERE 1=1
+		<if test="id != null and id != ''"> AND T1.ID= #{id} </if>
+		<if test="status != null and status != ''"> AND T1.STATUS= #{status} </if>
+		<if test="whatColumn == 'id'">
+ 			AND T1.ID LIKE '%'|| #{keyword} || '%'
+ 		</if>
 		AND T1.CNUM = T2.NUM
 		AND T1.RNUM = T3.NUM
 		AND T2.NUM = T3.CNUM
@@ -87,11 +84,20 @@
 			T3.OPTIONS,
 			T3.AMENITY
 		FROM RESERVATION T1, CAMPING T2, ROOM T3
-		WHERE T1.ID= #{id}
+		WHERE 1=1
+		<if test="id != null"> AND T1.ID= #{id} </if>
 		AND T1.CNUM = T2.NUM
 		AND T1.RNUM = T3.NUM
 		AND T2.NUM = T3.CNUM
 		AND T1.NUM = #{num}
 	</select>
-
+	
+	<!-- 예약 진행상태 변경 -->
+	<update id="updateReservationStatusChange">
+		UPDATE RESERVATION
+		<set>
+			STATUS = #{status}
+		</set>
+		WHERE NUM = #{num}
+	</update>
 </mapper>

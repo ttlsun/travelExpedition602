@@ -37,4 +37,11 @@ public class ReservationDao {
 		return bean;
 	}
 	
+	/*예약 진행사항 상태 변경*/
+	public int updateReservationStatusChange(Map<String, Object> map) {
+		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateReservationStatusChange", map);
+		return cnt;
+	}
+	
+	
 }

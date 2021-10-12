@@ -1,37 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../../../common/top.jsp" %>   
-
-
+<%@ include file="../../../common/admin/top.jsp" %>   
 
 <script type="text/javascript" >
 $(document).ready(function() {
 	//메뉴 on 유지.
 	navActive('myInfo');
 	
-	$("#metaTitle").attr("content", "${myReservation.name}");
-	$("#metaDescription").attr("content", "${myReservation.summary}");
-	$("#metaKeywords").attr("content", "${myReservation.regkeyword}");
+	$("#metaTitle").attr("content", "관리자 예약회원관리 상세");
+	$("#metaDescription").attr("content", "관리자 예약회원관리상세");
 	
 });
 
 //리스트 버튼 클릭시
 function goList() {
-	location.href= "${contextPath}/myReservationList.do?pageNumber="+${pageNumber};
+	location.href= "${contextPath}/userReservationList.ad?pageNumber="+${pageNumber};
 }
+
+function goUpdate() {
+	if (!confirm('진행사항 변경 하시겠습니까?')){
+		return false;
+	}
+	
+	$('#myForm').attr("method","post").attr("action","userReservationDetail.ad").submit();
+}
+
 </script>
 
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">${myReservation.campingname} 예약 상세</h2></header>
+	<header><h2 align="center" class="text-primary">회원 ${myReservation.campingname} 예약 상세</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
+	<input type="hidden" name="num" id="num" value="${myReservation.num}">
 	
 	<table class="table table-bordered">
-		<caption>예약자 정보 (예약 변경시, 관리자에게 문의하세요.)</caption>
+		<caption>예약자 정보</caption>
 		<tr>
 			<td>예약 번호</td>
 			<td>${myReservation.num}</td>
@@ -47,22 +54,22 @@ function goList() {
 			<td>${myReservation.checkindate} ~ ${myReservation.checkoutdate}</td>
 			<td>이용인원</td>
 			<td>${myReservation.guests}</td>
-			<td>예약 진행사항</td>
+			<td><label for="status">예약 진행사항</label></td>
 			<td>
-				<b class="redFont">
-				<c:choose>
-					<c:when test="${myReservation.status eq '01'}">예약중</c:when>
-					<c:when test="${myReservation.status eq '02'}">완료</c:when>
-					<c:when test="${myReservation.status eq '03'}">보류</c:when>
-					<c:when test="${myReservation.status eq '04'}">예약취소</c:when>
-				</c:choose>
-				</b>
+				<select name="status" id="status" class="form-control">
+					<option value="01" <c:if test="${myReservation.status eq '01'}">selected="selected" </c:if>>예약중</option>
+					<option value="02" <c:if test="${myReservation.status eq '02'}">selected="selected" </c:if>>완료</option>
+					<option value="03" <c:if test="${myReservation.status eq '03'}">selected="selected" </c:if>>보류</option>
+					<option value="04" <c:if test="${myReservation.status eq '04'}">selected="selected" </c:if>>예약취소</option>
+				</select>
 			</td>
 			<td>예약 총금액</td>
 			<td>
 				<b class="redFont"><fmt:formatNumber value="${myReservation.totalprice}" pattern="###,###"/></b> 원
 			</td>
 		</tr>
+		
+		
 	</table>
 	
 	<table class="table table-bordered">
@@ -143,6 +150,9 @@ function goList() {
 
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
+		<c:if test="${myReservation.status ne '02'}">
+			<input type="button" class="btn btn-default" value="수정하기" onclick="return goUpdate()">
+		</c:if>
 		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>
 	<!-- // 버튼 -->
@@ -151,7 +161,5 @@ function goList() {
 </div>  
 </article>
 </section>
-<script>
-	$('.carousel').carousel();
-</script>
-<%@ include file="../../../common/bottom.jsp" %>   
+
+<%@ include file="../../../common/admin/bottom.jsp" %> 
