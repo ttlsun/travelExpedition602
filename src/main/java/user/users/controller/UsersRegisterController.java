@@ -1,10 +1,8 @@
 package user.users.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import user.users.model.UsersDao;
 public class UsersRegisterController {
 	private final String COMMAND = "/usersReigster.do";
 	private final String GETPAGE = "user/users/usersRegisterForm"; //views/user/users/usersRegisterForm.jsp
-	private final String GOTOPAGE = "login.do"; //로그인 화면
+	private final String GOTOPAGE = "redirect:/login.do"; //로그인 화면
 	
 	@Autowired
 	UsersDao usersDao;
@@ -39,26 +37,17 @@ public class UsersRegisterController {
 	//userRegisterForm.jsp 에서 유효성 검사 성공하면 action usersRegister.do(POST) 요청
 	//@Valid UsersBean users, BindingResult result
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
-	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result,
-							   ModelAndView mav, PrintWriter pw, HttpServletResponse response) throws IOException {
+	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, ModelAndView mav) throws IOException {
 		System.out.println(this.getClass()); //추후 삭제 가능
-		
-		pw = response.getWriter();
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		
 		if(result.hasErrors()) {
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors){ System.out.println(error.getDefaultMessage()); }
 
 			//System.out.println(users.getUcode()+", "+users.getName()+", "+users.getGender()+", "+users.getId()+", "+users.getPw()+", "+users.getPostcode()+", "+users.getEmail()+", "+users.getAddress1()+", "+users.getAddress2()+", "+users.getContact());
+			System.out.println("회원가입 실패 - result");
 			mav.setViewName(GETPAGE);
-			pw.println("<script>alert('회원가입에 실패했습니다 - result');</script>");
 		} else {
-			//result에 오류가 없다면, 값 변형 및 추가(getter->split(or something else)->setter || setter)
-			//그대로 들어가는 값 ucode, name, gender, id, pw, postcode, email
-			//변형해야 하는 값 address1, address2, contact(-가 들어있을 경우)
-			//추가해야 하는 값 status="가입완료"
 			if(users.getAddress1() != "") {
 				String[] address_tmp = users.getAddress1().split(" ");
 				String address1 = address_tmp[0];
@@ -88,14 +77,13 @@ public class UsersRegisterController {
 			
 			//성공(-1아님)이면 gotoPage, 실패(-1)면 getPage
 			if(cnt != -1) {
+				System.out.println("회원가입 성공");
 				mav.setViewName(GOTOPAGE);
-				pw.println("<script>alert('회원가입에 성공했습니다');</script>");
 			} else {
+				System.out.println("회원가입 실패 - dao");
 				mav.setViewName(GETPAGE);
-				pw.println("<script>alert('회원가입에 실패했습니다 - dao');</script>");
 			}
 		}
-		pw.flush();
 		
 		return mav;
 	}
