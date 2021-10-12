@@ -80,15 +80,6 @@ public class UsersRegisterController {
 				users.setAddress4("");
 			}
 			
-			if(users.getContact().contains("-")) {
-				String[] contact_tmp = users.getContact().split("-");
-				String contact_tmp2 = "";
-				for(int i=0; i<contact_tmp.length; i++) {
-					contact_tmp2 += contact_tmp[i];
-				}
-				users.setContact(contact_tmp2);
-			}
-			
 			users.setStatus("가입완료");
 			
 			//usersDao에서 registerUsers(), return int(cnt)

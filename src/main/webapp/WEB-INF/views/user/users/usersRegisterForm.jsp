@@ -143,6 +143,11 @@
 			alert("이메일을 입력한 다음 확인해주세요");
 			$('#email').focus();
 			return;
+		} else if(email.indexOf("@") == -1){
+			alert("사용할 수 없는 이메일입니다");
+			$('#email').val("");
+			$('#email').focus();
+			return;
 		}
 		
 		$.ajax({
@@ -174,7 +179,6 @@
 
 	function input() {
 		if($('#ucode option:selected').val() == "customer"){
-			
 			if($('#postcode').val() == ""){
 				$('#postcode').val("0");
 			}
@@ -182,6 +186,16 @@
 				alert("성별 체크 안함");
 				return false;
 			}
+		}
+		
+		if($('#name').val() == ""){
+			if($('#ucode option:selected').val() == "customer"){
+				alert("이름을 입력하세요");
+			} else {
+				alert("상호를 입력하세요");
+			}
+			$('#name').focus();
+			return false;
 		}
 		
 		if(isIdCheck == false && isIdChange == true){
@@ -228,8 +242,17 @@
 			return false;
 		}
 		
-		if(id.indexOf("-") != -1){
-			alert("연락처는 숫자만 입력해주세요");
+		if($('#contact').val() == ""){
+			alert('연락처를 입력하세요');
+			$('#contact').focus();
+			return false;
+		} else if($('#contact').val().indexOf("-") == -1){
+			alert("연락처 형식을 확인하세요");
+			$('#contact').val("");
+			$('#contact').focus();
+			return false;
+		} else if(!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/g.test($('#contact').val())){
+			alert("연락처 형식을 확인하세요");
 			$('#contact').val("");
 			$('#contact').focus();
 			return false;
@@ -261,8 +284,8 @@
 						</td>
 						<td>
 							<select name="ucode" class="form-control" id="ucode">
-								<option value="customer">개인회원</option>
-								<option value="business">사업자</option>
+								<option value="customer" <c:if test="${users.ucode eq 'customer'}">selected</c:if>>개인회원</option>
+								<option value="business" <c:if test="${users.ucode eq 'business'}">selected</c:if>>사업자</option>
 							</select>
 							<form:errors cssClass="errMessage" path="ucode"/>
 						</td>
@@ -275,11 +298,11 @@
 						</td>
 						<td style="border-bottom: none; text-align: center;">
 							<label for="gender1">
-								<input type="radio" id="gender1" name="gender" value="남성"> 남성
+								<input type="radio" id="gender1" name="gender" value="남성" <c:if test="${users.gender eq '남성'}">checked</c:if>> 남성
 							</label>
 							&nbsp;&nbsp;
 							<label for="gender2">
-								<input type="radio" id="gender2" name="gender" value="여성"> 여성
+								<input type="radio" id="gender2" name="gender" value="여성" <c:if test="${users.gender eq '여성'}">checked</c:if>> 여성
 							</label>
 						</td>
 					</tr>
@@ -289,7 +312,7 @@
 							<label for="name">이름</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="name" name="name" size="30%" maxlength="40" placeholder="한글,영어,숫자,괄호가능">
+							<input type="text" class="form-control" id="name" name="name" size="30%" maxlength="40" placeholder="한글,영어,숫자,괄호가능" value="${users.name}">
 							<form:errors cssClass="errMessage" path="name"/>
 						</td>
 					</tr>
@@ -301,7 +324,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control"	id="id" name="id" maxlength="20" placeholder="영어소문자,숫자,-_가능">
+							<input type="text" class="form-control"	id="id" name="id" maxlength="20" placeholder="영어소문자,숫자,-_가능" value="${users.id}">
 							<input type="button" class="btn btn-primary" id="idDuplicateCheck" value="중복확인" onClick="idDupCheck();">
 							<span id="idDupCheckResult" style="display:none;">아이디 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="id"/>
@@ -314,7 +337,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="password" class="form-control" id="pw" name="pw" maxlength="20" placeholder="영어,숫자,특수문자 포함 5~20자">
+							<input type="password" class="form-control" id="pw" name="pw" maxlength="20" placeholder="영어,숫자,특수문자 포함 5~20자" value="${users.pw}">
 							<form:errors cssClass="errMessage" path="pw"/>
 						</td>
 					</tr>
@@ -335,11 +358,11 @@
 							</label>
 						</td>
 						<td style="border: none;">
-							<input type="text" class="form-control40" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호">
+							<input type="text" class="form-control40" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호" value="${users.postcode}">
 							<input type="button" class="btn btn-primary" id="searchPostcode" value="우편번호찾기" data-toggle="modal" data-target="#myModal">
 							<br>
-							<input type="text" style="background-color: white;"	class="form-control" id="address1" name="address1" placeholder="사업장 주소" readonly="readonly">
-							<input type="text" class="form-control" id="address2" name="address2" placeholder="상세주소 입력">
+							<input type="text" style="background-color: white;"	class="form-control" id="address1" name="address1" placeholder="사업장 주소" readonly="readonly" value="${users.address1}">
+							<input type="text" class="form-control" id="address2" name="address2" placeholder="상세주소 입력" value="${users.address2}">
 					</tr>
 					<tr>
 						<!-- 이메일 중복확인 -->
@@ -349,7 +372,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="abc_123@sample.com">
+							<input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="abc_123@sample.com" value="${users.email}">
 							<input type="button" class="btn btn-primary" id="emailDuplicateCheck" value="중복확인" onClick="emailDupCheck();">
 							<span id="emailDupCheckResult" style="display:none;">이메일 중복확인 결과</span>
 							<form:errors cssClass="errMessage" path="email"/>
@@ -362,7 +385,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="contact" name="contact" maxlength="30" placeholder="01000000000">
+							<input type="text" class="form-control" id="contact" name="contact" maxlength="30" placeholder="010-0000-0000" value="${users.contact}">
 							<form:errors cssClass="errMessage" path="contact"/>
 						</td>
 					</tr>
@@ -371,7 +394,7 @@
 							<label for="birth">생일</label>
 						</td>
 						<td>
-							<input type="date" class="form-control" id="birth" name="birth" max="2021-11-01">
+							<input type="date" class="form-control" id="birth" name="birth" max="2021-11-01" value="${users.birth}">
 						</td>
 					</tr>
 					<tr>
