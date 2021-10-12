@@ -12,7 +12,7 @@ import user.users.model.UsersDao;
 @Controller
 public class UsersLogoutController {
 	private final String COMMAND = "/logout.do";
-	private final String GOTOPAGE = "redirect:/main"; //메인 화면
+	private final String GOTOPAGE = "redirect:/main.do";
 	
 	@Autowired
 	UsersDao usersDao;

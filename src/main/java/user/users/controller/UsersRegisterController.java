@@ -3,6 +3,7 @@ package user.users.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class UsersRegisterController {
 	
 	//회원가입 버튼을 누르면 usersRegister.do(GET) 요청
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
-	public ModelAndView doGET(ModelAndView mav) {
-		System.out.println(this.getClass()); //추후 삭제 가능
+	public ModelAndView doGET(ModelAndView mav, HttpServletRequest request) {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		mav.setViewName(GETPAGE);
 		return mav;
 	}
@@ -37,8 +38,8 @@ public class UsersRegisterController {
 	//userRegisterForm.jsp 에서 유효성 검사 성공하면 action usersRegister.do(POST) 요청
 	//@Valid UsersBean users, BindingResult result
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
-	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, ModelAndView mav) throws IOException {
-		System.out.println(this.getClass()); //추후 삭제 가능
+	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, HttpServletRequest request, ModelAndView mav) throws IOException {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
 		if(result.hasErrors()) {
 			List<ObjectError> errors = result.getAllErrors();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,23 +27,21 @@ import user.users.model.UsersDao;
 public class UsersLoginController {
 	private final String COMMAND = "/login.do";
 	private final String GETPAGE = "common/loginForm"; //views/common/loginForm.jsp
-	/*
-	 * private final String GOTOPAGE = "redirect:/main"; //메인 화면
-	 */	
+
 	@Autowired
 	UsersDao usersDao;
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
-	public ModelAndView doGet(ModelAndView mav) {
-		System.out.println(this.getClass()); //추후 삭제 가능
+	public ModelAndView doGet(ModelAndView mav, HttpServletRequest request) {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		mav.setViewName(GETPAGE);
 		return mav;
 	}
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
 	public void doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result,
-							   PrintWriter pw, HttpServletResponse response, HttpSession session) throws IOException {
-		System.out.println(this.getClass()); //추후 삭제 가능
+							   PrintWriter pw, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
 		pw = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
@@ -64,7 +63,11 @@ public class UsersLoginController {
 				//session.removeAttribute("loginInfo"); //위에서 생성한 session 값 삭제
 				//session.invalidate(); //세션 전체 제거
 				
-				pw.println("<script>location.replace('main')</script>");
+				if(usersBean.getUcode().equals("admin")) {
+					pw.println("<script>location.replace('main.ad')</script>");
+				} else {
+					pw.println("<script>location.replace('main.do')</script>");
+				}
 				//mav.setViewName(GOTOPAGE);
 			} else {
 				usersBean = usersDao.idCheck(users.getId()); //아이디 중복체크 했을 때

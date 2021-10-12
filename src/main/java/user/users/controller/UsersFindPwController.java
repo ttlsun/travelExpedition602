@@ -3,6 +3,7 @@ package user.users.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -27,16 +28,16 @@ public class UsersFindPwController {
 	UsersDao usersDao;
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.GET)
-	public ModelAndView doGet(ModelAndView mav) {
-		System.out.println(this.getClass()); //추후 삭제 가능
+	public ModelAndView doGet(ModelAndView mav, HttpServletRequest request) {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		mav.setViewName(GETPAGE);
 		return mav;
 	}
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
 	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, ModelAndView mav,
-							   PrintWriter pw, HttpServletResponse response) throws IOException {
-		System.out.println(this.getClass()); //추후 삭제 가능
+							   PrintWriter pw, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
 		pw = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
