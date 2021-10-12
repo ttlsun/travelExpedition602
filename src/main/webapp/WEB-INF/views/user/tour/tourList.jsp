@@ -20,22 +20,9 @@ $(document).ready(function() {
 	
 	//셀렉트 박스 셋팅.
 	selInit();
-	selThemeInit();
 });
 
-//테마 샐랙트 박스 셋팅
-function selThemeInit() {
-	
-	$("#searchTheme").append(new Option("전체 테마", ""));
-	
-	$.each(selThemeArr, function (i, item) {
-	    $('#searchTheme').append($('<option>', {
-	        value: selThemeArr[i],
-	        text : selThemeArr[i]
-	    }));
-	});
-	
-}
+
 
 //첫번째 샐랙트 박스 셋팅
 function selInit() {
@@ -102,13 +89,13 @@ function addrAjax(type, code, callback) {
 }
 
 //등록페이지이동 버튼
-function goInsert() {
-	location.href= "${contextPath}/sampleCommunityRegister";
+function goRegister(){
+	location.href="${contextPath}/tourRegister.do";
 }
 
 //수정페이지이동 버튼
-function goUpdate() {
-	alert("수정 버튼");
+function goUpdate(num) {
+	location.href="${contextPath}/tourUpdate.do?num="+num+"&pageNumber=1";
 }
 
 //삭제버튼
@@ -116,8 +103,9 @@ function goDelete() {
 	alert("삭제 버튼");
 }
 
-function goDetail() {
-	alert("상세 버튼");
+function goDetail(num) {
+	
+	location.href="${contextPath}/tourDetail.do?num="+num+"&pageNumber="+${pageInfo.pageNumber};
 }
 
 	
@@ -130,20 +118,28 @@ function goDetail() {
 	
 	<div class="form-group rounded">
 		<form action="sampleCCTList" method="post">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
 			
 			<div>
 				<dl>
-					<dt><label for="searchAddr">지역</label></dt>
+					<dt><label for="searchTheme">테마</label></dt>
 					<dd>
-						<select id="searchAddr" name="address1" class="form-control45" onChange="chageSelOpt()"></select>
-						<span style="padding-left: 3.4%;"></span>
-						<select id="searchAddr2" name="address2" class="form-control50" ></select>
+						<select id="searchTheme" name="themecode" class="form-control45">
+							<option value="">선택하세요</option>
+							<option value="02">베스트</option>
+							<option value="03">제주여행</option>
+							<option value="04">내륙여행</option>
+							<option value="05">섬여행</option>
+						</select>
 					</dd>
 				</dl>
 				<dl>
-					<dt><label for="searchTheme">테마</label></dt>
-					<dd><select id="searchTheme" name="themecode" class="form-control"></select></dd>
+					<dt><label for="searchAddr">지역</label></dt>
+					<dd>
+						<select id="searchAddr" name="address1" class="form-control40" onChange="chageSelOpt()"></select><strong> (시) </strong>
+						<span style="padding-left: 3.4%;"></span>
+						<select id="searchAddr2" name="address2" class="form-control40" ></select><strong> (군/구) </strong>
+					</dd>
 				</dl>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>
@@ -169,11 +165,13 @@ function goDetail() {
 	</div>
   
 	<table class="table table-bordered" style="padding-top: 5%;">
-		<caption>레코드 총 갯수 : </caption>
+		<caption>
+			총 ${totalCount} 개의 관광지가 검색되었습니다.
+			<button onClick="goRegister()"> 관광지 등록하기</button>
+		</caption>
 		<thead>
 			<tr class="active">
-				<th>관광지</th>
-				<th>skdald</th>
+				<th width="70%" colspan="3">관광지</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -185,13 +183,39 @@ function goDetail() {
 		</tr>
 		</c:if>
 		
-		<c:forEach items="${lists}" var="list">
-			<tr>
-				<td>${list.num }</td>
-				<td>${list.name }</td>
-				<td>${list.themecode }</td>
-			</tr>
-		</c:forEach>
+		<c:if test="${empty lists}">
+				<tr>
+					<td colspan="3" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
+				</tr>
+			</c:if>
+			
+			<c:forEach var="bean" items="${lists}">
+				<tr>
+					<td rowspan="3" align="center" class="col-xs-3 col-sm-3 col-md-3">
+						<img src="${fileImg}/${bean.imgurl}" alt="" title="" width="100%">
+					</td>
+					<td colspan="2"align="left">
+						<h3><a href="${contextPath }/tourDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
+							[${bean.address1}&nbsp;${bean.address2}]${bean.name }</a></h3>
+						<p>${bean.summary }</p>
+						<p>#태그키워드 #태그 #키워드</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" class="text-center">
+						시설정보
+					</td>
+				</tr>
+				<tr>
+					<td class="text-left">
+						 조회수
+					</td>
+					<td class="text-right">
+						추천수, 찜수, 리뷰수
+					</td>
+				</tr>
+		</c:forEach> 
 		
 		</tbody>
 	</table>

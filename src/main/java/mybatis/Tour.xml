@@ -5,52 +5,93 @@
   
 <mapper namespace="user.tour.model.TourBean">
 	
-	<!-- <insert id="insertTour" parameterType="myTourBean">
+	<select id="getTourMaxNum" resultType="int">
+		SELECT TOUR_SEQ.NEXTVAL FROM DUAL 
+	</select>
+	
+	<insert id="insertTour" parameterType="myTourBean">
 		INSERT INTO TOURLIST(
-			NUM, NAME, THEMECODE, PRICE, DISCOUNT, REG_KEYWORD, SUMMARY, IMGURL, CONTENTS,
-			POSTCODE, ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, LATITUDE, LONGITUDE, CONTACT,
-			REGDATE, REGID, MODDATE,READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT
+			NUM, NAME, THEMECODE, PRICE, DISCOUNT, REG_KEYWORD, 
+			SUMMARY, IMGURL, CONTENTS, POSTCODE, 
+			ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, 
+			LATITUDE, LONGITUDE, CONTACT,
+			REGDATE, REGID,READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT,STATUS
 		)
 		VALUES(
-			TOUR_SEQ.NEXTVAL, #{name}, #{themecode},#{price},#{discount}, #{reg_keyword},
-			#{summary}, #{imgurl}, #{contents}, #{postcode}, #{address1}, #{address2}, #{address3}, #{address4},
-			#{latitude}, #{longitude}, #{contact}, SYSDATE, #{regid}, SYSDATE, 0, 0, 0, 0
+			#{num}, #{name}, #{themecode},#{price},#{discount}, #{regkeyword},
+			#{summary}, #{imgurl}, #{contents}, #{postcode}, 
+			#{address1}, #{address2}, #{address3}, #{address4},
+			#{latitude}, #{longitude}, #{contact}, SYSDATE, #{regid}, 0, 0, 0, 0,'01'
 		)
-	</insert> -->
+	</insert>
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM TOURLIST
-		<if test="address1 != null">
+		WHERE 1=1
+		<if test="status == '01'">
+			AND STATUS = #{status}
+		</if>
+		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1}
 		</if>
-		<if test="address2 != null">
+		<if test="address2 != null and address1 != ''">
 			AND ADDRESS2 = #{address2}
 		</if>
-		<if test="themecode != null">
+		<if test="themecode != null and address1 != ''">
 			AND THEMECODE IN(#{themecode})
 		</if>
-		<if test="searchName != null">
+		<if test="searchName != null and address1 != ''">
 			AND NAME LIKE #{searchName}
 		</if>
 	</select>
 	
 	<select id="getTourList" resultType="myTourBean">
 		SELECT NUM,NAME,THEMECODE,PRICE,DISCOUNT,REG_KEYWORD,SUMMARY,IMGURL,
-		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT 
+		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT,
+		(CASE STATUS
+					WHEN '01' THEN '노출'
+					WHEN '02' THEN '비노출'
+			END) AS STATUS 
 		FROM TOURLIST
 		WHERE 1=1
-		<if test="address1 != null">
-			AND ADDRESS1 = #{address1}
+		<if test="status == '01'">
+			AND STATUS = #{status}
 		</if>
-		<if test="address2 != null">
-			AND ADDRESS2 = #{address2}
-		</if>
-		<if test="themecode != null">
-			AND THEMECODE IN(#{themecode})
-		</if>
-		<if test="searchName != null">
-			AND NAME LIKE #{searchName}
-		</if>
-		
+		ORDER BY NUM DESC
 	</select>
+	
+	<select id="getTourDetail" resultType="myTourBean">
+		SELECT * FROM TOURLIST
+		WHERE NUM = #{num}
+	</select>
+	
+	<update id="updateData">
+		UPDATE TOURLIST
+		<set>
+			NAME = #{name},
+			THEMECODE = #{themecode},
+			PRICE = #{price},
+			DISCOUNT = ${discount},
+			REG_KEYWORD = #{regkeyword},
+			SUMMARY = #{summary},
+			IMGURL = #{imgurl},
+			CONTENTS = #{contents},
+			POSTCODE = #{postcode},
+			LATITUDE = #{latitude},
+			LONGITUDE = #{longitude},
+			CONTACT = #{contact},
+			MODDATE = SYSDATE,
+			MODID = #{modid}
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
+	<update id="updateTourStatusBlind">
+		UPDATE TOURLIST
+		<set>
+			STATUS = '02'
+		</set>
+		WHERE NUM = #{num}
+	</update>
+	
 </mapper>

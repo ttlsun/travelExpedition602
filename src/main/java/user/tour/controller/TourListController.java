@@ -30,9 +30,10 @@ public class TourListController {
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
 	public ModelAndView tourListView(ModelAndView mav,
 									@RequestParam Map<String,String> map,
+									@RequestParam(value="pageNumber", required=false) String pageNumber,
 									HttpServletRequest request) {
 		
-		System.out.println("dasdjklasjdlkasdjlk");
+		map.put("status", "01");
 		
 		
 		int totalCount = tourDao.getTotalCount(map);
@@ -42,6 +43,7 @@ public class TourListController {
 		
 		
 		List<TourBean> lists = tourDao.getTourList(pageInfo,map);
+		
 		
 		mav.addObject("pageInfo", pageInfo);
 		mav.addObject("totalCount", totalCount);
