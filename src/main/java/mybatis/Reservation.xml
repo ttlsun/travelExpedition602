@@ -6,6 +6,44 @@
 <!-- Reservation.xml -->
 <mapper namespace="user.reservation.model.ReservationBean">
 
+	<!-- 예약등록 : 일단 만들어놈. 변경하실거 있으면 변경해서 쓰셔요~ -->
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION
+		(
+			NUM,
+			CNUM,
+			RNUM,
+			ID,
+			CHECKINDATE,
+			CHECKOUTDATE,
+			REGDATE,
+			GUESTS,
+			NAME,
+			PHONE,
+			EMAIL,
+			REQUESTED,
+			TOTALPRICE,
+			STATUS
+		)
+		values(
+			RESERVSEQ.NEXTVAL,
+			#{cnum} ,
+			#{rnum} ,
+			#{id} ,
+			#{checkindate},
+			#{checkoutdate},
+			SYSDATE,
+			#{guests},
+			#{name},
+			#{phone},
+			#{email},
+			#{requested},
+			#{totalprice},
+			#{status}
+		)
+	</insert>
+
+
 	<!-- 나의 예약내역 : 어떤걸 사용하고 싶어하는지 몰라서.. 일단 다 때려넣어봄.. 추후 변경 요망 -->
 	<select id="getMyReservationList" resultType="user.reservation.model.MyReservationBean">
 		SELECT 

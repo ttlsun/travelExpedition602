@@ -10,4 +10,10 @@ public class PayDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
+	public int insertPayData(PayBean bean) {
+		int cnt = sqlSessionTemplate.insert(NAMESPACE + ".insertPay", bean);
+		return cnt;
+	}
+	
 }

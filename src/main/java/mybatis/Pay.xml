@@ -6,4 +6,24 @@
 <!-- Pay.xml -->
 <mapper namespace="user.pay.model.PayBean">
 
+	<insert id="insertPay" parameterType="myPayBean">
+		INSERT INTO PAY
+		(
+			NUM,
+			ID,
+			PAYCODE,
+			PAYDETAIL,
+			CVC,
+			REGDATE
+		)
+		values(
+			PAYSEQ.NEXTVAL,
+			#{id} ,
+			#{paycode} ,
+			#{paydetail} ,
+			#{cvc},
+			SYSDATE
+		)
+	</insert>
+
 </mapper>

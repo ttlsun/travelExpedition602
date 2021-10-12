@@ -18,6 +18,12 @@ public class ReservationDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	/*예약 등록 (추후 변경하세요. 일단 만들어놨어요.)*/
+	public int insertReservationData(ReservationBean bean) {
+		int cnt = sqlSessionTemplate.insert(NAMESPACE + ".insertReservation", bean);
+		return cnt;
+	}
+	
 	/*나의 캠핑 예약 내역 리스트*/
 	public List<MyReservationBean> getMyReservationList(Paging pageInfo, Map<String, String> map) {
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset() , pageInfo.getLimit());
