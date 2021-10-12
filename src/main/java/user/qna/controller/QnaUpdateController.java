@@ -89,14 +89,14 @@ public class QnaUpdateController {
 		
 		try {
 			
-			System.out.println("pw:" + pw);
+			//System.out.println("pw:" + pw);
 			
 			if (pw == null || pw.equals("")) {
 				throw new Exception("비밀번호를 입력하세요");
 			}
 			
 			String pwChk = qnaDao.getPwData(num);
-			System.out.println("pwChk: " + pwChk);
+			//System.out.println("pwChk: " + pwChk);
 			
 			if (!pwChk.equals(pw)) {
 				throw new Exception("비밀번호가 일치하지 않습니다.");

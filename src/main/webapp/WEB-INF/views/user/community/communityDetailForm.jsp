@@ -81,7 +81,7 @@ function goRatingRegister(ratingtype) {
 		success: function(data) {
 			if (data.resultCode != 'OK') {
 
-				//alert(data.resultMsg);
+				console.log(data.resultMsg);
 				if(ratingtype == 01){
 					alert("이미 추천 하신분은 또 추천 하실수 없습니다.");
 				}else{
@@ -91,8 +91,9 @@ function goRatingRegister(ratingtype) {
 				return;
 			}
 			
-			if(ratingtype != 01){
-				likesRegister();
+			console.log(ratingtype);
+			if(ratingtype == 02){
+				likesRegisters();
 			}
 			
 			location.reload();
@@ -105,15 +106,19 @@ function goRatingRegister(ratingtype) {
 	
 }
 
-//likes 테이블에도 insert 하기.
-function likesRegister() {
-	var regid = "${userId}"; // 페이지 진입한 유저 아이디.
+//공통으로 같이 태울 찜 likes 등록.
+function likesRegisters() {
+	var userId = "${userId}"; // 페이지 진입한 유저 아이디.
+	var num = $('#num').val(); //id로 얻어온 자기 고유값 넣기.
+	var acode = "3"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
+	
 	$.ajax({
-		url: "communityLikesRegister.do",
+		url: "myLikesRegister.do",
 		type: "POST",
 		data: {
-			num : $('#num').val(),
-			regid : regid
+			num : num,
+			userId : userId,
+			acode : acode
 		},
 		dataType: "json",
 		success: function(data) {

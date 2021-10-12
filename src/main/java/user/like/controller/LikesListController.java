@@ -37,8 +37,7 @@ public class LikesListController {
 		UsersBean loginInfo = (UsersBean)session.getAttribute("loginInfo");
 		String userId = loginInfo == null ? "" :  loginInfo.getId();
 		
-		//map.put("id", userId);
-		map.put("id", "member01");
+		map.put("id", userId);
 		int totalCount = likeDao.getAllLikesListTotalCnt(map);
 	
 		String pageUrl = request.getContextPath() + COMMAND; //페이지 URL

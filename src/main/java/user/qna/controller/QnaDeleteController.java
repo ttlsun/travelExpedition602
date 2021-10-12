@@ -64,7 +64,7 @@ public class QnaDeleteController {
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
     public ModelAndView doActionPost(ModelAndView mav,@RequestParam Map<String, Object> map) {
 		
-		System.out.println("map:" + map.get("num") );
+		//System.out.println("map:" + map.get("num") );
 		
 		try {
 			//여럿 파일 이미지들(이미지관리테이블) 조회

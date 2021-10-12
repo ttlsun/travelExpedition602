@@ -82,8 +82,7 @@ public class QnaRegisterController {
 			
 			//내 고유번호 최대값 구하기.
 			int maxNum = qnaDao.getQnaMaxNum();
-			System.out.println("maxNum:::" + maxNum);
-			
+			//System.out.println("maxNum:::" + maxNum);
 	
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("acode", "3"); //문의게시판 구분코드
@@ -93,8 +92,7 @@ public class QnaRegisterController {
 			//이미지테이블에 이미지들 저장.
 			String[] uploadFileList = WebUtil.fileUpload(servletContext, bean.getMultipleUpdateFile(), null);
 			
-			System.out.println("uploadFileList :" + uploadFileList);
-			
+			//System.out.println("uploadFileList :" + uploadFileList);
 			for (String str : uploadFileList) {
 				System.out.println("file : " + str);
 				

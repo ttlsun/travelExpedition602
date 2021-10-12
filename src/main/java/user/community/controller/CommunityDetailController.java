@@ -35,7 +35,6 @@ public class CommunityDetailController {
 	public static final String COMMAND_REPLY_REGISTER = "/communityReplyRegister.do";
 	public static final String COMMAND_REPLY_DELETE = "/communityReplyDelete.do";
 	
-	public static final String COMMAND_LIKES_REGISTER = "/communityLikesRegister.do";
 	public static final String COMMAND_RATING_REGISTER = "/communityRatingRegister.do";
 	public static final String COMMAND_RATING_DELETE = "/communityRatingDelete.do";
 	
@@ -142,12 +141,8 @@ public class CommunityDetailController {
 		JSONObject json = new JSONObject();
 		
 		try {
-			
-			//캠핑 or 관광지 고유번호.
-			int revieNum = Integer.parseInt((String)map.get("reviewnum"));
-			
 			//등급별 테이블에 저장.
-			map.put("revieNum", map.get("num"));
+			map.put("reviewnum", map.get("num"));
 			map.put("starranking", "0");
 			ratingDao.insertRatingData(map);
 			
@@ -156,6 +151,10 @@ public class CommunityDetailController {
 			//찜,좋아요, 별등급 카운트 올리기.
 			if(ratingtype.equals("01")) {
 				map.put("recommend","01");
+				
+				//캠핑 or 관광지 고유번호.
+				int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+				//System.out.println("revieNum : " + revieNum);
 				
 				//캠핑 or 관광지 테이블에 추천 카운트 올려주기.
 				//System.out.println("revieNum:" + revieNum);
@@ -169,32 +168,6 @@ public class CommunityDetailController {
 			}
 			
 			communityDao.updateCommunityUpcount(map);
-		
-			json.put("resultCode", "OK");
-			json.put("resultMsg", "성공");
-			
-		} catch (Exception e) {
-			json.put("resultCode", "ERROR");
-			json.put("resultMsg", e.getMessage());
-		}
-		
-		WebUtil.jsonSend(json, response);
-	}
-	
-	//likes테이블에도 insert 해주기
-	@RequestMapping(value = COMMAND_LIKES_REGISTER)
-	public void doJsonlikesRegister(HttpServletResponse response,@RequestParam Map<String, Object> map) throws Exception {
-		
-		JSONObject json = new JSONObject();
-		
-		try {
-			
-			//likes 테이블에 저장.
-			map.put("id", map.get("regid"));
-			map.put("anum", map.get("num"));
-			map.put("acode", "3"); //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
-			
-			likeDao.insertLikesData(map);
 		
 			json.put("resultCode", "OK");
 			json.put("resultMsg", "성공");
