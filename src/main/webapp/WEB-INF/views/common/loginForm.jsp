@@ -46,19 +46,19 @@
 						<div class="form-group">
 							<label for="id" class="col-xs-2 col-lg-2 control-label text-primary">ID : </label>
 							<div class="col-xs-10 col-lg-10">
-								<input type="text" name="id" id="id" maxlength="20"	class="form-control" placeholder="아이디를 입력하세요">
+								<input type="text" name="id" id="id" maxlength="20"	class="form-control" placeholder="아이디를 입력하세요" value="${users.id}">
 								<form:errors css="errMessage" path="id"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="pw" class="col-xs-2 col-lg-2 control-label text-primary">비밀번호 : </label>
 							<div class="col-xs-10 col-lg-10">
-								<input type="password" name="pw" id="pw" maxlength="20" class="form-control" placeholder="비밀번호를 입력하세요">
+								<input type="password" name="pw" id="pw" maxlength="20" class="form-control" placeholder="비밀번호를 입력하세요" value="${users.pw}">
 								<form:errors css="errMessage" path="pw"/>
 							</div>
 						</div>
 						<div class="form-group"	style="margin: auto; margin-top: 5%; text-align: center;">
-							<input type="button" class="btn btn-primary" value="회원가입"	onclick="goRegister()">
+							<input type="button" class="btn btn-primary" value="회원가입" onclick="goRegister()">
 							<input type="button" class="btn btn-primary" value="아이디찾기" onclick="findIdBtn()">
 							<input type="button" class="btn btn-primary" value="비번찾기" onclick="findPwBtn()">
 							<input type="submit" class="btn btn-primary" value="로그인">
