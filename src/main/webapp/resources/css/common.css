@@ -5,13 +5,13 @@ table td:first-child{text-align: center;}
 input[type='text']{vertical-align:middle;}
 form,h2{ margin: 10px; padding: 10px;}
 .marginPadding10{margin: 10px; padding: 10px;}
-
 .floatLeft{float:left}
 .floatRight{float:right}
 .overflowH{overflow:hidden}
 .textCenter{text-align:center!important;}
 .textLeft{text-align:left!important;}
 .textRight{text-align:right!important;}
+.textAlignLeft{text-align: left;}
 .fontB{font-weight:bold!important;}
 .nonLeftBorder{border-left: 0px!important;}
 .nonRightBorder{border-right: 0px!important;}
@@ -134,4 +134,24 @@ form,h2{ margin: 10px; padding: 10px;}
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* 캠핑/관광지 상세검색 css */
+.panel-default1 {
+  border-color: #ffffff;
+}
+.panel-title1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: inherit;
+}
+
+.panel-title1 > a,
+.panel-title1 > small,
+.panel-title1 > .small,
+.panel-title1 > small > a,
+.panel-title1 > .small > a {
+  color: inherit;
+  border: 1px solid;
 }
