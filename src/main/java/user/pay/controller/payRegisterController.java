@@ -21,7 +21,6 @@ import user.users.model.UsersBean;
 public class payRegisterController {
 	private static final String COMMAND = "/payRegister.do";
 	private static final String GETPAGE = "user/pay/payRegisterForm";
-	private static final String GOTOPAGE = "redirect:/payList.do";
 	
 	@Autowired
 	private PayDao payDao;
