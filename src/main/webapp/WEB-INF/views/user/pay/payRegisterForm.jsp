@@ -159,7 +159,7 @@ function input(){
 			<header>
 				<h2 align="center" class="text-primary">결제수단등록</h2>
 			</header>
-			<form:form commandName="pay" name="myForm" action="payRegister.do" method="post" class="form-horizontal">
+			<form name="myForm" action="payRegister.do" method="post" class="form-horizontal">
 				<table class="table table-bordered">
 					<caption>
 						<span class="redFont"> * </span> 필수 입력 사항
@@ -197,7 +197,7 @@ function input(){
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="paydetail1" name="paydetail1" size="30%" maxlength="30" placeholder="한글,영어 가능" value="${pay.paydetail1}">
+							<input type="text" class="form-control" id="paydetail1" name="paydetail1" size="30%" maxlength="30" placeholder="한글,영어 가능" value="${paydetail1}">
 						</td>
 					</tr>
 					<tr id="notPhone">
@@ -208,7 +208,7 @@ function input(){
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="paydetail2" name="paydetail2" size="30%" placeholder="숫자만 가능" value="${pay.paydetail2}">
+							<input type="text" class="form-control" id="paydetail2" name="paydetail2" size="30%" placeholder="숫자만 가능" value="${paydetail2}">
 						</td>
 					</tr>
 					<tr id="onlyCard" style="display:none;">
@@ -219,7 +219,7 @@ function input(){
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="cvc" name="cvc" size="30%" placeholder="숫자만 가능" value="${pay.cvc}">
+							<input type="text" class="form-control" id="cvc" name="cvc" size="30%" placeholder="숫자만 가능" value="${cvc}">
 						</td>
 					</tr>
 					<tr>
@@ -230,7 +230,7 @@ function input(){
 						</td>
 					</tr>
 				</table>
-			</form:form>
+			</form>
 		</div>
 	</article>
 </section>
