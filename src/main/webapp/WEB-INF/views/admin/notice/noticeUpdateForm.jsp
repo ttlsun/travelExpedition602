@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../../../common/admin/top.jsp" %> 
+<style type="text/css">
+	.textAlignLeft{text-align: left;} 
+</style>
+
 
 <script type="text/javascript">
 
@@ -55,17 +59,17 @@ function inputSave() {
 	<input type="hidden" name="num" value="${notice.num}">
 	
 	<div class="form-group">
-		<table class="table table-bordered">
+		<table class="table table-bordered textAlignLeft">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
-				<td><label for="title"><span class="redFont"> * </span>공지사항 제목 </label> </td>
+				<td width="30%;" style="text-align: left;"><label for="title"><span class="redFont"> * </span>공지사항 제목 </label> </td>
 				<td>
 					<input type="text" class="form-control" name="title" id="title" class="form-control input-sm" placeholder="제목 입력." value="${notice.title}">
 					<form:errors cssClass="errMessage" path="title"/>
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleImgFile"> 공지사항 이미지(여러장 올리기) </label> </td>
+				<td style="text-align: left;"><label for="multipleImgFile"> 공지사항 이미지(여러장 올리기) </label> </td>
 				<td>
 					<c:if test="${!empty imgList}">
 					<div class="rounded">
@@ -103,10 +107,12 @@ function inputSave() {
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2" style="text-align: left;">
 					<label for="contents"><span class="redFont"> * </span>공지사항 내용</label>
 				</td>
-				<td>
+			</tr>
+			<tr>
+				<td colspan="2">
 					<textarea class="form-control summernote" rows="20" cols="20"  name="contents" id="contents" class="form-control ">${notice.contents}</textarea>
 				</td>
 			</tr>
