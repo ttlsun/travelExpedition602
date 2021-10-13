@@ -77,6 +77,7 @@ public class payRegisterController {
 		} else {
 			pw.println("<script>alert('결제수단을 등록하지 못했습니다'); history.go(-1);</script>");
 		}
+		pw.flush();
 		
 		return;
 	}
