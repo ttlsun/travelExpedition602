@@ -7,11 +7,14 @@
 <mapper namespace="user.pay.model.PayBean">
 	<select id="getTotalCount" resultType="int">
 		select count(*) from pay
+		<if test="whatColumn == ''">
+			where id like #{id}
+		</if>
 		<if test="whatColumn == 'paycode'">
-		where paycode like #{keyword}
+			where id like #{id} and paycode like #{keyword}
 		</if>
 		<if test="whatColumn == 'paydetail'">
-		where paydetail1 like #{keyword} or paydetail2 like #{keyword}
+			where id like #{id} and (paydetail1 like #{keyword} or paydetail2 like #{keyword})
 		</if>
 	</select>
 	
@@ -40,6 +43,11 @@
 	<update id="updatePay" parameterType="myPayBean">
 		update pay set paydetail1 = #{paydetail1}, paydetail2 = #{paydetail2}, cvc = #{cvc}, moddate = sysdate, modid = #{modid}
 		where num = #{num}
+	</update>
+	
+	<update id="updatePaydetail" parameterType="myPayBean">
+		update pay set paydetail2 = #{paydetail2}, moddate = sysdate, modid = #{modid}
+		where id = #{id} and paycode = #{paycode}
 	</update>
 	
 	<delete id="deletePay">

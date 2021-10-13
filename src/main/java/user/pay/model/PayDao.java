@@ -41,6 +41,11 @@ public class PayDao {
 		return sqlSessionTemplate.update(NAMESPACE+".updatePay", payBean);
 	}
 	
+	public void updatePaydetail(PayBean payBean) {
+		sqlSessionTemplate.update(NAMESPACE+".updatePaydetail", payBean);
+		return;
+	}
+	
 	public int deletePay(int num) {
 		return sqlSessionTemplate.insert(NAMESPACE+".deletePay", num);
 	}

@@ -2,6 +2,8 @@ package user.users.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
+import user.pay.model.PayBean;
+import user.pay.model.PayDao;
 import user.users.model.UsersBean;
 import user.users.model.UsersDao;
 
@@ -34,7 +38,10 @@ public class UsersMyInfoController {
 	private final String GOTOUPDATEPWFORM = "user/users/usersPwUpdateForm";
 	
 	@Autowired
-	UsersDao usersDao;
+	private UsersDao usersDao;
+	
+	@Autowired
+	private PayDao payDao;
 	
 	//내정보 화면 이동
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
@@ -135,6 +142,25 @@ public class UsersMyInfoController {
 			
 			int cnt = -1;
 			cnt = usersDao.updateMyInfo(users);
+			
+			//사용자의 pay 테이블 paycode에 휴대폰결제가 있으면 paydetail2도 변경할 것
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("whatColumn", "paycode");
+			map.put("keyword", "%휴대폰결제%");
+			map.put("id", temp.getId());
+			int paycount = -1;
+			paycount = payDao.getTotalCount(map);
+			if(paycount > 0) {
+				String paydetail2_temp = users.getContact();
+				int paydetail2 = Integer.parseInt(paydetail2_temp.replace("-", ""));
+				PayBean payBean = new PayBean();
+				payBean.setId(users.getId());
+				payBean.setPaycode("휴대폰결제");
+				payBean.setPaydetail2(paydetail2);
+				payBean.setModid(temp.getId());
+				payDao.updatePaydetail(payBean);
+			}
+			
 			
 			if(cnt != -1) {
 				//session.invalidate();
