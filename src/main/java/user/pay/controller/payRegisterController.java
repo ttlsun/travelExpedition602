@@ -56,6 +56,7 @@ public class payRegisterController {
 
 		String paydetail2_temp = request.getParameter("paydetail2");
 		if(paydetail1.equals("휴대폰결제")) {
+			paydetail2_temp = temp.getContact();
 			paydetail2_temp.replace("-", "");
 		}
 		int paydetail2 = Integer.parseInt(paydetail2_temp);

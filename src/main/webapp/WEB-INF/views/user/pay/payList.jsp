@@ -40,7 +40,7 @@ function goDelete(num) {
 	if(!confirm("삭제하시겠습니까?")){
 		return;
 	} else{
-		location.href="payDelete.do?num="+num+"&pageNumber="+pageNumber;
+		location.href="payDelete.do?num="+num;
 	}
 }
 	
@@ -127,7 +127,7 @@ function goDelete(num) {
 			<fmt:formatDate var="moddate" value="${fmtDate2}" pattern="yyyy-MM-dd"/>
 			<td>${moddate}</td>
 			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${list[i].num}, ${pageInfo.pageNumber})" style="text-decoration:none; color:white;"></td>
-			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${list[i].num}, ${pageInfo.pageNumber})"></td>
+			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${list[i].num})"></td>
 		</tr>
 		</c:forEach>
 		</c:if>
