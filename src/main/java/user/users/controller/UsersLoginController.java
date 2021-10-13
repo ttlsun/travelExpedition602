@@ -32,10 +32,28 @@ public class UsersLoginController {
 	UsersDao usersDao;
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
-	public ModelAndView doGet(ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView doGet(ModelAndView mav, PrintWriter pw, HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException {
 		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
-		mav.setViewName(GETPAGE);
+		
+		if(session.getAttribute("loginInfo") != null) {
+			loginAlready(pw, request, response);
+		}else {
+			mav.setViewName(GETPAGE);
+		}
 		return mav;
+	}
+	
+	public void loginAlready(PrintWriter pw, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
+		
+		pw = response.getWriter();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		pw.println("<script>if(!confirm('로그아웃 후 재로그인 하시겠습니까?')){history.go(-1);}else{location.href='logout.do?channel=loginAlready';}</script>");
+		
+		pw.flush();
+		return;
 	}
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
