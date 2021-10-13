@@ -25,7 +25,8 @@ public class PayDao {
 	public List<PayBean> getList(Paging pageInfo, Map<String, String> map){
 		List<PayBean> lists = new ArrayList<PayBean>();
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
-		return sqlSessionTemplate.selectList(NAMESPACE+".getList", map, rowBounds);
+		lists = sqlSessionTemplate.selectList(NAMESPACE+".getList", map, rowBounds);
+		return lists;
 	}
 	
 	public int registerPay(PayBean payBean) {
