@@ -92,7 +92,7 @@ function navActive(activeName) {
          	</li>
          	
          	<!-- 회원일경우 or 관리자가 아닐경우 보여지게 처리 -->
-         	<c:if test="${!empty userId or userCode eq 'admin'}">
+         	<c:if test="${userCode eq 'business' or userCode eq 'customer'}">
           	<li data-nav="myInfo" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
