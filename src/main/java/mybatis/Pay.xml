@@ -5,25 +5,46 @@
 
 <!-- Pay.xml -->
 <mapper namespace="user.pay.model.PayBean">
-
-	<insert id="insertPay" parameterType="myPayBean">
-		INSERT INTO PAY
-		(
-			NUM,
-			ID,
-			PAYCODE,
-			PAYDETAIL,
-			CVC,
-			REGDATE
-		)
-		values(
-			PAYSEQ.NEXTVAL,
-			#{id} ,
-			#{paycode} ,
-			#{paydetail} ,
-			#{cvc},
-			SYSDATE
-		)
+	<select id="getTotalCount" resultType="int">
+		select count(*) from pay
+		<if test="whatColumn == 'paycode'">
+		where paycode like #{keyword}
+		</if>
+		<if test="whatColumn == 'paydetail'">
+		where paydetail1 like #{keyword} or paydetail2 like #{keyword}
+		</if>
+	</select>
+	
+	<!-- private int num; //pk
+	private String id; //20, not null, fk(users.id)
+	private String paycode; //20, not null
+	private String paydetail1; //30, not null
+	private int paydetail2; //0
+	private int cvc;
+	private String regdate; //sysdate
+	private String moddate;
+	private String modid; //20 -->
+	
+	<select id="getList" resultType="myPayBean">
+		select num, id, paycode, paydetail1, paydetail2, cvc, regdate, moddate, modid from pay order by num
+		<if test="whatColumn == ''">
+			where id like #{id}
+		</if>
+		<if test="whatColumn == 'paycode'">
+			where id like #{id} and paycode like #{keyword}
+		</if>
+		<if test="whatColumn == 'paydetail'">
+			where id like #{id} and (paydetail1 like #{keyword} or paydetail2 like #{keyword})
+		</if>
+	</select>
+	
+	<insert id="registerPay" parameterType="myPayBean">
+		insert into pay(num, id, paycode, paydetail1, paydetail2, cvc, regdate)
+		values(payseq.nextval, #{id}, #{paycode}, #{paydetail1}, #{paydetail2}, #{cvc}, sysdate)
 	</insert>
 
+	<insert id="insertPay" parameterType="myPayBean">
+		INSERT INTO PAY(NUM,ID,PAYCODE,PAYDETAIL,CVC,REGDATE)
+		values(PAYSEQ.NEXTVAL,#{id},#{paycode},#{paydetail},#{cvc},SYSDATE)
+	</insert>
 </mapper>
