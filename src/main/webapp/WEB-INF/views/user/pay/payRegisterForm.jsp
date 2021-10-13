@@ -177,9 +177,9 @@ function input(){
 						</td>
 						<td>
 							<select name="paycode" class="form-control" id="paycode">
-								<option value="계좌이체" <c:if test="${pay.paycode eq '계좌이체'}">selected</c:if>>계좌이체</option>
-								<option value="카드결제" <c:if test="${pay.paycode eq '카드결제'}">selected</c:if>>카드결제</option>
-								<option value="휴대폰결제" <c:if test="${pay.paycode eq '휴대폰결제'}">selected</c:if>>휴대폰결제</option>
+								<option value="계좌이체" <c:if test="${paycode eq '계좌이체'}">selected</c:if>>계좌이체</option>
+								<option value="카드결제" <c:if test="${paycode eq '카드결제'}">selected</c:if>>카드결제</option>
+								<option value="휴대폰결제" <c:if test="${paycode eq '휴대폰결제'}">selected</c:if>>휴대폰결제</option>
 							</select>
 						</td>
 					</tr>
