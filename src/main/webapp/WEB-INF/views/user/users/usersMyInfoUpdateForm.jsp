@@ -23,23 +23,19 @@
 		//회원 사용자 구분 select 박스 (change)
 		if($('#ucode option:selected').val() == "customer"){
 			$('#ucodeBusiness1').hide();
-			$('#ucodeCustomer2').show();
+			/* $('#ucodeCustomer2').show();
 			$('#ucodeCustomer2_2').show();
-				
 			$('#ucodeCustomer1').attr('colspan', ''); //css로 하면 테이블 모양 깨짐
 			$('#ucodeCustomer1').css('width', '30%');
-			
-			$("label[for='birth']").text('생일');
+			$("label[for='birth']").text('생일'); */
 			$("label[for='name']").text('이름');
 		} else if($('#ucode option:selected').val() == "business"){
-			$('#ucodeCustomer2_2').hide();
-			$('#ucodeCustomer2').hide();
 			$('#ucodeBusiness1').show();
-				
+			/* $('#ucodeCustomer2_2').hide();
+			$('#ucodeCustomer2').hide();
 			$('#ucodeCustomer1').css('width', '');
 			$('#ucodeCustomer1').attr('colspan', '3'); //css로 하면 테이블 모양 깨짐
-				
-			$("label[for='birth']").text('개업일');
+			$("label[for='birth']").text('개업일'); */
 			$("label[for='name']").text('상호');
 		}
 		
@@ -85,6 +81,7 @@
 			$('#email').focus();
 			return;
 		} else if(email == dbemail){
+			alert("변경사항이 없습니다");
 			return;
 		}
 		
@@ -182,7 +179,7 @@
 	<article>
 		<div>
 			<header>
-				<h2 align="center" class="text-primary">회원가입</h2>
+				<h2 align="center" class="text-primary">회원정보변경</h2>
 			</header>
 			<form:form commandName="users" name="myForm" action="usersUpdateMyInfo.do" method="post" class="form-horizontal">
 				<table class="table table-bordered">
@@ -197,7 +194,7 @@
 							</c:otherwise>
 						</c:choose>
 					</caption>
-					<tr>
+					<tr style="display:none;">
 						<!-- 회원 구분 -->
 						<td width="20%">
 							<label for="ucode">
@@ -211,7 +208,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr id="ucodeCustomer2" >
+					<tr id="ucodeCustomer2" style="display:none;">
 						<td width="20%" style="border-bottom: none; text-align: center;">
 							<label for="gender1">
 								<span class="redFont"> * </span> 성별
@@ -237,7 +234,7 @@
 							<form:errors cssClass="errMessage" path="name"/>
 						</td>
 					</tr>
-					<tr>
+					<tr style="display:none;">
 						<td width="20%">
 							<label for="id">
 								<span class="redFont"> * </span> 아이디
@@ -285,7 +282,7 @@
 							<form:errors cssClass="errMessage" path="contact"/>
 						</td>
 					</tr>
-					<tr>
+					<tr style="display:none;">
 						<td width="20%">
 							<label for="birth">생일</label>
 						</td>
