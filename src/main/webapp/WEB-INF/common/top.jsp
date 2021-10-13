@@ -29,14 +29,14 @@ function navActive(activeName) {
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
     	
-    		<c:if test="${userId eq 'admin' }">
+    		<c:if test="${userCode eq 'admin' }">
     			<li data-nav=""><a href="${contextPath}/main.ad"> 여행자들 관리자홈 </a></li>
     		</c:if>
     		
         	<li data-nav="introduction"><a href="${contextPath}/introduction.do"> 여행자들 소개 </a></li>
         	
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
-        	<c:if test="${userCode eq 'business' }">
+        	<c:if test="${userCode eq 'business' or userCode eq 'admin'}">
         	<li data-nav="camping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> [사업자] 캠핑/관광지 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
@@ -49,8 +49,9 @@ function navActive(activeName) {
          	<!-- 비회원 & 회원보는 리스트 -->
          	<li data-nav="camping" class="dropdown">
          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+         		<!-- 사업자와 관리자일경우, [일반회원] 으로 보이기. -->
          		<c:choose>
-         			<c:when test="${userCode ne 'customer' }">[일반회원] 캠핑/관광지</c:when>
+         			<c:when test="${userCode eq 'business' or userCode eq 'admin' }">[일반회원] 캠핑/관광지</c:when>
          			<c:otherwise> 캠핑/관광지</c:otherwise>
          		</c:choose>
            		 <b class="caret"></b></a>
@@ -90,8 +91,8 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
          	
-         	<!-- 회원일경우에만 보여지게 처리 -->
-         	<c:if test="${!empty userId}">
+         	<!-- 회원일경우 or 관리자가 아닐경우메나 보여지게 처리 -->
+         	<c:if test="${!empty userId or userCode eq 'admin'}">
           	<li data-nav="myInfo" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
