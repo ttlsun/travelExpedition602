@@ -144,21 +144,23 @@ public class UsersMyInfoController {
 			cnt = usersDao.updateMyInfo(users);
 			
 			//사용자의 pay 테이블 paycode에 휴대폰결제가 있으면 paydetail2도 변경할 것
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("whatColumn", "paycode");
-			map.put("keyword", "%휴대폰결제%");
-			map.put("id", temp.getId());
-			int paycount = -1;
-			paycount = payDao.getTotalCount(map);
-			if(paycount > 0) {
-				String paydetail2_temp = users.getContact();
-				int paydetail2 = Integer.parseInt(paydetail2_temp.replace("-", ""));
-				PayBean payBean = new PayBean();
-				payBean.setId(users.getId());
-				payBean.setPaycode("휴대폰결제");
-				payBean.setPaydetail2(paydetail2);
-				payBean.setModid(temp.getId());
-				payDao.updatePaydetail(payBean);
+			if(!users.getContact().equals(temp.getContact())) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("whatColumn", "paycode");
+				map.put("keyword", "%휴대폰결제%");
+				map.put("id", temp.getId());
+				int paycount = -1;
+				paycount = payDao.getTotalCount(map);
+				if(paycount > 0) {
+					String paydetail2_temp = users.getContact();
+					int paydetail2 = Integer.parseInt(paydetail2_temp.replace("-", ""));
+					PayBean payBean = new PayBean();
+					payBean.setId(users.getId());
+					payBean.setPaycode("휴대폰결제");
+					payBean.setPaydetail2(paydetail2);
+					payBean.setModid(temp.getId());
+					payDao.updatePaydetail(payBean);
+				}
 			}
 			
 			
