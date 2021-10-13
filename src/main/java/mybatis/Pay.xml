@@ -32,6 +32,10 @@
 		insert into pay(num, id, paycode, paydetail1, paydetail2, cvc, regdate)
 		values(payseq.nextval, #{id}, #{paycode}, #{paydetail1}, #{paydetail2}, #{cvc}, sysdate)
 	</insert>
+	
+	<delete id="deletePay">
+		delete from pay where num = #{num}
+	</delete>
 
 	<insert id="insertPay" parameterType="myPayBean">
 		INSERT INTO PAY(NUM,ID,PAYCODE,PAYDETAIL,CVC,REGDATE)

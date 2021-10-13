@@ -33,6 +33,10 @@ public class PayDao {
 		return sqlSessionTemplate.insert(NAMESPACE+".registerPay", payBean);
 	}
 	
+	public int deletePay(int num) {
+		return sqlSessionTemplate.insert(NAMESPACE+".deletePay", num);
+	}
+	
 	public int insertPayData(PayBean bean) {
 		return sqlSessionTemplate.insert(NAMESPACE + ".insertPay", bean);
 	}
