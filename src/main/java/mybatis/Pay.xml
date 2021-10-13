@@ -15,16 +15,6 @@
 		</if>
 	</select>
 	
-	<!-- private int num; //pk
-	private String id; //20, not null, fk(users.id)
-	private String paycode; //20, not null
-	private String paydetail1; //30, not null
-	private int paydetail2; //0
-	private int cvc;
-	private String regdate; //sysdate
-	private String moddate;
-	private String modid; //20 -->
-	
 	<select id="getList" resultType="myPayBean">
 		select num, id, paycode, paydetail1, paydetail2, cvc, regdate, moddate, modid from pay order by num
 		<if test="whatColumn == ''">
