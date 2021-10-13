@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.Paging;
 
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 import user.tour.model.TourBean;
 import user.tour.model.TourDao;
 
@@ -23,11 +25,13 @@ public class TourListController {
 	private static final String COMMAND = "/tourList.do";
 	private static final String GETPAGE = "user/tour/tourList";
 	
-	
 	@Autowired
 	private TourDao tourDao;
+
+	@Autowired
+	private KeywordDao keywordDao;
 	
-	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
+	@RequestMapping(value=COMMAND)
 	public ModelAndView tourListView(ModelAndView mav,
 									@RequestParam Map<String,String> map,
 									@RequestParam(value="pageNumber", required=false) String pageNumber,
@@ -35,6 +39,10 @@ public class TourListController {
 		
 		map.put("status", "01");
 		
+		//keyword 리스트 불러오기
+		String acode = "2";
+		List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+		mav.addObject("keywordLists", keywordLists);
 		
 		int totalCount = tourDao.getTotalCount(map);
 		String pageUrl = request.getContextPath() + COMMAND;

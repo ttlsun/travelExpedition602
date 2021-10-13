@@ -61,9 +61,7 @@ public class TourRegisterController {
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
 	public ModelAndView tourRegisterPost(ModelAndView mav,
 									@ModelAttribute("tour") @Valid TourBean tourbean, 
-									BindingResult result,
-									@RequestParam(value="coordsMa",required = false) String longitude,
-									@RequestParam(value="coordsLa",required = false) String latitude) {
+									BindingResult result) {
 		
 		
 		System.out.println("tourbean:" + tourbean.toString());
@@ -104,7 +102,7 @@ public class TourRegisterController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("acode", "5");
 			map.put("anum", maxNum);
-			map.put("regid", tourbean.getRegid());
+			map.put("regid", tourbean.getRegid()+"id");
 			
 			//이미지테이블에 이미지들 저장.
 			String[] uploadFileList = WebUtil.fileUpload(servletContext, tourbean.getMultipleUpdateFile(), null);
@@ -118,6 +116,9 @@ public class TourRegisterController {
 			
 			
 			tourbean.setNum(maxNum);
+			
+			//로그인 id연결
+			tourbean.setRegid("id");
 			
 			//관광지 레코드 insert
 			cnt = tourDao.insertData(tourbean);

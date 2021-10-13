@@ -197,7 +197,7 @@ function fileSelectChange(event) {
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 					<label for="regkeywords_${status.index}" style="color: #337ab7;">
 						&nbsp;
-						<input type="checkbox" name="reg_keyword" id="regkeywords_${status.index}" value="${keywordList.tag}"> ${keywordList.tag}
+						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"> ${keywordList.tag}
 					</label>
 				</c:forEach>
 			</td>
@@ -216,10 +216,10 @@ function fileSelectChange(event) {
 			<td rowspan="1" style="border-top: none; border-left: none; border-bottom: none;"></td>
 			<td colspan="3" style="border-top: none; border-left: none; border-bottom: none;">
 				<label style="padding-bottom: 3%;">
-					<input type="text" class="form-control40" id="address1" name="address1" placeholder="시" readonly="readonly">
-					<input type="text" class="form-control40" id="address2" name="address2" placeholder="구" readonly="readonly">
-					<input type="text" class="form-control40" id="address3" name="address3" placeholder="동" readonly="readonly">
-					<input type="text" class="form-control40" id="address4" name="address4" placeholder="상세주소 입력">
+					<input type="text" class="form-control40" id="address1" name="address1" value="${tour.address1}" placeholder="시" readonly="readonly">
+					<input type="text" class="form-control40" id="address2" name="address2" value="${tour.address2}" placeholder="구" readonly="readonly">
+					<input type="text" class="form-control40" id="address3" name="address3" value="${tour.address3}" placeholder="동" readonly="readonly">
+					<input type="text" class="form-control40" id="address4" name="address4" value="${tour.address4}" placeholder="상세주소 입력">
 				
 					<input type="text" class="form-control40" id="coordsMa" name="longitude" placeholder="좌표Ma">
 					<input type="text" class="form-control40" id="coordsLa" name="latitude" placeholder="좌표La">
