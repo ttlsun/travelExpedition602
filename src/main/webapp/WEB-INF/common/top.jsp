@@ -28,6 +28,11 @@ function navActive(activeName) {
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
+    	
+    		<c:if test="${userId eq 'admin' }">
+    			<li data-nav=""><a href="${contextPath}/main.ad"> 여행자들 관리자홈 </a></li>
+    		</c:if>
+    		
         	<li data-nav="introduction"><a href="${contextPath}/introduction.do"> 여행자들 소개 </a></li>
         	
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
@@ -57,7 +62,7 @@ function navActive(activeName) {
            			<li><a href="${contextPath}/reviewCommunityList.do">방문 후기</a></li>
            			<!-- 회원일경우에만 보여지게 처리 -->
            			<c:if test="${!empty userId}">
-           				<li><a href="${contextPath}/reservationCommunityList.do">MY 후기</a></li>
+           				<li><a href="${contextPath}/myCommunityList.do">MY 후기</a></li>
 	         		</c:if>
 	         	</ul>
          	</li>

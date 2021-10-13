@@ -15,8 +15,8 @@ $(document).ready(function() {
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "내 예약리뷰 후기 리스트");
-	$("#metaDescription").attr("content", "내 예약리뷰 캠핑/글램핑, 관광지 후기 리스트");
-	$("#metaKeywords").attr("content", "#내 예약리뷰 #캠핑/글램핑, #관광지, #후기");
+	$("#metaDescription").attr("content", "내 후기(리뷰) 캠핑/글램핑, 관광지 후기 리스트");
+	$("#metaKeywords").attr("content", "#내 후기(리뷰) #캠핑/글램핑, #관광지, #후기");
 	
 });
 
@@ -31,7 +31,7 @@ function goDetail(num) {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> My 예약 후기 리스트</h2></header>
+	<header><h2 align="center" class="text-primary"> My 후기 리스트</h2></header>
 	
 	<div class="form-horizontal rounded">
 		<form action="reservationCommunityList.do">

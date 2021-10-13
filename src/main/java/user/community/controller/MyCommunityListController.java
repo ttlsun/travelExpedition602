@@ -19,10 +19,10 @@ import user.community.model.CommunityDao;
 import user.users.model.UsersBean;
 
 @Controller
-public class ReservationCommunityListController {
+public class MyCommunityListController {
 
-	public static final String COMMAND = "/reservationCommunityList.do";
-	public static final String GETPAGE = "user/community/reservationCommunityList";
+	public static final String COMMAND = "/myCommunityList.do";
+	public static final String GETPAGE = "user/community/myCommunityList";
 	
 	@Autowired
 	private CommunityDao communityDao;
@@ -45,7 +45,7 @@ public class ReservationCommunityListController {
 		String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
 		
 		//
-		Paging pageInfo = new Paging(map, "9", totalCount, pageUrl);
+		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		List<CommunityBean> lists = communityDao.getCommunityList(pageInfo, map);
 		
 		mav.addObject("pageInfo", pageInfo);
