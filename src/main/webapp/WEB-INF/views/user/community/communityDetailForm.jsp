@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../../common/top.jsp" %>   
-
-
-
 <script type="text/javascript" >
 $(document).ready(function() {
 	//메뉴 on 유지.
@@ -311,9 +308,9 @@ function goAjaxDelete(url, numData , type) {
 		</tr>
 		<tr>
 			<td width="10%">번호</td>
-			<td>${community.num}</td>
-			<td>등록 ID</td>
-			<td>${community.regid}</td>
+			<td width="20%">${community.num}</td>
+			<td width="30%">등록 ID</td>
+			<td width="40%">${community.regid}</td>
 		</tr>
 		<tr>
 			<td colspan="4" style="border-bottom: none;"> 설명 </td>
@@ -325,7 +322,7 @@ function goAjaxDelete(url, numData , type) {
 		</tr>
 		<c:if test="${!empty community.regkeyword}">
 		<tr>
-			<td> 키워드 </td>
+			<td width="20%"> 키워드 </td>
 			<td colspan="3"> <span class="text-primary"> ${community.regkeyword} </span> </td>
 		</tr>
 		</c:if>
