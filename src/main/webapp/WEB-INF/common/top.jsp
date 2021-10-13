@@ -38,7 +38,7 @@ function navActive(activeName) {
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
         	<c:if test="${userCode eq 'business' }">
         	<li data-nav="camping" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> [사업자] 캠핑/글램핑 <b class="caret"></b></a>
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> [사업자] 캠핑/관광지 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="${contextPath}/campingList.do">캠핑/글램핑</a></li>
 	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>
@@ -48,7 +48,12 @@ function navActive(activeName) {
          	
          	<!-- 비회원 & 회원보는 리스트 -->
          	<li data-nav="camping" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 <b class="caret"></b></a>
+         		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+         		<c:choose>
+         			<c:when test="${userCode ne 'customer' }">[일반회원] 캠핑/관광지</c:when>
+         			<c:otherwise> 캠핑/관광지</c:otherwise>
+         		</c:choose>
+           		 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="${contextPath}/campingList.do">캠핑/글램핑</a></li>
 	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>

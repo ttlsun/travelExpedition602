@@ -41,7 +41,7 @@ function navActive(activeName) {
          	</li>
         	
         	<li data-nav="camping" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/글램핑 관리 <b class="caret"></b></a>
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 캠핑/관광지 관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="${contextPath}/campingList.ad">캠핑/글램핑 관리</a></li>
 	            	<li><a href="${contextPath}/tourList.ad">관광지 관리</a></li>
