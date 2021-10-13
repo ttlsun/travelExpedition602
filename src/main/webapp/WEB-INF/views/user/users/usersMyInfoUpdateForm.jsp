@@ -13,7 +13,7 @@
 	
 	$(document).ready(function() {
 		//메뉴 on 유지.
-		navActive('member');
+		navActive('users');
 
 		//메타태그 설정.
 		$("#metaTitle").attr("content", "회원정보변경");

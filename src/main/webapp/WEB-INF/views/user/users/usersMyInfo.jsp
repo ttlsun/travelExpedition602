@@ -6,7 +6,7 @@
 
 <script type="text/javascript" >
 $(document).ready(function() {
-	navActive('member');
+	navActive('users');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "내정보");

@@ -6,7 +6,7 @@
 <script type="text/javascript" >
 $(document).ready(function() {
 	//메뉴 on 유지.
-	navActive('login');
+	navActive('users');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "비밀번호변경");
