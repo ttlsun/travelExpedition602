@@ -99,7 +99,7 @@ function navActive(activeName) {
            			<li><a href="${contextPath}/usersMyInfo.do">내 정보</a></li>
 	            	
 	            	<c:if test="${userCode eq 'customer'}">
-	            	<li><a href="${contextPath}/usersPayList.do">내 결제수단 목록</a></li>
+	            	<li><a href="${contextPath}/payList.do">내 결제수단 목록</a></li>
 	            	<li><a href="${contextPath}/myReservationList.do">내 예약 목록</a></li>
 	            	<li><a href="${contextPath}/myLikesList.do">내 관심 목록</a></li>
 	            	</c:if>
