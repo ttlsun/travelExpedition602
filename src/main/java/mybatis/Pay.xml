@@ -28,10 +28,19 @@
 		</if>
 	</select>
 	
+	<select id="getData" resultType="myPayBean">
+		select * from pay where num = #{num}	
+	</select>
+	
 	<insert id="registerPay" parameterType="myPayBean">
 		insert into pay(num, id, paycode, paydetail1, paydetail2, cvc, regdate)
 		values(payseq.nextval, #{id}, #{paycode}, #{paydetail1}, #{paydetail2}, #{cvc}, sysdate)
 	</insert>
+	
+	<update id="updatePay" parameterType="myPayBean">
+		update pay set paydetail1 = #{paydetail1}, paydetail2 = #{paydetail2}, cvc = #{cvc}, moddate = sysdate, modid = #{modid}
+		where num = #{num}
+	</update>
 	
 	<delete id="deletePay">
 		delete from pay where num = #{num}

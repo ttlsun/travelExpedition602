@@ -29,8 +29,16 @@ public class PayDao {
 		return lists;
 	}
 	
+	public PayBean getData(int num) {
+		return sqlSessionTemplate.selectOne(NAMESPACE+".getData", num);
+	}
+	
 	public int registerPay(PayBean payBean) {
 		return sqlSessionTemplate.insert(NAMESPACE+".registerPay", payBean);
+	}
+	
+	public int updatePay(PayBean payBean) {
+		return sqlSessionTemplate.update(NAMESPACE+".updatePay", payBean);
 	}
 	
 	public int deletePay(int num) {

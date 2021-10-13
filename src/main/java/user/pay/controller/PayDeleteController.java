@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import user.pay.model.PayDao;
 
@@ -20,7 +19,7 @@ public class PayDeleteController {
 	private PayDao payDao;
 	
 	@RequestMapping(value=COMMAND)
-	public void doAction(PrintWriter pw, HttpServletResponse response, ModelAndView mav, HttpServletRequest request){
+	public void doAction(PrintWriter pw, HttpServletResponse response, HttpServletRequest request){
 		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
 		int num = Integer.parseInt(request.getParameter("num"));
