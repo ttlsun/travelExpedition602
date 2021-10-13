@@ -44,14 +44,21 @@ public class payRegisterController {
 		UsersBean temp = (UsersBean) session.getAttribute("loginInfo");
 		
 		String id = temp.getId();
+
 		String paycode = "";
 		if(temp.getUcode().equals("business")) {
 			paycode = request.getParameter("paycode2");
 		} else {
 			paycode = request.getParameter("paycode");
 		}
+		
 		String paydetail1 = request.getParameter("paydetail1");
-		int paydetail2 = Integer.parseInt(request.getParameter("paydetail2"));
+
+		String paydetail2_temp = request.getParameter("paydetail2");
+		if(paydetail1.equals("휴대폰결제")) {
+			paydetail2_temp.replace("-", "");
+		}
+		int paydetail2 = Integer.parseInt(paydetail2_temp);
 		int cvc = Integer.parseInt(request.getParameter("cvc"));
 		
 		PayBean payBean = new PayBean();
