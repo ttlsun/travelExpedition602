@@ -97,7 +97,9 @@ function navActive(activeName) {
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="${contextPath}/usersMyInfo.do">내 정보</a></li>
-	            	
+	            	<c:if test="${userCode eq 'business'}">
+	            	<li><a href="${contextPath}/payList.do">입금 계좌 관리</a></li>
+	            	</c:if>
 	            	<c:if test="${userCode eq 'customer'}">
 	            	<li><a href="${contextPath}/payList.do">내 결제수단 목록</a></li>
 	            	<li><a href="${contextPath}/myReservationList.do">내 예약 목록</a></li>
