@@ -85,18 +85,20 @@ create table pay(
   num number primary key,
   id varchar2(20) not null,
   paycode varchar2(20) not null,
-  paydetail varchar2(20),
-  cvc number,
+  paydetail1 varchar2(30) not null,
+  paydetail2 number default 0,
+  cvc number default 0,
   regdate date default sysdate,
-  moddate date,
-  modid varchar2(20),
+  moddate date null,
+  modid varchar2(20) null,
   foreign key(id) references users(id)
 );
 comment on table pay is '결제수단 등록 테이블';
 comment on column pay.num is '레코드 번호';
 comment on column pay.id is '사용자 아이디 - 부모 users';
-comment on column pay.paycode is '결제수단 구분';
-comment on column pay.paydetail is '결제수단 상세 정보(카드 번호 등)';
+comment on column pay.paycode is '결제수단 구분(계좌이체, 무통장입금, 카드결제, 휴대폰결제)';
+comment on column pay.paydetail1 is '결제수단 상세 정보(계좌이체-은행명, 무통장입금-은행명, 카드결제-카드사명, 휴대폰결제-통신사명-id로 join예정)';
+comment on column pay.paydetail2 is '결제수단 상세 정보(계좌이체-계좌번호, 무통장입금-계좌번호, 카드결제-카드번호)';
 comment on column pay.cvc is '카드-cvc';
 comment on column pay.regdate is '등록일';
 comment on column pay.moddate is '수정일';
