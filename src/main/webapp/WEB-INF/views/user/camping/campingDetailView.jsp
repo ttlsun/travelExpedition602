@@ -113,9 +113,16 @@ function likesRegisters() {
 	var userId = "${userId}"; // 페이지 진입한 유저 아이디.
 	var num = $('#num').val(); //id로 얻어온 자기 고유값 넣기.
 	var acode = "1"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
+	var userCode = "${userCode}"; //유저 구분코드
 	
 	if(userId == ""){
 		alert("로그인후 이용해주세요.");
+		return;
+	}
+	
+	//사업자와 관리자는 찜콩하지마쇼
+	if(userCode == "business" || userCode == "admin"){
+		alert("사업자/관리자는 찜 하실 수 없습니다.");
 		return;
 	}
 	
