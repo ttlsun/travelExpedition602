@@ -32,8 +32,8 @@ function allAgreeChk() {
 }
 
 //등록 버튼클릭시,
-function inputSave() {	
-	var answer = confirm("예약 신청 하시겠습니까?");
+function goPayment() {	
+	var answer = confirm("결제 하시겠습니까?");
 	if(answer){
 		//모든 체크박스가 체크될시 예약 되게 처리함.
 		if (!$('#agreeUse').is(':checked') || !$('#agreePrivacy').is(':checked')
@@ -88,7 +88,7 @@ function inputSave() {
 		</table>
 	</div>
 	
-	<form name="myForm" action="" method="post" class="form-horizontal" role="form">
+	<form name="myForm" action="payReservation.do" method="post" class="form-horizontal" role="form">
 
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
@@ -127,7 +127,7 @@ function inputSave() {
 			<tr>
 				<td><label for="totalprice">결제 금액</label></td>
 				<td>
-					<span style="color: red;">${totalprice } 원 </span>
+					<span style="color: red;">${totalprice} 원 </span>
 				</td>
 			</tr>
 			<tr>
@@ -135,11 +135,12 @@ function inputSave() {
 					<label for="paycode">결제 수단</label>
 				</td>
 				<td style="border-right: none;">
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="" checked="checked"> 카드</label>
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value=""> 무통장</label>
+					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="계좌이체" checked="checked"> 계좌이체</label>
+					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="무통장입금"> 무통장입금</label>
+					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="카드결제"> 카드결제</label>
+					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="휴대폰결제"> 휴대폰결제</label>
 				</td>
 			</tr>
-			
 		</table>
 		</div>
 		
@@ -263,7 +264,7 @@ function inputSave() {
 		<!-- //약관 -->
 		
 		<div class="marPadding" align="center">
-			<input type="submit" class="btn btn-primary" value="예약 신청" onclick="return inputSave()">
+			<input type="submit" class="btn btn-primary" value="결제하기" onclick="return goPayment()">
 			<input type="button" class="btn btn-default" value="목록">
 		</div>
 	</form>
