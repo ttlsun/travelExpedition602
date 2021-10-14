@@ -124,8 +124,8 @@ function goDelete(num) {
 			<fmt:parseDate var="fmtDate2" value="${lists[i].moddate}" pattern="yyyy-MM-dd"/>
 			<fmt:formatDate var="moddate" value="${fmtDate2}" pattern="yyyy-MM-dd"/>
 			<td>${moddate}</td>
-			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${list[i].num}, ${pageInfo.pageNumber})"></td>
-			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${list[i].num})"></td>
+			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${lists[i].num}, ${pageInfo.pageNumber})"></td>
+			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${lists[i].num})"></td>
 		</tr>
 		</c:forEach>
 		</c:if>
