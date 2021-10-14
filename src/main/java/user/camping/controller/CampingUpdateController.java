@@ -1,5 +1,7 @@
 package user.camping.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
@@ -16,6 +18,8 @@ import com.my.travelExpedition.utility.WebUtil;
 
 import user.camping.model.CampingBean;
 import user.camping.model.CampingDao;
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 
 @Controller
 public class CampingUpdateController {
@@ -29,6 +33,9 @@ public class CampingUpdateController {
 	
 	@Autowired
 	private CampingDao campingDao;
+
+	@Autowired
+	private KeywordDao keywordDao;
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
 	public ModelAndView campingUpdateGet(ModelAndView mav,
@@ -38,6 +45,11 @@ public class CampingUpdateController {
 		//수정 아이디 확인 후, 비밀번호 입력 일치 시에 페이지 이동 가능하도록
 		
 		CampingBean camping = campingDao.getCampingDetail(num);
+		
+		//keyword 리스트 불러오기
+		String acode = "1";
+		List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+		mav.addObject("keywordLists", keywordLists);
 		
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("camping", camping);

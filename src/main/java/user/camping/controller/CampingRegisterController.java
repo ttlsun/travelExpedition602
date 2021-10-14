@@ -1,5 +1,7 @@
 package user.camping.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
@@ -16,6 +18,8 @@ import com.my.travelExpedition.utility.WebUtil;
 
 import user.camping.model.CampingBean;
 import user.camping.model.CampingDao;
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 
 @Controller
 public class CampingRegisterController {
@@ -29,10 +33,18 @@ public class CampingRegisterController {
 	
 	@Autowired
 	private CampingDao campingDao;
+
+	@Autowired
+	private KeywordDao keywordDao;
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
 	public ModelAndView campingRegisterGet(ModelAndView mav) {
 		
+		//keyword 리스트 불러오기
+		String acode = "1";
+		List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+		mav.addObject("keywordLists", keywordLists);
+		    	
 		mav.setViewName(GETPAGE);
 		return mav;
 	}

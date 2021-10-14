@@ -192,21 +192,16 @@ function fileSelectChange(event) {
 				<input type="text" class="form-control" id="summary" name="summary" value="${camping.summary }" placeholder="목록 외부에 노출됩니다. ex) 숲 속 힐링캠프, 글램퍼스 양평점입니다.">
 			</td>
 		</tr>
-		
-		<!-- 키워드(#) 코드와 문자열 연결하여 배열로 만들것 -->
 		<tr>
 			<td><label for="regkeyword"> 우리 캠핑장의 키워드(#) </label></td>
 			<td>
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="01" 
-					<c:if test="${fn:contains(camping.regkeyword,'01')}"> checked</c:if>>&nbsp;힐링&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="02" 
-					<c:if test="${fn:contains(camping.regkeyword,'02')}"> checked</c:if>>&nbsp;연인과함께&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="03" 
-					<c:if test="${fn:contains(camping.regkeyword,'03')}"> checked</c:if>>&nbsp;반려견동반&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="04" 
-					<c:if test="${fn:contains(camping.regkeyword,'04')}"> checked</c:if>>&nbsp;파쇄석&nbsp;
-				
+				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
+					<label for="regkeywords_${status.index}" style="color: #337ab7;">
+						&nbsp;
+						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"> ${keywordList.tag}
+					</label>
+				</c:forEach>
 			</td>
 		</tr>
 		<tr>

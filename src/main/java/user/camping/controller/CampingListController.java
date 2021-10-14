@@ -15,6 +15,8 @@ import com.my.travelExpedition.utility.Paging;
 
 import user.camping.model.CampingBean;
 import user.camping.model.CampingDao;
+import user.common.model.KeywordBean;
+import user.common.model.KeywordDao;
 
 @Controller
 public class CampingListController {
@@ -24,6 +26,9 @@ public class CampingListController {
 	
 	@Autowired
 	private CampingDao campingDao;
+	
+	@Autowired
+	private KeywordDao keywordDao;
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView campingList(ModelAndView mav, 
@@ -41,12 +46,19 @@ public class CampingListController {
 		map.put("searchName", map.get("searchName"));
 		map.put("searchKeyword", map.get("searchKeyword"));
 		
+		//keyword 리스트 불러오기
+		String acode = "1";
+		List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+    	mav.addObject("keywordLists", keywordLists);
+    	
+		//게시글 수
 		int totalCount = campingDao.getTotalCount(map);
 		
 		System.out.println("totalCount:" + totalCount);
 		
 		String pageUrl = request.getContextPath()+ COMMAND;
 		
+		//캠핑장 리스트 불러오기
 		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		List<CampingBean> lists = campingDao.getCampingList(pageInfo,map);
 		

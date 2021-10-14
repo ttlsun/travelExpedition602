@@ -108,7 +108,6 @@ function goReservation(num,pageNumber){
 <section class="container">
 <article>
 <div>
-	<header><h5 align="left" class="text-primary">캠핑장 상세 화면</h5></header>
 	<div class="marginPadding10" align="right">
 		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
 		<input type="button" class="btn btn-default" value="수정(사업자 전용)" onclick="goUpdate(${campbean.num},${pageNumber})">
@@ -120,62 +119,74 @@ function goReservation(num,pageNumber){
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${campbean.num }">
 	
-	<table class="table table-bordered" style="border: none;">
+	<table>
 		<tr>
-			<td colspan="4" align="center" style="border: none;">
-				<span class="text-primary" style="font-size: 30px; border-bottom: none;">
-				${campbean.name }
-				</span>	
+			<td colspan="2" style="text-align:center; padding-bottom: 20px; border-bottom: 1px solid lightgrey;">
+				<h2 class="text-primary">${campbean.name }</h2>
+				<h4 style="font-style: italic;">"${campbean.summary }"</h4>
+				<h4>${campbean.regkeyword }</h4>
+				
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center" style="border: none;">
-				<img src="${fileImg}/${campbean.imgurl}" alt="" title="" width="60%">
+			<td style="text-align:left; padding-top: 20px; padding-bottom: 20px;" class="col-xs-8 col-sm-8 col-md-8">
+				<img src="${fileImg}/${campbean.imgurl}" alt="" title="" width="100%">
 			</td>
-		</tr>
-		<tr>
-			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
-				<span class="text-primary" style="font-size: 15px;">
-				${campbean.summary }
-				</span>	
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4" align="center" style="border: none; padding-bottom: 20px;">
-				<span class="text-primary" style="font-size: 15px;">
-					<font color="red">!!!!!키워드태그추가!!!!!</font>
-				</span>	
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4" style="border: none; text-align:end;">
-				<c:forEach var="i" begin="1" end="5">
-					<c:choose>
-						<c:when test="${i <= 3}"> <!-- 3으로 적힌 곳을 별등급 받은 숫자 컬럼값으로 셋팅하세요. -->
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-							  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-							</svg>
-						</c:when>
-						<c:otherwise>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-							  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-							</svg>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="left" style="border: none; text-align:left;">
-				<div class="fs-4 mb-3">
-             		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
- 						<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
- 						<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-				</svg>
-					조회수 ${campbean.readcount }
-           		</div>
-			</td>
-			<td colspan="2" align="right" style="border: none; text-align:end;" width="30%">
+			<td style="border-left:none; padding-top:20px; text-align:right;" valign="top">
+				<table class="table table-bordered" style="border-left:none; border-right:none;">
+					<tr>
+						<th style="border-top-color: red; border-left:none;">
+							캠핑장 유형
+						</th>
+						<td style="border-top-color: black; border-right:none;">
+							<c:if test="${fn:contains(campbean.camptype,'01') }">일반캠핑장&nbsp;</c:if>
+							<c:if test="${fn:contains(campbean.camptype,'02') }">자동차캠핑장&nbsp;</c:if>
+							<c:if test="${fn:contains(campbean.camptype,'03') }">글램핑&nbsp;</c:if>
+							<c:if test="${fn:contains(campbean.camptype,'04') }">카라반&nbsp;</c:if>
+						</td>
+					</tr>
+					<tr>
+						<th style="border-top-color: red; border-left:none;">
+							테마
+						</th>
+						<td style="border-top-color: black; border-right:none;">
+							<c:if test="${campbean.themecode eq '01' }">숲/산</c:if>
+							<c:if test="${campbean.themecode eq '02' }">해변/바다</c:if>
+							<c:if test="${campbean.themecode eq '03' }">강/호수/계곡</c:if>
+							<c:if test="${campbean.themecode eq '04' }">도심</c:if>
+							<c:if test="${campbean.themecode eq '05' }">섬</c:if>
+						</td>
+					</tr>
+					<tr>
+						<th style="border-left:none;">
+							시설정보
+						</th>
+						<td style="border-right:none;">
+							${campbean.options }
+						</td>
+					</tr>
+					<tr>
+						<th style="border-left:none; ">
+							주소
+						</th>
+						<td style="border-right:none;">
+							${campbean.address1 }&nbsp;${campbean.address2 }&nbsp;${campbean.address3 }&nbsp;${campbean.address4 }
+						</td>
+					</tr>
+					<tr>
+						<th style="border-bottom-color: red; border-left:none; ">
+							연락처
+						</th>
+						<td style="border-bottom-color: black; border-right:none;">
+							<a href="tel:${campbean.contact }" class="text-decoration-none">
+                				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
+								  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z"/>
+								</svg>
+             			 	</a>
+							&nbsp; ${campbean.contact }
+						</td>
+					</tr>
+				</table>
 				<button type="button" class="btn outline-secondary" >
 					추천
 			    	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
@@ -191,77 +202,16 @@ function goReservation(num,pageNumber){
 				</button>
 			</td>
 		</tr>
-		<tr>
-			<th width="15%">
-				캠핑장 환경
-			</th>
-			<td width="35%">
-				<c:if test="${campbean.themecode eq '01' }">
-					&nbsp;숲/산&nbsp;
-				</c:if>
-				<c:if test="${campbean.themecode eq '02' }">
-					&nbsp;해변/바다&nbsp;
-				</c:if>
-				<c:if test="${campbean.themecode eq '03' }">
-					&nbsp;강/호수/계곡&nbsp;
-				</c:if>
-				<c:if test="${campbean.themecode eq '04' }">
-					&nbsp;도심&nbsp;
-				</c:if>
-				<c:if test="${campbean.themecode eq '05' }">
-					&nbsp;섬&nbsp;
-				</c:if>
-			</td>
-			<th width="15%">
-				캠핑장 유형
-			</th>
-			<td width="35%">
-				<c:if test="${fn:contains(campbean.camptype,'01') }">
-					&nbsp;일반캠핑장&nbsp;
-				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'02') }">
-					&nbsp;자동차캠핑장&nbsp;
-				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'03') }">
-					&nbsp;글램핑&nbsp;
-				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'04') }">
-					&nbsp;카라반&nbsp;
-				</c:if>
-			</td>
-		</tr>
-		<tr>
-			<th>
-				주소
-			</th>
-			<td>
-				<span class="text-primary" style="font-size: 15px;">
-				<c:set var="fullAddr" value="${campbean.address1} ${campbean.address2} ${campbean.address3} ${campbean.address4}"/>
-				${fullAddr }
-				</span>	
-			</td>
-			<th>
-				문의처
-			</th>
-			<td>
-				<a href="tel:${campbean.contact }" class="text-decoration-none">
-                	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
-				  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z"/>
-				</svg>
-              	</a>
-              	&nbsp; ${campbean.contact }
-			</td>
-		</tr>
 	</table>
 	</form>
 
 	<!-- 캠핑장 상세 정보/객실 목록/후기/오시는 길/ 탭 -->
 	<div class="marginPadding10">
 		<ul class="nav nav-tabs">
-			<li><a href="#tab1" data-toggle="tab">캠핑장 상세 정보</a></li>
-			<li class="active"><a href="#tab2" data-toggle="tab">객실 목록</a></li>
-		    <li><a href="#tab3" data-toggle="tab">캠핑장 후기(${campbean.reviewcount })</a></li>
-		    <li><a href="#tab4" data-toggle="tab" onClick="fnTab(4)">오시는 길</a></li>
+			<li style="width: 25%; text-align:center;"><a href="#tab1" data-toggle="tab">캠핑장 상세 정보</a></li>
+			<li class="active" style="width: 25%; text-align:center;"><a href="#tab2" data-toggle="tab">객실 목록</a></li>
+		    <li style="width: 25%; text-align:center;"><a href="#tab3" data-toggle="tab">캠핑장 후기(${campbean.reviewcount })</a></li>
+		    <li style="width: 25%; text-align:center;"><a href="#tab4" data-toggle="tab" onClick="fnTab(4)">오시는 길</a></li>
 		</ul>
 		
 		<div class="tab-content marginPadding10">

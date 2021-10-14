@@ -200,15 +200,13 @@ function fileSelectChange(event) {
 			<td><label for="regkeyword"> 우리 캠핑장의 키워드(#) </label></td>
 			<td>
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="01" 
-					<c:if test="${fn:contains(camping.regkeyword,'01')}"> checked</c:if>>&nbsp;힐링&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="02" 
-					<c:if test="${fn:contains(camping.regkeyword,'02')}"> checked</c:if>>&nbsp;연인과함께&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="03" 
-					<c:if test="${fn:contains(camping.regkeyword,'03')}"> checked</c:if>>&nbsp;반려견동반&nbsp;
-				<input type="checkbox" id="regkeyword" name="regkeyword" value="04" 
-					<c:if test="${fn:contains(camping.regkeyword,'04')}"> checked</c:if>>&nbsp;파쇄석&nbsp;
-				
+				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
+					<label for="regkeywords_${status.index}" style="color: #337ab7;">
+						&nbsp;
+						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"
+							<c:if test="${fn:contains(camping.regkeyword,keywordList.tag) }">checked</c:if>> ${keywordList.tag}
+					</label>
+				</c:forEach>
 			</td>
 		</tr>
 		<tr>
