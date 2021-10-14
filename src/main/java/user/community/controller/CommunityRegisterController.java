@@ -145,9 +145,10 @@ public class CommunityRegisterController {
 				ratingDao.insertRatingData(map);
 				
 				//캠핑 or 관광지 리뷰수 올려주기.
-				//System.out.println("reviewnum:" + reviewnum);
-				map.put("reviewnum", reviewnum);
-				communityDao.updateReviewCount(map);
+				Map<String, Object> reviceCountMap = new HashMap<String, Object>();
+				reviceCountMap.put("reviewnum", reviewnum);
+				reviceCountMap.put("reviewtype", reviewType);
+				communityDao.updateReviewCount(reviceCountMap);
 			}
 			
 			//후기 저장.
