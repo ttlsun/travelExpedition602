@@ -118,4 +118,9 @@
 		WHERE NUM = #{num}
 	</update>
 	
+	
+	<select id="getCampingRegid" resultType="String">
+		SELECT REGID FROM CAMPING
+		WHERE NUM = #{cnum}
+	</select>
 </mapper>

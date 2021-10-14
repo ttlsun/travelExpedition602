@@ -55,5 +55,7 @@ public class CampingDao {
 		return cnt;
 	}
 	
-	
+	public String getCampingRegid(int cnum) {
+		return sqlSessionTemplate.selectOne(NAMESPACE+".getCampingRegid", cnum);
+	}
 }

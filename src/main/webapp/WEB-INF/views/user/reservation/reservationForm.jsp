@@ -88,7 +88,9 @@ function goPayment() {
 		</table>
 	</div>
 	
-	<form name="myForm" action="payReservation.do" method="get" class="form-horizontal" role="form">
+	<form name="myForm" action="payReservation.do?cname=${cname}&totalprice=${totalprice}&calDateDays=${calDateDays}&weekdayCount=${weekdayCount}&weekendCount=${weekendCount}
+	&checkindate=${map.checkindate}&checkoutdate=${map.checkoutdate}&guests=${map.guests}
+	&weekdayprice=${roombean.weekdayprice}&weekendprice=${roombean.weekendprice}&cnum=${roombean.cnum}" method="post" class="form-horizontal" role="form">
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
 		<h4 align="center">예약자 정보 입력</h4>
