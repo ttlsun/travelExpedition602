@@ -44,6 +44,7 @@ function goDelete(num) {
 function goRatingRegister(ratingtype) {
 	var userid = "${userId}"; // 페이지 진입한 유저 아이디.
 	var regid = "${community.regid}" //후기등록자 아이디
+	var userCode = "${userCode}"; //유저 구분코드
 	
 	//회원이 아닐 경우,
 	//로그인 페이지로 안보낼거임..
@@ -52,15 +53,15 @@ function goRatingRegister(ratingtype) {
 		return false; 
 	}
 	
-	//자기가 적은 후기는 추천할수 없게 설정.
-	if(userid == regid || regid == "admin"){
-		alert("자신이 적은 후기에 추천/찜 하실 수 없습니다.");
+	//사업자는 찜콩하지마쇼
+	if(userCode == "business" || userCode == "admin"){
+		alert("사업자/관리자는 후기에 추천/찜 하실 수 없습니다.");
 		return;
 	}
 	
-	//관리자 하지마.. 
-	if(userid == "admin"){
-		alert("관리자는 후기에 추천/찜 하실 수 없습니다.");
+	//자기가 적은 후기는 추천할수 없게 설정.
+	if(userid == regid || regid == "admin"){
+		alert("자신이 적은 후기에 추천/찜 하실 수 없습니다.");
 		return;
 	}
 	
