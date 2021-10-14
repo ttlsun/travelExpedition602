@@ -17,7 +17,7 @@ $(document).ready(function() {
 function goList() {
 	var type = $('#type').val();
 	if(type == 3){
-		location.href= "${contextPath}/reservationCommunityList.do?pageNumber="+${pageNumber};
+		location.href= "${contextPath}/myCommunityList.do?pageNumber="+${pageNumber};
 	}else if(type == 2){
 		location.href= "${contextPath}/reviewCommunityList.do?pageNumber="+${pageNumber};
 	}else{

@@ -75,7 +75,12 @@ function goList() {
 	location.href= "${contextPath}/qnaList.do?pageNumber="+${pageNumber};
 }
 
-
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var num = $('#num').val();
+	var pageNumber = $('#pageNumber').val();
+	location.href= "${contextPath}/qnaDetail.do?num=" + num + "&pageNumber=" + pageNumber;
+}
 </script>    
  
 <section class="container">
@@ -84,8 +89,8 @@ function goList() {
 	<header><h2 align="center" class="text-primary"> 문의 수정 </h2></header>
 	<form:form commandName="qna" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="modid" value="${userId}">
-		<input type="hidden" name="pageNumber" value="${pageNumber}">
-		<input type="hidden" id="num" name="num" value="${qna.num}">
+		<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
+		<input type="hidden" name="num" id="num" value="${qna.num}">
 		
 		<div class="form-group">
 		<table class="table table-bordered">
@@ -173,6 +178,7 @@ function goList() {
 			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 		</div>
 	</form:form>
 </div>

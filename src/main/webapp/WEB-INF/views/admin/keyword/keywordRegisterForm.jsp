@@ -42,7 +42,11 @@ function goList() {
 	location.href= "${contextPath}/keywordList.ad";
 }
 
-
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var num = $('#num').val();
+	location.href= "${contextPath}/keywordDetail.ad?num=" + num + "&pageNumber=" + ${pageNumber};
+}
 </script>    
  
 <section class="container">
@@ -80,6 +84,7 @@ function goList() {
 			<input type="submit" class="btn btn-primary" value="등록하기" onclick="return inputSave()">
 			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 		</div>
 	</form:form>
 </div>

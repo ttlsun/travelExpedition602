@@ -40,7 +40,11 @@ function goList() {
 	location.href= "${contextPath}/qnaList.ad?pageNumber="+${pageNumber};
 }
 
-
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var num = $('#num').val();
+	location.href= "${contextPath}/qnaDetail.ad?num=" + num + "&pageNumber=" + +${pageNumber};
+}
 </script>    
  
 <section class="container">
@@ -50,7 +54,7 @@ function goList() {
 	<form:form commandName="qna" name="myForm" action="qnaRefUpdate.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="modid" value="${userId}">
 		<input type="hidden" name="pageNumber" value="${pageNumber}">
-		<input type="hidden" name="num" value="${qna.num}">
+		<input type="hidden" name="num" id="num" value="${qna.num}">
 		
 		<div class="form-group">
 		<table class="table table-bordered">
@@ -109,7 +113,7 @@ function goList() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="regkeyword1">문의 키워드 </label></td>
+				<td><label for="regkeyword1"><span class="redFont"> * </span>문의 키워드 </label></td>
 				<td>
 					<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 						<label for="regkeyword_${status.index}" style="color: #337ab7;">
@@ -126,6 +130,7 @@ function goList() {
 			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 		</div>
 	</form:form>
 </div>

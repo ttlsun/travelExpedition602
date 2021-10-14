@@ -33,6 +33,15 @@ function goList() {
 	location.href= "${contextPath}/eventList.ad?pageNumber="+${pageNumber};
 }
 
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var type = $('#type').val();
+	var num = $('#num').val();
+	var pageNumber = $('#pageNumber').val();
+	location.href= "${contextPath}/eventDetail.ad?num=" + num + "&pageNumber=" + pageNumber + "&type="+ type;
+}
+
+//자바스크립트로 널 체크 미리 하고 싶긴하지만.. 어노테이션으로 걸어둔 유효성검사도 봐야하기 때문에 .. 이벤트날짜만 미리 채크하고 가기..
 function inputSave() {
 	
 	if(!isInputNullChk("이벤트 시작날짜 ", 'startdate')){
@@ -66,9 +75,9 @@ function inputSave() {
 	<header><h2 align="center" class="text-primary"> 이벤트 수정 </h2></header>
 	<form:form commandName="event" name="myForm" action="eventUpdate.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="modid" value="${userId}">
-		<input type="hidden" name="pageNumber" value="${pageNumber}">
-		<input type="hidden" name="num" value="${event.num}">
-		<input type="hidden" name="type" value="${type}">
+		<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
+		<input type="hidden" name="num" id="num" value="${event.num}">
+		<input type="hidden" name="type" id="type" value="${type}">
 		
 		<div class="form-group">
 		<table class="table table-bordered">
@@ -148,6 +157,7 @@ function inputSave() {
 			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 		</div>
 	</form:form>
 </div>

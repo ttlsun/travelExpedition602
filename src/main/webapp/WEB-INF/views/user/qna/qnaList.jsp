@@ -56,7 +56,7 @@ function goRegister() {
 	</div>
 	
 	<!-- 회원만 문의를 쓸수 있게 변경 -->
-	<c:if test="${!empty userId or userId eq 'admin'}">
+	<c:if test="${!empty userCode and userCode ne 'admin'}">
 	<div align="right" style="padding-top: 2%;">
 		<input type="button" class="btn btn-primary" value="문의 등록" onclick="goRegister()">
 	</div>
