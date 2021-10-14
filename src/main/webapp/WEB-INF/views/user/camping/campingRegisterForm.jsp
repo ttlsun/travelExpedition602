@@ -143,7 +143,7 @@ function fileSelectChange(event) {
 	<header><h2 align="center" class="text-primary">캠핑장 등록</h2></header>
 	
 	<form:form name="myForm" commandName="camping" action="${contextPath}/campingRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="hidden" value="member01" name="regid">
+	<input type="hidden" value="${loginInfo.id}" name="regid">
 	<table border="1" class="table table-bordered">
 		<caption>
 			<p><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
