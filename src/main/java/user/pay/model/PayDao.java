@@ -29,6 +29,12 @@ public class PayDao {
 		return lists;
 	}
 	
+	public List<PayBean> getListForReserve(Map<String, String> map){
+		List<PayBean> lists = new ArrayList<PayBean>();
+		lists = sqlSessionTemplate.selectList(NAMESPACE+".getListForReserve", map);
+		return lists;
+	}
+	
 	public PayBean getData(int num) {
 		return sqlSessionTemplate.selectOne(NAMESPACE+".getData", num);
 	}

@@ -228,6 +228,7 @@ public class UsersMyInfoController {
 				pw.println("<script>alert('비밀번호 수정에 실패했습니다'); history.go(-1);</script>");
 			}
 		}
+		pw.flush();
 		
 		return;
 	}

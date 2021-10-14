@@ -32,6 +32,14 @@
 		order by num
 	</select>
 	
+	<select id="getListForReserve" resultType="myPayBean">
+		select * from pay
+		<if test="whatColumn == 'paycode'">
+			where id like #{id} and paycode like #{keyword}
+		</if>
+		order by num
+	</select>
+	
 	<select id="getData" resultType="myPayBean">
 		select * from pay where num = #{num}	
 	</select>
