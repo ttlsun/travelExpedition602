@@ -38,6 +38,9 @@
 		<if test="regid != null">
 			AND REGID = #{regid}
 		</if>
+		<if test="reviewnum != null and reviewnum != ''">
+			AND REVIEW_NUM = #{reviewnum}
+		</if>
 		<if test="reviewtype != null and reviewtype != ''">
 			AND REVIEW_TYPE = #{reviewtype}
 		</if>
@@ -62,6 +65,9 @@
 		</if>
 		<if test="regid != null">
 			AND REGID = #{regid}
+		</if>
+		<if test="reviewnum != null and reviewnum != ''">
+			AND REVIEW_NUM = #{reviewnum}
 		</if>
 		<if test="reviewtype != null and reviewtype != ''">
 			AND REVIEW_TYPE = #{reviewtype}
@@ -259,7 +265,7 @@
 				CAMPING
 			</if>
 			<if test="reviewtype == '02'">
-				COMMUNITY
+				TOURLIST
 			</if>
 		<set>
 			REVIEWCOUNT = REVIEWCOUNT+1
@@ -274,7 +280,7 @@
 				CAMPING
 			</if>
 			<if test="reviewtype == '02'">
-				COMMUNITY
+				TOURLIST
 			</if>
 		<set>
 			REVIEWCOUNT = REVIEWCOUNT-1
@@ -289,7 +295,7 @@
 				CAMPING
 			</if>
 			<if test="reviewtype == '02'">
-				COMMUNITY
+				TOURLIST
 			</if>
 		<set>
 			RECOMMEND = RECOMMEND+1
@@ -304,7 +310,7 @@
 				CAMPING
 			</if>
 			<if test="reviewtype == '02'">
-				COMMUNITY
+				TOURLIST
 			</if>
 		<set>
 			RECOMMEND = RECOMMEND-1

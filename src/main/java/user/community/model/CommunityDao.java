@@ -99,7 +99,7 @@ public class CommunityDao {
 	}
 	
 	/*별등급 평균 내기*/
-	public int getStarAVG(Map<String, Object> map) {
+	public int getStarAVG(Map<String, String> map) {
 		System.out.println("reviewtype:(01:캠핑/02:관광지) : " + map.get("reviewtype") +"," + "리뷰고유번호(캠핑고유번호 or 관광지고유 번호) : " + map.get("reviewnum"));
 		Integer svgStar = sqlSessionTemplate.selectOne(NAMESPACE + ".getStarAVG", map);
 		if (svgStar == null)
@@ -110,6 +110,7 @@ public class CommunityDao {
 	
 	/*캠핑 or 관광지 리뷰수 올려주기 */
 	public int updateReviewCount(Map<String, Object> map) {
+		System.out.println("reviewtype:(01:캠핑/02:관광지) : "+ map.get("reviewtype") + "리뷰고유번호(캠핑고유번호 or 관광지고유 번호) : " + map.get("reviewnum"));
 		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateReviewCount", map);
 		return cnt;
 	}

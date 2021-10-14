@@ -31,11 +31,8 @@ public class CommunityListController {
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
 		map.put("status", "01"); //노출만 리스트 뿌리기.
-		
 		int totalCount = communityDao.getCommunityListTotalCnt(map);
-	
 		String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
-		
 		Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
 		List<CommunityBean> lists = communityDao.getCommunityList(pageInfo, map);
 		
