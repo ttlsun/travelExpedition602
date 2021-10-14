@@ -146,6 +146,7 @@ function fileSelectChange(event) {
 	<form:form name="myForm" commandName="camping" action="${contextPath}/campingUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" value="${camping.num}">
+	<input type="hidden" name="modid" value="${userid}">
 	<table border="1" class="table table-bordered">
 		<caption>
 			<p><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
@@ -221,7 +222,7 @@ function fileSelectChange(event) {
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
 				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" value="${camping.postcode }" placeholder="우편번호 입력">
-				<input type="hidden" id="postcode" name="postcode">
+				<input type="hidden" id="postcode" name="postcode" value="${camping.postcode }">
 				<input type="button" class="btn btn-primary" id="searchZip" value="우편번호찾기"  data-toggle="modal" data-target="#myModal">
 			</td>
 		</tr>

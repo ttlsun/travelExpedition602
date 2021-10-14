@@ -64,7 +64,8 @@ public class RoomUpdateController {
 		//System.out.println("imgList:" + imgList.toString());
 		
 		mav.addObject("room", room);
-		mav.addObject("campbean", campbean);
+		mav.addObject("cname", campbean.getName());
+		mav.addObject("camptype", campbean.getCamptype());
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("originImgUrl", room.getImgurl());
 		mav.addObject("imgList", imgList);
@@ -77,7 +78,8 @@ public class RoomUpdateController {
 							@ModelAttribute("room") @Valid RoomBean roombean,
 							BindingResult result,
 							@RequestParam(value = "originImgUrl") String originImgUrl,
-							@RequestParam("campbean") String campbean,
+							@RequestParam("cname") String cname,
+							@RequestParam("camptype") String camptype,
 							@RequestParam("pageNumber") String pageNumber) {
 		
 		System.out.println("roomUpdate1:"+roombean.toString());
@@ -89,20 +91,19 @@ public class RoomUpdateController {
 			List<PostimgBean> imgList = postimgDao.getPostimgList(map);
 						
 			mav.addObject("num", roombean.getNum());
-			mav.addObject("campbean", campbean);
+			mav.addObject("cname", cname);
+			mav.addObject("camptype", camptype);
 			mav.addObject("pageNumber", pageNumber);
 			mav.addObject("originImgUrl", originImgUrl);
 			mav.addObject("imgList", imgList);
 			
-			System.out.println("roomUpdate2:"+roombean.toString());
 			if(result.hasErrors()) {
 				mav.setViewName(GETPAGE);
-				System.out.println("roomUpdate3:"+roombean.toString());
 				return mav;
 			}
 			
 			//로그인 세션에 저장되어 있는 id값 넣기
-			roombean.setModid(roombean.getModid()+"id");
+			roombean.setModid(roombean.getModid());
 			
 			int cnt = -1;
 			

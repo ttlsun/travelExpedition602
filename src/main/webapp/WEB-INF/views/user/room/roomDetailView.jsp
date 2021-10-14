@@ -32,6 +32,10 @@ $(document).ready(function() {
 });
 
 
+function ajaxdas() {
+	
+}
+
 //예약하기(사용자) 버튼 클릭시
 function goReservation(num,pageNumber) {
 	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;
@@ -57,34 +61,28 @@ function goDelete(num,pageNumber) {
 <section class="container">
 <article>
 <div>
-	<header><h5 align="left" class="text-primary">객실 상세 화면</h5></header>
-	<div align="left">
-		<input type="button" class="btn btn-default" value="돌아가기" onclick="history.back()">
-	</div>
-	<div>
+		<div class="marginPadding10" align="right">
+			<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="history.back()">
+			<input type="button" class="btn btn-primary" value="문의하기(사용자)" onclick="goQna(${roombean.num})">
+			<input type="button" class="btn btn-primary" value="객실정보수정(사업자)" onclick="goUpdate(${roombean.num},${pageNumber})">
+			<input type="button" class="btn btn-primary" value="객실목록에서제거(사업자)" onclick="goDelete(${roombean.num},${pageNumber})">
+		</div>
 		<div align="center">
 			<h2 align="center" class="text-primary">${roombean.name }</h2>
 			<h4 align="center" class="text-info">${cname }</h4>
-			<!-- 사용자용 -->
-			<div class="marginPadding10">
-				<input type="button" class="btn btn-primary" value="문의하기(사용자)" onclick="goQna(${roombean.num})">
-			</div>
-			<!-- 사업자용 -->
-			<div class="marginPadding10">
-				<input type="button" class="btn btn-primary" value="객실정보수정(사업자)" onclick="goUpdate(${roombean.num},${pageNumber})">
-				<input type="button" class="btn btn-primary" value="객실목록에서제거(사업자)" onclick="goDelete(${roombean.num},${pageNumber})">
-			</div>
 		</div>
 		
 		<!-- 객실 여럿 이미지  -->
 		<div class="container"> 
 			<div id="carousel-example-generic" class="carousel slide">
 	      	<!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
-	          <ol class="carousel-indicators">
-	            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-	          </ol>
+	        	<ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				
+					<c:forEach var="i" begin="1" end="${fn:length(imgList)}" step="1"> 
+						<li data-target="#carousel-example-generic" data-slide-to="${i}"></li>
+					</c:forEach>
+				</ol>
 	           <!-- Carousel items -->
 	           <div class="carousel-inner">
 	              <c:forEach items="${imgList}" var="list" varStatus="status">
@@ -161,17 +159,6 @@ function goDelete(num,pageNumber) {
 	  		
 	  	</div> 
 	  	
-	  	<div align="center">
-	  		<hr>
-	  		<article><h4 class="text-info text-center">객실 소개</h4></article>
-	  		<div class="marginPadding10">
-	  			${roombean.summary }
-	  		</div>
-	  		<div class="marginPadding10">
-	  			${roombean.contents }
-	  		</div>
-	  	</div>
-	  	
 	  	<div class="marginPadding10" align="center">
 	  		<hr>
 	  		<article><h4 class="text-info text-center">이용 정보</h4></article>
@@ -199,8 +186,20 @@ function goDelete(num,pageNumber) {
 	  			</tr>
 	  		</table>
 	  	</div>
-	  </div>
+	  	
+	  	<div align="center">
+	  		<hr>
+	  		<article><h4 class="text-info text-center">객실 소개</h4></article>
+	  		<div class="marginPadding10">
+	  			${roombean.summary }
+	  		</div>
+	  		<div class="marginPadding10">
+	  			${roombean.contents }
+	  		</div>
+	  	</div>
+	  	
 </div>
+
 </article>
 </section>
 

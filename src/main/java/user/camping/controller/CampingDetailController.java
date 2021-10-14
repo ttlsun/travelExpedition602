@@ -47,7 +47,7 @@ public class CampingDetailController {
 		
 		
 		//num과 cnum이 null 일경우 0으로 값 넣기
-		String num = request.getParameter("num") == null ? "0" : (String)map.get("num");
+		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
 //		String cnum = request.getParameter("cnum") != null ? (String)map.get("cnum") : (String)map.get("num");
 		System.out.println("num:::" + num);
 		
@@ -82,7 +82,7 @@ public class CampingDetailController {
 		List<CommunityBean> communityLists = communityDao.getCommunityList(communityPageInfo, map);
 	
 		//별등급 가져오기. 
-		map.put("reviewnum", map.get("num")); //관광지고유번호
+		map.put("reviewnum", map.get("cnum")); //관광지고유번호
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
 		System.out.println("startAvg::::::" + startAvg);

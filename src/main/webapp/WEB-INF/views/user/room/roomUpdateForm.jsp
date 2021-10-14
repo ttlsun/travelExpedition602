@@ -53,13 +53,15 @@ function goList() {
 	
 	<form:form commandName="room" name="myform" action="${contextPath}/roomUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="num" value="${room.num}">
-	<input type="hidden" name="campbean" value="${campbean }">
+	<input type="hidden" name="cname" value="${cname }">
+	<input type="hidden" name="camptype" value="${camptype }">
 	<input type="hidden" name="pageNumber" value="${pageNumber }">
+	<input type="hidden" name="modid" value="${userid}">
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 표시는 필수 입력사항입니다. </caption>
 		<tr class="active">
 			<td colspan="4">
-				<h4>${campbean.name }</h4>
+				<h4>${cname }</h4>
 			</td>
 		</tr>
 		<tr>
@@ -70,19 +72,19 @@ function goList() {
 			</td>
 			<td width="12%"><label for="roomtype"><span class="redFont"> * </span> 객실 타입 </label></td>
 			<td>
-				<c:if test="${fn:contains(campbean.camptype,'01')}">
+				<c:if test="${fn:contains(camptype,'01')}">
 					<input type="radio" id="roomtype" name="roomtype" value="01"
 						<c:if test="${room.roomtype eq '01'}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'02')}">
+				<c:if test="${fn:contains(camptype,'02')}">
 					<input type="radio" id="roomtype" name="roomtype" value="02"
 						<c:if test="${room.roomtype eq '02'}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'03')}">
+				<c:if test="${fn:contains(camptype,'03')}">
 					<input type="radio" id="roomtype" name="roomtype" value="03"
 						<c:if test="${room.roomtype eq '03'}"> checked</c:if>>&nbsp;글램핑&nbsp;
 				</c:if>
-				<c:if test="${fn:contains(campbean.camptype,'04')}">
+				<c:if test="${fn:contains(camptype,'04')}">
 					<input type="radio" id="roomtype" name="roomtype" value="04"
 						<c:if test="${room.roomtype eq '04'}"> checked</c:if>>&nbsp;카라반&nbsp;
 				</c:if>
@@ -139,7 +141,7 @@ function goList() {
 						<c:forEach var="listRow" items="${imgList}" varStatus="vsRow" step="5">
 						<tr>
 							<c:forEach var="listCell" items="${imgList}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*5-1}">
-							<td align="center" class="col-xs-12 col-sm-6 col-md-3" width="20%">
+							<td align="center" width="12%">
 								<img src="${fileImg}/${listCell.imgname}" style="width:100%; margin: 0px auto;" alt="${listCell.imgname} 이미지" title="${listCell.imgname} 이미지" >
 							</td>
 							</c:forEach>

@@ -42,8 +42,6 @@ public class CampingUpdateController {
 								@RequestParam("num") String num,
 								@RequestParam("pageNumber") String pageNumber) {
 		
-		//수정 아이디 확인 후, 비밀번호 입력 일치 시에 페이지 이동 가능하도록
-		
 		CampingBean camping = campingDao.getCampingDetail(num);
 		
 		//keyword 리스트 불러오기
@@ -67,6 +65,11 @@ public class CampingUpdateController {
 		System.out.println("campbean:"+campbean.toString());
 		try {
 		
+		//keyword 리스트 불러오기
+		String acode = "1";
+		List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+		mav.addObject("keywordLists", keywordLists);	
+			
 		mav.addObject("num", campbean.getNum());
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("originImgUrl", originImgUrl);
@@ -86,7 +89,7 @@ public class CampingUpdateController {
 		}
 		
 		//로그인 세션에 저장되어 있는 id값 넣기
-		campbean.setModid(campbean.getModid()+"id");
+		campbean.setModid(campbean.getModid());
 				
 		cnt = campingDao.updateData(campbean);
 		

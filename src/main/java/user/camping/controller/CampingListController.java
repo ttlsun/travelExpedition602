@@ -33,7 +33,6 @@ public class CampingListController {
 	@RequestMapping(value=COMMAND)
 	public ModelAndView campingList(ModelAndView mav, 
 								  @RequestParam Map<String,String> map,
-								  @RequestParam(value="pageNumber", required=false) String pageNumber,
 								  HttpServletRequest request) {
 		//노출만 리스트업
 		map.put("status", "01");
@@ -44,7 +43,7 @@ public class CampingListController {
 		map.put("camptype", map.get("camptype"));
 		map.put("themecode", map.get("themecode"));
 		map.put("searchName", map.get("searchName"));
-		map.put("searchKeyword", map.get("searchKeyword"));
+		map.put("regkeyword", map.get("regkeyword"));
 		
 		//keyword 리스트 불러오기
 		String acode = "1";

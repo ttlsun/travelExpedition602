@@ -52,7 +52,8 @@ public class RoomRegisterController {
 		CampingBean campbean = campingDao.getCampingNameAndTypes(Integer.parseInt(num)); 
 		
 		mav.addObject("cnum", num);
-		mav.addObject("campbean", campbean);
+		mav.addObject("cname", campbean.getName());
+		mav.addObject("camptype", campbean.getCamptype());
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GETPAGE);
 		return mav;
@@ -63,14 +64,13 @@ public class RoomRegisterController {
 								@ModelAttribute("room") @Valid RoomBean roombean,
 								BindingResult result,
 								@RequestParam("cnum") String cnum,
+								@RequestParam("cname") String cname,
+								@RequestParam("camptype") String camptype,
 								@RequestParam("pageNumber") String pageNumber) {
-		
-		//해당 캠핑장 이름, 유형
-		CampingBean campbean = campingDao.getCampingNameAndTypes(Integer.parseInt(cnum));
-		
+				
 		mav.addObject("cnum", cnum);
-		mav.addObject("num", cnum);
-		mav.addObject("campbean", campbean);
+		mav.addObject("cname", cname);
+		mav.addObject("camptype", camptype);
 		mav.addObject("pageNumber", pageNumber);
 		
 		System.out.println("roombean:" + roombean.toString());

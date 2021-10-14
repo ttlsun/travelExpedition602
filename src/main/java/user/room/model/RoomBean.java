@@ -2,10 +2,12 @@ package user.room.model;
 
 import java.util.Arrays;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RoomBean {
@@ -27,13 +29,13 @@ public class RoomBean {
 	private String summary;
 	private String contents;
 	
-	@NotNull(message = "적정인원 입력은 필수입니다.")
+	@Min(value = 1, message = "적정인원 입력은 필수입니다.")
 	private int propguests;
-	@NotNull(message = "최대인원 입력은 필수입니다.")
+	@Min(value = 1, message = "최대인원 입력은 필수입니다.")
 	private int maxguests;
-	@NotNull(message = "주중 가격 입력은 필수입니다.")
+	@Min(value = 1, message = "주중 가격 입력은 필수입니다.")
 	private int weekdayprice;
-	@NotNull(message = "주말 가격 입력은 필수입니다.")
+	@Min(value = 1, message = "주말 가격 입력은 필수입니다.")
 	private int weekendprice;
 	
 	private String options;
@@ -43,6 +45,7 @@ public class RoomBean {
 	private String moddate;
 	private String modid;
 	private String status; //00:완전삭제/01:노출/02:비노출
+	
 
 	public int getNum() {
 		return num;

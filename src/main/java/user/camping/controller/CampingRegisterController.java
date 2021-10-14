@@ -56,6 +56,11 @@ public class CampingRegisterController {
 									) {
 			try {
 			
+			//keyword 리스트 불러오기
+			String acode = "1";
+			List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+			mav.addObject("keywordLists", keywordLists);	
+				
 			if(result.hasErrors()) {
 				mav.setViewName(GETPAGE);
 				return mav;
@@ -79,7 +84,7 @@ public class CampingRegisterController {
 			}
 			
 			//로그인 세션에 저장되어 있는 id값 넣기
-			campbean.setRegid(campbean.getRegid()+"id");
+			campbean.setRegid(campbean.getRegid());
 						
 			System.out.println(campbean.toString());
 			

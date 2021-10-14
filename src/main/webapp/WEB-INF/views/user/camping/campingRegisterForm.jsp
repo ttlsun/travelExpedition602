@@ -143,7 +143,7 @@ function fileSelectChange(event) {
 	<header><h2 align="center" class="text-primary">캠핑장 등록</h2></header>
 	
 	<form:form name="myForm" commandName="camping" action="${contextPath}/campingRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="hidden" value="${loginInfo.id}" name="regid">
+	<input type="hidden" name="regid" value="${loginInfo.id}">
 	<table border="1" class="table table-bordered">
 		<caption>
 			<p><span class="redFont">* </span>표시는 필수 입력사항입니다.</p>
@@ -199,7 +199,8 @@ function fileSelectChange(event) {
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 					<label for="regkeywords_${status.index}" style="color: #337ab7;">
 						&nbsp;
-						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"> ${keywordList.tag}
+						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"
+							<c:if test="${fn:contains(camping.regkeyword,keywordList.tag) }">checked</c:if>> ${keywordList.tag}
 					</label>
 				</c:forEach>
 			</td>
@@ -215,8 +216,8 @@ function fileSelectChange(event) {
 				<label for="searchZip"><span class="redFont"> * </span> 캠핑장 주소 </label>
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
-				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" placeholder="우편번호 입력">
-				<input type="hidden" id="postcode" name="postcode">
+				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" value="${camping.postcode }" placeholder="우편번호 입력">
+				<input type="hidden" id="postcode" name="postcode" value="${camping.postcode }">
 				<input type="button" class="btn btn-primary" id="searchZip" value="우편번호찾기"  data-toggle="modal" data-target="#myModal">
 			</td>
 		</tr>
@@ -233,8 +234,8 @@ function fileSelectChange(event) {
 					<input type="text" class="form-control40" id="address4" name="address4" value="${camping.address4}" placeholder="상세주소 입력">
 					<form:errors cssClass="errMessage" path="address4"/>
 					
-					<input type="hidden" class="form-control40" id="coordsMa" name="longitude" placeholder="좌표Ma">
-					<input type="hidden" class="form-control40" id="coordsLa" name="latitude" placeholder="좌표La">
+					<input type="hidden" class="form-control40" id="coordsMa" name="longitude" value="${camping.longitude}" placeholder="좌표Ma">
+					<input type="hidden" class="form-control40" id="coordsLa" name="latitude" value="${camping.latitude}" placeholder="좌표La">
 					
 				</label>
 				

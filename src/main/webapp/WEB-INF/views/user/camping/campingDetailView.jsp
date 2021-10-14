@@ -305,8 +305,7 @@ function likesRegisters() {
 									[${rType}]&nbsp;${room.name }
 								</td>
 								<td rowspan="4" width="10%" align="center" style="vertical-align: middle;">
-									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail(${room.num},${pageNumber })"><br><br>
-									<input type="button" value="객실예약" class="btn btn-primary" onClick="goReservation(${room.num},${pageNumber })">	
+									<input type="button" value="상세보기" class="btn btn-primary" onClick="goRoomDetail(${room.num},${pageNumber })">
 								</td>
 							</tr>
 							<tr>
