@@ -29,7 +29,8 @@ public class AdminNoticeUpdateController {
 
 	public static final String COMMAND = "/noticeUpdate.ad";
 	public static final String GETPAGE = "admin/notice/noticeUpdateForm";
-	public static final String GOTOPAGE = "redirect:/noticeList.ad";
+	public static final String GOTOPAGE = "redirect:/noticeDetail.ad"; //상세로 이동
+	//public static final String GOTOPAGE = "redirect:/noticeList.ad";
 	
 	@Autowired
 	private ServletContext servletContext;

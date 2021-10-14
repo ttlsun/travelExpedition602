@@ -31,7 +31,8 @@ public class AdminQnaUpdateController {
 	
 	public static final String COMMAND = "/qnaRefUpdate.ad";
 	public static final String GETPAGE = "admin/qna/qnaRefUpdateForm";
-	public static final String GOTOPAGE = "redirect:/qnaList.ad";
+	public static final String GOTOPAGE = "redirect:/qnaDetail.ad";
+	//public static final String GOTOPAGE = "redirect:/qnaList.ad";
 	
 	@Autowired
 	private ServletContext servletContext;

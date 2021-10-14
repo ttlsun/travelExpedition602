@@ -20,7 +20,6 @@ import net.sf.json.JSONObject;
 import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.community.model.CommunityReplyBean;
-import user.like.model.LikeDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
 import user.rating.model.RatingDao;

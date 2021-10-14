@@ -24,7 +24,8 @@ public class AdminKeywordUpdateController {
 
 	public static final String COMMAND = "/keywordUpdate.ad";
 	public static final String GETPAGE = "admin/keyword/keywordUpdateForm";
-	public static final String GOTOPAGE = "redirect:/keywordList.ad";
+	public static final String GOTOPAGE = "redirect:/keywordDetail.ad"; //상세로 이동
+	//public static final String GOTOPAGE = "redirect:/keywordList.ad"; //리스트로이동
 	
 	@Autowired
 	private AdminKeywordDao adminKeywordDao;
@@ -44,9 +45,13 @@ public class AdminKeywordUpdateController {
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
 	public ModelAndView doActionPost(ModelAndView mav, HttpServletRequest request,
+									@RequestParam(value = "pageNumber") String pageNumber,
 									@ModelAttribute("keyword") @Valid KeywordBean bean,
 									BindingResult result) {
 		try {
+			
+			mav.addObject("pageNumber", pageNumber);
+			mav.addObject("num", bean.getNum()); 
 			
 			if(result.hasErrors())  {
 				

@@ -50,8 +50,8 @@ function goDelete() {
 	<header><h2 align="center" class="text-primary">${event.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
-	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${event.num}">
+	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="type" id="type" value="${type}">
 	
 	<table class="table table-bordered">

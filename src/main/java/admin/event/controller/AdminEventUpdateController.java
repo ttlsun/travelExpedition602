@@ -29,7 +29,8 @@ public class AdminEventUpdateController {
 
 	public static final String COMMAND = "/eventUpdate.ad";
 	public static final String GETPAGE = "admin/event/eventUpdateForm";
-	public static final String GOTOPAGE = "redirect:/eventList.ad";
+	public static final String GOTOPAGE = "redirect:/eventDetail.ad";
+	//public static final String GOTOPAGE = "redirect:/eventList.ad";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -57,6 +58,7 @@ public class AdminEventUpdateController {
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
 		//System.out.println("lists:" + lists.toString());
 		
+		mav.addObject("type", map.get("type")); //01:진행중인 이벤트 , 02:종료된 이벤트
 		mav.addObject("pageNumber", map.get("pageNumber"));
 		mav.addObject("event", event); //이벤트 상세
 		mav.addObject("imgList", imgList); //이미지리스트
@@ -67,6 +69,7 @@ public class AdminEventUpdateController {
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
 	public ModelAndView doActionPost(ModelAndView mav,
 									@RequestParam(value = "pageNumber") String pageNumber,
+									@RequestParam(value = "type") String type,
 									@ModelAttribute("event") @Valid AdminEventBean bean,
 									BindingResult result) {
 		
@@ -79,6 +82,7 @@ public class AdminEventUpdateController {
 			List<PostimgBean> imgList = postimgDao.getPostimgList(map);
 			
 			mav.addObject("num", bean.getNum());
+			mav.addObject("type", type); //01:진행중인 이벤트 , 02:종료된 이벤트
 			mav.addObject("pageNumber", pageNumber);
 			mav.addObject("lists", imgList);
 			

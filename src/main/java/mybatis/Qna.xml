@@ -54,6 +54,7 @@
 		SELECT 
 				NUM,
 				ID,
+				PW,
 				TITLE,
 				CONTENTS,
 				REG_KEYWORD,

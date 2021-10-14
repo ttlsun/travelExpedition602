@@ -58,6 +58,16 @@ function goList() {
 		location.href= "${contextPath}/communityList.do?pageNumber="+${pageNumber};
 	}
 }
+
+
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var type = $('#type').val();
+	var num = $('#num').val();
+	var pageNumber = $('#pageNumber').val();
+	location.href= "${contextPath}/communityDetail.do?num=" + num + "&pageNumber=" + pageNumber+"&type=" + type;
+}
+
 </script>
 
 <section class="container">
@@ -68,8 +78,8 @@ function goList() {
 	<form:form commandName="community" name="myForm" action="communityUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="modid" value="${userId}">
 	<input type="hidden" name="reviewnum" value="${community.reviewnum}">
-	<input type="hidden" name="pageNumber" value="${pageNumber}">
-	<input type="hidden" name="num" value="${community.num}">
+	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
+	<input type="hidden" name="num" id="num" value="${community.num}">
 	<input type="hidden" name="type" id="type" value="${type}">
 	<input type="hidden" name="reviewtype" id="reviewtype" value="${community.reviewtype}">
 	
@@ -187,6 +197,7 @@ function goList() {
 				<input type="submit" class="btn btn-primary" value="수정" onclick="return inputSave()">
 				<input type="reset" class="btn btn-default" value="다시작성">
 				<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+				<input type="reset" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 			</td>
 		</tr>
 	</table>

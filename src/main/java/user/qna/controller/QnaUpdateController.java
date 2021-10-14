@@ -35,7 +35,8 @@ public class QnaUpdateController {
 	public static final String GETPAGE = "user/qna/qnaUpdateForm";
 	public static final String COMMAND_PWCHK = "/pwChk.do";
 	
-	public static final String GOTOPAGE = "redirect:/qnaList.do";
+	public static final String GOTOPAGE = "redirect:/qnaDetail.do";
+	//public static final String GOTOPAGE = "redirect:/qnaList.do";
 	
 	@Autowired
 	private ServletContext servletContext;

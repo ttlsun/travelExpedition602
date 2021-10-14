@@ -38,6 +38,13 @@ function goList() {
 	location.href= "${contextPath}/noticeList.ad?pageNumber="+${pageNumber};
 }
 
+//상세페이지로(돌아가기) 이동 버튼
+function goDetail() {
+	var num = $('#num').val();
+	location.href= "${contextPath}/noticeDetail.ad?num=" + num + "&pageNumber=" + ${pageNumber};
+}
+
+
 function inputSave() {
 	
 	if (!confirm('수정 하시겠습니까?')){
@@ -56,7 +63,7 @@ function inputSave() {
 	<form:form commandName="notice" name="myForm" action="noticeUpdate.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="modid" value="${userId}">
 	<input type="hidden" name="pageNumber" value="${pageNumber}">
-	<input type="hidden" name="num" value="${notice.num}">
+	<input type="hidden" name="num" id="num" value="${notice.num}">
 	
 	<div class="form-group">
 		<table class="table table-bordered textAlignLeft">
@@ -122,6 +129,7 @@ function inputSave() {
 			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 		</div>
 	</form:form>
 </div>

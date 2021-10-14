@@ -27,6 +27,11 @@ function goRef() {
 	$('#myForm').attr("method","get").attr("action","qnaRefRegister.ad").submit();
 }
 
+//답변 수정 클릭시
+function goUpdate() {
+	$('#myForm').attr("method","get").attr("action","qnaRefUpdate.ad").submit();
+}
+
 //삭제 버튼 클릭시
 function goDelete() {
 	
@@ -45,8 +50,8 @@ function goDelete() {
 	<header><h2 align="center" class="text-primary">${qna.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
-	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${qna.num}">
+	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="ref" value="${qna.ref}">
 	<input type="hidden" name="restep" value="${qna.restep}">
 	<input type="hidden" name="relevel" value="${qna.relevel}">
@@ -130,6 +135,12 @@ function goDelete() {
 		<c:if test="${qna.status ne '03'}">
 			<input type="submit" class="btn btn-primary" value="답변하기" onclick="goRef()">
 		</c:if>
+		
+		<!-- 글쓴이가 나일경우 수정 -->
+		<c:if test="${qna.id eq userId}">
+			<input type="submit" class="btn btn-primary" value="수정하기" onclick="goUpdate()">
+		</c:if>
+		
 		<input type="submit" class="btn btn-primary" value="삭제" onclick="goDelete()">
 		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>

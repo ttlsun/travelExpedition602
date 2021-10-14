@@ -29,10 +29,12 @@ public class CommunityUpdateController {
 
 	public static final String COMMAND = "/communityUpdate.do";
 	public static final String GETPAGE = "user/community/communityUpdateForm";
+	public static final String GOTOPAGE = "redirect:/communityDetail.do";
 	
-	public static final String GOTOPAGE = "redirect:/communityList.do";
-	public static final String GOTOPAGE_REVIEW = "redirect:/reviewCommunityList.do";
-	public static final String GOTOPAGE_RESERVATION = "redirect:/reservationCommunityList.do";
+	//리스트로 가고 싶을 경우 사용
+	//public static final String GOTOPAGE = "redirect:/communityList.do";
+	//public static final String GOTOPAGE_REVIEW = "redirect:/reviewCommunityList.do";
+	//public static final String GOTOPAGE_RESERVATION = "redirect:/reservationCommunityList.do";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -75,7 +77,8 @@ public class CommunityUpdateController {
 	}
 
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
-	public ModelAndView doActionPost(ModelAndView mav, @RequestParam(value = "type") String type,
+	public ModelAndView doActionPost(ModelAndView mav, 
+									@RequestParam(value = "type") String type,
 									@RequestParam(value = "pageNumber") String pageNumber,
 									@RequestParam(value = "basicImgUrl", required = true) String basicImgUrl,
 									@ModelAttribute("community") @Valid CommunityBean bean,
@@ -168,15 +171,16 @@ public class CommunityUpdateController {
 			String msg = cnt < 0 ? "수정 실패" : "수정 성공";
 			System.out.println(msg);
 			
-			if(cnt != -1) {
-				//타입에 맞춰 list로 이동한다.(1:모든후기 , 2:방문후기 , 3:내가 쓴 my 후기)
-				if(type.equals("3")) {
-					mav.setViewName(GOTOPAGE_RESERVATION);
-				}else if(type.equals("2")) {
-					mav.setViewName(GOTOPAGE_REVIEW);
-				}else {
-					mav.setViewName(GOTOPAGE);
-				}
+			if(cnt != -1) {				
+				mav.setViewName(GOTOPAGE);
+				//타입에 맞춰 상세로 이동한다.(1:모든후기 , 2:방문후기 , 3:내가 쓴 my 후기)
+//				if(type.equals("3")) {
+//					mav.setViewName(GOTOPAGE_RESERVATION);
+//				}else if(type.equals("2")) {
+//					mav.setViewName(GOTOPAGE_REVIEW);
+//				}else {
+//					mav.setViewName(GOTOPAGE);
+//				}
 			}else {
 				mav.setViewName(GETPAGE);
 				return mav;
