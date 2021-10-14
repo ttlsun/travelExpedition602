@@ -30,18 +30,16 @@ function goRegister() {
 function goUpdate(num, pageNumber) {
 	if(!confirm("수정하시겠습니까?")){
 		return;
-	} else{
-		location.href="payUpdate.do?num="+num+"&pageNumber="+pageNumber;	
 	}
+	location.href="payUpdate.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
 //삭제버튼
 function goDelete(num) {
 	if(!confirm("삭제하시겠습니까?")){
 		return;
-	} else{
-		location.href="payDelete.do?num="+num;
 	}
+	location.href="payDelete.do?num="+num;
 }
 	
 </script>
