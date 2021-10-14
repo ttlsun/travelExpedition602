@@ -88,7 +88,7 @@ function goPayment() {
 		</table>
 	</div>
 	
-	<form name="myForm" action="payReservation.do" method="post" class="form-horizontal" role="form">
+	<form name="myForm" action="payReservation.do" method="get" class="form-horizontal" role="form">
 
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
