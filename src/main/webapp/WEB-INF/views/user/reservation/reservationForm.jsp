@@ -89,7 +89,6 @@ function goPayment() {
 	</div>
 	
 	<form name="myForm" action="payReservation.do" method="get" class="form-horizontal" role="form">
-
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
 		<h4 align="center">예약자 정보 입력</h4>
@@ -97,7 +96,7 @@ function goPayment() {
 			<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
 				<td><label>회원 ID</label></td>
-				<td style="text-align:left; padding-left: 20px">${loginId }</td>
+				<td style="text-align:left; padding-left: 20px">${loginInfo.id}</td>
 			</tr>
 			<tr>
 				<td><label><span class="redFont"> * </span>예약자 성명</label></td>
