@@ -7,7 +7,7 @@
 <mapper namespace="user.pay.model.PayBean">
 	<select id="getTotalCount" resultType="int">
 		select count(*) from pay
-		<if test="whatColumn == ''">
+		<if test="whatColumn == null">
 			where id like #{id}
 		</if>
 		<if test="whatColumn == 'paycode'">
@@ -19,8 +19,8 @@
 	</select>
 	
 	<select id="getList" resultType="myPayBean">
-		select num, id, paycode, paydetail1, paydetail2, cvc, regdate, moddate, modid from pay order by num
-		<if test="whatColumn == ''">
+		select * from pay
+		<if test="whatColumn == null">
 			where id like #{id}
 		</if>
 		<if test="whatColumn == 'paycode'">
@@ -29,6 +29,7 @@
 		<if test="whatColumn == 'paydetail'">
 			where id like #{id} and (paydetail1 like #{keyword} or paydetail2 like #{keyword})
 		</if>
+		order by num
 	</select>
 	
 	<select id="getData" resultType="myPayBean">
@@ -39,6 +40,10 @@
 		insert into pay(num, id, paycode, paydetail1, paydetail2, cvc, regdate)
 		values(payseq.nextval, #{id}, #{paycode}, #{paydetail1}, #{paydetail2}, #{cvc}, sysdate)
 	</insert>
+	
+	<select id="paycodeCheck" resultType="myPayBean">
+		select paycode from pay where id = #{id} and paycode = #{selectVal}
+	</select>
 	
 	<update id="updatePay" parameterType="myPayBean">
 		update pay set paydetail1 = #{paydetail1}, paydetail2 = #{paydetail2}, cvc = #{cvc}, moddate = sysdate, modid = #{modid}
@@ -53,9 +58,4 @@
 	<delete id="deletePay">
 		delete from pay where num = #{num}
 	</delete>
-
-	<insert id="insertPay" parameterType="myPayBean">
-		INSERT INTO PAY(NUM,ID,PAYCODE,PAYDETAIL,CVC,REGDATE)
-		values(PAYSEQ.NEXTVAL,#{id},#{paycode},#{paydetail},#{cvc},SYSDATE)
-	</insert>
 </mapper>

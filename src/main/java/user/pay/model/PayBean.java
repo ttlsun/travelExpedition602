@@ -5,7 +5,7 @@ public class PayBean {
 	private String id; //20, not null, fk(users.id)
 	private String paycode; //20, not null
 	private String paydetail1; //30, not null
-	private int paydetail2; //0
+	private String paydetail2; //20, null
 	private int cvc;
 	private String regdate; //sysdate
 	private String moddate;
@@ -15,7 +15,7 @@ public class PayBean {
 	public PayBean() {
 		super();
 	}
-	public PayBean(int num, String id, String paycode, String paydetail1, int paydetail2, int cvc, String regdate,
+	public PayBean(int num, String id, String paycode, String paydetail1, String paydetail2, int cvc, String regdate,
 			String moddate, String modid) {
 		super();
 		this.num = num;
@@ -57,10 +57,10 @@ public class PayBean {
 		this.paydetail1 = paydetail1;
 	}
 	
-	public int getPaydetail2() {
+	public String getPaydetail2() {
 		return paydetail2;
 	}
-	public void setPaydetail2(int paydetail2) {
+	public void setPaydetail2(String paydetail2) {
 		this.paydetail2 = paydetail2;
 	}
 	

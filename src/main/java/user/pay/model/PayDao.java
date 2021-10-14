@@ -37,6 +37,10 @@ public class PayDao {
 		return sqlSessionTemplate.insert(NAMESPACE+".registerPay", payBean);
 	}
 	
+	public PayBean paycodeCheck(Map<String, String> map) {
+		return sqlSessionTemplate.selectOne(NAMESPACE+".paycodeCheck", map);
+	}
+	
 	public int updatePay(PayBean payBean) {
 		return sqlSessionTemplate.update(NAMESPACE+".updatePay", payBean);
 	}
@@ -48,9 +52,5 @@ public class PayDao {
 	
 	public int deletePay(int num) {
 		return sqlSessionTemplate.insert(NAMESPACE+".deletePay", num);
-	}
-	
-	public int insertPayData(PayBean bean) {
-		return sqlSessionTemplate.insert(NAMESPACE + ".insertPay", bean);
 	}
 }

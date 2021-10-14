@@ -43,6 +43,30 @@ $(document).ready(function() {
 			$("#notPhone").hide();
 			
 			$("label[for='paydetail1']").text("통신사명");
+			
+			$.ajax({
+				url : "${contextPath}/payDubCheck.do",
+				type : "post",
+				data : escape(selectVal),
+				dataType : "json",
+				contentType: "application/json; charset=UTF-8",
+				success : function(data){
+					if(data.resultCode != "0"){
+						alert("휴대폰결제 등록은 하나만 가능합니다");
+						$("#paycode").find("[value='휴대폰결제']").wrap("<span>");
+						
+						$("#onlyCard").hide();
+						$("#notPhone").show();
+						
+						$("label[for='paydetail1']").text("은행명");
+						$("label[for='paydetail2']").text("계좌번호");
+					}
+				},
+				error : function(request, status, error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					alert("휴대폰결제 중복확인 에러 발생");
+				}
+			});
 		}
 	});
 });
@@ -52,8 +76,9 @@ function goBack(){
 }
 
 function input(){
-	if(!$("#paycode").is("selected")){ //사업자일 경우
-		//무통장입금 : 상세1과 상세2가 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2는 숫자만, cvc 0 설정
+	if($("#paycode option:selected").val() == "계좌이체" || $("#paycode option:selected").val() == "무통장입금"){
+	//계좌이체 : 상세1과 상세2가 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2는 숫자만, cvc 0 설정
+	//무통장입금 : 상세1과 상세2가 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2는 숫자만, cvc 0 설정
 		if($("#paydetail1").val() == ""){
 			alert("은행명을 입력하세요");
 			$("#paydetail1").focus();
@@ -75,75 +100,50 @@ function input(){
 		} else{
 			$("#cvc").val("0");
 		}
-	} else{ //개인회원일 경우
-		if($("#paycode option:selected").val() == "계좌이체"){
-		//계좌이체 : 상세1과 상세2가 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2는 숫자만, cvc 0 설정
-			if($("#paydetail1").val() == ""){
-				alert("은행명을 입력하세요");
-				$("#paydetail1").focus();
-				return false;
-			} else if(!/^[가-힣a-zA-Z]{1,30}/g.test($("#paydetail1").val())){
-				alert("은행명 형식을 확인하세요");
-				$("#paydetail1").val("");
-				$("#paydetail1").focus();
-				return false;
-			} else if($("#paydetail2").val() == ""){
-				alert("계좌번호를 입력하세요");
-				$("#paydetail2").focus();
-				return false;
-			} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-				alert("계좌번호는 숫자로만 작성하세요");
-				$("#paydetail2").val("");
-				$("#paydetail2").focus();
-				return false;
-			} else{
-				$("#cvc").val("0");
-			}
-		} else if($("#paycode option:selected").val() == "카드결제"){
+	} else if($("#paycode option:selected").val() == "카드결제"){
 		//카드결제 : 상세1과 상세2과 cvc가 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2는 숫자만, 상세3은 숫자만
-			if($("#paydetail1").val() == ""){
-				alert("카드사명을 입력하세요");
-				$("#paydetail1").focus();
-				return false;
-			} else if(!/^[가-힣a-zA-Z]{1,30}/g.test($("#paydetail1").val())){
-				alert("카드사명 형식을 확인하세요");
-				$("#paydetail1").val("");
-				$("#paydetail1").focus();
-				return false;
-			} else if($("#paydetail2").val() == ""){
-				alert("카드번호를 입력하세요");
-				$("#paydetail2").focus();
-				return false;
-			} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-				alert("카드번호는 숫자로만 작성하세요");
-				$("#paydetail2").val("");
-				$("#paydetail2").focus();
-				return false;
-			} else if($("#cvc").val() == ""){
-				alert("cvc 번호를 입력하세요");
-				$("#cvc").focus();
-				return false;
-			} else if(!/^[0-9]+/g.test($("#cvc").val())){
-				alert("cvc 번호는 숫자로만 작성하세요");
-				$("#cvc").val("");
-				$("#cvc").focus();
-				return false;
-			}
-		} else{
+		if($("#paydetail1").val() == ""){
+			alert("카드사명을 입력하세요");
+			$("#paydetail1").focus();
+			return false;
+		} else if(!/^[가-힣a-zA-Z]{1,30}/g.test($("#paydetail1").val())){
+			alert("카드사명 형식을 확인하세요");
+			$("#paydetail1").val("");
+			$("#paydetail1").focus();
+			return false;
+		} else if($("#paydetail2").val() == ""){
+			alert("카드번호를 입력하세요");
+			$("#paydetail2").focus();
+			return false;
+		} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
+			alert("카드번호는 숫자로만 작성하세요");
+			$("#paydetail2").val("");
+			$("#paydetail2").focus();
+			return false;
+		} else if($("#cvc").val() == ""){
+			alert("cvc 번호를 입력하세요");
+			$("#cvc").focus();
+			return false;
+		} else if(!/^[0-9]+/g.test($("#cvc").val())){
+			alert("cvc 번호는 숫자로만 작성하세요");
+			$("#cvc").val("");
+			$("#cvc").focus();
+			return false;
+		}
+	} else if($("#paycode option:selected").val() == "휴대폰결제"){
 		//휴대폰결제 : 상세1이 적혀있어야 함, 상세1은 한글/영어로 최대 30글자, 상세2와 상세3 0 설정
-			if($("#paydetail1").val() == ""){
-				alert("통신사명을 입력하세요");
-				$("#paydetail1").focus();
-				return false;
-			} else if(!/^[가-힣a-zA-Z]{1,30}/g.test($("#paydetail1").val())){
-				alert("통신사명 형식을 확인하세요");
-				$("#paydetail1").val("");
-				$("#paydetail1").focus();
-				return false;
-			} else{
-				$("#paydetail2").val("0");
-				$("#cvc").val("0");
-			}
+		if($("#paydetail1").val() == ""){
+			alert("통신사명을 입력하세요");
+			$("#paydetail1").focus();
+			return false;
+		} else if(!/^[가-힣a-zA-Z]{1,30}/g.test($("#paydetail1").val())){
+			alert("통신사명 형식을 확인하세요");
+			$("#paydetail1").val("");
+			$("#paydetail1").focus();
+			return false;
+		} else{
+			$("#paydetail2").val("0");
+			$("#cvc").val("0");
 		}
 	}
 	
@@ -164,8 +164,6 @@ function input(){
 					<caption>
 						<span class="redFont"> * </span> 필수 입력 사항
 					</caption>
-					<c:choose>
-					<c:when test="${loginInfo.ucode eq 'customer'}">
 					<tr>
 						<!-- (결제수단)구분
 						개인회원 : 계좌이체, 카드결제, 휴대폰결제
@@ -177,24 +175,25 @@ function input(){
 						</td>
 						<td>
 							<select name="paycode" class="form-control" id="paycode">
+							<c:choose>
+								<c:when test="${loginInfo.ucode eq 'customer'}">
 								<option value="계좌이체" <c:if test="${paycode eq '계좌이체'}">selected</c:if>>계좌이체</option>
 								<option value="카드결제" <c:if test="${paycode eq '카드결제'}">selected</c:if>>카드결제</option>
-								<option value="휴대폰결제" <c:if test="${paycode eq '휴대폰결제'}">selected</c:if>>휴대폰결제</option>
+								<option id="justOnly" value="휴대폰결제" <c:if test="${paycode eq '휴대폰결제'}">selected</c:if>>휴대폰결제</option>
+								</c:when>
+								<c:otherwise>
+								<option value="무통장입금" <c:if test="${paycode eq '무통장입금'}">selected</c:if>>무통장입금</option>
+								</c:otherwise>
+							</c:choose>
 							</select>
 						</td>
 					</tr>
-					</c:when>
-					<c:otherwise>
-					<input type="hidden" id="paycode2" value="무통장입금">
-					</c:otherwise>
-					</c:choose>
 					
 					<tr>
 						<!-- 결제수단 상세 정보(계좌이체-은행명, 무통장입금-은행명, 카드결제-카드사명, 휴대폰결제-통신사명-id로 join예정) -->
 						<td width="20%">
-							<label for="paydetail1">
-								<span class="redFont"> * </span> 은행명
-							</label>
+							<span class="redFont"> * </span> 
+							<label for="paydetail1">은행명</label>
 						</td>
 						<td>
 							<input type="text" class="form-control" id="paydetail1" name="paydetail1" size="30%" maxlength="30" placeholder="한글,영어 가능" value="${paydetail1}">
@@ -203,9 +202,8 @@ function input(){
 					<tr id="notPhone">
 						<!-- 결제수단 상세 정보(계좌이체-계좌번호, 무통장입금-계좌번호, 카드결제-카드번호) -->
 						<td width="20%">
-							<label for="paydetail2">
-								<span class="redFont"> * </span> 계좌번호
-							</label>
+							<span class="redFont"> * </span>
+							<label for="paydetail2">계좌번호</label>
 						</td>
 						<td>
 							<input type="text" class="form-control" id="paydetail2" name="paydetail2" size="30%" placeholder="숫자만 가능" value="${paydetail2}">

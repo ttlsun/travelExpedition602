@@ -152,8 +152,7 @@ public class UsersMyInfoController {
 				int paycount = -1;
 				paycount = payDao.getTotalCount(map);
 				if(paycount > 0) {
-					String paydetail2_temp = users.getContact();
-					int paydetail2 = Integer.parseInt(paydetail2_temp.replace("-", ""));
+					String paydetail2 = users.getContact().replace("-", "");
 					PayBean payBean = new PayBean();
 					payBean.setId(users.getId());
 					payBean.setPaycode("휴대폰결제");

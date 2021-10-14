@@ -39,9 +39,10 @@ function goUpdate(num, pageNumber) {
 function goDelete(num) {
 	if(!confirm("삭제하시겠습니까?")){
 		return;
-	} else{
-		location.href="payDelete.do?num="+num;
 	}
+	
+	alert(num);
+	location.href="payDelete.do?num="+num;
 }
 	
 </script>
@@ -108,7 +109,14 @@ function goDelete(num) {
 		<c:forEach var="i" begin="0" end="${fn:length(lists)-1}">
 		<tr>
 			<!-- 번호 -->
+			<c:choose>
+			<c:when test="${pageInfo.pageNumber == 1}">
 			<td>${i + 1}</td>
+			</c:when>
+			<c:otherwise>
+			<td>${(i + 1) + ((pageInfo.pageNumber - 1) * 5)}</td>
+			</c:otherwise>
+			</c:choose>
 			<!-- 구분(계좌이체, 카드결제, 휴대폰결제) -->
 			<td>${lists[i].paycode}</td>
 			<!-- 상세내용 -->
@@ -126,8 +134,8 @@ function goDelete(num) {
 			<fmt:parseDate var="fmtDate2" value="${lists[i].moddate}" pattern="yyyy-MM-dd"/>
 			<fmt:formatDate var="moddate" value="${fmtDate2}" pattern="yyyy-MM-dd"/>
 			<td>${moddate}</td>
-			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${list[i].num}, ${pageInfo.pageNumber})" style="text-decoration:none; color:white;"></td>
-			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${list[i].num})"></td>
+			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${lists[i].num}, ${pageInfo.pageNumber})"></td>
+			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${lists[i].num})"></td>
 		</tr>
 		</c:forEach>
 		</c:if>

@@ -37,7 +37,7 @@ public class PayListController {
 		System.out.println(this.getClass()+" "+request.getMethod());
 		
 		UsersBean temp = (UsersBean) session.getAttribute("loginInfo");
-		if(temp.getUcode().equals("admin")) {
+		if(temp.getUcode().equals("admin") || temp.getUcode() == null) {
 			//admin이 접근시도할 경우 접근 불가
 			mav.setViewName(GETPAGEELSE);
 		} else {
