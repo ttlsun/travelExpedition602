@@ -199,7 +199,7 @@ function goStatus(num) {
 				<c:forEach var="replyList" items="${replyLists}">
 				<tr>
 					<td class="tableWidth200" style="border: none;" align="center">
-						<label for="replyNo"> ${replyList.regid} ${replyList.regname} </label> 
+						<label for="replyNo"> ${replyList.regid} </label> 
 					</td>
 					<td style="border: none;">
 						${replyList.contents}

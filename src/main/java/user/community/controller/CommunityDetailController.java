@@ -98,7 +98,8 @@ public class CommunityDetailController {
 		mav.addObject("replyLists", replyLists); //후기댓글 리스트
 		mav.addObject("replyPageInfo", replyPageInfo); //후기댓글 페이징 정보
 		mav.addObject("replyTotalCount", replyTotalCount); //후기댓글 총 갯수
-		mav.addObject("replyPageNumber", map.get("replyPageNumber")); //후기댓글 페이지
+		//(지금은 수정에서 상세로올때 이것도 같이 보내고있지않지만..추후 필요할수 있으니.. 넣어놈.)
+		mav.addObject("communityPageNumber", map.get("communityPageNumber")); //후기댓글 페이지
 		mav.addObject("recommendList", recommendList); //추천 리스트
 		
 		System.out.println("recommendList:" + recommendList.size());

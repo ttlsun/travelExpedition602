@@ -267,7 +267,7 @@ function goAjaxDelete(url, numData , type) {
 		<tr>
 			<c:choose>
 				<c:when test="${community.reviewtype ne '03' }">
-					<td colspan="1" style="border: none;">
+					<td colspan="1" style="border: none;" width="30%">
 						<fmt:parseNumber var="starranking" value="${community.starranking}"/>
 						<c:forEach var="i" begin="1" end="5">
 							<c:choose>
