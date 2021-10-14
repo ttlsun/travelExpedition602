@@ -39,7 +39,7 @@ public class RoomDetailController {
 		
 		//이미지들 가져오기
 		Map<String, Object> imgMap = new HashMap<String, Object>();
-		imgMap.put("acode", "4"); //커뮤니티 구분자값
+		imgMap.put("acode", "4"); //게시글 구분코드(1:공지사항/2:이벤트/3:문의게시판/4:캠핑/5:관광지/6:커뮤니티)
 		imgMap.put("anum", num); 
 		
 		System.out.println(roombean.getNum());

@@ -63,10 +63,13 @@ public class RoomRegisterController {
 								@ModelAttribute("room") @Valid RoomBean roombean,
 								BindingResult result,
 								@RequestParam("cnum") String cnum,
-								@RequestParam("campbean") String campbean,
 								@RequestParam("pageNumber") String pageNumber) {
 		
+		//해당 캠핑장 이름, 유형
+		CampingBean campbean = campingDao.getCampingNameAndTypes(Integer.parseInt(cnum));
+		
 		mav.addObject("cnum", cnum);
+		mav.addObject("num", cnum);
 		mav.addObject("campbean", campbean);
 		mav.addObject("pageNumber", pageNumber);
 		
@@ -74,10 +77,17 @@ public class RoomRegisterController {
 		
 		try {
 			
-			if(result.hasErrors()) {
+			if(result.hasErrors()
+					&& !WebUtil.isResultErrorIgnore(result, new String[] {
+							"imgurl","imgname"}))  {
+				
+				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
+				WebUtil.resultErrorConvert(result);
+				System.out.println("유효성 검사 오류 E: ----------------------------------------------");
 				mav.setViewName(GETPAGE);
 				return mav;
 			}
+			
 			
 			int cnt = -1;
 			
@@ -99,7 +109,7 @@ public class RoomRegisterController {
 			int maxNum = roomDao.getRoomMaxNum();
 			
 			//로그인 세션에 저장되어 있는 id값 넣기
-			roombean.setRegid(roombean.getRegid()+"id");
+			roombean.setRegid(roombean.getRegid());
 			
 			//이미지테이블에 상세 이미지들 저장.
 			Map<String, Object> map = new HashMap<String, Object>();

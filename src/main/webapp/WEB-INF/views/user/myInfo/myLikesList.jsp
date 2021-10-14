@@ -57,7 +57,15 @@ $(document).ready(function() {
 						${list.name}
 					</td>
 					<td>${list.summary}</td>
-					<td>${list.themecode}</td>
+					<td>
+						<c:choose>
+							<c:when test="${list.themecode eq '01'}">숲/산</c:when>
+							<c:when test="${list.themecode eq '02'}">해변/바다</c:when>
+							<c:when test="${list.themecode eq '03'}">강/호수/계곡</c:when>
+							<c:when test="${list.themecode eq '04'}">도심</c:when>
+							<c:when test="${list.themecode eq '05'}">섬</c:when>
+						</c:choose>
+					</td>
 					<td>${list.regdate}</td>
 				</tr>
 			</c:forEach>

@@ -24,11 +24,10 @@ $(document).ready(function() {
 	navActive('camping');
 	
 	//메타태그 설정. (DB에 가져온 값 셋팅)
-	var title = "${campbean.name}"; //요런식으로 추출한값 가져오기. var title = "${bean.title}";
-	$("#metaTitle").attr("content", title);
-	$("#metaDescription").attr("content", "캠핑 상세");
-	$("#metaKeywords").attr("content", "#키워드,#좋아요,#캠핑상세");
-
+	$("#metaTitle").attr("content", "${campbean.name} 캠핑 상세 ");
+	$("#metaDescription").attr("content", "${campbean.summary}");
+	$("#metaKeywords").attr("content", "${campbean.regkeyword}");
+	
 });
 
 function addSearch(fullAddr, lat, lng) {
@@ -103,6 +102,45 @@ function goReservation(num,pageNumber){
 	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
+
+//후기 등록페이지이동 버튼
+function goCommunityRegister() {
+	location.href= "${contextPath}/communityRegister.do?reviewnum=${campbean.num}&reviewtype=01&type=2";
+}
+
+//공통으로 같이 태울 찜 likes 등록.
+function likesRegisters() {
+	var userId = "${userId}"; // 페이지 진입한 유저 아이디.
+	var num = $('#num').val(); //id로 얻어온 자기 고유값 넣기.
+	var acode = "1"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
+	
+	if(userId == ""){
+		alert("로그인후 이용해주세요.");
+		return;
+	}
+	
+	$.ajax({
+		url: "myLikesRegister.do",
+		type: "POST",
+		data: {
+			num : num,
+			userId : userId,
+			acode : acode
+		},
+		dataType: "json",
+		success: function(data) {
+			if (data.resultCode != 'OK') {
+				//alert(data.resultMsg);
+				return;
+			}
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+		}
+	});
+}
+
+
 </script>
 
 <section class="container">
@@ -115,9 +153,10 @@ function goReservation(num,pageNumber){
 	</div>
 	
 	<!-- 캠핑장 타이틀 block -->
-	<form name="campform" action="" method="post" class="form-horizontal">
+	<form name="campform" action="campingDetail.do" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${campbean.num }">
+	<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
 	
 	<table>
 		<tr>
@@ -130,7 +169,7 @@ function goReservation(num,pageNumber){
 		</tr>
 		<tr>
 			<td style="text-align:left; padding-top: 20px; padding-bottom: 20px;" class="col-xs-8 col-sm-8 col-md-8">
-				<img src="${fileImg}/${campbean.imgurl}" alt="" title="" width="100%">
+				<img src="${fileImg}/${campbean.imgurl}" alt="${campbean.imgurl} 이미지" title="${campbean.imgurl} 이미지" width="100%">
 			</td>
 			<td style="border-left:none; padding-top:20px; text-align:right;" valign="top">
 				<table class="table table-bordered" style="border-left:none; border-right:none;">
@@ -194,7 +233,7 @@ function goReservation(num,pageNumber){
 					</svg>
 					1 
 			    </button>
-			    <button type="button" class="btn outline-secondary" >
+			    <button type="button" class="btn outline-secondary" onclick="likesRegisters()">
 	           		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
 					  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
 					</svg>
@@ -203,14 +242,14 @@ function goReservation(num,pageNumber){
 			</td>
 		</tr>
 	</table>
-	</form>
+	
 
 	<!-- 캠핑장 상세 정보/객실 목록/후기/오시는 길/ 탭 -->
 	<div class="marginPadding10">
 		<ul class="nav nav-tabs">
 			<li style="width: 25%; text-align:center;"><a href="#tab1" data-toggle="tab">캠핑장 상세 정보</a></li>
 			<li class="active" style="width: 25%; text-align:center;"><a href="#tab2" data-toggle="tab">객실 목록</a></li>
-		    <li style="width: 25%; text-align:center;"><a href="#tab3" data-toggle="tab">캠핑장 후기(${campbean.reviewcount })</a></li>
+		    <li id="liTab3" style="width: 25%; text-align:center;"><a href="#tab3" data-toggle="tab">캠핑장 후기(${campbean.reviewcount })</a></li>
 		    <li style="width: 25%; text-align:center;"><a href="#tab4" data-toggle="tab" onClick="fnTab(4)">오시는 길</a></li>
 		</ul>
 		
@@ -227,11 +266,12 @@ function goReservation(num,pageNumber){
 		   		<h3>객실 리스트</h3>
 		    	<span class="spanFlowRootP10"></span>
 				
-				<form name="roomform" action="" method="post">
+				<!-- <form name="roomform" action="" method="post"> -->
 					<div align="right">
 						<input type="button" class="btn btn-primary" value="객실 등록하기(사업자 전용)" style="margin-bottom: 10px" onClick="goInsertRoom(${pageNumber})">
 					</div>
 					
+										
 					<c:forEach var="room" items="${lists }">
 					
 					<c:choose>
@@ -289,35 +329,61 @@ function goReservation(num,pageNumber){
 							</tr>
 						</table>
 					</c:forEach>
-				</form>
+				<!-- </form> -->
 			</div>
 			
 			<!-- 후기 탭-->
 			<div class="tab-pane fade" id="tab3" style="text-align: left;">
 		    	<h3>캠핑장 후기</h3>
-		     	<form name="reviewform" action="" method="post" class="form-horizontal">
 	
 				<div class="marginPadding10">
-					<div class="form-group">
-						<table class="table table-bordered">
-						<caption>캠핑/글램핑 후기 목록</caption>
-							<tr>
-								<td colspan="3"> 등록된 후기가 없습니다.</td>
-							</tr>
-						</table>
-					</div>
-		
-					<!-- 후기 페이징 -->
+						<table class="table table-bordered" style="margin-top: 3%;">
+					<caption>레코드 총 갯수 : ${communityTotalCount}</caption>
+					<thead>
+						<tr class="active">
+							<th width="6%">번호</th>
+							<th>제목</th>
+							<th>한줄요약</th>
+							<th width="14%">등록일</th>
+						</tr>
+					</thead>
+				
+					<tbody>
+						<!-- list가 없을 경우 -->
+						<c:if test="${empty communityLists}">
+						<tr>
+							<td colspan="4" align="center"> 해당 후기 레코드가 없습니다.</td>
+						</tr>
+						</c:if>
+						
+						<c:forEach var="list" items="${communityLists}">
+						<tr>
+							<td>${list.rownum}</td>
+							<td><a href="communityDetail.do?num=${list.num}&pageNumber=${communityPageInfo.pageNumber}&type=2">${list.title}</a></td> 
+							<td>${list.summary}</td>
+							<td>
+								<fmt:parseDate var="dateFmt" value="${list.regdate}" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate var="registerDate" value="${dateFmt}" pattern="yyyy-MM-dd"/>
+								${registerDate}
+							</td> 
+						</tr>
+						</c:forEach>
+					</tbody>
+				
+					</table>
+			
+					<!-- 페이징 -->
 					<div class="paginationCenter" align="center">
-						${pageInfo.pagingHtml} <!-- 후기관련 페이징으로 변경해야함 -->
+						${communityPageInfo.pagingHtml}
 					</div>
-					<!-- // 후기 페이징 -->
 					
+					<!-- 회원만 문의를 쓸수 있게 변경 (관리자는 안됨!) -->
+					<c:if test="${!empty userCode and userCode ne 'admin'}">
 					<div align="right"> 
-						<input type="button" class="btn btn-primary" value="후기등록하기" >
+						<input type="button" class="btn btn-primary" value="후기등록하기" onclick="goCommunityRegister()">
 					</div>
+					</c:if>
 				</div>
-				</form>
 			</div>
 			
 			<!-- 오시는 길 탭 -->
@@ -338,9 +404,8 @@ function goReservation(num,pageNumber){
 	   	<div class="marginPadding10">
 			<label class="text-primary textFontSizeLarge"> 추천관광지 </label>
 		</div>
-        <div id="carousel-example-generic" class="carousel slide">
-        
-            <!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
+        	<div id="carousel-example-generic" class="carousel slide">
+        	<!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
             <ol class="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
               <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -371,6 +436,8 @@ function goReservation(num,pageNumber){
 		<input type="button" class="btn btn-primary" value="추천 관광지 더보기" onclick="goTourList()">
 	</div>
 	<!-- // 버튼 -->
+	
+	</form>
 </div>
 </article>
 </section>

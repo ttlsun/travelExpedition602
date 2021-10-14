@@ -53,13 +53,13 @@ function goList() {
 	
 	<form:form commandName="room" name="myform" action="roomRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="pageNumber" value="${pageNumber }">
+	<input type="hidden" name="regid" value="${userId}">
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 표시는 필수 입력사항입니다. </caption>
 		<tr class="active">
 			<td colspan="4">
 				<label for="cname"><h4>${campbean.name }</h4></label>
 				<input type="hidden" name="cnum" value="${cnum}">
-				<input type="hidden" name="campbean" value="${campbean }">
 			</td>
 		</tr>
 		<tr>
