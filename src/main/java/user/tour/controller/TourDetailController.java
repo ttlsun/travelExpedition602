@@ -32,9 +32,6 @@ public class TourDetailController {
 	private TourDao tourDao;
 	
 	@Autowired
-	private ServletContext servletContext;
-	
-	@Autowired
 	private PostimgDao postimgDao;
 	
 	
@@ -55,7 +52,7 @@ public class TourDetailController {
 		mav.addObject("imgList",imgList);
 		mav.addObject("tourbean",tourbean);
 		mav.addObject("pageNumber", pageNumber);
-		
+	
 		
 		
 		mav.setViewName(GETPAGE);

@@ -34,13 +34,13 @@
 		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1}
 		</if>
-		<if test="address2 != null and address1 != ''">
+		<if test="address2 != null and address2 != ''">
 			AND ADDRESS2 = #{address2}
 		</if>
-		<if test="themecode != null and address1 != ''">
+		<if test="themecode != null and themecode != ''">
 			AND THEMECODE IN(#{themecode})
 		</if>
-		<if test="searchName != null and address1 != ''">
+		<if test="searchName != null and searchName != ''">
 			AND NAME LIKE #{searchName}
 		</if>
 	</select>

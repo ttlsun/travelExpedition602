@@ -45,6 +45,7 @@ public class TourListController {
 		mav.addObject("keywordLists", keywordLists);
 		
 		int totalCount = tourDao.getTotalCount(map);
+		System.out.println("totalCount:"+totalCount);
 		String pageUrl = request.getContextPath() + COMMAND;
 		
 		Paging pageInfo = new Paging(map,"10",totalCount, pageUrl);

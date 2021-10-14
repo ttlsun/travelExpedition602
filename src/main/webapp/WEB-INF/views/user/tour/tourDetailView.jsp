@@ -297,11 +297,6 @@ function goDelete(num,pageNumber) {
   	</div>
 	<!-- // 추천 캠핑/글램핑  -->
 	
-	<!-- 버튼 -->
-	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
-	</div>
-	<!-- // 버튼 -->
 </div>  
 </article>
 </section>

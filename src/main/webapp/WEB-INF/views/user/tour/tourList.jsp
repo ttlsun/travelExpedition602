@@ -204,7 +204,7 @@ function goDetail(num) {
 	
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>
-			총 ${totalCount} 개의 관광지가 검색되었습니다.
+			<span style="text-align: left">총 ${totalCount}개 관광지가 검색되었습니다. </span>
 			<button onClick="goRegister()"> 관광지 등록하기</button>
 		</caption>
 		<thead>

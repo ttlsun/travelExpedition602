@@ -26,7 +26,7 @@ public class TourDao {
 	}
 
 	public int getTotalCount(Map<String, String> map) {
-		int cnt = sqlSessionTemplate.insert(NAMESPACE+".getTotalCount", map);
+		int cnt = sqlSessionTemplate.selectOne(NAMESPACE+".getTotalCount", map);
 		return cnt;
 	}
 
