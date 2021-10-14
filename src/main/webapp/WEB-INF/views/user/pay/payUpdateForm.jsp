@@ -127,6 +127,8 @@ function input(){
 			}
 	}
 	
+	alert($("#num").val());
+	
 	if(!confirm("수정하시겠습니까?")){
 		return false;
 	}
@@ -139,9 +141,7 @@ function input(){
 			<header>
 				<h2 align="center" class="text-primary">결제수단 정보변경</h2>
 			</header>
-			<form name="myForm" action="payRegister.do" method="post" class="form-horizontal">
-				<input type="hidden" id="num" value="${pay.num}">
-				<input type="hidden" id="pageNumber" value="${pageNumber}">
+			<form name="myForm" action="payUpdate.do?num=${num}&pageNumber=${pageNumber}" method="post" class="form-horizontal">
 				<table class="table table-bordered">
 					<caption>
 						<span class="redFont"> * </span> 필수 입력 사항

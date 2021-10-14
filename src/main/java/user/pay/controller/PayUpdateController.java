@@ -1,5 +1,6 @@
 package user.pay.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ public class PayUpdateController {
 		
 		PayBean payBean = payDao.getData(num);
 		
+		mav.addObject("num", num);
 		mav.addObject("pay", payBean);
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GETPAGE);
@@ -40,14 +42,18 @@ public class PayUpdateController {
 	}
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
-	public void doPost(PrintWriter pw, HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+	public void doPost(PrintWriter pw, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		pw = response.getWriter();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		String paycode = request.getParameter("paycode");
 		String paydetail1 = request.getParameter("paydetail1");
-		int paydetail2 = Integer.parseInt(request.getParameter("paydetail2"));
+		String paydetail2 = request.getParameter("paydetail2");
 		int cvc = Integer.parseInt(request.getParameter("cvc"));
 		
 		PayBean payBean = new PayBean();
