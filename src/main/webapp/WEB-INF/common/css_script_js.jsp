@@ -57,6 +57,10 @@
     
 <style type="text/css">
 	/* 필요한게 있으면 1차적으로 여기에 테스트해보고 공통 사항으로 들어갈시 , common.css에 적용시켜주세요.(이문구는, 추후 문구 삭제 예정)*/
+	.travelExpedition602{
+	    max-width: 100%;
+	    height: auto;
+	}
 </style>
 
 <!-- 제이쿼리 js -->
@@ -78,3 +82,6 @@
 	
 	$('.table th').addClass("textAlignCenter");
 </script>
+
+
+
