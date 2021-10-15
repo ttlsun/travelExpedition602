@@ -111,10 +111,6 @@
          </when>
          <otherwise>ORDER BY REGDATE DESC</otherwise>
     	</choose>
-		ORDER BY NUM DESC
-		
-		
-		
 	</select>
 	
 	<select id="getCampingDetail" resultType="myCampingBean">
