@@ -191,7 +191,7 @@ function fileSelectChange(event) {
 		
 		<!-- 키워드(#) 코드와 문자열 연결하여 배열로 만들것 -->
 		<tr>
-			<td><label for="regkeywords_0"> 관광지 관련 키워드(#) </label></td>
+			<td><label for="regkeywords"> 관광지 관련 키워드(#) </label></td>
 			<td colspan="3">
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">

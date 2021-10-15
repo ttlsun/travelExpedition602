@@ -203,7 +203,7 @@ function goSearch(){
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>
 			<span style="text-align: left">총 ${totalCount}개 관광지가 검색되었습니다. </span>
-			<button onClick="goRegister()"> 관광지 등록하기</button>
+			<input type="button" style="float: right;" class="btn btn-primary" value="관광지 등록하기(사업자 전용)" onClick="goRegister()">
 		</caption>
 		<thead>
 			<tr class="active">
@@ -215,7 +215,7 @@ function goSearch(){
 						<option value="steamed desc">찜 많은순</option>
 						<option value="reviewcount desc">리뷰 많은순</option>
 					</select>
-				</td>
+				</td>   
 			</tr>
 		</thead>
 		<tbody>
