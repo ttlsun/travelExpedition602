@@ -75,7 +75,7 @@ function navActive(activeName) {
           	<li data-nav="member" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 회원관리 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
-           			<li><a href="#">회원리스트</a></li>
+           			<li><a href="${contextPath}/usersList.ad">회원리스트</a></li>
 	            	<li><a href="${contextPath}/userReservationList.ad">회원예약리스트</a></li>
 	         	</ul>
          	</li>
