@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>   
 
 <style type="text/css">
 	th,td{
@@ -214,9 +214,4 @@ function goRoomDetail(num,pageNumber){
 
 
 
-<%@ include file="../../../common/bottom.jsp" %>
-
-<!-- kakao api start -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}"></script>
-<!-- kakao api end --> 
+<%@ include file="../../../common/admin/bottom.jsp" %>

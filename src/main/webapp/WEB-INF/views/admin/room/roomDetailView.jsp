@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>   
 
 <script type="text/javascript">
 
@@ -91,4 +91,4 @@ function goDelete(num,pageNumber) {
 	$('.carousel').carousel();
 </script>
 
-<%@ include file="../../../common/bottom.jsp" %>
+<%@ include file="../../../common/admin/bottom.jsp" %>
