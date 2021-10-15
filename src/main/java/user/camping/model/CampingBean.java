@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CampingBean {
 
+	private int rownum;
+	
 	private int num;
 
 	@NotBlank(message = "캠핑장 상호명 입력은 필수입니다.")
@@ -49,6 +51,15 @@ public class CampingBean {
 	private int steamed;
 	private int reviewcount;
 	private String status; //00:완전삭제/01:노출/02:비노출
+
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 
 	public int getNum() {
 		return num;

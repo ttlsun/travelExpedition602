@@ -97,12 +97,6 @@ function goRoomDetail(num,pageNumber){
 	location.href= "${contextPath}/roomDetail.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
-//객실 예약 버튼
-function goReservation(num,pageNumber){
-	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;	
-}
-
-
 //후기 등록페이지이동 버튼
 function goCommunityRegister() {
 	location.href= "${contextPath}/communityRegister.do?reviewnum=${campbean.num}&reviewtype=01&type=2";

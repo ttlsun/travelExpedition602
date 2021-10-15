@@ -19,8 +19,7 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#캠핑리스트");
 	
 	//셀렉트 박스 셋팅.
-	selInit();
-	
+	selInit();	
 });
 
 //첫번째 샐랙트 박스 셋팅
@@ -87,17 +86,18 @@ function addrAjax(type, code, callback) {
 	});
 }
 
+
 //키워드 선택 여부 체크
 function keywordChk(index) {
 	
 	//값 확인(값을 따로 내려주고싶을때 사용해도 됨.)
-	var regkeywordIndex = $('#regkeyword_'+index).val();
-	//alert(regkeywordIndex);
+	var regkeywordName = $('#regkeyword_'+index).val();
+	//alert(regkeywordName);
 	//alert($('#regkeyword_'+index).is(':checked')); //내가 선택했는지 여부 체크.
 	
 	//키워드가 체크되어있으면 색변경
 	if($('#regkeyword_'+index).is(':checked') == true){
-		$('#labelKegkeyword_'+index).css("color","#15b15a"); //변경색
+		$('#labelKegkeyword_'+index).css("color","#15b15a"); //변경색		
 	}else{
 		$('#labelKegkeyword_'+index).css("color","#337ab7");
 	}
@@ -110,7 +110,6 @@ function goRegister(){
 
 //리스트 정렬 옵션 변경시
 function listOrderBy(){
-	var orderBy = $("#orderBy").val();
 	document.myform.submit();
 }
 
@@ -126,80 +125,77 @@ function goSearch(){
 <div>
 	<header><h2 align="center" class="text-primary">캠핑장</h2></header>
 	
+	<form name="myform" action="${contextPath}/campingList.do" method="post">
 	<div class="form-group rounded">
-		<form name="myform" action="${contextPath}/campingList.do" method="post">
-		<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
-			<div>
-				<dl>
-					<dt><label for="searchAddr">지역</label></dt>
-					<dd>
-						<select id="searchAddr" name="address1" class="form-control40" onChange="chageSelOpt()"></select><strong> (시) </strong>
-						<span style="padding-left: 3.4%;"></span>
-						<select id="searchAddr2" name="address2" class="form-control40" ></select><strong> (군/구) </strong>
-					</dd>
-				</dl>
-				<dl>
-					<dd>
-						<input type="text" class="form-control45" name="searchName" placeholder="이름으로 검색">
-						<span style="padding-left: 3.4%;"></span>
-						<input type="submit" class="btn btn-primary" value="검색하기" onClick="">
-						<input type="reset" class="btn btn-default" value="초기화">
-					</dd>
-				</dl>
-				<div class="panel-group" id="accordion">
-					<div class="panel panel-default1">
-						<div>
-							<h4 class="panel-title1">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
-								상세검색&nbsp;<span style="color: gray;"><small>∨</small></span>
-								</a>
-							</h4>
-						</div>
-						<div id="collapseOne" class="panel-collapse collapse">
-							<div class="panel-body">
-								<dl>
-									<dt><label for="searchType">유형</label></dt>
-									<dd>
-										<label><input type="checkbox" id="searchType" name="camptype" value="01">&nbsp;일반캠핑장&nbsp;</label>
-										<label><input type="checkbox" id="searchType" name="camptype" value="02">&nbsp;자동차캠핑장&nbsp;</label>
-										<label><input type="checkbox" id="searchType" name="camptype" value="03">&nbsp;글램핑&nbsp;</label>
-										<label><input type="checkbox" id="searchType" name="camptype" value="04">&nbsp;카라반&nbsp;</label>
-									</dd>
-								</dl>
-								<dl>
-									<dt><label for="searchTheme">테마</label></dt>
-									<dd>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="01">&nbsp;숲/산&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="02">&nbsp;해변/바다&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="03">&nbsp;강/호수/계곡&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="04">&nbsp;도심&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="05">&nbsp;섬&nbsp;</label>
-									</dd>
-								</dl>
-								<dl>
-									<dt><label for="searchKeyword">태그로 검색</label></dt>
-									<dd>
-										<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
-										<label for="regkeyword_${status.index}" id="labelKegkeyword_${status.index}" style="color: #337ab7;">
-										&nbsp;
-										<input type="checkbox" name="regkeyword" id="regkeyword_${status.index}" value="${keywordList.tag}" style="display:none; " onclick="keywordChk(${status.index})"> ${keywordList.tag}
-										</label>
-										</c:forEach>
-									</dd>
-								</dl>
-								<dl>
-									<dd style="text-align: right;">
-										<input type="button" class="btn btn-primary" value="상세검색" onClick="goSearch()">
-										<input type="reset" class="btn btn-default" value="초기화">
-									</dd>
-								</dl>
-							</div>
+		<div>
+			<dl>
+				<dt><label for="searchAddr">지역</label></dt>
+				<dd>
+					<select id="searchAddr" name="address1" class="form-control40" onChange="chageSelOpt()"></select><strong> (시) </strong>
+					<span style="padding-left: 3.4%;"></span>
+					<select id="searchAddr2" name="address2" class="form-control40" ></select><strong> (군/구) </strong>
+				</dd>
+			</dl>
+			<dl>
+				<dd>
+					<input type="text" class="form-control45" name="searchName" placeholder="이름으로 검색">
+					<span style="padding-left: 3.4%;"></span>
+					<input type="submit" class="btn btn-primary" value="검색하기">
+					<input type="reset" class="btn btn-default" value="초기화">
+				</dd>
+			</dl>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default1">
+					<div>
+						<h4 class="panel-title1">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
+							상세검색&nbsp;<span style="color: gray;"><small>∨</small></span>
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<dl>
+								<dt><label for="searchType1">유형</label></dt>
+								<dd>
+									<label><input type="checkbox" id="searchType1" name="camptype" value="01">&nbsp;일반캠핑장&nbsp;</label>
+									<label><input type="checkbox" id="searchType2" name="camptype" value="02">&nbsp;자동차캠핑장&nbsp;</label>
+									<label><input type="checkbox" id="searchType3" name="camptype" value="03">&nbsp;글램핑&nbsp;</label>
+									<label><input type="checkbox" id="searchType4" name="camptype" value="04">&nbsp;카라반&nbsp;</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt><label for="searchTheme1">테마</label></dt>
+								<dd>
+									<label><input type="checkbox" id="searchTheme1" name="themecode" value="01">&nbsp;숲/산&nbsp;</label>
+									<label><input type="checkbox" id="searchTheme2" name="themecode" value="02">&nbsp;해변/바다&nbsp;</label>
+									<label><input type="checkbox" id="searchTheme3" name="themecode" value="03">&nbsp;강/호수/계곡&nbsp;</label>
+									<label><input type="checkbox" id="searchTheme4" name="themecode" value="04">&nbsp;도심&nbsp;</label>
+									<label><input type="checkbox" id="searchTheme5" name="themecode" value="05">&nbsp;섬&nbsp;</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt><label for="searchKeyword">태그로 검색</label></dt>
+								<dd>
+									<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
+									<label for="regkeyword_${status.index}" id="labelKegkeyword_${status.index}" style="color: #337ab7;">
+									&nbsp;
+									<input type="checkbox" name="regkeyword" id="regkeyword_${status.index}" value="${keywordList.tag}" style="display:none; " onclick="keywordChk(${status.index})"> ${keywordList.tag}
+									</label>
+									</c:forEach>
+								</dd>
+							</dl>
+							<dl>
+								<dd style="text-align: right;">
+									<input type="submit" class="btn btn-primary" value="상세검색" onClick="goSearch()">
+									<input type="reset" class="btn btn-default" value="초기화">
+								</dd>
+							</dl>
 						</div>
 					</div>
 				</div>
-				
 			</div>
-		</form>
+		</div>
 	</div>
 	
 	<table class="table table-bordered" style="">
@@ -211,6 +207,7 @@ function goSearch(){
 			<tr class="active">
 				<td colspan="3" style="text-align: left">
 					<select name="orderBy" id="orderBy" onchange="listOrderBy()">
+						<option value="regdate desc">등록일순</option>
 						<option value="moddate desc">업데이트순</option>
 						<option value="readcount desc">조회수 높은순</option>
 						<option value="recommend desc">추천 많은순</option>
@@ -282,6 +279,7 @@ function goSearch(){
 	<div class="paginationCenter" align="center">
 		${pageInfo.pagingHtml}
 	</div>
+	</form>
 		
 </div>
 </article>
