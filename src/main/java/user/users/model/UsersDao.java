@@ -1,8 +1,15 @@
 package user.users.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.my.travelExpedition.utility.Paging;
 
 @Controller("myUsersDao")
 public class UsersDao {
@@ -45,5 +52,16 @@ public class UsersDao {
 	
 	public int updatePw(UsersBean users) {
 		return sqlSessionTemplate.update(NAMESPACE+".updatePw", users);
+	}
+	
+	public int getTotalCount(Map<String, String> map) {
+		return sqlSessionTemplate.selectOne(NAMESPACE+".getTotalCount", map);
+	}
+	
+	public List<UsersBean> getList(Paging pageInfo, Map<String, String> map){
+		List<UsersBean> lists = new ArrayList<UsersBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		lists = sqlSessionTemplate.selectList(NAMESPACE+".getList", map, rowBounds);
+		return lists;
 	}
 }
