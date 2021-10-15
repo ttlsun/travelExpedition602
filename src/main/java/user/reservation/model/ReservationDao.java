@@ -18,12 +18,26 @@ public class ReservationDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	/*모든 예약 내역 리스트(추후 변경하세요.) */
+	public List<ReservationBean> getAllReservationList(Map<String, Object> map) {
+		System.out.println("캠핑 고유번호: cnum :" + map.get("cnum") +"방고유번호 : rnum :" + map.get("rnum") );
+		
+		List<ReservationBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getAllReservationList", map);
+		return lists;
+	}
+	
 	/*예약 등록 (추후 변경하세요. 일단 만들어놨어요.)*/
 	public int insertReservationData(ReservationBean bean) {
 		int cnt = sqlSessionTemplate.insert(NAMESPACE + ".insertReservation", bean);
 		return cnt;
 	}
 	
+	/*예약 진행사항 상태 변경*/
+	public int updateReservationStatusChange(Map<String, Object> map) {
+		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateReservationStatusChange", map);
+		return cnt;
+	}
+
 	/*나의 캠핑 예약 내역 리스트*/
 	public List<MyReservationBean> getMyReservationList(Paging pageInfo, Map<String, String> map) {
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset() , pageInfo.getLimit());
@@ -43,11 +57,7 @@ public class ReservationDao {
 		return bean;
 	}
 	
-	/*예약 진행사항 상태 변경*/
-	public int updateReservationStatusChange(Map<String, Object> map) {
-		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateReservationStatusChange", map);
-		return cnt;
-	}
+
 	
 	
 }

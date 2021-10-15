@@ -136,10 +136,10 @@ function goPayment() {
 					<label for="paycode">결제 수단</label>
 				</td>
 				<td style="border-right: none;">
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="계좌이체" checked="checked"> 계좌이체</label>
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="무통장입금"> 무통장입금</label>
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="카드결제"> 카드결제</label>
-					<label for="paycode"><input type="radio" id="paycode" name="paycode" value="휴대폰결제"> 휴대폰결제</label>
+					<label for="paycode1"><input type="radio" id="paycode1" name="paycode" value="계좌이체" checked="checked"> 계좌이체</label>
+					<label for="paycode2"><input type="radio" id="paycode2" name="paycode" value="무통장입금"> 무통장입금</label>
+					<label for="paycode3"><input type="radio" id="paycode3" name="paycode" value="카드결제"> 카드결제</label>
+					<label for="paycode4"><input type="radio" id="paycode4" name="paycode" value="휴대폰결제"> 휴대폰결제</label>
 				</td>
 			</tr>
 		</table>

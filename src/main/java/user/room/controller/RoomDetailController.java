@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
+import user.reservation.model.ReservationBean;
+import user.reservation.model.ReservationDao;
 import user.room.model.RoomBean;
 import user.room.model.RoomDao;
 
@@ -26,6 +30,9 @@ public class RoomDetailController {
 	
 	@Autowired
 	private PostimgDao postimgDao;
+	
+	@Autowired
+	private ReservationDao reservationDao;
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView roomDetailView(ModelAndView mav,
@@ -44,8 +51,23 @@ public class RoomDetailController {
 		
 		System.out.println(roombean.getNum());
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
-		System.out.println("imgList:" + imgList.toString());
+		//System.out.println("imgList:" + imgList.toString());
 		
+		Map<String, Object> reservationMap = new HashMap<String, Object>();
+		reservationMap.put("cnum", roombean.getCnum()); //캠핑장 고유번호
+		reservationMap.put("rnum", num); //방고유번호
+		List<ReservationBean> reservationMapLists = reservationDao.getAllReservationList(reservationMap);
+		JSONArray reservationJsonArray = new JSONArray();
+		for(int i =0; i< reservationMapLists.size(); i++) {
+			JSONObject jsonTmp = new JSONObject();
+			
+			jsonTmp.put("checkindate", reservationMapLists.get(i).getCheckindate()); //체크인 시간
+			jsonTmp.put("checkoutdate", reservationMapLists.get(i).getCheckoutdate()); //체크아웃 시간
+			
+			reservationJsonArray.add(jsonTmp);
+		}
+
+		mav.addObject("reservationLists", reservationJsonArray);
 		mav.addObject("roombean", roombean);
 		mav.addObject("imgList", imgList);
 		mav.addObject("cname", cname);
@@ -53,4 +75,5 @@ public class RoomDetailController {
 		mav.setViewName(GETPAGE);
 		return mav;
 	}
+	
 }

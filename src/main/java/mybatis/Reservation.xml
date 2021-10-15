@@ -141,4 +141,16 @@
 		</set>
 		WHERE NUM = #{num}
 	</update>
+	
+	<!-- 예약된 리스트 -->
+	<select id="getAllReservationList" resultType="user.reservation.model.ReservationBean">
+		SELECT 
+			TO_CHAR(CHECKINDATE, 'YYYYMMDD') CHECKINDATE, 
+			TO_CHAR(CHECKOUTDATE, 'YYYYMMDD') CHECKOUTDATE
+			FROM RESERVATION
+			WHERE 
+				CNUM = #{cnum}
+			AND RNUM = #{rnum}
+			AND STATUS = '01' 
+	</select>
 </mapper>

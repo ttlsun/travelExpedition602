@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
 	
 	//달력 얻어오기. (달력 여러개 적용시 class에 주기)
-	$( "#startDate" ).datepicker({
+	/* $( "#startDate" ).datepicker({
 	    minDate: 0,
 	    maxDate: "+3M",
 		onClose: function( selectedDate ) { //시작일(startDate) datepicker가 닫힐때 //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
@@ -28,22 +28,59 @@ $(document).ready(function() {
 		
 	});
 	
-	$( "#endDate" ).datepicker({ });
+	$( "#endDate" ).datepicker({ }); */
+	
+	//달력 얻어오기. (달력 여러개 적용시 class에 주기)
+	$( "#startDate" ).datepicker({
+	    minDate: 0,
+	    maxDate: "+3M",
+		onClose: function( selectedDate ) { //시작일(startDate) datepicker가 닫힐때 //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+			$("#endDate").datepicker( "option", "minDate", selectedDate );
+		},
+		beforeShowDay: disableSomeDay
+	});
+	
+	$( "#endDate" ).datepicker({
+		beforeShowDay: disableSomeDay
+	});
 });
 
-
-function ajaxdas() {
+function disableSomeDay(date) {
 	
+	var year = date.getFullYear();
+	var month = (date.getMonth() + 1);
+	var dates = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(); //10이하 1자라 날짜형식을 맞추기위해 0붙이기 (09)
+	var nDate = Number(year + "" + month + "" + dates); //number로 바꾸면 다 합쳐버려서 공백으로 구분짓기. 
+	
+	var reservationLists = ${reservationLists}; //예약된 리스트 가져오기.
+	
+	for (i = 0; i < reservationLists.length; i++) { 
+		if (nDate >= Number(reservationLists[i].checkindate) //체크인
+				&& nDate <= Number(reservationLists[i].checkoutdate)) { //체크아웃
+			return [false]; //사이에있는것들은 disable...처리.
+		}
+	}
+	
+	return [true];
 }
 
 //예약하기(사용자) 버튼 클릭시
 function goReservation(num,pageNumber) {
+	
+	var startDate = $('#startDate').val().replaceAll('-', '');
+	var endDate = $('#endDate').val().replaceAll('-', '');
+	
+	if(endDate < startDate){
+		alert("죄송합니다. 예약 끝날날짜는 시작날짜보다 앞으로 선택하지말아주세요.");
+		return false;
+	}
+	
 	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;
 }
 
 //문의하기(사용자) 버튼 클릭시
 function goQna(num) {
-	location.href= "${contextPath}/캠핑문의게시판";
+	location.href= "${contextPath}/qnaList.do";
 }
 
 //객실정보수정(사업자) 버튼 클릭시
@@ -151,7 +188,7 @@ function goDelete(num,pageNumber) {
 							</span>
 						</td>
 						<td colspan="2" class="text-center">
-							<input type="submit" class="btn btn-primary" value="예약하기(사용자)" onclick="goReservation(${roombean.num},${pageNumber})">
+							<input type="submit" class="btn btn-primary" value="예약하기(사용자)" onclick="return goReservation(${roombean.num},${pageNumber})">
 						</td>
 					</tr>
 				</table>
