@@ -150,7 +150,8 @@ function goDelete(num) {
 							<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색할 내용을 입력하세요">
 						</div>
 						<div align="right" style="padding-top: 5px;">
-							<input type="submit" class="btn btn-default" value="검색" <!-- onClick="return search()" -->>
+							 <input type="submit" class="btn btn-default" value="검색" >
+							 <!-- <input type="submit" class="btn btn-default" value="검색" onClick="return search()"> -->
 						</div>
 					</dd>
 				</dl>
