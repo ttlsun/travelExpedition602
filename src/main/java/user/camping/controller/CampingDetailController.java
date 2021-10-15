@@ -37,28 +37,13 @@ public class CampingDetailController {
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView campingDetail(HttpServletRequest request, 
-			//@RequestParam(value="num", required=false) String num,
-			//@RequestParam(value="cnum", required=false) String cnum,
-			//@RequestParam(value="pageNumber") String pageNumber
-										@RequestParam Map<String,String> map) {
+								@RequestParam Map<String,String> map) {
 		
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
-		
-		
-		//num과 cnum이 null 일경우 0으로 값 넣기
 		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
 //		String cnum = request.getParameter("cnum") != null ? (String)map.get("cnum") : (String)map.get("num");
 		System.out.println("num:::" + num);
-		
-		
-//		String camp_num = "0"; //이걸 제가 이해를 못해서 ㅠ.ㅠ..
-//		if(cnum != null) {
-//			camp_num = cnum;
-//		}
-//		if(num != null) {
-//			camp_num = num;
-//		}
 		
 		//캠핑장 상세내용 select
 		CampingBean campbean = campingDao.getCampingDetail(num);
@@ -73,7 +58,7 @@ public class CampingDetailController {
 		mav.addObject("lists", lists); //객실리스트
 		
 		//후기 리스트
-		map.put("reviewnum", num); //캠핑 번호
+		map.put("reviewnum", num); //캠핑 고유번호
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		map.put("status", "01"); //노출만 리스트 뿌리기.
 		int communityTotalCount = communityDao.getCommunityListTotalCnt(map);
@@ -82,10 +67,13 @@ public class CampingDetailController {
 		List<CommunityBean> communityLists = communityDao.getCommunityList(communityPageInfo, map);
 	
 		//별등급 가져오기. 
-		map.put("reviewnum", map.get("cnum")); //관광지고유번호
+		map.put("reviewnum", map.get("cnum")); //캠핑 고유번호
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
 		System.out.println("startAvg::::::" + startAvg);
+		
+		//조회수 올리기
+		int cnt = campingDao.campingReadcountUp(num);
 		
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보

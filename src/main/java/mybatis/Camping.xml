@@ -48,7 +48,7 @@
 			AND THEMECODE IN(#{themecode})
 		</if>
 		<if test="searchName != null and searchName != ''">
-			AND NAME LIKE %||#{searchName}||%
+			AND NAME LIKE '%' || #{searchName} || '%'
 		</if>
 	</select>
 	
@@ -118,9 +118,16 @@
 		WHERE NUM = #{num}
 	</update>
 	
+	<update id="campingReadcountUp">
+		UPDATE CAMPING
+		<set>
+			READCOUNT = READCOUNT+1
+		</set>
+		WHERE NUM = #{num}
+	</update>
 	
 	<select id="getCampingRegid" resultType="String">
-		SELECT REGID FROM CAMPING
-		WHERE NUM = #{cnum}
-	</select>
+      SELECT REGID FROM CAMPING
+      WHERE NUM = #{cnum}
+   </select>
 </mapper>

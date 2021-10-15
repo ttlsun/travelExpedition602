@@ -32,7 +32,7 @@ public class CampingListController {
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView campingList(ModelAndView mav, 
-								  @RequestParam Map<String,String> map,
+								  @RequestParam Map<String, String> map,
 								  HttpServletRequest request) {
 		//노출만 리스트업
 		map.put("status", "01");

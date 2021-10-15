@@ -103,12 +103,19 @@ function keywordChk(index) {
 	}
 }
 
+//캠핑장 등록하기 버튼 클릭시
 function goRegister(){
 	location.href="${contextPath}/campingRegister.do";
 }
 
+//리스트 정렬 옵션 변경시
 function listOrderBy(){
 	var orderBy = $("#orderBy").val();
+	document.myform.submit();
+}
+
+//상세검색 버튼 클릭시
+function goSearch(){
 	document.myform.submit();
 }
 
@@ -182,7 +189,7 @@ function listOrderBy(){
 								</dl>
 								<dl>
 									<dd style="text-align: right;">
-										<input type="button" class="btn btn-primary" value="상세검색" onClick="">
+										<input type="button" class="btn btn-primary" value="상세검색" onClick="goSearch()">
 										<input type="reset" class="btn btn-default" value="초기화">
 									</dd>
 								</dl>
