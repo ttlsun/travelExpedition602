@@ -102,7 +102,7 @@ public class TourRegisterController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("acode", "5");
 			map.put("anum", maxNum);
-			map.put("regid", tourbean.getRegid()+"id");
+			map.put("regid", tourbean.getRegid());
 			
 			//이미지테이블에 이미지들 저장.
 			String[] uploadFileList = WebUtil.fileUpload(servletContext, tourbean.getMultipleUpdateFile(), null);

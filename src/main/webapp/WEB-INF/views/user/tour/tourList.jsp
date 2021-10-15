@@ -207,8 +207,9 @@ function goSearch(){
 		</caption>
 		<thead>
 			<tr class="active">
-				<td colspan="3" style="text-align: left">
+				<td colspan="5" style="text-align: left">
 					<select name="orderBy" id="orderBy" onchange="listOrderBy()">
+						<option value="regdate desc">등록일순</option>
 						<option value="moddate desc">업데이트순</option>
 						<option value="readcount desc">조회수 높은순</option>
 						<option value="recommend desc">추천 많은순</option>
@@ -223,7 +224,7 @@ function goSearch(){
 		<!-- list가 없을 경우 -->
 		<c:if test="${empty lists}">
 		<tr>
-			<td colspan="3" align="center"> 해당 관광지 레코드가 없습니다.</td>
+			<td colspan="5" align="center"> 해당 관광지 레코드가 없습니다.</td>
 		</tr>
 		</c:if>
 		

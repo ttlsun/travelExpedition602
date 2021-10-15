@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TourBean {
 
+	private int rownum;
 	private int num;
 	@NotBlank(message = "관광지명 입력은 필수입니다.")
 	private String name;
@@ -51,6 +52,17 @@ public class TourBean {
 	public TourBean() {
 		super();
 	}
+
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
 
 	public int getNum() {
 		return num;
