@@ -49,8 +49,8 @@ function input(){
 			alert("계좌번호를 입력하세요");
 			$("#paydetail2").focus();
 			return false;
-		} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-			alert("계좌번호는 숫자로만 작성하세요");
+		} else if(!/^[0-9]{1,20}/g.test($("#paydetail2").val())){
+			alert("계좌번호는 20자 이내 숫자로만 작성하세요");
 			$("#paydetail2").val("");
 			$("#paydetail2").focus();
 			return false;
@@ -72,8 +72,8 @@ function input(){
 				alert("계좌번호를 입력하세요");
 				$("#paydetail2").focus();
 				return false;
-			} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-				alert("계좌번호는 숫자로만 작성하세요");
+			} else if(!/^[0-9]{1,20}/g.test($("#paydetail2").val())){
+				alert("계좌번호는 20자 이내 숫자로만 작성하세요");
 				$("#paydetail2").val("");
 				$("#paydetail2").focus();
 				return false;
@@ -95,8 +95,8 @@ function input(){
 				alert("카드번호를 입력하세요");
 				$("#paydetail2").focus();
 				return false;
-			} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-				alert("카드번호는 숫자로만 작성하세요");
+			} else if(!/^[0-9]{1,20}/g.test($("#paydetail2").val())){
+				alert("카드번호는 20자 이내 숫자로만 작성하세요");
 				$("#paydetail2").val("");
 				$("#paydetail2").focus();
 				return false;
