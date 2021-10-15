@@ -17,12 +17,12 @@ var marker;
 $(document).ready(function() {
 	
 	//메뉴 on 유지.
-	navActive('tourism');
+	navActive('camping');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "관광지");
-	$("#metaDescription").attr("content", "관광지 등록");
-	$("#metaKeywords").attr("content", "#여행자들602호 관광지 등록,#관광지,#등록");
+	$("#metaDescription").attr("content", "관광지 수정");
+	$("#metaKeywords").attr("content", "#여행자들602호 관광지 등록,#관광지,#수정");
 	
   	//모달로 우편번호 띄우기.
   	$('#searchZip').click(function(){

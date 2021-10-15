@@ -47,7 +47,7 @@ public class TourUpdateController {
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.GET)
 	public ModelAndView tourUpdateGet(ModelAndView mav,
-								@RequestParam("num") String num,
+								@RequestParam("num") int num,
 								@RequestParam("pageNumber") String pageNumber) {
 		
 		//수정 아이디 확인 후, 비밀번호 입력 일치 시에 페이지 이동 가능하도록

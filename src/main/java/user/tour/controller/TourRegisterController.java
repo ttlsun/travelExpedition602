@@ -108,7 +108,12 @@ public class TourRegisterController {
 			String[] uploadFileList = WebUtil.fileUpload(servletContext, tourbean.getMultipleUpdateFile(), null);
 			for (String str : uploadFileList) {
 				System.out.println("file : " + str);
-				
+				//파일이 있을경우만, 이미지테이블에 데이터를 쌓는다.
+				if(str != null) {
+					map.put("imgname", str);
+					cnt = postimgDao.insertPostimgData(map);
+					tourbean.setImgname(str);
+				}
 				map.put("imgname", str);
 				cnt = postimgDao.insertPostimgData(map);
 				tourbean.setImgname(str);

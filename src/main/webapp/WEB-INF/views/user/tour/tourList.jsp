@@ -123,7 +123,10 @@ function goDetail(num) {
 	
 	location.href="${contextPath}/tourDetail.do?num="+num+"&pageNumber="+${pageInfo.pageNumber};
 }
-
+//상세검색 버튼 클릭시
+function goSearch(){
+	document.myform.submit();
+}
 	
 </script>
 
@@ -132,10 +135,8 @@ function goDetail(num) {
 <div>
 	<header><h2 align="center" class="text-primary">관광지 리스트 화면</h2></header>
 	
-	<div class="form-group rounded">
-		<form action="sampleCCTList" method="post">
-			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
-			
+	<form name="myform" action="${contextPath}/tourList.do" method="post">
+	<div class="form-group rounded">		
 			<div>
 				<dl>
 					<dt><label for="searchAddr">지역</label></dt>
@@ -149,7 +150,7 @@ function goDetail(num) {
 					<dd>
 						<input type="text" class="form-control45" name="searchName" placeholder="이름으로 검색">
 						<span style="padding-left: 3.4%;"></span>
-						<input type="submit" class="btn btn-primary" value="검색하기" onClick="">
+						<input type="submit" class="btn btn-primary" value="검색하기">
 						<input type="reset" class="btn btn-default" value="초기화">
 					</dd>
 				</dl>
@@ -188,18 +189,15 @@ function goDetail(num) {
 								</dl>
 								<dl>
 									<dd style="text-align: right;">
-										<input type="button" class="btn btn-primary" value="상세검색" onClick="">
+										<input type="button" class="btn btn-primary" value="상세검색" onClick="goSearch()">
 										<input type="reset" class="btn btn-default" value="초기화">
 									</dd>
 								</dl>
 							</div>
 						</div>
 					</div>
-				</div>
-				
+				</div>	
 			</div>
-			
-		</form>
 	</div>
 	
 	<table class="table table-bordered" style="padding-top: 5%;">
@@ -209,7 +207,15 @@ function goDetail(num) {
 		</caption>
 		<thead>
 			<tr class="active">
-				<th width="70%" colspan="5">관광지</th>
+				<td colspan="3" style="text-align: left">
+					<select name="orderBy" id="orderBy" onchange="listOrderBy()">
+						<option value="moddate desc">업데이트순</option>
+						<option value="readcount desc">조회수 높은순</option>
+						<option value="recommend desc">추천 많은순</option>
+						<option value="steamed desc">찜 많은순</option>
+						<option value="reviewcount desc">리뷰 많은순</option>
+					</select>
+				</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -221,11 +227,6 @@ function goDetail(num) {
 		</tr>
 		</c:if>
 		
-		<c:if test="${empty lists}">
-				<tr>
-					<td colspan="3" align="center">조건에 맞는 캠핑장 목록이 없습니다.</td>
-				</tr>
-			</c:if>
 			
 			<c:forEach var="bean" items="${lists}">
 				<tr>
@@ -245,7 +246,8 @@ function goDetail(num) {
 						가격
 					</td>
 					<td>
-						${bean.price }&nbsp;원
+						<fmt:formatNumber value="${bean.price}" pattern="###,###"/>
+							&nbsp;원
 					</td>
 					<td class="text-center">
 						할인율
@@ -264,6 +266,9 @@ function goDetail(num) {
 						조회수 ${bean.readcount }
            				</div>
 					</td>
+					
+					
+					
 					<td colspan="3" class="text-right" style="border-left: none;">
 						<button type="button" class="btn outline-secondary" >
 						추천
@@ -293,7 +298,7 @@ function goDetail(num) {
 	<div class="paginationCenter" align="center">
 		${pageInfo.pagingHtml}
 	</div>
-	
+	</form>
 </div>   
 </article>
 </section>

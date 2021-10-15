@@ -17,7 +17,7 @@ var marker;
 $(document).ready(function() {
 	
 	//메뉴 on 유지.
-	navActive('tourism');
+	navActive('camping');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "관광지");

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.my.travelExpedition.utility.Paging;
 
-import user.camping.model.CampingBean;
-
 @Component("myTourDao")
 public class TourDao {
 	
@@ -42,7 +40,7 @@ public class TourDao {
 		return num;
 	}
 	
-	public TourBean getTourDetail(String num) {
+	public TourBean getTourDetail(int num) {
 		TourBean tourbean = sqlSessionTemplate.selectOne(NAMESPACE+".getTourDetail", num);
 		return tourbean;
 	}
@@ -57,6 +55,11 @@ public class TourDao {
 		return cnt;
 	}
 	
+	/*조회수 카운트 올리기*/
+	public int updateTourUpcount(Map<String, String> map) {
+		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateTourUpcount", map);
+		return cnt;
+	}
 	
 	
 }

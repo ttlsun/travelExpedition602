@@ -15,13 +15,13 @@
 			SUMMARY, IMGURL, CONTENTS, POSTCODE, 
 			ADDRESS1, ADDRESS2, ADDRESS3, ADDRESS4, 
 			LATITUDE, LONGITUDE, CONTACT,
-			REGDATE, REGID,READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT,STATUS
+			REGDATE, REGID, MODDATE, READCOUNT, RECOMMEND, STEAMED, REVIEWCOUNT,STATUS
 		)
 		VALUES(
 			#{num}, #{name}, #{themecode},#{price},#{discount}, #{regkeyword},
 			#{summary}, #{imgurl}, #{contents}, #{postcode}, 
 			#{address1}, #{address2}, #{address3}, #{address4},
-			#{latitude}, #{longitude}, #{contact}, SYSDATE, #{regid}, 0, 0, 0, 0,'01'
+			#{latitude}, #{longitude}, #{contact}, SYSDATE, #{regid}, SYSDATE, 0, 0, 0, 0,'01'
 		)
 	</insert>
 	
@@ -40,6 +40,9 @@
 		<if test="themecode != null and themecode != ''">
 			AND THEMECODE IN(#{themecode})
 		</if>
+		<if test="regkeyword != null and regkeyword != ''">
+			AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
+		</if>
 		<if test="searchName != null and searchName != ''">
 			AND NAME LIKE #{searchName}
 		</if>
@@ -48,6 +51,7 @@
 	<select id="getTourList" resultType="myTourBean">
 		SELECT NUM,NAME,THEMECODE,PRICE,DISCOUNT,REG_KEYWORD,SUMMARY,IMGURL,
 		POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT,
+		REGID,REGDATE,MODDATE,
 		(CASE STATUS
 					WHEN '01' THEN '노출'
 					WHEN '02' THEN '비노출'
@@ -57,7 +61,42 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
-		ORDER BY NUM DESC
+		<if test="address1 != null and address1 != ''">
+			AND ADDRESS1 = #{address1} 
+		</if>
+		<if test="address2 != null and address2 != ''">
+			AND ADDRESS2 = #{address2} 
+		</if>
+		<if test="themecode != null and themecode != ''">
+			AND REGEXP_LIKE(THEMECODE, #{themecode})
+		</if>
+		<if test="regkeyword != null and regkeyword != ''">
+			AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
+		</if>
+		<if test="searchName != null and searchName != ''">
+			AND NAME LIKE '%' || #{searchName} || '%'
+		</if>
+		<choose>
+         <when test="orderBy == 'regdate desc'">
+           	 ORDER BY REGDATE DESC
+         </when>
+         <when test="orderBy == 'moddate desc'">
+            ORDER BY MODDATE DESC
+         </when>
+         <when test="orderBy == 'readcount desc'">
+            ORDER BY READCOUNT DESC
+         </when>
+         <when test="orderBy == 'recommend desc'">
+            ORDER BY RECOMMEND DESC
+         </when>
+         <when test="orderBy == 'steamed desc'">
+            ORDER BY STEAMED DESC
+         </when>
+         <when test="orderBy == 'reviewcount desc'">
+            ORDER BY REVIEWCOUNT DESC
+         </when>
+         <otherwise>ORDER BY REGDATE DESC</otherwise>
+    	</choose>
 	</select>
 	
 	<select id="getTourDetail" resultType="myTourBean">
@@ -94,4 +133,12 @@
 		WHERE NUM = #{num}
 	</update>
 	
+	<!-- 조회수 올리기 -->
+	<update id="updateTourUpcount">
+		UPDATE TOURLIST
+		<set>
+			READCOUNT = READCOUNT+1
+		</set>
+		WHERE NUM = #{num}
+	</update>
 </mapper>
