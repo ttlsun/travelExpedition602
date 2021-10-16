@@ -48,105 +48,101 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from users
-		<if test="whatColumn == null">
-			where not ucode like 'admin'
-		</if>
+		where not ucode like 'admin'
 		<if test="whatColumn == 'num'">
-			where not ucode like 'admin' and num like #{keyword}
+			and num like #{keyword}
 		</if>
 		<if test="whatColumn == 'ucode'">
-			where not ucode like 'admin' and ucode like #{keyword}
+			and ucode like #{keyword}
 		</if>
 		<if test="whatColumn == 'id'">
-			where not ucode like 'admin' and id like #{keyword}
+			and id like #{keyword}
 		</if>
 		<if test="whatColumn == 'name'">
-			where not ucode like 'admin' and name like #{keyword}
+			and name like #{keyword}
 		</if>
 		<if test="whatColumn == 'gender'">
-			where not ucode like 'admin' and gender like #{keyword}
+			and gender like #{keyword}
 		</if>
 		<if test="whatColumn == 'email'">
-			where not ucode like 'admin' and email like #{keyword}
+			and email like #{keyword}
 		</if>
 		<if test="whatColumn == 'cbirth'">
-			where birth like #{keyword} and ucode like 'customer'
+			and birth like #{keyword} and ucode like 'customer'
 		</if>
 		<if test="whatColumn == 'bbirth'">
-			where birth like #{keyword} and ucode like 'business'
+			and birth like #{keyword} and ucode like 'business'
 		</if>
 		<if test="whatColumn == 'postcode'">
-			where not ucode like 'admin' and postcode like #{keyword}
+			and postcode like #{keyword}
 		</if>
 		<if test="whatColumn == 'address'">
-			where ucode like 'business' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
+			and ucode like 'business' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
 		</if>
 		<if test="whatColumn == 'contact'">
-			where not ucode like 'admin' and contact like #{keyword}
+			and contact like #{keyword}
 		</if>
 		<if test="whatColumn == 'regdate'">
-			where not ucode like 'admin' and regdate like #{keyword}
+			and regdate like #{keyword}
 		</if>
 		<if test="whatColumn == 'moddate'">
-			where not ucode like 'admin' and moddate like #{keyword}
+			and moddate like #{keyword}
 		</if>
 		<if test="whatColumn == 'modid'">
-			where not ucode like 'admin' and modid like #{keyword}
+			and modid like #{keyword}
 		</if>
 		<if test="whatColumn == 'status'">
-			where not ucode like 'admin' and status like #{keyword}
+			and status like #{keyword}
 		</if>
 	</select>
 	
 	<select id="getList" resultType="myUsersBean">
 		select * from users
-		<if test="whatColumn == null">
-			where not ucode like 'admin'
-		</if>
+		where not ucode like 'admin'
 		<if test="whatColumn == 'num'">
-			where not ucode like 'admin' and num like #{keyword}
+			and num like #{keyword}
 		</if>
 		<if test="whatColumn == 'ucode'">
-			where not ucode like 'admin' and ucode like #{keyword}
+			and ucode like #{keyword}
 		</if>
 		<if test="whatColumn == 'id'">
-			where not ucode like 'admin' and id like #{keyword}
+			and id like #{keyword}
 		</if>
 		<if test="whatColumn == 'name'">
-			where not ucode like 'admin' and name like #{keyword}
+			and name like #{keyword}
 		</if>
 		<if test="whatColumn == 'gender'">
-			where not ucode like 'admin' and gender like #{keyword}
+			and gender like #{keyword}
 		</if>
 		<if test="whatColumn == 'email'">
-			where not ucode like 'admin' and email like #{keyword}
+			and email like #{keyword}
 		</if>
 		<if test="whatColumn == 'cbirth'">
-			where birth like #{keyword} and ucode like 'customer'
+			and birth like #{keyword} and ucode like 'customer'
 		</if>
 		<if test="whatColumn == 'bbirth'">
-			where birth like #{keyword} and ucode like 'business'
+			and birth like #{keyword} and ucode like 'business'
 		</if>
 		<if test="whatColumn == 'postcode'">
-			where not ucode like 'admin' and postcode like #{keyword}
+			and postcode like #{keyword}
 		</if>
 		<if test="whatColumn == 'address'">
-			where not ucode like 'admin' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
+			and ucode like 'business' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
 		</if>
 		<if test="whatColumn == 'contact'">
-			where not ucode like 'admin' and contact like #{keyword}
+			and contact like #{keyword}
 		</if>
 		<if test="whatColumn == 'regdate'">
-			where not ucode like 'admin' and regdate like #{keyword}
+			and regdate like #{keyword}
 		</if>
 		<if test="whatColumn == 'moddate'">
-			where not ucode like 'admin' and moddate like #{keyword}
+			and moddate like #{keyword}
 		</if>
 		<if test="whatColumn == 'modid'">
-			where not ucode like 'admin' and modid like #{keyword}
+			and modid like #{keyword}
 		</if>
 		<if test="whatColumn == 'status'">
-			where not ucode like 'admin' and status like #{keyword}
+			and status like #{keyword}
 		</if>
 		order by num
 	</select>

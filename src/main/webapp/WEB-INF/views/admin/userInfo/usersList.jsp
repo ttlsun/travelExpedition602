@@ -21,6 +21,7 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#여행자들602호 결제수단목록, 개인회원");
 	
 	//selectVal에 따라 keyword의 placeholder 변경
+	//이거 안됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	$("#whatColumn").on("chnage", function(){
 		var selectVal = $("#whatColumn option:selected").val();
 		<!-- num, ucode, id, name, gender, email, birth,
@@ -61,7 +62,7 @@ $(document).ready(function() {
 	})
 });
 
-/*
+//이거 안됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function search(){
 	var selectVal = $("#whatColumn option:selected").val();
 	if(selectVal == "num"){
@@ -81,18 +82,46 @@ function search(){
 			}
 		}
 	} else if(selectVal == "id"){
-		
+		if($("#keyword").val() == "" || !/^[_0-9a-z-]{1,20}/g.test($("#keyword").val())){
+			alert("아이디 형식에 맞게 입력하세요");
+			$("#keyword").val("");
+			$("#keyword").focus();
+			return false;
+		}
 	} else if(selectVal == "name"){
-		
+		if($("#keyword").val() == "" || !/^[0-9a-zA-Zㄱ-ㅎ가-힣\\[{<(\\]}>)]{1,40}/g.test($("#keyword").val())){
+			alert("이름 형식에 맞게 입력하세요");
+			$("#keyword").val("");
+			$("#keyword").focus();
+			return false;
+		}
 	} else if(selectVal == "gender"){
-		
+		if($("#keyword").val() == ""){
+			if($("#keyword").val() != "남성" && $("#keyword").val() != "남" && $("#keyword").val() != "여성" && $("#keyword").val() != "여"){
+				alert("남성, 남, 여성, 여 중 하나를 입력하세요");
+				$("#keyword").val("");
+				$("#keyword").focus();
+				return false;
+			}
+		}
 	} else if(selectVal == "email"){
-		
-	} else if(selectVal == "cbirth" || selectVal == "bbirth" || selectVal == "regdate" || selectVal == ""){
-		
+		if($("#keyword").val() == "" || !/^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[_0-9a-zA-Z-]+)*)/g.test($("#keyword").val())){
+			alert("이메일 형식에 맞게 입력하세요");
+			$("#keyword").val("");
+			$("#keyword").focus();
+			return false;
+		}
+	} else if(selectVal == "cbirth" || selectVal == "bbirth" || selectVal == "regdate" || selectVal == "moddate"){
+		if($("#keyword").val() == ""){ //yyyy-MM-dd
+			if(!/^[0-9]{4}-[0-9]{2}-[0-9]{2}/g.test($("#keyword").val())){
+				alert("날짜 형식에 맞게 입력하세요");
+				$("#keyword").val("");
+				$("#keyword").focus();
+				return false;
+			}
+		}
 	}
 }
-*/
 
 //수정페이지이동 버튼
 function goUpdate(num, pageNumber) {
@@ -144,14 +173,13 @@ function goDelete(num) {
 							<option value="moddate">수정일자</option>
 							<option value="modid">수정한 계정</option>
 							<option value="status">회원 상태</option>
-						</select>
+						</select>	
 						
 						<div align="left" style="padding-top: 5px;">
 							<input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색할 내용을 입력하세요">
 						</div>
 						<div align="right" style="padding-top: 5px;">
-							 <input type="submit" class="btn btn-default" value="검색" >
-							 <!-- <input type="submit" class="btn btn-default" value="검색" onClick="return search()"> -->
+							 <input type="submit" class="btn btn-default" value="검색" onClick="return search()">
 						</div>
 					</dd>
 				</dl>
@@ -172,7 +200,7 @@ function goDelete(num) {
 				<th width="5%">주소</th>
 				<th width="5%">연락처</th>
 				<th width="5%">생일/개업일</th> -->
-				<th width="10%">등록일</th>
+				<th width="10%">가입일</th>
 				<th width="10%">수정일</th>
 				<th width="5%">수정</th>
 				<th width="5%">삭제</th>
@@ -183,7 +211,7 @@ function goDelete(num) {
 		<!-- list가 없을 경우 -->
 		<c:if test="${empty lists}">
 		<tr>
-			<td colspan="7" align="center"> 해당 레코드가 없습니다.</td>
+			<td colspan="9" align="center"> 해당 레코드가 없습니다.</td>
 		</tr>
 		</c:if>
 		
