@@ -92,8 +92,8 @@ function input(){
 			alert("계좌번호를 입력하세요");
 			$("#paydetail2").focus();
 			return false;
-		} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-			alert("계좌번호는 숫자로만 작성하세요");
+		} else if(!/^[0-9]{10,20}$/.test($("#paydetail2").val())){
+			alert("계좌번호는 10~20자리 숫자로만 작성하세요");
 			$("#paydetail2").val("");
 			$("#paydetail2").focus();
 			return false;
@@ -115,8 +115,8 @@ function input(){
 			alert("카드번호를 입력하세요");
 			$("#paydetail2").focus();
 			return false;
-		} else if(!/^[0-9]+/g.test($("#paydetail2").val())){
-			alert("카드번호는 숫자로만 작성하세요");
+		} else if(!/^[0-9]{10,20}$/.test($("#paydetail2").val())){
+			alert("카드번호는 10~20자리 숫자로만 작성하세요");
 			$("#paydetail2").val("");
 			$("#paydetail2").focus();
 			return false;
@@ -124,8 +124,8 @@ function input(){
 			alert("cvc 번호를 입력하세요");
 			$("#cvc").focus();
 			return false;
-		} else if(!/^[0-9]+/g.test($("#cvc").val())){
-			alert("cvc 번호는 숫자로만 작성하세요");
+		} else if(!/^[0-9]{3,4}$/.test($("#cvc").val())){
+			alert("cvc 번호는 3~4자리 숫자로만 작성하세요");
 			$("#cvc").val("");
 			$("#cvc").focus();
 			return false;
@@ -196,7 +196,7 @@ function input(){
 							<label for="paydetail1">은행명</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="paydetail1" name="paydetail1" size="30%" maxlength="30" placeholder="한글,영어 가능" value="${paydetail1}">
+							<input type="text" class="form-control" id="paydetail1" name="paydetail1" size="30%" maxlength="35" placeholder="한글,영어 가능" value="${paydetail1}">
 						</td>
 					</tr>
 					<tr id="notPhone">
@@ -206,7 +206,7 @@ function input(){
 							<label for="paydetail2">계좌번호</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="paydetail2" name="paydetail2" size="30%" placeholder="숫자만 가능" value="${paydetail2}">
+							<input type="text" class="form-control" id="paydetail2" name="paydetail2" maxlength="25" size="30%" placeholder="숫자만 가능" value="${paydetail2}">
 						</td>
 					</tr>
 					<tr id="onlyCard" style="display:none;">
@@ -217,7 +217,7 @@ function input(){
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="cvc" name="cvc" size="30%" placeholder="숫자만 가능" value="${cvc}">
+							<input type="text" class="form-control" id="cvc" name="cvc" maxlength="10" size="30%" placeholder="숫자만 가능" value="${cvc}">
 						</td>
 					</tr>
 					<tr>
