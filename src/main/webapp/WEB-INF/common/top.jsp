@@ -50,11 +50,11 @@ function navActive(activeName) {
         	
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
         	<c:if test="${userCode eq 'business' or userCode eq 'admin'}">
-        	<li data-nav="camping" class="dropdown">
+        	<li data-nav="bCamping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> [사업자] 캠핑/관광지 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
-           			<li><a href="${contextPath}/campingList.do">캠핑/글램핑</a></li>
-	            	<li><a href="${contextPath}/tourList.do">관광지</a></li>
+           			<li><a href="${contextPath}/bCampingList.do">캠핑/글램핑</a></li>
+	            	<li><a href="${contextPath}/bTourList.do">관광지</a></li>
 	         	</ul>
          	</li>
          	</c:if>
