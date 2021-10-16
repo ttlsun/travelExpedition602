@@ -5,19 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.Paging;
-import com.my.travelExpedition.utility.WebUtil;
 
 import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
@@ -47,6 +43,8 @@ public class TourDetailController {
 		
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
+		String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
+		
 		//관광지상세
 		int num = Integer.parseInt((String)map.get("num"));
 		TourBean tourbean = tourDao.getTourDetail(num);
@@ -63,8 +61,7 @@ public class TourDetailController {
 		map.put("reviewtype", "02"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		map.put("status", "01"); //노출만 리스트 뿌리기.
 		int communityTotalCount = communityDao.getCommunityListTotalCnt(map);
-		String communityPageUrl = request.getContextPath()+ COMMAND; //페이지 URL
-		Paging communityPageInfo = new Paging(map, "10", communityTotalCount, communityPageUrl);
+		Paging communityPageInfo = new Paging(map, "10", communityTotalCount, pageUrl);
 		List<CommunityBean> communityLists = communityDao.getCommunityList(communityPageInfo, map);
 	
 		//별등급 가져오기. 
@@ -76,10 +73,17 @@ public class TourDetailController {
 		//조회수올리기.
 		tourDao.updateTourUpcount(map);
 		
-		
-		//리스트
-		
-		
+		//주변관광지 리스트 (시,군) : 이건 정하셔요~ ..이게 원하시는게 맞는지 모르겠네요,, 내꺼 제외는 따로 해야할것 같아요..
+		map.put("status", "01"); //노출만 보여주기.
+		map.put("address1", tourbean.getAddress1()); //시
+		map.put("address2", tourbean.getAddress2()); //군
+		map.put("aroundAddrRegId", tourbean.getRegid()); //등록자아이디꺼만 제외
+		int totalCount = tourDao.getTotalCount(map);
+		Paging pageInfo = new Paging(map,"10",totalCount, pageUrl);		
+		List<TourBean> lists = tourDao.getTourList(pageInfo,map);
+		mav.addObject("pageInfo", pageInfo); //주변관광지 리스트 페이징 정보
+		mav.addObject("totalCount", totalCount); // 주변관광지 총카운트
+		mav.addObject("lists", lists); //주변관광지 리스트
 		
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보

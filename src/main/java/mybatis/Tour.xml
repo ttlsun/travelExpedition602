@@ -37,8 +37,11 @@
 		<if test="address2 != null and address2 != ''">
 			AND ADDRESS2 = #{address2}
 		</if>
+		<if test="aroundAddrRegId != null and aroundAddrRegId != ''">
+			AND REGID NOT IN (#{aroundAddrRegId})
+		</if>
 		<if test="themecode != null and themecode != ''">
-			AND THEMECODE IN(#{themecode})
+			AND REGEXP_LIKE(THEMECODE, #{themecode})
 		</if>
 		<if test="regkeyword != null and regkeyword != ''">
 			AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
@@ -67,6 +70,9 @@
 		</if>
 		<if test="address2 != null and address2 != ''">
 			AND ADDRESS2 = #{address2} 
+		</if>
+		<if test="aroundAddrRegId != null and aroundAddrRegId != ''">
+			AND REGID NOT IN (#{aroundAddrRegId})
 		</if>
 		<if test="themecode != null and themecode != ''">
 			AND REGEXP_LIKE(THEMECODE, #{themecode})

@@ -120,11 +120,16 @@ function goDelete() {
 }
 
 function goDetail(num) {
-	
 	location.href="${contextPath}/tourDetail.do?num="+num+"&pageNumber="+${pageInfo.pageNumber};
 }
 //상세검색 버튼 클릭시
 function goSearch(){
+	document.myform.submit();
+}
+
+
+// orderBy검색 클릭시,
+function listOrderBy() {
 	document.myform.submit();
 }
 	
@@ -189,7 +194,7 @@ function goSearch(){
 								</dl>
 								<dl>
 									<dd style="text-align: right;">
-										<input type="button" class="btn btn-primary" value="상세검색" onClick="goSearch()">
+										<input type="submit" class="btn btn-primary" value="상세검색" onClick="goSearch()">
 										<input type="reset" class="btn btn-default" value="초기화">
 									</dd>
 								</dl>
