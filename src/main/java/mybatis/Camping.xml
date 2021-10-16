@@ -164,6 +164,11 @@
       WHERE NUM = #{cnum}
    </select>
    
+    <select id="getCampingDetail" resultType="myCampingBean">
+        SELECT * FROM CAMPING
+        WHERE NUM = #{num}
+    </select>
+   
    <update id="updateCampingStatus">
       UPDATE CAMPING
       <set>
