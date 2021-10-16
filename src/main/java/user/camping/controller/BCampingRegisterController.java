@@ -22,11 +22,11 @@ import user.common.model.KeywordBean;
 import user.common.model.KeywordDao;
 
 @Controller
-public class CampingRegisterController {
+public class BCampingRegisterController {
 	
-	private static final String COMMAND = "/campingRegister.do";
-	private static final String GETPAGE = "user/camping/campingRegisterForm";
-	private static final String GOTOPAGE = "redirect:/campingList.do";
+	private static final String COMMAND = "/bCampingRegister.do";
+	private static final String GETPAGE = "user/camping/bCampingRegisterForm";
+	private static final String GOTOPAGE = "redirect:/bCampingList.do";
 	
 	@Autowired
 	private ServletContext servletContext;

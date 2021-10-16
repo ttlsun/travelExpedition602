@@ -4,13 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import user.reservation.model.ReservationBean;
 import user.reservation.model.ReservationDao;
 import user.room.model.RoomBean;
 import user.room.model.RoomDao;
@@ -20,7 +25,7 @@ public class ReservationController {
 	
 	private static final String COMMAND = "/reservation.do";
 	private static final String GETPAGE = "user/reservation/reservationForm";
-	private static final String GOTOPAGE = "redirect:/어디로갈까요.do";
+	private static final String GOTOPAGE = "redirect:/payReservation.do";
 	
 	@Autowired
 	private RoomDao roomDao;
@@ -32,12 +37,8 @@ public class ReservationController {
 	public ModelAndView reservationGet(ModelAndView mav,
 								@RequestParam("num") String rnum,
 								@RequestParam("pageNumber") String pageNumber,
-								@RequestParam("cname") String cname,
-								@RequestParam Map<String, String> map) {
-		
-		map.put("checkindate", map.get("checkindate"));
-		map.put("checkoutdate", map.get("checkoutdate"));
-		map.put("guests", map.get("guests"));
+								@RequestParam Map<String, String> map
+								) {
 		
 		//캠핑장 번호, 객실 번호/이름/타입, 주중/주말가격, 기준인원 가져옴
 		RoomBean roombean = roomDao.getRoomReserveInfo(rnum); 
@@ -96,7 +97,6 @@ public class ReservationController {
 		
 		mav.addObject("map", map);
 		mav.addObject("roombean", roombean);
-		mav.addObject("cname", cname); //캠핑장 이름
 		mav.addObject("rnum", rnum);
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GETPAGE);
@@ -105,14 +105,22 @@ public class ReservationController {
 	
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
 	public ModelAndView reservationPost(ModelAndView mav,
-								@RequestParam("num") String rnum,
-								@RequestParam("pageNumber") String pageNumber) {
+								@RequestParam Map<String, String> map,
+								@ModelAttribute("reservation") @Valid ReservationBean reservation, 
+								BindingResult result) {
+		
+		mav.addObject("rnum", map.get("rnum"));
+		mav.addObject("pageNumber", map.get("pageNumber"));
+		mav.addObject("totalprice", map.get("totalprice"));
+		mav.addObject("map", map);
+		
+		if(result.hasErrors()) {
+			mav.setViewName(GETPAGE);
+			return mav;
+		}
 		
 		
 		
-		
-		mav.addObject("rnum", rnum);
-		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName(GOTOPAGE);
 		return mav;
 	}

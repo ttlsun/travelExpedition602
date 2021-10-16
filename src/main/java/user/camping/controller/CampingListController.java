@@ -37,7 +37,7 @@ public class CampingListController {
 		
 		//페이지가 안넘어오면 1로 셋팅.
 		//String pageNumber = request.getParameter("pageNumber") == null ? "1" : (String)map.get("pageNumber");
-		//map.put("pageNumber", pageNumber);
+		
 		//노출만 리스트업
 		map.put("status", "01");
 		
@@ -110,6 +110,7 @@ public class CampingListController {
 		mav.addObject("pageInfo", pageInfo);
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("lists", lists);
+		mav.addObject("map", map);
 		
 		mav.setViewName(GETPAGE);
 		return mav;

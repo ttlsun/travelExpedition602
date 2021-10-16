@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {	
-	navActive('member');
+	navActive('camping');
 	$('.tdTextClassAdd').css('padding-top', '10%').css('border-top','none').css('border-right','none').css('border-left','none');
 	$('.tdborderClassAdd').css('border-top','none').css('border-right','none').css('border-left','none');
 
@@ -33,7 +33,7 @@ function allAgreeChk() {
 
 //등록 버튼클릭시,
 function goPayment() {	
-	var answer = confirm("결제 하시겠습니까?");
+	var answer = confirm("예약 하시겠습니까?");
 	if(answer){
 		//모든 체크박스가 체크될시 예약 되게 처리함.
 		if (!$('#agreeUse').is(':checked') || !$('#agreePrivacy').is(':checked')
@@ -41,10 +41,10 @@ function goPayment() {
 				alert("이용약관에 동의해주세요.");
 				return false;
 		}
-		
-		$('#myForm').submit();
 	}
-	
+	else{
+		return false;
+	}
 }
 </script>   
  
@@ -59,7 +59,7 @@ function goPayment() {
 		<table class="table table-bordered" style="width: 75%">
 			<tr>
 				<th>캠핑장명</th>
-				<td colspan="3">${cname }</td>
+				<td colspan="3">${map.cname }</td>
 			</tr>
 			<tr>
 				<th>객실명</th>
@@ -81,16 +81,26 @@ function goPayment() {
 			</tr>
 			<tr>
 				<th>주중이용요금</th>
-				<td>[${weekdayCount}박]&nbsp;${roombean.weekdayprice * weekdayCount}&nbsp;원</td>
+				<td>[${weekdayCount}박]&nbsp;
+					<fmt:formatNumber value="${roombean.weekdayprice * weekdayCount}" pattern="###,###"/>&nbsp;원
+				</td>
 				<th>주말이용요금</th>
-				<td>[${weekendCount}박]&nbsp;${roombean.weekendprice * weekendCount}&nbsp;원</td>
+				<td>[${weekendCount}박]&nbsp;
+					<fmt:formatNumber value="${roombean.weekendprice * weekendCount}" pattern="###,###"/>&nbsp;원
+				</td>
 			</tr>
 		</table>
 	</div>
 	
-	<form name="myForm" action="payReservation.do?cname=${cname}&totalprice=${totalprice}&calDateDays=${calDateDays}&weekdayCount=${weekdayCount}&weekendCount=${weekendCount}
-	&checkindate=${map.checkindate}&checkoutdate=${map.checkoutdate}&guests=${map.guests}
-	&weekdayprice=${roombean.weekdayprice}&weekendprice=${roombean.weekendprice}&cnum=${roombean.cnum}" method="post" class="form-horizontal" role="form">
+	<form:form commandName="reservation" name="myForm" action="${contextPath}/reservation.do" method="post" class="form-horizontal" role="form">
+		<input type="hidden" name="rnum" value="${rnum }">
+		<input type="hidden" name="pageNumber" value="${pageNumber }">
+		<input type="hidden" name="checkindate" value="${map.checkindate }">
+		<input type="hidden" name="checkoutdate" value="${map.checkoutdate }">
+		<input type="hidden" name="totalprice" value="${totalprice}">
+		<input type="hidden" name="guests" value="${map.guests }">
+		<input type="hidden" name="userId" value="${userId}">
+		
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
 		<h4 align="center">예약자 정보 입력</h4>
@@ -98,37 +108,41 @@ function goPayment() {
 			<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
 				<td><label>회원 ID</label></td>
-				<td style="text-align:left; padding-left: 20px">${loginInfo.id}</td>
+				<td style="text-align:left; padding-left: 20px">${userId}</td>
 			</tr>
 			<tr>
 				<td><label><span class="redFont"> * </span>예약자 성명</label></td>
 				<td>
-					<input type="text" class="form-control" id="name" name="name" value="">
+					<input type="text" class="form-control" id="name" name="name" value="${reservation.name }">
+					<form:errors cssClass="errMessage" path="name"/>
 				</td>
 			</tr>
 			
 			<tr>
 				<td><label for="phone"><span class="redFont"> * </span>예약자 연락처</label></td>
 				<td>
-					<input type="text" class="form-control" id="phone" name="phone" placeholder="ex) 010-1234-5678 형태로 입력해주세요.">
+					<input type="text" class="form-control" id="phone" name="phone" value="${reservation.phone }" placeholder="ex) 010-1234-5678 형태로 입력해주세요.">
+					<form:errors cssClass="errMessage" path="phone"/>
 				</td>
 			</tr>
 			<tr>
 				<td><label for="email">예약자 이메일</label></td>
 				<td>
-					<input type="text" class="form-control" id="email" name="email" value="" placeholder="ex) abc123@gmail.com 형태로 입력해주세요.">
+					<input type="text" class="form-control" id="email" name="email" value="${reservation.email }" placeholder="ex) abc123@gmail.com 형태로 입력해주세요.">
 				</td>
 			</tr>
 			<tr>
 				<td><label for="requested">예약 요청사항</label></td>
 				<td>
-					<textarea rows="5" cols="30" class="form-control" id="requested" name="requested" placeholder="예약 시 요청사항을 작성해주세요."></textarea>
+					<textarea rows="5" cols="30" class="form-control" id="requested" name="requested" placeholder="예약 시 요청사항을 작성해주세요.">${reservation.requested }</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td><label for="totalprice">결제 금액</label></td>
 				<td>
-					<span style="color: red;">${totalprice} 원 </span>
+					<span style="color: red;">
+						<fmt:formatNumber value="${totalprice}" pattern="###,###"/>원
+					</span>
 				</td>
 			</tr>
 			<tr>
@@ -265,10 +279,10 @@ function goPayment() {
 		<!-- //약관 -->
 		
 		<div class="marPadding" align="center">
-			<input type="submit" class="btn btn-primary" value="결제하기" onclick="return goPayment()">
-			<input type="button" class="btn btn-default" value="목록">
+			<input type="submit" class="btn btn-primary" value="예약하기" onclick="return goPayment()">
+			<input type="button" class="btn btn-default" value="돌아가기" onclick="history.back()">
 		</div>
-	</form>
+	</form:form>
 	</div>
 </article>
 </section>

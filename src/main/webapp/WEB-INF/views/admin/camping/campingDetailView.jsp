@@ -188,7 +188,9 @@ function goRoomDetail(num,pageNumber){
 								</td>
 								<td width="10%">가격</td>
 								<td>
-									${room.weekdayprice }~${room.weekendprice }
+									<fmt:formatNumber value="${room.weekdayprice }" pattern="###,###"/>원
+									&nbsp;~&nbsp;
+									<fmt:formatNumber value="${room.weekendprice }" pattern="###,###"/>원
 								</td>
 							</tr>
 							<tr>

@@ -27,11 +27,11 @@ import user.room.model.RoomDao;
 
 
 @Controller
-public class RoomUpdateController {
+public class BRoomUpdateController {
 
-	private static final String COMMAND = "/roomUpdate.do";
-	private static final String GETPAGE = "user/room/roomUpdateForm";
-	private static final String GOTOPAGE = "redirect:/roomDetail.do";
+	private static final String COMMAND = "/bRoomUpdate.do";
+	private static final String GETPAGE = "user/room/bRoomUpdateForm";
+	private static final String GOTOPAGE = "redirect:/bRoomDetail.do";
 	
 	@Autowired
 	private ServletContext servletContext;

@@ -21,7 +21,7 @@ var marker;
 
 $(document).ready(function() {
 	//메뉴 on 유지.
-	navActive('camping');
+	navActive('bCamping');
 	
 	//메타태그 설정. (DB에 가져온 값 셋팅)
 	$("#metaTitle").attr("content", "${campbean.name} 캠핑 상세 ");
@@ -69,7 +69,17 @@ function closeOverlay() {
 
 //목록보기 버튼 클릭시
 function goList(pageNumber) {
-	location.href= "${contextPath}/campingList.do?pageNumber="+pageNumber;
+	location.href= "${contextPath}/bCampingList.do?pageNumber="+pageNumber;
+}
+
+//캠핑장정보수정(사업자 전용) 버튼 클릭시
+function goUpdate(num,pageNumber) {
+	location.href= "${contextPath}/bCampingUpdate.do?num="+num+"&pageNumber="+pageNumber;
+}
+
+//캠핑장삭제(사업자 전용) 버튼 클릭시
+function goDelete(num,pageNumber) {
+	location.href= "${contextPath}/bCampingDelete.do?num="+num+"&pageNumber="+pageNumber;
 }
 
 //추천관광지 더보기 버튼 클릭시
@@ -77,9 +87,14 @@ function goTourList() {
 	location.href= "${contextPath}/추천관광지";
 }
 
+//객실 등록 버튼
+function goInsertRoom(pageNumber){
+	location.href= "${contextPath}/bRoomRegister.do?num=${campbean.num}&pageNumber="+pageNumber;	
+}
+
 //객실 상세보기 버튼
 function goRoomDetail(num,pageNumber){
-	location.href= "${contextPath}/roomDetail.do?num="+num+"&pageNumber="+pageNumber;	
+	location.href= "${contextPath}/bRoomDetail.do?num="+num+"&pageNumber="+pageNumber;	
 }
 
 //후기 등록페이지이동 버튼
@@ -134,10 +149,12 @@ function likesRegisters() {
 <div>
 	<div class="marginPadding10" align="right">
 		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
+		<input type="button" class="btn btn-primary" value="캠핑장정보수정" onclick="goUpdate(${campbean.num},${pageNumber})">
+		<input type="button" class="btn btn-primary" value="캠핑장삭제" onclick="goDelete(${campbean.num},${pageNumber})">
 	</div>
 	
 	<!-- 캠핑장 타이틀 block -->
-	<form name="campform" action="campingDetail.do" method="post" class="form-horizontal">
+	<form name="campform" action="bCampingDetail.do" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="num" id="num" value="${campbean.num }">
 	<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
@@ -274,7 +291,12 @@ function likesRegisters() {
 			<div class="tab-pane active fade in" id="tab2" style="text-align: left;">
 		   		<h3>객실 리스트</h3>
 		    	<span class="spanFlowRootP10"></span>
-								
+			
+					<div align="right">
+						<input type="button" class="btn btn-primary" value="객실 등록하기" style="margin-bottom: 10px" onClick="goInsertRoom(${pageNumber})">
+					</div>
+					
+										
 					<c:forEach var="room" items="${lists }">
 					
 					<c:choose>

@@ -9,10 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import user.room.model.RoomDao;
 
 @Controller
-public class RoomDeleteController {
+public class BRoomDeleteController {
 
-	private static final String COMMAND = "/roomDelete.do";
-	private static final String GOTOPAGE = "redirect:/campingDetail.do";
+	private static final String COMMAND = "/bRoomDelete.do";
+	private static final String GOTOPAGE = "redirect:/bCampingDetail.do";
 	
 	@Autowired
 	private RoomDao roomDao;
@@ -36,7 +36,7 @@ public class RoomDeleteController {
 		}
 		else {
 			System.out.println("room 비노출 변경 실패");
-			mav.setViewName("user/room/roomDetailView");
+			mav.setViewName("user/room/bRoomDetailView");
 		}
 		
 		mav.addObject("pageNumber", pageNumber);

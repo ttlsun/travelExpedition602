@@ -6,7 +6,7 @@
 
 $(document).ready(function() {
 	//메뉴 on 유지.
-	navActive('camping');
+	navActive('bCamping');
 	
 	$("#metaTitle").attr("content", "캠핑 객실 수정");
 	$("#metaDescription").attr("content", "캠핑 객실 수정");
@@ -40,7 +40,7 @@ function inputSave() {
 
 //리스트 버튼 클릭시
 function goList() {
-	location.href= "${contextPath}/campingList.do";
+	location.href= "${contextPath}/bCampingList.do";
 	//pageNumber 가져가기?
 }
 
@@ -51,7 +51,7 @@ function goList() {
 <div>
 	<header><h2 align="center" class="text-primary">캠핑장 객실 수정</h2></header>
 	
-	<form:form commandName="room" name="myform" action="${contextPath}/roomUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<form:form commandName="room" name="myform" action="${contextPath}/bRoomUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="num" value="${room.num}">
 	<input type="hidden" name="cname" value="${cname }">
 	<input type="hidden" name="camptype" value="${camptype }">
@@ -127,9 +127,10 @@ function goList() {
 				<div class="rounded">
 					<img src="${fileImg}/${originImgUrl} " style="height:10%; width: 30%;">
 				</div>
-				<input type="file" id="imgFile" name="updateFile" value="" accept=".jpg, .jpeg, .png, .gif">
+				<input type="file" id="imgFile" name="updateFile" value="${room.imgurl}" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" name="imgurl" value="${room.imgurl}">
 				<input type="hidden" name="originImgUrl" id="originImgUrl" value="${originImgUrl}">
+				<form:errors cssClass="errMessage" path="updateFile"/>
 			</td>
 		</tr>
 		<tr>

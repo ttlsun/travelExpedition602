@@ -21,6 +21,8 @@ public class RoomBean {
 	private int cnum;
 	
 	private String imgurl; // 대표이미지
+	
+	@NotNull(message = "대표이미지를 선택하세요.")
 	private MultipartFile updateFile; // 대표이미지명
 
 	private String imgname; // 상세이미지(여러장)

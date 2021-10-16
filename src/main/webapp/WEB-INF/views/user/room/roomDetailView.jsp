@@ -65,32 +65,47 @@ function disableSomeDay(date) {
 }
 
 //예약하기(사용자) 버튼 클릭시
-function goReservation(num,pageNumber) {
+function goReservation() {
 	
 	var startDate = $('#startDate').val().replaceAll('-', '');
 	var endDate = $('#endDate').val().replaceAll('-', '');
+	var guests = $('#guests').val();
 	
-	if(endDate < startDate){
-		alert("죄송합니다. 예약 끝날날짜는 시작날짜보다 앞으로 선택하지말아주세요.");
+	if("${userId}" == ''){
+		alert("예약은 회원만 가능합니다.");
 		return false;
 	}
 	
-	location.href= "${contextPath}/reservation.do?num="+num+"&pageNumber="+pageNumber;
+	if(startDate == null || startDate == ''){
+		alert("입실날짜를 선택하세요.");
+		return false;
+	}
+	
+	if(endDate == null || endDate == ''){
+		alert("퇴실날짜를 선택하세요.");
+		return false;
+	}
+	
+	if(guests == null || guests == ''){
+		alert("이용인원을 선택하세요.");
+		return false;
+	}
+	
+	if(endDate < startDate){
+		alert("죄송합니다. 퇴실날짜는 입실날짜 이후로 선택하세요.");
+		return false;
+	}
+	
 }
 
-//문의하기(사용자) 버튼 클릭시
+//문의하기(사용자) 버튼 클릭시, 캠핑장 고유번호 들고 감
 function goQna(num) {
 	location.href= "${contextPath}/qnaList.do";
 }
 
-//객실정보수정(사업자) 버튼 클릭시
-function goUpdate(num,pageNumber) {
-	location.href= "${contextPath}/roomUpdate.do?num="+num+"&pageNumber="+pageNumber;
-}
-
-//객실목록에서제거(사업자) 버튼 클릭시
-function goDelete(num,pageNumber) {
-	location.href= "${contextPath}/roomDelete.do?num="+num+"&pageNumber="+pageNumber;
+//돌아가기(캠핑상세로)
+function goCampingDetail(cnum,pageNumber){
+	location.href= "${contextPath}/campingDetail.do?cnum="+cnum+"&pageNumber="+pageNumber;
 }
 
 </script>
@@ -99,10 +114,8 @@ function goDelete(num,pageNumber) {
 <article>
 <div>
 		<div class="marginPadding10" align="right">
-			<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="history.back()">
-			<input type="button" class="btn btn-primary" value="문의하기(사용자)" onclick="goQna(${roombean.num})">
-			<input type="button" class="btn btn-primary" value="객실정보수정(사업자)" onclick="goUpdate(${roombean.num},${pageNumber})">
-			<input type="button" class="btn btn-primary" value="객실목록에서제거(사업자)" onclick="goDelete(${roombean.num},${pageNumber})">
+			<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goCampingDetail(${roombean.cnum},${pageNumber})">
+			<input type="button" class="btn btn-primary" value="문의하기" onclick="goQna(${roombean.cnum})">
 		</div>
 		<div align="center">
 			<h2 align="center" class="text-primary">${roombean.name }</h2>
@@ -188,7 +201,7 @@ function goDelete(num,pageNumber) {
 							</span>
 						</td>
 						<td colspan="2" class="text-center">
-							<input type="submit" class="btn btn-primary" value="예약하기(사용자)" onclick="return goReservation(${roombean.num},${pageNumber})">
+							<input type="submit" class="btn btn-primary" value="예약하기" onclick="return goReservation()">
 						</td>
 					</tr>
 				</table>
@@ -209,9 +222,13 @@ function goDelete(num,pageNumber) {
 	  			</tr>
 	  			<tr>
 	  				<td>주중가격</td>
-	  				<td>${roombean.weekdayprice }</td>
+	  				<td>
+						<fmt:formatNumber value="${roombean.weekdayprice }" pattern="###,###"/>원
+					</td>
 	  				<td>주말가격</td>
-	  				<td>${roombean.weekendprice }</td>
+	  				<td>
+						<fmt:formatNumber value="${roombean.weekendprice }" pattern="###,###"/>원
+					</td>
 	  			</tr>
 	  			<tr>
 	  				<td>내부 시설</td>

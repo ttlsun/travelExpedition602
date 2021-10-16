@@ -1,8 +1,12 @@
 package user.reservation.model;
 
-public class ReservationBean {
+import javax.validation.constraints.NotNull;
 
+public class ReservationBean {
+	
+	@NotNull(message = "예약자 성명을 입력하세요.")
 	private int num;
+	
 	private int cnum;
 	private int rnum;
 	private String id;
@@ -11,7 +15,10 @@ public class ReservationBean {
 	private String regdate;
 	private int guests;
 	private String name;
+	
+	@NotNull(message = "예약자 연락처을 입력하세요.")
 	private String phone;
+	
 	private String email;
 	private String requested;
 	private int totalprice;

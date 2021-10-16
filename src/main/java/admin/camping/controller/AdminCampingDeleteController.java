@@ -1,4 +1,4 @@
-package user.camping.controller;
+package admin.camping.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import user.camping.model.CampingDao;
 
 @Controller
-public class CampingDeleteController {
+public class AdminCampingDeleteController {
 
-	private static final String COMMAND = "/campingDelete.do";
-	private static final String GOTOPAGE = "redirect:/campingList.do";
+	private static final String COMMAND = "/campingDelete.ad";
+	private static final String GOTOPAGE = "redirect:/campingList.ad";
 	
 	@Autowired
 	private CampingDao campingDao;
@@ -33,7 +33,7 @@ public class CampingDeleteController {
 		}
 		else {
 			System.out.println("camping 비노출 변경 실패");
-			mav.setViewName("user/camping/campingDetailView");
+			mav.setViewName("admin/camping/campingDetailView");
 		}
 		
 		mav.addObject("num", num);

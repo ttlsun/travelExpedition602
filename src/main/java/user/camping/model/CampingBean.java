@@ -1,5 +1,7 @@
 package user.camping.model;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +22,15 @@ public class CampingBean {
 	private String themecode;
 
 	private String regkeyword;
+	
+	@NotNull(message = "한줄 소개글 입력은 필수입니다.")
 	private String summary;
 	
 	private String imgurl;
+	@NotNull(message = "대표이미지를 선택하세요.")
 	private MultipartFile updateFile; // 대표이미지명
 	
 	private String options;
-	
 	private String contents;
 	private int postcode;
 
@@ -41,7 +45,10 @@ public class CampingBean {
 
 	private String latitude;
 	private String longitude;
+	
+	@NotNull(message = "연락처 입력은 필수입니다.")
 	private String contact;
+	
 	private String regdate;
 	private String regid;
 	private String moddate;

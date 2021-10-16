@@ -35,6 +35,9 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
+		<if test="regid != null">
+			AND REGID = #{regid}
+		</if>
 		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1}
 		</if>
@@ -71,6 +74,9 @@
 		WHERE 1=1
 		<if test="status == '01'">
 			AND STATUS = #{status} 
+		</if>
+		<if test="regid != null">
+			AND REGID = #{regid}
 		</if>
 		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1} 

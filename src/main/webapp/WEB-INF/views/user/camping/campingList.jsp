@@ -26,7 +26,7 @@ $(document).ready(function() {
 function selInit() {
 	
 	$("#searchAddr , #searchAddr2").append(new Option("선택", ""));
-	
+		
 	//시도 검색 select박스
 	addrAjax("시도", "", function(data) {
 		$.each(data.body, function (i, item) {
@@ -97,15 +97,10 @@ function keywordChk(index) {
 	
 	//키워드가 체크되어있으면 색변경
 	if($('#regkeyword_'+index).is(':checked') == true){
-		$('#labelKegkeyword_'+index).css("color","#15b15a"); //변경색		
+		$('#labelKegkeyword_'+index).css("color","purple"); //변경색		
 	}else{
 		$('#labelKegkeyword_'+index).css("color","#337ab7");
 	}
-}
-
-//캠핑장 등록하기 버튼 클릭시
-function goRegister(){
-	location.href="${contextPath}/campingRegister.do";
 }
 
 //리스트 정렬 옵션 변경시
@@ -126,10 +121,10 @@ function goSearch(){
 	<header><h2 align="center" class="text-primary">캠핑장</h2></header>
 	
 	<form name="myform" action="${contextPath}/campingList.do" method="post">
-	<div class="form-group rounded">
+	<div class="form-group rounded" style="padding: 40px;">
 		<div>
 			<dl>
-				<dt><label for="searchAddr">지역</label></dt>
+				<dt><label for="searchAddr" style="font-size: 16px;">지역으로 검색</label></dt>
 				<dd>
 					<select id="searchAddr" name="address1" class="form-control40" onChange="chageSelOpt()"></select><strong> (시) </strong>
 					<span style="padding-left: 3.4%;"></span>
@@ -148,7 +143,7 @@ function goSearch(){
 				<div class="panel panel-default1">
 					<div>
 						<h4 class="panel-title1">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="font-weight: normal; background-color:lightgrey;"> 
 							상세검색&nbsp;<span style="color: gray;"><small>∨</small></span>
 							</a>
 						</h4>
@@ -156,7 +151,7 @@ function goSearch(){
 					<div id="collapseOne" class="panel-collapse collapse">
 						<div class="panel-body">
 							<dl>
-								<dt><label for="searchType1">유형</label></dt>
+								<dt><label for="searchType1" style="font-size: 16px;">유형</label></dt>
 								<dd>
 									<label><input type="checkbox" id="searchType1" name="camptype" value="01">&nbsp;일반캠핑장&nbsp;</label>
 									<label><input type="checkbox" id="searchType2" name="camptype" value="02">&nbsp;자동차캠핑장&nbsp;</label>
@@ -165,7 +160,7 @@ function goSearch(){
 								</dd>
 							</dl>
 							<dl>
-								<dt><label for="searchTheme1">테마</label></dt>
+								<dt><label for="searchTheme1" style="font-size: 16px;">테마</label></dt>
 								<dd>
 									<label><input type="checkbox" id="searchTheme1" name="themecode" value="01">&nbsp;숲/산&nbsp;</label>
 									<label><input type="checkbox" id="searchTheme2" name="themecode" value="02">&nbsp;해변/바다&nbsp;</label>
@@ -175,7 +170,7 @@ function goSearch(){
 								</dd>
 							</dl>
 							<dl>
-								<dt><label for="searchKeyword">태그로 검색</label></dt>
+								<dt><label for="searchKeyword" style="font-size: 16px;">태그로 검색</label></dt>
 								<dd>
 									<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 									<label for="regkeyword_${status.index}" id="labelKegkeyword_${status.index}" style="color: #337ab7;">
@@ -201,7 +196,6 @@ function goSearch(){
 	<table class="table table-bordered" style="">
 		<caption>
 			<span style="text-align: left">총 ${totalCount }개 캠핑장이 검색되었습니다. </span>
-			<input type="button" style="float: right;" class="btn btn-primary" value="캠핑장 등록하기(사업자 전용)" onClick="goRegister()">
 		</caption>
 		<thead>
 			<tr class="active">
@@ -231,15 +225,22 @@ function goSearch(){
 					</td>
 					<td colspan="2"align="left">
 						<h3><a href="${contextPath }/campingDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
-							[${bean.address1}&nbsp;${bean.address2}]${bean.name }</a></h3>
-						<p style="font-style: italic;">${bean.summary }</p>
-						<p>${bean.regkeyword }</p>
+							[${bean.address1}&nbsp;${bean.address2}]&nbsp;${bean.name }</a></h3>
+						<p style="font-style: italic;">"${bean.summary }"</p>
+						<h4 style="color:purple; font-weight: normal;">
+							<c:forTokens var="keyword" items="${bean.regkeyword }" delims=",">
+								${keyword }
+							</c:forTokens>
+						</h4>
 					</td>
 				</tr>
 				
 				<tr>
 					<td colspan="2" class="text-center">
-						${bean.options }
+						<c:if test="${fn:contains(bean.camptype,'01') }">일반캠핑장&nbsp;</c:if>
+						<c:if test="${fn:contains(bean.camptype,'02') }">자동차캠핑장&nbsp;</c:if>
+						<c:if test="${fn:contains(bean.camptype,'03') }">글램핑&nbsp;</c:if>
+						<c:if test="${fn:contains(bean.camptype,'04') }">카라반&nbsp;</c:if>
 					</td>
 				</tr>
 				<tr>
