@@ -19,6 +19,11 @@ function navActive(activeName) {
 </script>
 
 <div class="container" style="padding-top: 10px;">
+	<!-- 승민님이 만들어주신 저희 대표이미지..! -->
+	<div style="padding-bottom: 1%;">
+		<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />
+	</div>
+
 	<div>
 	<nav class="navbar navbar-default" role="navigation" >
      
