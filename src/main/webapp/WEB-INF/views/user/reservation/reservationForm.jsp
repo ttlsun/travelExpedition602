@@ -94,12 +94,19 @@ function goPayment() {
 	
 	<form:form commandName="reservation" name="myForm" action="${contextPath}/reservation.do" method="post" class="form-horizontal" role="form">
 		<input type="hidden" name="rnum" value="${rnum }">
+		<input type="hidden" name="cnum" value="${roombean.cnum }">
+		<input type="hidden" name="cname" value="${map.cname }">
 		<input type="hidden" name="pageNumber" value="${pageNumber }">
 		<input type="hidden" name="checkindate" value="${map.checkindate }">
 		<input type="hidden" name="checkoutdate" value="${map.checkoutdate }">
 		<input type="hidden" name="totalprice" value="${totalprice}">
 		<input type="hidden" name="guests" value="${map.guests }">
 		<input type="hidden" name="userId" value="${userId}">
+		<input type="hidden" name="weekdayprice" value="${roombean.weekdayprice}">
+		<input type="hidden" name="weekendprice" value="${roombean.weekendprice}">
+		<%-- <input type="hidden" name="weekdayCount" value="${weekdayCount}">
+		<input type="hidden" name="weekendCount" value="${weekendCount}">
+		<input type="hidden" name="calDateDays" value="${calDateDays}"> --%>
 		
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">

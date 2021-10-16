@@ -109,19 +109,54 @@ public class ReservationController {
 								@ModelAttribute("reservation") @Valid ReservationBean reservation, 
 								BindingResult result) {
 		
+		//mav.addObject("calDateDays", map.get("calDateDays"));
+		//mav.addObject("weekdayCount", map.get("weekdayCount"));
+		//mav.addObject("weekendCount", map.get("weekendCount"));
+		
 		mav.addObject("rnum", map.get("rnum"));
 		mav.addObject("pageNumber", map.get("pageNumber"));
-		mav.addObject("totalprice", map.get("totalprice"));
 		mav.addObject("map", map);
 		
+		mav.addObject("cname", map.get("cname"));
+		mav.addObject("totalprice", map.get("totalprice"));
+		mav.addObject("calDateDays", map.get("calDateDays"));
+		mav.addObject("weekdayCount", map.get("weekdayCount"));
+		mav.addObject("weekendCount", map.get("weekendCount"));
+		mav.addObject("checkindate", map.get("checkindate"));
+		mav.addObject("checkoutdate", map.get("checkoutdate"));
+		mav.addObject("guests", map.get("guests"));
+		mav.addObject("weekdayprice", map.get("weekdayprice"));
+		mav.addObject("weekendprice", map.get("weekendprice"));
+		mav.addObject("cnum", map.get("cnum"));
+		mav.addObject("campingRegid", map.get("userId"));
+		mav.addObject("name", map.get("name"));
+		mav.addObject("phone", map.get("phone"));
+		mav.addObject("email", map.get("email"));
+		mav.addObject("requested", map.get("requested"));
+		mav.addObject("paycode", map.get("paycode"));
+
 		if(result.hasErrors()) {
 			mav.setViewName(GETPAGE);
 			return mav;
 		}
 		
+		//예약 => 입금대기 상태
+		map.put("status", "01"); //01:입금대기,02:결제완료,03:예약취소신청,04:환불완료
+		map.put("id", map.get("userId"));
 		
+		int cnt = -1;
 		
-		mav.setViewName(GOTOPAGE);
+		cnt = reservationDao.insertReservation(map);
+		
+		if(cnt != -1) {
+			System.out.println("객실 예약 성공: 입금대기");
+			//mav.setViewName(GOTOPAGE);
+		}
+		else {
+			System.out.println("객실 예약 성공: 입금대기");
+			mav.setViewName(GETPAGE);
+		}
+	
 		return mav;
 	}
 }

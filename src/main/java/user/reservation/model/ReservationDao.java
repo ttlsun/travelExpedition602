@@ -57,6 +57,12 @@ public class ReservationDao {
 		return bean;
 	}
 	
+	/* 캠핑 객실 예약 */
+	public int insertReservation(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.insert(NAMESPACE + ".insertReservation", map);
+		return cnt;
+	}
+	
 
 	
 	

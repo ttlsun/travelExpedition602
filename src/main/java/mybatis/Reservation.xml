@@ -6,7 +6,7 @@
 <!-- Reservation.xml -->
 <mapper namespace="user.reservation.model.ReservationBean">
 
-	<!-- 예약등록 : 일단 만들어놈. 변경하실거 있으면 변경해서 쓰셔요~ -->
+	<!-- 예약등록 -->
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION
 		(
