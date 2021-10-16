@@ -1,5 +1,8 @@
 package user.room.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +22,19 @@ public class BRoomDeleteController {
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView roomDelete(ModelAndView mav,
-							@RequestParam("num") String num,
-							@RequestParam("pageNumber") String pageNumber) {
+								@RequestParam("num") String num,
+								@RequestParam("cnum") String cnum,
+								@RequestParam("pageNumber") String pageNumber) {
 		
-		//campingDetail.do로 넘길 캠핑장 번호 파라미터값
-		String cnum = roomDao.getCampingNum(num);
+		System.out.println("num:" + num + "cnum:" + cnum);
 		
 		int cnt = -1;
 		
-		//ROOM STATUS값 02(비노출)로 변경
-		cnt = roomDao.updateRoomStatusBlind(num);
+		//ROOM STATUS값 02(비노출)로 변경 (cnum이 따로 들가면 안되서 map 따로 생성.)
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status","02");
+		map.put("num",num);
+		cnt = roomDao.updateRoomStatus(map);
 		
 		if(cnt != -1) {
 			System.out.println("room 비노출 변경 성공");
@@ -39,8 +45,8 @@ public class BRoomDeleteController {
 			mav.setViewName("user/room/bRoomDetailView");
 		}
 		
-		mav.addObject("pageNumber", pageNumber);
-		mav.addObject("cnum", cnum);
+		mav.addObject("pageNumber", pageNumber); //캠핑 상세페이지갈때 pageNumber 넘기기.
+		mav.addObject("num", cnum); //캠핑 상세페이지갈때 캠핑num 넘기기.
 		
 		return mav;
 	}

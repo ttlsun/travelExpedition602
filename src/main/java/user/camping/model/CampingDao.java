@@ -56,9 +56,9 @@ public class CampingDao {
 		return campbean;
 	}
 
-	//캠핑장 삭제->상태값 비노출로 변경
-	public int updateCampingStatusBlind(String num) {
-		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateCampingStatusBlind", num);
+	//캠핑장 삭제->상태값 변경(00:완전삭제(삭제는 신중해야되서 안할예정) , 01:노출 , 02:비노출)
+	public int updateCampingStatus(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateCampingStatus", map);
 		return cnt;
 	}
 	

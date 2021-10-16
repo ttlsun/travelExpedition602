@@ -43,8 +43,7 @@ public class CampingDetailController {
 		
 		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
 //		String cnum = request.getParameter("cnum") != null ? (String)map.get("cnum") : (String)map.get("num");
-		System.out.println("num:::" + num);
-		
+	
 		//캠핑장 상세내용 select
 		CampingBean campbean = campingDao.getCampingDetail(num);
 		mav.addObject("campbean", campbean);
@@ -53,8 +52,8 @@ public class CampingDetailController {
 		//맵으로 바꿔서 status "01" 넣자 (Map<String,String> map 으로..) 
 		map.put("cnum", num); 
 		map.put("status", "01");
-		List<RoomBean> lists = roomDao.getRoomList(num); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
-		System.out.println("lists : " + lists.toString());
+		List<RoomBean> lists = roomDao.getRoomList(map); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
+		//System.out.println("lists : " + lists.toString());
 		mav.addObject("lists", lists); //객실리스트
 		
 		//후기 리스트

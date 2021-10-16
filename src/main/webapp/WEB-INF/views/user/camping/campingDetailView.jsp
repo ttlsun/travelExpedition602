@@ -132,8 +132,8 @@ function likesRegisters() {
 <section class="container">
 <article>
 <div>
-	<div class="marginPadding10" align="right">
-		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
+	<div class="marginPadding10" align="left">
+		<input type="button" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
 	</div>
 	
 	<!-- 캠핑장 타이틀 block -->
@@ -155,10 +155,10 @@ function likesRegisters() {
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align:left; padding-top: 20px; padding-bottom: 20px;" class="col-xs-8 col-sm-8 col-md-8">
+			<td style="text-align:center; padding-top: 20px; padding-bottom: 20px;" class="col-xs-8 col-sm-8 col-md-8">
 				<img src="${fileImg}/${campbean.imgurl}" alt="${campbean.imgurl} 이미지" title="${campbean.imgurl} 이미지" width="100%">
 			</td>
-			<td style="border-left:none; padding-top:20px; text-align:right;" valign="top">
+			<td style="border-left:none; padding-top:20px; text-align:right" valign="top">
 				<table class="table table-bordered" style="border-left:none; border-right:none;">
 					<tr>
 						<th style="border-top-color: red; border-left:none; width:12%">

@@ -1,6 +1,7 @@
 package user.room.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class RoomDao {
 		return maxNum;
 	}
 
-	public List<RoomBean> getRoomList(String cnum) {
-		List<RoomBean> lists = sqlSessionTemplate.selectList(NAMESPACE+".getRoomList", cnum);
+	public List<RoomBean> getRoomList(Map<String,String> map) {
+		List<RoomBean> lists = sqlSessionTemplate.selectList(NAMESPACE+".getRoomList", map);
 		return lists;
 	}
 
@@ -54,8 +55,8 @@ public class RoomDao {
 		return cnum;
 	}
 
-	public int updateRoomStatusBlind(String num) {
-		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateRoomStatusBlind", num);
+	public int updateRoomStatus(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateRoomStatus", map);
 		return cnt;
 	}
 	

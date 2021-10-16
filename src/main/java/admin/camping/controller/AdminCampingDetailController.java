@@ -42,19 +42,15 @@ public class AdminCampingDetailController {
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
 		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
-//		String cnum = request.getParameter("cnum") != null ? (String)map.get("cnum") : (String)map.get("num");
-		System.out.println("num:::" + num);
-		
+
 		//캠핑장 상세내용 select
 		CampingBean campbean = campingDao.getCampingDetail(num);
 		mav.addObject("campbean", campbean);
 		
-		//객실 리스트 select(노출값만)
-		//맵으로 바꿔서 status "01" 넣자 (Map<String,String> map 으로..) 
+		//객실 리스트 select
 		map.put("cnum", num); 
-		map.put("status", "01");
-		List<RoomBean> lists = roomDao.getRoomList(num); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
-		System.out.println("lists : " + lists.toString());
+		List<RoomBean> lists = roomDao.getRoomList(map); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
+		//System.out.println("lists : " + lists.toString());
 		mav.addObject("lists", lists); //객실리스트
 		
 		//후기 리스트
@@ -70,10 +66,7 @@ public class AdminCampingDetailController {
 		map.put("reviewnum", map.get("cnum")); //캠핑 고유번호
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
-		System.out.println("startAvg::::::" + startAvg);
-		
-		//조회수 올리기
-		int cnt = campingDao.campingReadcountUp(num);
+		//System.out.println("startAvg::::::" + startAvg);
 		
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보

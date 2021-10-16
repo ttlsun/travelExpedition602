@@ -34,18 +34,20 @@
 	</select>
 	
 	<select id="getRoomList" resultType="myRoomBean">
-		SELECT 
-			NUM, NAME, ROOM_TYPE,
-			IMGURL, SUMMARY, 
-			PROPGUESTS, MAXGUESTS,
-			WEEKDAYPRICE, WEEKENDPRICE,
-			OPTIONS, AMENITY
-		FROM ROOM
-		WHERE 
-			CNUM = #{cnum} AND
-			STATUS = '01'
-		ORDER BY NUM ASC
-	</select>
+      SELECT 
+         NUM, NAME, ROOM_TYPE,
+         IMGURL, SUMMARY, 
+         PROPGUESTS, MAXGUESTS,
+         WEEKDAYPRICE, WEEKENDPRICE,
+         OPTIONS, AMENITY
+      FROM ROOM
+      WHERE 
+         CNUM = #{cnum} 
+         <if test="status == '01'">
+            AND STATUS = #{status}
+         </if>
+      ORDER BY NUM ASC
+   </select>
 	
 	<select id="getRoomDetail" resultType="myRoomBean">
 		SELECT * FROM ROOM
@@ -96,12 +98,17 @@
 		WHERE NUM = #{num}
 	</select>
 	
-	<update id="updateRoomStatusBlind">
-		UPDATE ROOM
-		<set>
-			STATUS = '02'
-		</set>
-		WHERE NUM = #{num}
-	</update>
+	<update id="updateRoomStatus">
+      UPDATE ROOM
+      <set>
+         STATUS = #{status}
+      </set>
+      <choose>
+            <when test="cnum != null and cnum != '' ">
+                 WHERE CNUM = #{cnum}
+            </when>
+            <otherwise>WHERE NUM = #{num}</otherwise>
+        </choose>      
+   </update>
 	
 </mapper>

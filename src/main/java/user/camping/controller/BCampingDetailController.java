@@ -43,7 +43,6 @@ public class BCampingDetailController {
 		
 		//num, cnum으로 캠핑장 번호가 다르게 들어오는 경우 존재
 		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
-		System.out.println("num:::" + num);
 		
 		//캠핑장 상세내용 select
 		CampingBean campbean = campingDao.getCampingDetail(num);
@@ -52,8 +51,8 @@ public class BCampingDetailController {
 		//객실 리스트 select(노출값만)
 		map.put("cnum", num); 
 		map.put("status", "01");
-		List<RoomBean> lists = roomDao.getRoomList(num); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
-		System.out.println("lists : " + lists.toString());
+		List<RoomBean> lists = roomDao.getRoomList(map); //지금 cnum이 캠핑장 num라 num으로 일단 넣어서 리스트 보이게함.
+		//System.out.println("lists : " + lists.toString());
 		mav.addObject("lists", lists); //객실리스트
 		
 		//후기 리스트
@@ -69,7 +68,7 @@ public class BCampingDetailController {
 		map.put("reviewnum", map.get("cnum")); //캠핑 고유번호
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
-		System.out.println("startAvg::::::" + startAvg);
+		//System.out.println("startAvg::::::" + startAvg);
 		
 		//사업자 본인 캠핑장은 조회수 카운트하지 않음
 		//int cnt = campingDao.campingReadcountUp(num);

@@ -16,8 +16,21 @@ function goList(pageNumber) {
 }
 
 //비활성화 버튼 클릭시
-function goDelete(num,pageNumber) {
-	location.href= "${contextPath}/campingDelete.ad?num="+num+"&pageNumber="+pageNumber;
+function goStatus(num) {
+	var msg = "";
+	if(num == "00"){
+		msg = "삭제";
+	}else if(num == "01"){
+		msg = "활성화";
+	}else{
+		msg = "비활성화";
+	}
+	
+	if (!confirm(msg+' 하시겠습니까?')){
+		return false;
+	}
+	
+	$('#status').val(num);
 }
 
 //객실 상세보기 버튼
@@ -30,18 +43,29 @@ function goRoomDetail(num,pageNumber){
 <section class="container">
 <article>
 <div>
+	<form name="campform" action="campingDelete.ad" method="post" class="form-horizontal">
+		<input type="hidden" name="num" id="num" value="${campbean.num}">
+		<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
+		<input type="hidden" name="status" id="status" value="">
+		<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
+	
 	<div class="marginPadding10" align="right">
 		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
-		<input type="button" class="btn btn-primary" value="비활성화" onclick="goDelete(${campbean.num},${pageNumber})">
+		<c:choose>
+			<c:when test="${campbean.status eq '01' }">
+				<input type="submit" class="btn btn-primary" value="비활성화" onclick="return goStatus('02')">
+			</c:when>
+			<c:when test="${campbean.status eq '02' }">
+				<input type="submit" class="btn btn-primary" value="활성화" onclick="return goStatus('01')">
+			</c:when>
+			<%-- <c:otherwise>
+				<input type="submit" class="btn btn-primary" value="완전삭제" onclick="return goStatus('00')">
+			</c:otherwise> --%>
+		</c:choose>
 	</div>
 	
 	<header><h3 align="center" class="text-primary">${campbean.name }</h3></header>
-	
-	<form name="campform" action="campingDetail.do" method="post" class="form-horizontal">
-	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
-	<input type="hidden" name="num" id="num" value="${campbean.num }">
-	<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
-	
+
 	<table class="table table-bordered">
 		<tr>
 			<td rowspan="7" colspan="2" width="50%">

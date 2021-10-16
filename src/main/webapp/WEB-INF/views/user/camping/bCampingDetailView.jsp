@@ -79,6 +79,10 @@ function goUpdate(num,pageNumber) {
 
 //캠핑장삭제(사업자 전용) 버튼 클릭시
 function goDelete(num,pageNumber) {
+	if (!confirm('캠핑장삭제 하시겠습니까?')){
+		return;
+	}
+	
 	location.href= "${contextPath}/bCampingDelete.do?num="+num+"&pageNumber="+pageNumber;
 }
 

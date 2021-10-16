@@ -30,75 +30,75 @@
 	</insert>
 	
 	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) FROM CAMPING
-		WHERE 1=1
-		<if test="status == '01'">
-			AND STATUS = #{status}
-		</if>
-		<if test="regid != null">
-			AND REGID = #{regid}
-		</if>
-		<if test="address1 != null and address1 != ''">
-			AND ADDRESS1 = #{address1}
-		</if>
-		<if test="address2 != null and address2 != ''">
-			AND ADDRESS2 = #{address2}
-		</if>
-		<if test="camptype != null and camptype != ''">
-			AND REGEXP_LIKE(CAMP_TYPE, #{camptype})
-		</if>
-		<if test="themecode != null and themecode != ''">
-			AND REGEXP_LIKE(THEMECODE, #{themecode})
-		</if>
-		<if test="regkeyword != null and regkeyword != ''">
-			AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
-		</if>
-		<if test="searchName != null and searchName != ''">
-			AND NAME LIKE '%' || #{searchName} || '%'
-		</if>
-	</select>
-	
-	<select id="getCampingList" resultType="myCampingBean">
-		SELECT 
-			ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
-			NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,
-			SUMMARY,IMGURL,OPTIONS,
-			POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,
-			READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT,
-			REGID,REGDATE,MODDATE,
-			(CASE STATUS
-					WHEN '01' THEN '노출'
-					WHEN '02' THEN '비노출'
-			END) AS STATUS 
-		FROM CAMPING
-		WHERE 1=1
-		<if test="status == '01'">
-			AND STATUS = #{status} 
-		</if>
-		<if test="regid != null">
-			AND REGID = #{regid}
-		</if>
-		<if test="address1 != null and address1 != ''">
-			AND ADDRESS1 = #{address1} 
-		</if>
-		<if test="address2 != null and address2 != ''">
-			AND ADDRESS2 = #{address2} 
-		</if>
-		<if test="camptype != null and camptype != ''">
-			AND REGEXP_LIKE(CAMP_TYPE, #{camptype})
-		</if>
-		<if test="themecode != null and themecode != ''">
-			AND REGEXP_LIKE(THEMECODE, #{themecode})
-		</if>
-		<if test="regkeyword != null and regkeyword != ''">
-			AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
-		</if>
-		<if test="searchName != null and searchName != ''">
-			AND NAME LIKE '%' || #{searchName} || '%'
-		</if>
-		<choose>
+      SELECT COUNT(*) FROM CAMPING
+      WHERE 1=1
+      <if test="status == '01'">
+         AND STATUS = #{status}
+      </if>
+      <if test="regid != null and regid != ''">
+         AND REGID = #{regid}
+      </if>
+      <if test="address1 != null and address1 != ''">
+         AND ADDRESS1 = #{address1}
+      </if>
+      <if test="address2 != null and address2 != ''">
+         AND ADDRESS2 = #{address2}
+      </if>
+      <if test="camptype != null and camptype != ''">
+         AND REGEXP_LIKE(CAMP_TYPE, #{camptype})
+      </if>
+      <if test="themecode != null and themecode != ''">
+         AND REGEXP_LIKE(THEMECODE, #{themecode})
+      </if>
+      <if test="regkeyword != null and regkeyword != ''">
+         AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
+      </if>
+      <if test="searchName != null and searchName != ''">
+         AND NAME LIKE '%' || #{searchName} || '%'
+      </if>
+   </select>
+   
+   <select id="getCampingList" resultType="myCampingBean">
+      SELECT 
+         ROW_NUMBER() OVER(ORDER BY NUM DESC, REGDATE DESC) AS ROW_NUM,
+         NUM,NAME,CAMP_TYPE,THEMECODE,REG_KEYWORD,
+         SUMMARY,IMGURL,OPTIONS,
+         POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4,
+         READCOUNT,RECOMMEND,STEAMED,REVIEWCOUNT,
+         REGID,REGDATE,MODDATE,
+         (CASE STATUS
+               WHEN '01' THEN '노출'
+               WHEN '02' THEN '비노출'
+         END) AS STATUS 
+      FROM CAMPING
+      WHERE 1=1
+      <if test="status == '01'">
+         AND STATUS = #{status} 
+      </if>
+      <if test="regid != null and regid != ''">
+         AND REGID = #{regid}
+      </if>
+      <if test="address1 != null and address1 != ''">
+         AND ADDRESS1 = #{address1} 
+      </if>
+      <if test="address2 != null and address2 != ''">
+         AND ADDRESS2 = #{address2} 
+      </if>
+      <if test="camptype != null and camptype != ''">
+         AND REGEXP_LIKE(CAMP_TYPE, #{camptype})
+      </if>
+      <if test="themecode != null and themecode != ''">
+         AND REGEXP_LIKE(THEMECODE, #{themecode})
+      </if>
+      <if test="regkeyword != null and regkeyword != ''">
+         AND REG_KEYWORD LIKE '%'|| #{regkeyword} || '%'
+      </if>
+      <if test="searchName != null and searchName != ''">
+         AND NAME LIKE '%' || #{searchName} || '%'
+      </if>
+      <choose>
          <when test="orderBy == 'regdate desc'">
-           	 ORDER BY REGDATE DESC
+               ORDER BY REGDATE DESC
          </when>
          <when test="orderBy == 'moddate desc'">
             ORDER BY MODDATE DESC
@@ -116,13 +116,8 @@
             ORDER BY REVIEWCOUNT DESC
          </when>
          <otherwise>ORDER BY REGDATE DESC</otherwise>
-    	</choose>
-	</select>
-	
-	<select id="getCampingDetail" resultType="myCampingBean">
-		SELECT * FROM CAMPING
-		WHERE NUM = #{num}
-	</select>
+       </choose>
+   </select>
 	
 	<select id="getCampingNameAndTypes" resultType="myCampingBean">
 		SELECT 
@@ -155,15 +150,7 @@
 		</set>
 		WHERE NUM = #{num}
 	</update>
-	
-	<update id="updateCampingStatusBlind">
-		UPDATE CAMPING
-		<set>
-			STATUS = '02'
-		</set>
-		WHERE NUM = #{num}
-	</update>
-	
+		
 	<update id="campingReadcountUp">
 		UPDATE CAMPING
 		<set>
@@ -176,4 +163,13 @@
       SELECT REGID FROM CAMPING
       WHERE NUM = #{cnum}
    </select>
+   
+   <update id="updateCampingStatus">
+      UPDATE CAMPING
+      <set>
+         STATUS = #{status}
+      </set>
+      WHERE NUM = #{num}
+   </update>
+   
 </mapper>

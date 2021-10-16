@@ -44,7 +44,7 @@ public class AdminRoomDetailController {
 		
 		System.out.println(roombean.getNum());
 		List<PostimgBean> imgList = postimgDao.getPostimgList(imgMap);
-		System.out.println("imgList:" + imgList.toString());
+		//System.out.println("imgList:" + imgList.toString());
 		
 		mav.addObject("roombean", roombean);
 		mav.addObject("imgList", imgList);
