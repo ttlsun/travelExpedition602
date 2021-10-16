@@ -1,5 +1,7 @@
 package user.tour.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,22 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
 import user.tour.model.TourDao;
 
 @Controller
-public class TourDeleteController {
+public class BTourDeleteController {
 
-	private static final String COMMAND = "/tourDelete.do";
-	private static final String GOTOPAGE = "redirect:/tourList.do";
+	private static final String COMMAND = "/bTourDelete.do";
+	private static final String GOTOPAGE = "redirect:/bTourList.do";
 	
 	@Autowired
 	private TourDao tourdao;
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView tourDelete(ModelAndView mav,
-			@RequestParam("num") String num,
-			@RequestParam("pageNumber") String pageNumber) {
+			@RequestParam Map<String, Object> map) {
 		
 		int cnt = -1;
 		
-		cnt = tourdao.updateTourStatusBlind(num);
+		map.put("status", "02");
+		cnt = tourdao.updateTourStatus(map);
 		
 		if(cnt != -1) {
 			System.out.println("tour 비노출 변경 성공");
@@ -35,8 +37,8 @@ public class TourDeleteController {
 			mav.setViewName("user/tour/tourDetailView");
 		}
 		
-		mav.addObject("num",num);
-		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("num",map.get("num"));
+		mav.addObject("pageNumber",map.get("pageNumber"));
 		
 		return mav;
 	}

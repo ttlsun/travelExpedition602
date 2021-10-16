@@ -17,7 +17,7 @@ var marker;
 $(document).ready(function() {
 	
 	//메뉴 on 유지.
-	navActive('camping');
+	navActive('bCamping');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "관광지");
@@ -146,7 +146,7 @@ function fileSelectChange(event) {
 <div>
 	<header><h2 align="center" class="text-primary">관광지 등록 화면</h2></header>
 	
-	<form:form name="myForm" commandName="tour" action="${contextPath}/tourRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<form:form name="myForm" commandName="tour" action="${contextPath}/bTourRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 	<input type="hidden" name="regid" value="${userId}">
  	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>

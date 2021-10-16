@@ -31,6 +31,9 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
+		  <if test="regid != null and regid != ''">
+         AND REGID = #{regid}
+      	</if>
 		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1}
 		</if>
@@ -65,6 +68,10 @@
 		<if test="status == '01'">
 			AND STATUS = #{status}
 		</if>
+	 <if test="regid != null and regid != ''">
+         AND REGID = #{regid}
+      </if>
+		
 		<if test="address1 != null and address1 != ''">
 			AND ADDRESS1 = #{address1} 
 		</if>
@@ -132,13 +139,13 @@
 		WHERE NUM = #{num}
 	</update>
 	
-	<update id="updateTourStatusBlind">
-		UPDATE TOURLIST
-		<set>
-			STATUS = '02'
-		</set>
-		WHERE NUM = #{num}
-	</update>
+	<update id="updateTourStatus">
+      UPDATE TOURLIST
+      <set>
+         STATUS = #{status}
+      </set>
+      WHERE NUM = #{num}
+   </update>
 	
 	<!-- 조회수 올리기 -->
 	<update id="updateTourUpcount">

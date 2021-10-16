@@ -156,7 +156,7 @@ function listByStatus(){
 				<td>${tour.rownum}</td>
 				<td>${tour.num}</td>
 				<td>${tour.address1}</td> 
-				<td><a href="tourgDetail.ad?num=${tour.num}&pageNumber=${pageInfo.pageNumber}">${tour.name}</a></td> 
+				<td><a href="tourDetail.ad?num=${tour.num}&pageNumber=${pageInfo.pageNumber}">${tour.name}</a></td> 
 				<td>
 					<c:if test="${fn:contains(tour.themecode,'01') }">베스트</c:if>
 					<c:if test="${fn:contains(tour.themecode,'02') }">제주여행</c:if>

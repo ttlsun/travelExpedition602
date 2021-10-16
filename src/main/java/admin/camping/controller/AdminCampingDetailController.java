@@ -19,7 +19,7 @@ import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.room.model.RoomBean;
 import user.room.model.RoomDao;
-
+  
 @Controller
 public class AdminCampingDetailController {
 	

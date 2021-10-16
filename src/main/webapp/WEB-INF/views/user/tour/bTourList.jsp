@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	navActive('camping');
+	navActive('bCamping');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "관광지");
@@ -22,115 +22,9 @@ $(document).ready(function() {
 	selInit();
 });
 
-
-
-//첫번째 샐랙트 박스 셋팅
-function selInit() {
-	
-	$("#searchAddr , #searchAddr2").append(new Option("선택", ""));
-	
-	//시도 검색 select박스
-	addrAjax("시도", "", function(data) {
-		$.each(data.body, function (i, item) {
-		    $('#searchAddr').append($('<option>', {
-		        value: item,
-		        text : item
-		    }));
-		});
-	});
-}
-
-//첫번째 선택시, 두번째 샐랙트 박스 셋팅
-function chageSelOpt() {
-	
-	var selFirstIndex = $("#searchAddr option:selected").index();
-	
-	//초기화
-	$("#searchAddr2").empty(); 
-	$("#searchAddr2").append(new Option("선택", ""));
-	
-	//구군 검색 select박스
-	if (selFirstIndex > 0) {
-		addrAjax("구군", $("#searchAddr option:selected").val(), function(data) {
-			$.each(data.body, function (i, item) {
-			    $('#searchAddr2').append($('<option>', {
-			        value: item,
-			        text : item
-			    }));
-			});
-		});
-	}	
-}
-
-//주소 ajax(addrAjax)
-function addrAjax(type, code, callback) {
-	$.ajax({
-		url: "getAddr",
-		type: "POST",
-		data: {
-			addrType : type,
-			addrCode : code
-		},
-		dataType: "json",
-		success: function(data) {
-			console.log(data);
-			if (data.resultCode != 'OK') {
-				callback(null);
-				return;
-			}
-			
-			callback(data);
-		},
-		error: function(msg, error) {
-			console.log("처리오류");
-			callback(null);
-		}
-	});
-}
-
-//키워드 선택 여부 체크
-function keywordChk(index) {
-	
-	//값 확인(값을 따로 내려주고싶을때 사용해도 됨.)
-	var regkeywordIndex = $('#regkeyword_'+index).val();
-	//alert(regkeywordIndex);
-	//alert($('#regkeyword_'+index).is(':checked')); //내가 선택했는지 여부 체크.
-	
-	//키워드가 체크되어있으면 색변경
-	if($('#regkeyword_'+index).is(':checked') == true){
-		$('#labelKegkeyword_'+index).css("color","#15b15a"); //변경색
-	}else{
-		$('#labelKegkeyword_'+index).css("color","#337ab7");
-	}
-}
-
 //등록페이지이동 버튼
 function goRegister(){
-	location.href="${contextPath}/tourRegister.do";
-}
-
-//수정페이지이동 버튼
-function goUpdate(num) {
-	location.href="${contextPath}/tourUpdate.do?num="+num+"&pageNumber=1";
-}
-
-//삭제버튼
-function goDelete() {
-	alert("삭제 버튼");
-}
-
-function goDetail(num) {
-	location.href="${contextPath}/tourDetail.do?num="+num+"&pageNumber="+${pageInfo.pageNumber};
-}
-//상세검색 버튼 클릭시
-function goSearch(){
-	document.myform.submit();
-}
-
-
-// orderBy검색 클릭시,
-function listOrderBy() {
-	document.myform.submit();
+	location.href="${contextPath}/bTourRegister.do";
 }
 	
 </script>
@@ -140,74 +34,11 @@ function listOrderBy() {
 <div>
 	<header><h2 align="center" class="text-primary">관광지 리스트 화면</h2></header>
 	
-	<form name="myform" action="${contextPath}/tourList.do" method="post">
-	<div class="form-group rounded">		
-			<div>
-				<dl>
-					<dt><label for="searchAddr">지역</label></dt>
-					<dd>
-						<select id="searchAddr" name="address1" class="form-control40" onChange="chageSelOpt()"></select><strong> (시) </strong>
-						<span style="padding-left: 3.4%;"></span>
-						<select id="searchAddr2" name="address2" class="form-control40" ></select><strong> (군/구) </strong>
-					</dd>
-				</dl>
-				<dl>
-					<dd>
-						<input type="text" class="form-control45" name="searchName" placeholder="이름으로 검색">
-						<span style="padding-left: 3.4%;"></span>
-						<input type="submit" class="btn btn-primary" value="검색하기">
-						<input type="reset" class="btn btn-default" value="초기화">
-					</dd>
-				</dl>
-				<div class="panel-group" id="accordion">
-					<div class="panel panel-default1">
-						<div>
-							<h4 class="panel-title1">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 
-								상세검색&nbsp;<span style="color: gray;"><small>∨</small></span>
-								</a>
-							</h4>
-						</div>
-						<div id="collapseOne" class="panel-collapse collapse">
-							<div class="panel-body">
-								<dl>
-									<dt>
-										<label for="searchTheme">테마</label>
-									</dt>
-									<dd>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="01">&nbsp;베스트&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="02">&nbsp;제주여행&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="03">&nbsp;내륙여행&nbsp;</label>
-										<label><input type="checkbox" id="searchTheme" name="themecode" value="04">&nbsp;섬여행&nbsp;</label>
-									</dd>
-								</dl>
-								<dl>
-									<dt><label for="searchKeyword">태그로 검색</label></dt>
-									<dd>
-										<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
-										<label for="regkeyword_${status.index}" id="labelKegkeyword_${status.index}" style="color: #337ab7;">
-										&nbsp;
-										<input type="checkbox" name="regkeyword" id="regkeyword_${status.index}" value="${keywordList.tag}" style="display:none; " onclick="keywordChk(${status.index})"> ${keywordList.tag}
-										</label>
-										</c:forEach>
-									</dd>
-								</dl>
-								<dl>
-									<dd style="text-align: right;">
-										<input type="submit" class="btn btn-primary" value="상세검색" onClick="goSearch()">
-										<input type="reset" class="btn btn-default" value="초기화">
-									</dd>
-								</dl>
-							</div>
-						</div>
-					</div>
-				</div>	
-			</div>
-	</div>
-	
+	<form name="myform" action="${contextPath}/bTourList.do" method="post">
 	<table class="table table-bordered" style="padding-top: 5%;">
 		<caption>
 			<span style="text-align: left">총 ${totalCount}개 관광지가 검색되었습니다. </span>
+			<input type="button" style="float: right;" class="btn btn-primary" value="관광지 등록하기(사업자 전용)" onClick="goRegister()">
 		</caption>
 		<thead>
 			<tr class="active">
@@ -239,7 +70,7 @@ function listOrderBy() {
 						<img src="${fileImg}/${bean.imgurl}" alt="" title="" width="100%">
 					</td>
 					<td colspan="4"align="left">
-						<h3><a href="${contextPath }/tourDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
+						<h3><a href="${contextPath }/bTourDetail.do?num=${bean.num}&pageNumber=${pageInfo.pageNumber}">
 							[${bean.address1}&nbsp;${bean.address2}]${bean.name }</a></h3>
 						<p style="font-style: italic;">"${bean.summary}"</p>
 						<p>${bean.regkeyword }</p>

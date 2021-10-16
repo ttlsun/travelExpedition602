@@ -27,11 +27,11 @@ import user.tour.model.TourDao;
 
 
 @Controller
-public class TourUpdateController {
+public class BTourUpdateController {
 	
-	private static final String COMMAND = "/tourUpdate.do";
-	private static final String GETPAGE = "user/tour/tourUpdateForm";
-	private static final String GOTOPAGE = "redirect:/tourDetail.do";
+	private static final String COMMAND = "/bTourUpdate.do";
+	private static final String GETPAGE = "user/tour/bTourUpdateForm";
+	private static final String GOTOPAGE = "redirect:/bTourDetail.do";
 	
 	@Autowired
 	private ServletContext servletContext;

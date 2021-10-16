@@ -17,7 +17,7 @@ var marker;
 $(document).ready(function() {
 	
 	//메뉴 on 유지.
-	navActive('camping');
+	navActive('bCamping');
 	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "관광지");
@@ -118,7 +118,7 @@ function inputSave() {
 
 //리스트 버튼 클릭시
 function goList() {
-	location.href= "${contextPath}/tourList.do?pageNumber="+pageNumber;
+	location.href= "${contextPath}/bTourList.do?pageNumber="+pageNumber;
 }
 
 // 이미지 파일 선택시 지도 말풍선 이미지 변경
@@ -139,10 +139,10 @@ function fileSelectChange(event) {
 <div>
 	<header><h2 align="center" class="text-primary">관광지 수정 화면</h2></header>
 	
-	<form:form name="myForm" commandName="tour" action="${contextPath}/tourUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<input type="text" name="pageNumber" value="${pageNumber}">
-	<input type="text" name="num" value="${tour.num}">
-	<input type="text" name="modid" value="${userId}"> 
+	<form:form name="myForm" commandName="tour" action="${contextPath}/bTourUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<input type="hidden" name="pageNumber" value="${pageNumber}">
+	<input type="hidden" name="num" value="${tour.num}">
+	<input type="hidden" name="modid" value="${userId}"> 
 	<table border="1" class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>

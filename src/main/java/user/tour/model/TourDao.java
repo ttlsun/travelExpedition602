@@ -50,8 +50,8 @@ public class TourDao {
 		return cnt;
 	}
 	
-	public int updateTourStatusBlind(String num) {
-		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateTourStatusBlind", num);
+	public int updateTourStatus(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.update(NAMESPACE+".updateTourStatus", map);
 		return cnt;
 	}
 	

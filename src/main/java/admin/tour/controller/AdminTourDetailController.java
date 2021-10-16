@@ -24,8 +24,7 @@ public class AdminTourDetailController {
 
 	private static final String COMMAND = "/tourDetail.ad";
 	private static final String GETPAGE = "admin/tour/tourDetailView";
-	public static final String GOTOPAGE = "redirect:/tourList.ad";
-	public static final String GOTOPAGE_DETAIL = "redirect:/tourDetail.ad";
+	public static final String GOTOPAGE = "redirect:/tourDetail.ad";
 	
 	@Autowired
 	private TourDao tourDao;
@@ -70,37 +69,33 @@ public class AdminTourDetailController {
 	}
 	
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
-    public ModelAndView communityDetailPost(ModelAndView mav,
-    										@RequestParam (value = "num") int num,
-    										@RequestParam (value = "pageNumber") String pageNumber,
-    										@RequestParam (value = "status") String status) {
-		
-		System.out.println("num:" + num + " ,status : " + status);
-		
-		try {
-			
-			if(status.equals("00")) {
-				
-				//이미지파일들 테이블 삭제.. 서버에 있는 이미지 삭제..
-				
-				//삭제일경우에만 리스트로 가게..하셔요.. 저는 깜빡하고 리스트로 가게했네요 ㅠㅠ..
-				mav.setViewName(GOTOPAGE);
-			}else {
-				//완전삭제가 아닐경우, 상태값만 업뎃
-				
-				mav.setViewName(GOTOPAGE_DETAIL);
-			}
-			
-			mav.addObject("pageNumber", pageNumber);
-			mav.addObject("num", num);
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("내부오류");
-		}
-		
-		return mav;
-	}
+    public ModelAndView tourDetailPost(ModelAndView mav, 
+                               @RequestParam("num") String num,
+                               @RequestParam("status") String status,
+                              @RequestParam("pageNumber") String pageNumber) {
+      
+      System.out.println("num:" + num+ " ,status : " + status);
+      
+      try {
+         
+         //상태값 변경
+         Map<String, Object> map =  new HashMap<String, Object>();
+         map.put("num", num);
+         map.put("status", status);
+         tourDao.updateTourStatus(map);
+            
+         mav.setViewName(GOTOPAGE);
+         
+         mav.addObject("num",num);
+         mav.addObject("pageNumber",pageNumber);
+         
+      }catch (Exception e) {
+         e.printStackTrace();
+         System.out.println("내부오류");
+      }
+      
+      return mav;
+   }
 	
 	
 }

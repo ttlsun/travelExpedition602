@@ -16,7 +16,7 @@ var marker;
 
 $(document).ready(function() {
 	//메뉴 on 유지.
-	navActive('camping');
+	navActive('bCamping');
 	
 	//메타태그 설정. (DB에 가져온 값 셋팅)
 	$("#metaTitle").attr("content", "${tourbean.name} 관광지 상세");
@@ -63,21 +63,17 @@ function closeOverlay() {
 
 //목록보기 버튼 클릭시
 function goList(pageNumber) {
-	location.href= "${contextPath}/tourList.do?pageNumber="+pageNumber;
+	location.href= "${contextPath}/bTourList.do?pageNumber="+pageNumber;
 }
 
 //수정(사업자 전용) 버튼 클릭시
 function goUpdate(num,pageNumber) {
-	location.href= "${contextPath}/tourUpdate.do?num="+num+"&pageNumber="+pageNumber;
+	location.href= "${contextPath}/bTourUpdate.do?num="+num+"&pageNumber="+pageNumber;
 }
 
 //삭제(사업자 전용) 버튼 클릭시
 function goDelete(num,pageNumber) {
-	
-	if(!confirm('관광지 삭제 하시겠습니까?')){
-		return;
-	}
-	location.href= "${contextPath}/tourDelete.do?num="+num+"&pageNumber="+pageNumber;
+	location.href= "${contextPath}/bTourDelete.do?num="+num+"&pageNumber="+pageNumber;
 }
 
 
@@ -133,7 +129,9 @@ function likesRegisters() {
 <div>
 	<div class="marginPadding10" align="right">
 		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
-		
+		<input type="button" class="btn btn-default" value="수정(사업자 전용)" onclick="goUpdate(${tourbean.num},${pageNumber})">
+		<input type="button" class="btn btn-default" value="삭제(사업자 전용)" onclick="goDelete(${tourbean.num},${pageNumber})">
+	</div> 
 	<!-- 상세페이지 form -->
 	<form name="tourForm" action="tourDetail.do" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">

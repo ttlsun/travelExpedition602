@@ -27,11 +27,11 @@ import user.tour.model.TourBean;
 import user.tour.model.TourDao;
 
 @Controller
-public class TourRegisterController {
+public class BTourRegisterController {
 	
-	private static final String COMMAND = "/tourRegister.do";
-	private static final String GETPAGE = "user/tour/tourRegisterForm";
-	private static final String GOTOPAGE = "redirect:/tourList.do";
+	private static final String COMMAND = "/bTourRegister.do";
+	private static final String GETPAGE = "user/tour/bTourRegisterForm";
+	private static final String GOTOPAGE = "redirect:/bTourList.do";
 	
 	
 	@Autowired
@@ -121,9 +121,6 @@ public class TourRegisterController {
 			
 			
 			tourbean.setNum(maxNum);
-			
-			//로그인 id연결
-			tourbean.setRegid("id");
 			
 			//관광지 레코드 insert
 			cnt = tourDao.insertData(tourbean);
