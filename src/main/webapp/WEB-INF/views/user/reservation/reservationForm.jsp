@@ -2,10 +2,15 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../../common/top.jsp" %>   
+
 <style type="text/css">
 	th,td{
 		text-align: center;
 	}
+	
+	.ui-dialog-titlebar-close {
+    	background-image: url(https://code.jquery.com/ui/1.13.0/themes/base/images/ui-icons_777777_256x240.png);
+    }
 </style>
 
 <script type="text/javascript">
@@ -19,8 +24,103 @@ $(document).ready(function() {
 	$("#metaTitle").attr("content", "예약");
 	$("#metaDescription").attr("content", "예약 등록");
 	$("#metaKeywords").attr("content", "#여행자들602호 예약,#예약, #예약등록");
+	
+	// dialog 셋팅 
+  	$('#payDialog').dialog({
+		autoOpen:false, //자동으로 열리지 않게
+		resizable: false,
+		height: 500,
+		width: 900,
+		position: { my: "center", at: "center", of: window } ,
+		modal:true ,
+		resizable : false,
+		close: function( event, ui ) {
+	        $('html, body').css({'overflow': 'auto', 'height': '100%'}); 
+	    }
+	});  
+	
+  	//등록 결재수단 검색 클릭시,
+  	$('#payCheck').click(function() {
+		$("#payDialog").dialog("open");
+		getPay();
+	});
+  	
+  	//결재수단 체크시,
+  	$('input[name="paycode"]').on('click', function(event) {
+  		var selectVal=  $(this).val();
+  		//alert(selectVal);
+  		$('#paycodeVal').val(selectVal);
+  		
+  		if ($(this).val() == "카드결제") {
+  			$('#cvcTr').show(); //cvc 보이게 처리
+  		}else{
+  			$('#cvcTr').hide(); //cvc 안보이게 처리.
+  			$('#cvc').val(); //값 초기화
+  		}
+  	});
+  	
 });
 
+
+function getPay() {
+	var regId = "${userId}";
+	var paycodeVal = $('#paycodeVal').val();
+	$.ajax({
+		url: "jsonPayList.do",
+		type: "POST",
+		data: {
+			id : regId,
+			paycode : paycodeVal
+		},
+		dataType: "json",
+		success: function(data) {
+			//console.log(data);
+			
+			//리스트 초기화
+			$('#paylist').empty();
+			
+			if (data.resultCode == "OK") {
+				var addList = "";
+				if(data.lists.length == 0){
+					addList += "<tr>";
+					addList += "<td colspan='6' align='center'> 해당 리스트가 없습니다.";
+					addList += "</td>";
+					addList += "</tr>";
+				}else{
+					for(var i = 0; i < data.lists.length; i++){
+						addList += "<tr style='cursor:pointer;' onclick=\"payListclick('"+data.lists[i].paydetail1+"','"+ data.lists[i].paydetail2+"','"+data.lists[i].cvc+"')\">";
+						addList += "<td align='center'> " + data.lists[i].num + " </td>";
+						addList += "<td align='center'> " + data.lists[i].paycode + " </td>";
+						addList += "<td align='center'> " + data.lists[i].paydetail1 + " </td>";
+						addList += "<td align='center'> " + data.lists[i].paydetail2 + " </td>";
+						addList += "<td align='center'> " + data.lists[i].cvc + " </td>";
+						addList += "<td align='center'> " + data.lists[i].regdate + " </td>";
+						addList += "</tr>";
+					}
+				}
+				
+			}
+			
+			$('#paylist').append(addList);
+			
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+		}
+	});
+	
+}
+	
+//내가 선택한 결재 수단
+function payListclick(paydetail1,paydetail2,cvc) {
+	console.log(paydetail1+","+paydetail2+","+cvc);
+	$('#paydetail1').val(paydetail1);
+	$('#paydetail2').val(paydetail2);
+	$('#cvc').val(cvc);
+
+	$("#payDialog").dialog("close");
+}
+	
 //모든 이용약관 체크
 function allAgreeChk() {
 
@@ -41,8 +141,7 @@ function goPayment() {
 				alert("이용약관에 동의해주세요.");
 				return false;
 		}
-	}
-	else{
+	}else{
 		return false;
 	}
 }
@@ -70,7 +169,7 @@ function goPayment() {
 						<c:when test="${roombean.roomtype eq 03 }">[글램핑]</c:when>
 						<c:when test="${roombean.roomtype eq 04 }">[카라반]</c:when>
 					</c:choose>
-					&nbsp;${roombean.name }
+					&nbsp; ${roombean.name}
 				</td>
 			</tr>
 			<tr>
@@ -93,7 +192,7 @@ function goPayment() {
 	</div>
 	
 	<form:form commandName="reservation" name="myForm" action="${contextPath}/reservation.do" method="post" class="form-horizontal" role="form">
-		<input type="hidden" name="rnum" value="${rnum }">
+		<input type="hidden" name="rnum" value="${rnum}">
 		<input type="hidden" name="cnum" value="${roombean.cnum }">
 		<input type="hidden" name="cname" value="${map.cname }">
 		<input type="hidden" name="pageNumber" value="${pageNumber }">
@@ -104,9 +203,11 @@ function goPayment() {
 		<input type="hidden" name="userId" value="${userId}">
 		<input type="hidden" name="weekdayprice" value="${roombean.weekdayprice}">
 		<input type="hidden" name="weekendprice" value="${roombean.weekendprice}">
-		<%-- <input type="hidden" name="weekdayCount" value="${weekdayCount}">
+		<input type="hidden" name="weekdayCount" value="${weekdayCount}">
 		<input type="hidden" name="weekendCount" value="${weekendCount}">
-		<input type="hidden" name="calDateDays" value="${calDateDays}"> --%>
+		<input type="hidden" name="calDateDays" value="${calDateDays}">
+		
+		<input type="hidden" name="paycodeVal" id="paycodeVal" value="">
 		
 		<!-- 예약 회원,결제 정보 리스트 -->	
 		<div class="form-group" align="center">
@@ -161,6 +262,36 @@ function goPayment() {
 					<label for="paycode2"><input type="radio" id="paycode2" name="paycode" value="무통장입금"> 무통장입금</label>
 					<label for="paycode3"><input type="radio" id="paycode3" name="paycode" value="카드결제"> 카드결제</label>
 					<label for="paycode4"><input type="radio" id="paycode4" name="paycode" value="휴대폰결제"> 휴대폰결제</label>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="payCheck">결제수단검색</label></td>
+				<td>
+					<input type="button" class="btn btn-default" value="등록결제수단검색" id="payCheck">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="paycode">은행명</label>
+				</td>
+				<td style="border-right: none;">
+					<input type="text" class="form-control" name="paydetail1" id="paydetail1" value="">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="paycode">계좌번호</label>
+				</td>
+				<td style="border-right: none;">
+					<input type="text" class="form-control" name="paydetail2" id="paydetail2" value="">
+				</td>
+			</tr>
+			<tr id="cvcTr" style="display: none;">
+				<td>
+					<label for="paycode">cvc</label>
+				</td>
+				<td style="border-right: none;">
+					<input type="text" class="form-control" name="cvc" id="cvc" value="">
 				</td>
 			</tr>
 		</table>
@@ -293,5 +424,25 @@ function goPayment() {
 	</div>
 </article>
 </section>
+
+<!-- 결제(pay) 관련 dialog -->
+<div id="payDialog" title="내 등록 결제 수단 검색" >
+	<div class="marPadding">
+		<table border="1" class="table table-bordered">
+		<caption>내 등록 결제 수단 선택</caption>
+			<thead>
+				<tr class="active">
+					<th>번호</th>
+					<th>결재수단</th>
+					<th>은행명</th>
+					<th>계좌번호</th>
+					<th>cvc</th>
+					<th>등록일</th>
+				</tr>
+			</thead>
+			<tbody id="paylist"></tbody>
+		</table>
+	</div>
+</div>
 
 <%@ include file="../../../common/bottom.jsp" %>   

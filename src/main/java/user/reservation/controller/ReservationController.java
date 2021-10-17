@@ -2,8 +2,11 @@ package user.reservation.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.travelExpedition.utility.Paging;
+import com.my.travelExpedition.utility.WebUtil;
+
+import net.sf.json.JSONObject;
+import user.pay.model.PayBean;
+import user.pay.model.PayDao;
 import user.reservation.model.ReservationBean;
 import user.reservation.model.ReservationDao;
 import user.room.model.RoomBean;
@@ -29,6 +38,9 @@ public class ReservationController {
 	
 	@Autowired
 	private RoomDao roomDao;
+	
+	@Autowired
+	private PayDao payDao;
 	
 	@Autowired
 	private ReservationDao reservationDao;
@@ -77,29 +89,29 @@ public class ReservationController {
 			
 			System.out.println("주중숙박일:"+weekdayCount);
 			System.out.println("주말숙박일:"+weekendCount);
-			
+		
 			//총 결제금액 구하기
 			int totalprice = (weekdayCount*roombean.getWeekdayprice())+(weekendCount*roombean.getWeekendprice());
+
+			mav.addObject("calDateDays", calDateDays); //주중숙박일
+			mav.addObject("weekdayCount", weekdayCount); //주말숙박일
+			mav.addObject("weekendCount", weekendCount); //숙박일수
+			mav.addObject("totalprice", totalprice); //총결제금액
 			
-			mav.addObject("calDateDays", calDateDays);
-			mav.addObject("weekdayCount", weekdayCount);
-			mav.addObject("weekendCount", weekendCount);
-			mav.addObject("totalprice", totalprice);
-		}
-		catch(Exception e){
+			//사용자 아이디(ID) mav로 가져가기
+			//mav.addObject("loginId", "loginId");
+			
+			mav.addObject("map", map);
+			mav.addObject("roombean", roombean);
+			mav.addObject("rnum", rnum);
+			mav.addObject("pageNumber", pageNumber);
+			
+			mav.setViewName(GETPAGE);
+			
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		
-		//사용자 아이디(ID) mav로 가져가기
-		mav.addObject("loginId", "loginId");
-		
-		
-		mav.addObject("map", map);
-		mav.addObject("roombean", roombean);
-		mav.addObject("rnum", rnum);
-		mav.addObject("pageNumber", pageNumber);
-		mav.setViewName(GETPAGE);
 		return mav;
 	}
 	
@@ -109,14 +121,17 @@ public class ReservationController {
 								@ModelAttribute("reservation") @Valid ReservationBean reservation, 
 								BindingResult result) {
 		
-		//mav.addObject("calDateDays", map.get("calDateDays"));
-		//mav.addObject("weekdayCount", map.get("weekdayCount"));
-		//mav.addObject("weekendCount", map.get("weekendCount"));
+		//객실관련 조회.
+		String rnum = (String)map.get("rnum");
+		//System.out.println("rnum:" + rnum);
+		RoomBean roombean = roomDao.getRoomReserveInfo(rnum); 
 		
 		mav.addObject("rnum", map.get("rnum"));
 		mav.addObject("pageNumber", map.get("pageNumber"));
 		mav.addObject("map", map);
+		mav.addObject("roombean", roombean);
 		
+		//보내드려야할것 같아서 보내드려요.
 		mav.addObject("cname", map.get("cname"));
 		mav.addObject("totalprice", map.get("totalprice"));
 		mav.addObject("calDateDays", map.get("calDateDays"));
@@ -159,4 +174,39 @@ public class ReservationController {
 	
 		return mav;
 	}
+	
+	//pay 리스트 조회.
+	@RequestMapping(value = "/jsonPayList.do")
+	public void doJsonUpdateStatus(HttpServletResponse response,HttpServletRequest request,
+									@RequestParam Map<String, String> map) throws Exception {
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			System.out.println("paycode : " + map.get("paycode"));
+			
+			//paycode 만 검색하게 만들어주시면 주석 풀어서 사용. 
+			//map.put("whatColumn", map.get("paycode"));
+			int totalCount = payDao.getTotalCount(map);
+			String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
+			Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
+			List<PayBean> lists = payDao.getList(pageInfo, map);
+
+			//json.put("pageInfo", pageInfo); //굳이 페이징 할 필요없어보임.
+			//json.put("totalCount", totalCount);
+			json.put("lists", lists);
+			json.put("resultCode", "OK");
+			json.put("resultMsg", "성공");
+			
+		} catch (Exception e) {
+			json.put("resultCode", "ERROR");
+			json.put("resultMsg", e.getMessage());
+		}
+		
+		WebUtil.jsonSend(json, response);
+	}
+	
+	
+	
 }

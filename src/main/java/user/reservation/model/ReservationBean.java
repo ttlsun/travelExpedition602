@@ -1,9 +1,8 @@
 package user.reservation.model;
 
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class ReservationBean {
-	
 	
 	private int num;
 	private int cnum;
@@ -14,10 +13,10 @@ public class ReservationBean {
 	private String regdate;
 	private int guests;
 	
-	@NotNull(message = "예약자 성명을 입력하세요.")
+	@NotBlank(message = "예약자 성명을 입력하세요.")
 	private String name;
 	
-	@NotNull(message = "예약자 연락처을 입력하세요.")
+	@NotBlank(message = "예약자 연락처을 입력하세요.")
 	private String phone;
 	
 	private String email;
