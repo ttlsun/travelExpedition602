@@ -664,6 +664,10 @@ CREATE TABLE RESERVATION(
 	REQUESTED CLOB,
 	TOTALPRICE NUMBER NOT NULL,
 	STATUS VARCHAR2(100),
+	paycode varchar2(20) not null,
+ 	paydetail1 varchar2(30) not null,
+  	paydetail2 varchar2(20) null,
+  	cvc number default 0,
 	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM) ON DELETE CASCADE,
 	FOREIGN KEY(RNUM) REFERENCES ROOM(NUM) ON DELETE CASCADE,
 	FOREIGN KEY(id) REFERENCES USERS(id) ON DELETE CASCADE
@@ -684,6 +688,10 @@ COMMENT ON COLUMN RESERVATION.EMAIL IS '이메일';
 COMMENT ON COLUMN RESERVATION.REQUESTED IS '요청사항';
 COMMENT ON COLUMN RESERVATION.TOTALPRICE IS '총금액';
 COMMENT ON COLUMN RESERVATION.STATUS IS '진행상태/01:입금대기,02:결제완료,03:예약취소신청,04:환불완료';
+comment on column RESERVATION.paycode is '결제수단 구분(계좌이체, 무통장입금, 카드결제, 휴대폰결제)';
+comment on column RESERVATION.paydetail1 is '결제수단 상세 정보(계좌이체-은행명, 무통장입금-은행명, 카드결제-카드사명, 휴대폰결제-통신사명-id로 join예정)';
+comment on column RESERVATION.paydetail2 is '결제수단 상세 정보(계좌이체-계좌번호, 무통장입금-계좌번호, 카드결제-카드번호)';
+comment on column RESERVATION.cvc is '카드-cvc';
 
 
 
