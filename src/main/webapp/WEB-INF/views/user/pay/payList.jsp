@@ -51,13 +51,15 @@ function goDelete(num) {
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	</div>
+	
 	<header><h2 align="center" class="text-primary">내 결제수단</h2></header>
 
 	<!-- 개인회원 : 계좌이체, 카드결제, 휴대폰결제 -->	
 	<div class="form-horizontal rounded">
 		<form action="payList.do">
-			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="keyword">검색</label></dt>

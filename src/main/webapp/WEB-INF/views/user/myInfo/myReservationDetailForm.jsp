@@ -26,7 +26,7 @@ function goList() {
 <article>
 <div>
 	<div class="marginPadding10" align="right">
-		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	</div>
 
 	<header><h2 align="center" class="text-primary">${myReservation.campingname} 예약 상세</h2></header>

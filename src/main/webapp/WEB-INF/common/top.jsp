@@ -33,14 +33,18 @@ function navActive(activeName) {
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong>〓</strong></small>
         	</button>
+        	
+        	<a class="navbar-brand" href="${contextPath}/main.do">
+        	<span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
+      	
         	<c:choose>
-        	<c:when test="${userCode eq 'admin'}">
-        	<a class="navbar-brand" href="${contextPath}/main.ad"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
-        	</c:when>
-        	<c:otherwise>
-        	<a class="navbar-brand" href="${contextPath}/main.do"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
-        	</c:otherwise>
-        	</c:choose>
+          		<c:when test="${!empty userId}">
+          			<a class="navbar-brand" style="float: right;" href="${contextPath}/logout.do"> ${userName}님 로그아웃 </a>
+          		</c:when>
+          		<c:otherwise>
+          			<a class="navbar-brand" style="float: right;" href="${contextPath}/login.do"> 로그인 </a>
+          		</c:otherwise>
+          	</c:choose>
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
@@ -124,18 +128,6 @@ function navActive(activeName) {
 	         	</ul>
          	</li>
          	</c:if>
-         	
-          	<!-- 로그인x면 로그인 & 로그인o면 로그아웃 -->
-          	<li data-nav="login">
-	          	<c:choose>
-	          		<c:when test="${!empty userId}">
-	          			<a href="${contextPath}/logout.do"> ${userName}님 로그아웃 </a>
-	          		</c:when>
-	          		<c:otherwise>
-	          			<a href="${contextPath}/login.do"> 로그인 </a>
-	          		</c:otherwise>
-	          	</c:choose>
-          	</li>
         </ul>
       </div>
 	</nav>

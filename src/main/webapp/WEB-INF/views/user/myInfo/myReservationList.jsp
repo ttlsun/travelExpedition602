@@ -18,11 +18,19 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#my예약내역리스트 , #예약내역");
 });
 
+function goBack(){
+	history.go(-1);
+}
+
 </script>
 
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> MY 예약 내역리스트 </h2></header>
 	<!-- 현재날짜 -->
 	<c:set var="today" value="<%=new java.util.Date()%>" />

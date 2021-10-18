@@ -36,7 +36,10 @@ function byeBtn() {
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	</div>
+	
 	<header><h2 align="center" class="text-primary"> 회원정보 </h2></header>
 	<form action="usersBye.do" method="get" id="myFrom" class="form-horizontal" role="form">
 		<div class="form-group">

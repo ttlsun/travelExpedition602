@@ -22,8 +22,8 @@ function navActive(activeName) {
 	<!-- 승민님이 만들어주신 저희 대표이미지..! -->
 	<div style="padding-bottom: 1%;">
 		<!-- 관형님이 링크 걸어달라고 하셔서 걸었습니다. 관형님 아이디어~! -->
-		<a href="${contextPath}/main.ad">
-			<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="관리자 602호여행자들 이미지" alt="관리자 602호여행자들 이미지"  />
+		<a href="${contextPath}/main.do">
+			<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />
 		</a>
 	</div>
 
@@ -34,11 +34,24 @@ function navActive(activeName) {
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong>〓</strong></small>
         	</button>
-        	<a class="navbar-brand" href="${contextPath}/main.do"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
+        	
+        	<a class="navbar-brand" href="${contextPath}/main.do">
+        	<span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
+      	
+      		<c:choose>
+          		<c:when test="${!empty userId}">
+          			<a class="navbar-brand" style="float: right;" href="${contextPath}/logout.do"> ${userName}님 로그아웃 </a>
+          		</c:when>
+          		<c:otherwise>
+          			<a class="navbar-brand" style="float: right;" href="${contextPath}/login.do"> 로그인 </a>
+          		</c:otherwise>
+          	</c:choose>
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
         	<li data-nav="main"><a href="${contextPath}/main.ad"> 여행자들 관리자홈 </a></li>
+        	
+        	
         	
         	<li data-nav="keyword" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 태그 &amp; 이미지 관리 <b class="caret"></b></a>
@@ -87,19 +100,6 @@ function navActive(activeName) {
 	            	<li><a href="${contextPath}/userReservationList.ad">회원예약리스트</a></li>
 	         	</ul>
          	</li>
-         	
-          	<!-- 세영 : (예정)로그인/회원가입 구현 완료 후, 로그인x면 로그인 & 로그인o면 로그아웃 -->
-          	<li data-nav="login">
-	          	<c:choose>
-	          		<c:when test="${!empty userId}">
-	          			<a href="${contextPath}/logout.do"> ${userName}님 로그아웃 </a>
-	          		</c:when>
-	          		<c:otherwise>
-	          			<a href="${contextPath}/login.do"> 로그인 </a>
-	          		</c:otherwise>
-	          	</c:choose>
-          	</li>
-
         </ul>
       </div>
 	</nav>

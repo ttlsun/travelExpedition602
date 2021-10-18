@@ -18,11 +18,19 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#my찜내역리스트 , #찜");
 });
 
+function goBack(){
+	history.go(-1);
+}
+
 </script>
 
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> MY 찜 내역리스트 </h2></header>
 	
 	<table class="table table-bordered" style="margin-top: 3%;">
