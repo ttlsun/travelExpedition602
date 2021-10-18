@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.Paging;
+import com.my.travelExpedition.utility.WebUtil;
 
+import net.sf.json.JSONObject;
+import user.community.model.CommunityDao;
 import user.reservation.model.MyReservationBean;
 import user.reservation.model.ReservationDao;
 import user.users.model.UsersBean;
@@ -26,6 +30,9 @@ public class MyReservationListController {
 	
 	@Autowired
 	private ReservationDao reservationDao;
+	
+	@Autowired
+	private CommunityDao communityDao;
 	
 	@RequestMapping(value = COMMAND)
     public ModelAndView eventListView(HttpServletRequest request, HttpSession session,
@@ -50,6 +57,38 @@ public class MyReservationListController {
 		mav.addObject("lists", lists);
 		
 		return mav;
+	}
+	
+	//후기쓰기 중복 체크
+	@RequestMapping(value = "/getCommunityWritCount")
+	public void doJsonGetCommunityWritCount(HttpServletResponse response,
+									@RequestParam Map<String, Object> map) throws Exception {
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			System.out.println( "reviewnum:" + map.get("reviewnum") + ", reservationnum:" + map.get("reservationnum") +"," + map.get("regid"));
+			
+			map.put("reviewnum", map.get("reviewnum"));
+			map.put("reservationnum", map.get("reservationnum"));
+			map.put("regid", map.get("regid"));
+			
+			//후기썼는지 체크.
+			int cnt = communityDao.getCommunityWritCount(map);
+			
+			//System.out.println("cnt:" + cnt);
+			
+			json.put("cnt", cnt); //후기 갯수
+			json.put("resultCode", "OK");
+			json.put("resultMsg", "성공");
+			
+		} catch (Exception e) {
+			json.put("resultCode", "ERROR");
+			json.put("resultMsg", e.getMessage());
+		}
+		
+		WebUtil.jsonSend(json, response);
 	}
 	
 }

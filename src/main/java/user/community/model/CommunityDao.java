@@ -54,8 +54,14 @@ public class CommunityDao {
 		int num = sqlSessionTemplate.selectOne(NAMESPACE + ".getCommunityMaxNum");
 		return num;
 	}
-
 	
+	/*예약완료인 후기썻는지 확인*/
+	public int getCommunityWritCount(Map<String, Object> map) {
+		int num = sqlSessionTemplate.selectOne(NAMESPACE + ".getCommunityWritCount",map);
+		return num;
+	}
+	
+	/*상태값 변경*/
 	public int updateCommunityStatusChange(Map<String, Object> map) {
 		int cnt =  sqlSessionTemplate.update(NAMESPACE + ".updateCommunityStatusChange", map);
 		return cnt;

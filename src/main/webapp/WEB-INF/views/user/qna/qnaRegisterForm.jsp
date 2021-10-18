@@ -46,6 +46,11 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="history.go(-1)">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> 문의 등록 </h2></header>
 	<form:form commandName="qna" name="myForm" action="qnaRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="id" value="${userId}">
@@ -53,14 +58,14 @@ function goList() {
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
-				<td><label for="title"><span class="redFont"> * </span>문의 제목 </label> </td>
+				<td class="active"><label for="title"><span class="redFont"> * </span>문의 제목 </label> </td>
 				<td>
 					<input type="text" maxlength="100" class="form-control" name="title" id="title" class="form-control input-sm" placeholder="제목 입력." value="${qna.title}">
 					<form:errors cssClass="errMessage" path="title"/>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="active">
 					<label for="contents"><span class="redFont"> * </span>문의 내용</label>
 				</td>
 				<td>
@@ -68,7 +73,7 @@ function goList() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleUpdateFile"> 문의 이미지(여러장 올리기) </label> </td>
+				<td class="active"><label for="multipleUpdateFile"> 문의 이미지(여러장 올리기) </label> </td>
 				<td>
 					<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 					<input type="hidden" name="imgname" value="${qna.imgname}">
@@ -76,7 +81,7 @@ function goList() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="regkeyword1"><span class="redFont"> * </span>문의 키워드 </label></td>
+				<td class="active"><label for="regkeyword1"><span class="redFont"> * </span>문의 키워드 </label></td>
 				<td>
 					<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 						<%-- <c:if test="${keywordList.tag ne '#답변'}"> --%>
@@ -91,7 +96,7 @@ function goList() {
 				</td>
 			</tr> 
 			<tr>
-				<td><label for="pw"> 게시글 비밀번호 </label> </td>
+				<td class="active"><label for="pw"> 게시글 비밀번호 </label> </td>
 				<td>
 					<input type="text" maxlength="20" class="form-control" name="pw" id="pw" class="form-control input-sm" placeholder="비밀번호 입력." value="${qna.pw}">
 					<form:errors cssClass="errMessage" path="pw"/>

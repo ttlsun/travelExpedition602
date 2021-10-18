@@ -256,6 +256,17 @@
 		FROM 	COMMUNITY
 		WHERE 	REVIEW_NUM = #{reviewnum}
 		AND 	REVIEW_TYPE = #{reviewtype}
+		AND 	STATUS = '01'
+	</select>
+	
+	<!-- 예약 후기 썼는지 조회 -->
+	<select id="getCommunityWritCount" resultType="int">
+		SELECT 	COUNT(*) CNT FROM COMMUNITY
+		WHERE 	REVIEW_NUM = #{reviewnum}
+		AND 	REVIEW_TYPE ='01'
+		AND		REGID = #{regid}
+		AND 	RESERVATION_NUM = #{reservationnum}
+		AND 	STATUS = '01'
 	</select>
 	
 	<!-- 리뷰수 업뎃 -->
@@ -335,6 +346,7 @@
 			WHERE T1.NUM = T2.REVIEW_NUM 
 			AND T2.RECOMMEND >= 6
 	   		AND ROWNUM <= 6
+	   		AND T2.STATUS = '01'
    		]]>
 	</select>
 	

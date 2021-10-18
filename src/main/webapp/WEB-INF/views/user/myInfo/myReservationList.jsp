@@ -22,6 +22,36 @@ function goBack(){
 	history.go(-1);
 }
 
+
+//후기 썻는지 체크 후 후기 미등록시 등록하러 가기.
+function goCommunityRegister(num,campingnum) {
+	var userId = "${userId}";
+	$.ajax({
+		url: "getCommunityWritCount.do",
+		type: "POST",
+		data: {
+			reservationnum : num,
+			reviewnum : campingnum,
+			regid : userId
+		},
+		dataType: "json",
+		success: function(data) {
+			//alert(data.cnt);
+			if(data.cnt > 0){
+				alert("이미 후기쓴 분은 쓸수 없습니다.");
+				return;
+			}
+			
+			location.href='${contextPath}/communityRegister.do?reservationnum=${list.num}&reviewnum=${list.campingnum}&reviewtype=01&type=1'
+			
+		},
+		error: function(msg, error) {
+			console.log("처리오류");
+		}
+	});
+	
+}
+
 </script>
 
 <section class="container">
@@ -91,7 +121,7 @@ function goBack(){
 					<!-- 예약일 끝날짜거나 완료인 상태일경우 예약관련 후기쓰기.  -->
 					<c:if test="${list.checkoutdate <= date or list.status eq '02'}">
 					<span class="spanFlowRootP10">
-						<input type="button" class="btn btn-primary" value="후기쓰기" onclick="location.href='${contextPath}/communityRegister.do?reservationnum=${list.num}&reviewnum=${list.campingnum}&reviewtype=01&type=1'">
+						<input type="button" class="btn btn-primary" value="후기쓰기" onclick="return goCommunityRegister(${list.num},${list.campingnum})">
 					</span>
 					</c:if>
 				</td>
