@@ -34,7 +34,7 @@ public class ReservationController {
 	
 	private static final String COMMAND = "/reservation.do";
 	private static final String GETPAGE = "user/reservation/reservationForm";
-	private static final String GOTOPAGE = "redirect:/payReservation.do";
+	private static final String GOTOPAGE = "redirect:/myReservationList.do";
 	
 	@Autowired
 	private RoomDao roomDao;
@@ -121,54 +121,71 @@ public class ReservationController {
 								@ModelAttribute("reservation") @Valid ReservationBean reservation, 
 								BindingResult result) {
 		
-		//객실관련 조회.
-		String rnum = (String)map.get("rnum");
-		//System.out.println("rnum:" + rnum);
-		RoomBean roombean = roomDao.getRoomReserveInfo(rnum); 
-		
-		mav.addObject("rnum", map.get("rnum"));
-		mav.addObject("pageNumber", map.get("pageNumber"));
-		mav.addObject("map", map);
-		mav.addObject("roombean", roombean);
-		
-		//보내드려야할것 같아서 보내드려요.
-		mav.addObject("cname", map.get("cname"));
-		mav.addObject("totalprice", map.get("totalprice"));
-		mav.addObject("calDateDays", map.get("calDateDays"));
-		mav.addObject("weekdayCount", map.get("weekdayCount"));
-		mav.addObject("weekendCount", map.get("weekendCount"));
-		mav.addObject("checkindate", map.get("checkindate"));
-		mav.addObject("checkoutdate", map.get("checkoutdate"));
-		mav.addObject("guests", map.get("guests"));
-		mav.addObject("weekdayprice", map.get("weekdayprice"));
-		mav.addObject("weekendprice", map.get("weekendprice"));
-		mav.addObject("cnum", map.get("cnum"));
-		mav.addObject("campingRegid", map.get("userId"));
-		mav.addObject("name", map.get("name"));
-		mav.addObject("phone", map.get("phone"));
-		mav.addObject("email", map.get("email"));
-		mav.addObject("requested", map.get("requested"));
-		mav.addObject("paycode", map.get("paycode"));
+		try {
+			//객실관련 조회.
+			String rnum = (String)map.get("rnum");
+			//System.out.println("rnum:" + rnum);
+			RoomBean roombean = roomDao.getRoomReserveInfo(rnum); 
+			
+			mav.addObject("rnum", map.get("rnum"));
+			mav.addObject("pageNumber", map.get("pageNumber"));
+			mav.addObject("map", map);
+			mav.addObject("roombean", roombean);
+			mav.addObject("cname", map.get("cname"));
+			mav.addObject("totalprice", map.get("totalprice"));
+			mav.addObject("calDateDays", map.get("calDateDays"));
+			mav.addObject("weekdayCount", map.get("weekdayCount"));
+			mav.addObject("weekendCount", map.get("weekendCount"));
 
-		if(result.hasErrors()) {
-			mav.setViewName(GETPAGE);
-			return mav;
-		}
-		
-		//예약 => 입금대기 상태
-		map.put("status", "01"); //01:입금대기,02:결제완료,03:예약취소신청,04:환불완료
-		map.put("id", map.get("userId"));
-		
-		int cnt = -1;
-		
-		cnt = reservationDao.insertReservation(map);
-		
-		if(cnt != -1) {
-			System.out.println("객실 예약 성공: 입금대기");
-			//mav.setViewName(GOTOPAGE);
-		}
-		else {
-			System.out.println("객실 예약 성공: 입금대기");
+			//필요없음
+//			mav.addObject("cname", map.get("cname"));
+//			mav.addObject("totalprice", map.get("totalprice"));
+//			mav.addObject("calDateDays", map.get("calDateDays"));
+//			mav.addObject("weekdayCount", map.get("weekdayCount"));
+//			mav.addObject("weekendCount", map.get("weekendCount"));
+//			mav.addObject("checkindate", map.get("checkindate"));
+//			mav.addObject("checkoutdate", map.get("checkoutdate"));
+//			mav.addObject("guests", map.get("guests"));
+//			mav.addObject("weekdayprice", map.get("weekdayprice"));
+//			mav.addObject("weekendprice", map.get("weekendprice"));
+//			mav.addObject("cnum", map.get("cnum"));
+//			mav.addObject("campingRegid", map.get("userId"));
+//			mav.addObject("name", map.get("name"));
+//			mav.addObject("phone", map.get("phone"));
+//			mav.addObject("email", map.get("email"));
+//			mav.addObject("requested", map.get("requested"));
+//			mav.addObject("paycode", map.get("paycode"));
+
+			//cvc 필수값이 아니여서 예외처리.
+			if(result.hasErrors() && !WebUtil.isResultErrorIgnore(result, new String[] {"cvc"}))  {
+				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
+				WebUtil.resultErrorConvert(result);
+				System.out.println("유효성 검사 오류 E: ----------------------------------------------");
+				mav.setViewName(GETPAGE);
+				return mav;
+			}
+			
+			System.out.println("타니?");
+			
+			//예약 => 입금대기 상태
+			map.put("status", "01"); //진행상태/01:입금대기,02:결제완료,03:예약취소신청,04:환불완료'
+			map.put("id", map.get("userId"));
+			
+			int cnt = -1;
+			
+			cnt = reservationDao.insertReservation(map);
+			
+			if(cnt != -1) {
+				//System.out.println("객실 예약 성공: 입금대기");
+				mav.setViewName(GOTOPAGE);
+			}
+			else {
+				//System.out.println("객실 예약 성공: 입금대기");
+				mav.setViewName(GETPAGE);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("내부오류");
 			mav.setViewName(GETPAGE);
 		}
 	

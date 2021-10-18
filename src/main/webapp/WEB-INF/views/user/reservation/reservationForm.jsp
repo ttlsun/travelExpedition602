@@ -15,11 +15,11 @@
 
 <script type="text/javascript">
 $(document).ready(function() {	
+	
 	navActive('camping');
 	$('.tdTextClassAdd').css('padding-top', '10%').css('border-top','none').css('border-right','none').css('border-left','none');
 	$('.tdborderClassAdd').css('border-top','none').css('border-right','none').css('border-left','none');
 
-	
 	//메타태그 설정.
 	$("#metaTitle").attr("content", "예약");
 	$("#metaDescription").attr("content", "예약 등록");
@@ -39,19 +39,39 @@ $(document).ready(function() {
 	    }
 	});  
 	
-  	//등록 결재수단 검색 클릭시,
+	//예약실패하여 결제수단이 다시 들어올경우, 표기.
+	var chagePayCode = "${reservation.paycode}";
+	if (chagePayCode == "휴대폰결제") {
+		$('#labelPaydetail1').html("통신사명");
+		$('#labelPaycode').html("휴대폰번호");
+		$('#cvcTr').hide(); //cvc 안보이게 처리.
+	}else if(chagePayCode == "카드결제") {
+		$('#labelPaydetail1').html("카드사명");
+		$('#labelPaycode').html("카드번호");
+		$('#cvcTr').show(); //cvc 보이게 처리
+	}else if(chagePayCode == "계좌이체" || chagePayCode == "무통장입금") {
+		$('#labelPaydetail1').html("은행명");
+		$('#labelPaycode').html("계좌번호");
+		$('#cvcTr').hide(); //cvc 보이게 처리
+	}else{
+		//현장결제시 결재수단 못적게 하기.
+		$('.trPayCheck , #cvcTr').hide();
+	}
+	
+  	//등록 결제수단 검색 클릭시,
   	$('#payCheck').click(function() {
 		$("#payDialog").dialog("open");
 		getPay();
 	});
   	
-  	//결재수단 체크시,
+  	//결제수단 체크시,
   	$('input[name="paycode"]').on('click', function(event) {
   		var selectVal=  $(this).val();
   		//alert(selectVal);
   		$('#paycodeVal').val(selectVal);
   		
   		$('#cvc, #paydetail1 ,#paydetail2 , #paycode').val(""); //값 초기화
+  		$('.trPayCheck').show();
   		
   		if ($(this).val() == "휴대폰결제") {
   			$('#labelPaydetail1').html("통신사명");
@@ -61,14 +81,13 @@ $(document).ready(function() {
   			$('#labelPaydetail1').html("카드사명");
   			$('#labelPaycode').html("카드번호");
   			$('#cvcTr').show(); //cvc 보이게 처리
-  		}else if($(this).val() == "계좌이체") {
+  		}else if($(this).val() == "계좌이체" || $(this).val() == "무통장입금") {
   			$('#labelPaydetail1').html("은행명");
   			$('#labelPaycode').html("계좌번호");
   			$('#cvcTr').hide(); //cvc 보이게 처리
   		}else{
-  			$('#labelPaydetail1').html("은행명");
-  			$('#labelPaycode').html("계좌번호");
-  			$('#cvcTr').hide(); //cvc 보이게 처리
+  			//현장결제시 결재수단 못적게 하기.
+  			$('.trPayCheck , #cvcTr').hide();
   		}
   	});
   	
@@ -166,6 +185,7 @@ function allAgreeChk() {
 function goPayment() {	
 	var answer = confirm("예약 하시겠습니까?");
 	if(answer){
+		
 		//모든 체크박스가 체크될시 예약 되게 처리함.
 		if (!$('#agreeUse').is(':checked') || !$('#agreePrivacy').is(':checked')
 			|| !$('#agreeRefund').is(':checked') || !$('#agreeService').is(':checked')) {
@@ -225,7 +245,7 @@ function goPayment() {
 	<form:form commandName="reservation" name="myForm" action="${contextPath}/reservation.do" method="post" class="form-horizontal" role="form">
 		<input type="hidden" name="rnum" value="${rnum}">
 		<input type="hidden" name="cnum" value="${roombean.cnum }">
-		<input type="hidden" name="cname" value="${map.cname }">
+		<input type="hidden" name="cname" value="${map.cname}">
 		<input type="hidden" name="pageNumber" value="${pageNumber }">
 		<input type="hidden" name="checkindate" value="${map.checkindate }">
 		<input type="hidden" name="checkoutdate" value="${map.checkoutdate }">
@@ -286,35 +306,37 @@ function goPayment() {
 			</tr>
 			<tr>
 				<td>
-					<label for="paycode">결제 수단</label>
+					<label for="paycode"><span class="redFont"> * </span>결제 수단</label>
 				</td>
 				<td style="border-right: none;">
-					<label for="paycode1"><input type="radio" id="paycode1" name="paycode" value="계좌이체" checked="checked"> 계좌이체</label>
-					<label for="paycode2"><input type="radio" id="paycode2" name="paycode" value="무통장입금"> 무통장입금</label>
-					<label for="paycode3"><input type="radio" id="paycode3" name="paycode" value="카드결제"> 카드결제</label>
-					<label for="paycode4"><input type="radio" id="paycode4" name="paycode" value="휴대폰결제"> 휴대폰결제</label>
+					<label for="paycode1"><input type="radio" id="paycode1" name="paycode" value="계좌이체" <c:if test="${reservation.paycode eq '계좌이체'}">checked="checked"</c:if>> 계좌이체</label>
+					<label for="paycode2"><input type="radio" id="paycode2" name="paycode" value="무통장입금" <c:if test="${reservation.paycode eq '무통장입금'}">checked="checked"</c:if>> 무통장입금</label>
+					<label for="paycode3"><input type="radio" id="paycode3" name="paycode" value="카드결제" <c:if test="${reservation.paycode eq '카드결제'}">checked="checked"</c:if>> 카드결제</label>
+					<label for="paycode4"><input type="radio" id="paycode4" name="paycode" value="휴대폰결제" <c:if test="${reservation.paycode eq '휴대폰결제'}">checked="checked"</c:if>> 휴대폰결제</label>
+					<label for="paycode5"><input type="radio" id="paycode5" name="paycode" value="현장결제" <c:if test="${reservation.paycode eq '현장결제'}">checked="checked"</c:if>> 현장결제</label>
+					<form:errors cssClass="errMessage" path="paycode"/>
 				</td>
 			</tr>
-			<tr>
+			<tr class="trPayCheck">
 				<td><label for="payCheck">결제수단검색</label></td>
 				<td>
 					<input type="button" class="btn btn-default" value="등록결제수단검색" id="payCheck">
 				</td>
 			</tr>
-			<tr>
+			<tr class="trPayCheck">
 				<td>
 					<label for="paydetail1" id="labelPaydetail1">은행명</label>
 				</td>
 				<td style="border-right: none;">
-					<input type="text" class="form-control" name="paydetail1" id="paydetail1" value="">
+					<input type="text" class="form-control" name="paydetail1" id="paydetail1" value="${reservation.paydetail1}">
 				</td>
 			</tr>
-			<tr>
+			<tr class="trPayCheck">
 				<td>
 					<label for="paydetail2" id="labelPaycode">계좌번호</label>
 				</td>
 				<td style="border-right: none;">
-					<input type="text" class="form-control" name="paydetail2" id="paydetail2" value="">
+					<input type="text" class="form-control" name="paydetail2" id="paydetail2" value="${reservation.paydetail2}">
 				</td>
 			</tr>
 			<tr id="cvcTr" style="display: none;">
@@ -322,7 +344,7 @@ function goPayment() {
 					<label for="cvc">cvc</label>
 				</td>
 				<td style="border-right: none;">
-					<input type="text" class="form-control" name="cvc" id="cvc" value="">
+					<input type="text" class="form-control" name="cvc" id="cvc" maxlength="4" value="${reservation.cvc}">
 				</td>
 			</tr>
 		</table>

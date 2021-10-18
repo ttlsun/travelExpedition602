@@ -1,6 +1,7 @@
 package user.reservation.model;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ReservationBean {
 
@@ -24,6 +25,7 @@ public class ReservationBean {
 	private int totalprice;
 	private String status;
 
+	@NotBlank(message = "결제 수단 선택하세요.")
 	private String paycode;
 	private String paydetail1;
 	private String paydetail2;

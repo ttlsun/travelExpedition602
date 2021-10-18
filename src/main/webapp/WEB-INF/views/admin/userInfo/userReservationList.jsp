@@ -34,10 +34,10 @@ $(document).ready(function() {
 					<dd>
 						<select id="searchStatus" name="status" class="form-control">
 							<option value="">선택</option>
-							<option value="01">예약중</option>
-							<option value="02">완료</option>
-							<option value="03">보류</option>
-							<option value="04">예약취소</option>
+							<option value="01">입금대기</option>
+							<option value="02">결제완료</option>
+							<option value="03">예약취소신청</option>
+							<option value="04">환불완료</option>
 						</select>
 					</dd>
 				</dl>
@@ -103,10 +103,10 @@ $(document).ready(function() {
 					<span class="spanFlowRootP10">
 						<b class="text-primary"> 예약 상태 : </b>
 						<c:choose>
-							<c:when test="${list.status eq '01'}">예약중</c:when>
-							<c:when test="${list.status eq '02'}">완료</c:when>
-							<c:when test="${list.status eq '03'}">보류</c:when>
-							<c:when test="${list.status eq '04'}">예약취소</c:when>
+							<c:when test="${list.status eq '01'}">입금대기</c:when>
+							<c:when test="${list.status eq '02'}">결제완료</c:when>
+							<c:when test="${list.status eq '03'}">예약취소신청</c:when>
+							<c:when test="${list.status eq '04'}">환불완료</c:when>
 						</c:choose>
 					</span>
 					<span class="spanFlowRootP10">

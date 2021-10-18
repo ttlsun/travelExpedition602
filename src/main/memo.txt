@@ -665,7 +665,7 @@ CREATE TABLE RESERVATION(
 	TOTALPRICE NUMBER NOT NULL,
 	STATUS VARCHAR2(100),
 	paycode varchar2(20) not null,
- 	paydetail1 varchar2(30) not null,
+ 	paydetail1 varchar2(30) null,
   	paydetail2 varchar2(20) null,
   	cvc number default 0,
 	FOREIGN KEY(CNUM) REFERENCES CAMPING(NUM) ON DELETE CASCADE,

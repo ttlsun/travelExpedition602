@@ -60,13 +60,13 @@ function goUpdate() {
 				<c:choose>
 					<c:when test="${myReservation.status ne '02'}">
 						<select name="status" id="status" class="form-control">
-							<option value="01" <c:if test="${myReservation.status eq '01'}">selected="selected" </c:if>>예약중</option>
-							<option value="02" <c:if test="${myReservation.status eq '02'}">selected="selected" </c:if>>완료</option>
-							<option value="03" <c:if test="${myReservation.status eq '03'}">selected="selected" </c:if>>보류</option>
-							<option value="04" <c:if test="${myReservation.status eq '04'}">selected="selected" </c:if>>예약취소</option>
+							<option value="01" <c:if test="${myReservation.status eq '01'}">selected="selected" </c:if>>입금대기</option>
+							<option value="02" <c:if test="${myReservation.status eq '02'}">selected="selected" </c:if>>결제완료</option>
+							<option value="03" <c:if test="${myReservation.status eq '03'}">selected="selected" </c:if>>예약취소신청</option>
+							<option value="04" <c:if test="${myReservation.status eq '04'}">selected="selected" </c:if>>환불완료</option>
 						</select>
 					</c:when>
-					<c:when test="${myReservation.status eq '02'}">완료</c:when>
+					<c:when test="${myReservation.status eq '02'}">결제완료</c:when>
 				</c:choose>
 			</td>
 			<td>예약 총금액</td>
@@ -74,8 +74,47 @@ function goUpdate() {
 				<b class="redFont"><fmt:formatNumber value="${myReservation.totalprice}" pattern="###,###"/></b> 원
 			</td>
 		</tr>
-		
-		
+		<c:if test="${!empty myReservation.paycode}">
+		<tr>
+			<td>결제수단</td>
+			<!-- 얼랜 위에서..td 명칭 바꾸고 해야되는데 ..귀찮아서 걍 .. 무식하게 처리.. -->
+			<c:choose>
+				<c:when test="${myReservation.paycode eq '계좌이체'}">
+					<td>${myReservation.paycode}</td>
+					<td>은행명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>계좌번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '무통장입금'}">
+					<td>${myReservation.paycode}</td>
+					<td>은행명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>계좌번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '카드결제'}">
+					<td>${myReservation.paycode}</td>
+					<td>카드명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>카드번호</td>
+					<td>${myReservation.paydetail2}</td>
+					<td>cvc</td>
+					<td>${myReservation.cvc}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '휴대폰결제'}">
+					<td>${myReservation.paycode}</td>
+					<td>통신사명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>핸드폰번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:otherwise>
+					<td colspan="8">현장 결제</td>
+				</c:otherwise>
+			</c:choose>
+		</tr>
+		</c:if>
 	</table>
 	
 	<table class="table table-bordered">

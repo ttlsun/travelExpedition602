@@ -51,10 +51,10 @@ function goList() {
 			<td>
 				<b class="redFont">
 				<c:choose>
-					<c:when test="${myReservation.status eq '01'}">예약중</c:when>
-					<c:when test="${myReservation.status eq '02'}">완료</c:when>
-					<c:when test="${myReservation.status eq '03'}">보류</c:when>
-					<c:when test="${myReservation.status eq '04'}">예약취소</c:when>
+					<c:when test="${myReservation.status eq '01'}">입금대기</c:when>
+					<c:when test="${myReservation.status eq '02'}">결제완료</c:when>
+					<c:when test="${myReservation.status eq '03'}">예약취소신청</c:when>
+					<c:when test="${myReservation.status eq '04'}">환불완료</c:when>
 				</c:choose>
 				</b>
 			</td>
@@ -62,6 +62,44 @@ function goList() {
 			<td>
 				<b class="redFont"><fmt:formatNumber value="${myReservation.totalprice}" pattern="###,###"/></b> 원
 			</td>
+		</tr>
+		<tr>
+			<td>결제수단</td>
+			<c:choose>
+				<c:when test="${myReservation.paycode eq '계좌이체'}">
+					<td>${myReservation.paycode}</td>
+					<td>은행명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>계좌번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '무통장입금'}">
+					<td>${myReservation.paycode}</td>
+					<td>은행명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>계좌번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '카드결제'}">
+					<td>${myReservation.paycode}</td>
+					<td>카드명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>카드번호</td>
+					<td>${myReservation.paydetail2}</td>
+					<td>cvc</td>
+					<td>${myReservation.cvc}</td>
+				</c:when>
+				<c:when test="${myReservation.paycode eq '휴대폰결제'}">
+					<td>${myReservation.paycode}</td>
+					<td>통신사명</td>
+					<td>${myReservation.paydetail1}</td>
+					<td>핸드폰번호</td>
+					<td colspan="3">${myReservation.paydetail2}</td>
+				</c:when>
+				<c:otherwise>
+					<td colspan="8">${myReservation.paycode}</td>
+				</c:otherwise>
+			</c:choose>
 		</tr>
 	</table>
 	
