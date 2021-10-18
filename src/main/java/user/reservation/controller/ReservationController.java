@@ -198,14 +198,19 @@ public class ReservationController {
 		JSONObject json = new JSONObject();
 		
 		try {
-			
 			System.out.println("paycode : " + map.get("paycode"));
 			
-			//paycode 만 검색하게 만들어주시면 주석 풀어서 사용. 
-			map.put("paycode", map.get("paycode"));
+			if(map.get("paycode").equals("무통장입금")) {
+				map.put("id", map.get("campingId"));
+			} else {
+				map.put("id", map.get("id"));
+			}
+			
+			map.put("whatColumn", "paycode");
+			map.put("keyword", map.get("paycode"));
 			int totalCount = payDao.getTotalCount(map);
 			String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
-			Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);
+			Paging pageInfo = new Paging(map.get("pageNumber"), "10", totalCount, pageUrl, "paycode", map.get("paycode"));
 			List<PayBean> lists = payDao.getList(pageInfo, map);
 
 			//json.put("pageInfo", pageInfo); //굳이 페이징 할 필요없어보임.

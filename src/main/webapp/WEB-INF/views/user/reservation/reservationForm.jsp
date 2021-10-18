@@ -95,12 +95,14 @@ $(document).ready(function() {
 
 
 function getPay() {
+	var campingId = "${roombean.regid}"
 	var regId = "${userId}";
 	var paycodeVal = $('#paycodeVal').val();
 	$.ajax({
 		url: "jsonPayList.do",
 		type: "POST",
 		data: {
+			campingId : campingId,
 			id : regId,
 			paycode : paycodeVal
 		},
@@ -130,7 +132,6 @@ function getPay() {
 						addList += "</tr>";
 					}
 				}
-				
 
 				//결제마다 다르게 보여주기.
 				//alert($('#paycodeVal').val());

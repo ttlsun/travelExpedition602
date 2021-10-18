@@ -58,7 +58,7 @@
 	<select id="getRoomReserveInfo" resultType="myRoomBean">
 		SELECT 
 			NUM, NAME, ROOM_TYPE,
-			CNUM,
+			CNUM, REGID,
 			PROPGUESTS,
 			WEEKDAYPRICE,
 			WEEKENDPRICE
