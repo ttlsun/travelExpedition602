@@ -128,7 +128,7 @@ $(document).ready(function() {
 			<tbody>
 			
 			<!-- list가 없을 경우 -->
-			<c:if test="${empty campingLists}">
+			<c:if test="${empty communityLists}">
 			<tr>
 				<td colspan="3" align="center"> 해당 후기 레코드가 없습니다.</td>
 			</tr>
