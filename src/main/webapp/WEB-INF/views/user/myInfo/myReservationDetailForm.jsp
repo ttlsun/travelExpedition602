@@ -20,13 +20,19 @@ $(document).ready(function() {
 function goList() {
 	location.href= "${contextPath}/myReservationList.do?pageNumber="+${pageNumber};
 }
+
+function goBack(){
+	history.go(-1);
+}
+
 </script>
 
 <section class="container">
 <article>
 <div>
 	<div class="marginPadding10" align="right">
-		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onClick="goBack()">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goBack()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 	</div>
 
 	<header><h2 align="center" class="text-primary">${myReservation.campingname} 예약 상세</h2></header>
