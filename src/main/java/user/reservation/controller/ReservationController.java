@@ -165,8 +165,6 @@ public class ReservationController {
 				return mav;
 			}
 			
-			System.out.println("타니?");
-			
 			//예약 => 입금대기 상태
 			map.put("status", "01"); //진행상태/01:입금대기,02:결제완료,03:예약취소신청,04:환불완료'
 			map.put("id", map.get("userId"));
