@@ -117,42 +117,38 @@ function getPay() {
 				var addList = "";
 				if(data.lists.length == 0){
 					addList += "<tr>";
-					addList += "<td colspan='6' align='center'> 해당 리스트가 없습니다.";
+					addList += "<td colspan='4' align='center'> 해당 리스트가 없습니다.";
 					addList += "</td>";
 					addList += "</tr>";
 				}else{
 					for(var i = 0; i < data.lists.length; i++){
 						addList += "<tr style='cursor:pointer;' onclick=\"payListclick('"+data.lists[i].paydetail1+"','"+ data.lists[i].paydetail2+"','"+data.lists[i].cvc+"')\">";
-						addList += "<td align='center'> " + data.lists[i].num + " </td>";
 						addList += "<td align='center'> " + data.lists[i].paycode + " </td>";
 						addList += "<td align='center'> " + data.lists[i].paydetail1 + " </td>";
 						addList += "<td align='center'> " + data.lists[i].paydetail2 + " </td>";
-						addList += "<td align='center' id='payDialogTd3' style='display: none;> " + data.lists[i].cvc + " </td>";
-						addList += "<td align='center'> " + data.lists[i].regdate + " </td>";
+						addList += "<td align='center' class='payDialogTd3' style='display: none;'> " + data.lists[i].cvc + " </td>";
 						addList += "</tr>";
 					}
 				}
-
-				//결제마다 다르게 보여주기.
-				//alert($('#paycodeVal').val());
-				if ($('#paycodeVal').val() == "카드결제") {
-					$('#payDialog1').html("카드명");
-					$('#payDialog2').html("카드번호");
-					$('#payDialog3,#payDialogTd3').show();
-		  		}else if ($('#paycodeVal').val() == "휴대폰결제") {
-		  			$('#payDialog1').html("통신사명");
-					$('#payDialog2').html("휴대폰번호");
-					$('#payDialog3,#payDialogTd3').hide();
-		  		}else{
-		  			$('#payDialog1').html("은행명");
-					$('#payDialog2').html("계좌번호");
-					$('#payDialog3,#payDialogTd3').hide();
-		  		}
-				
-				
 			}
 			
 			$('#paylist').append(addList);
+			
+			//결제마다 다르게 보여주기.
+			//alert($('#paycodeVal').val());
+			if ($('#paycodeVal').val() == "카드결제") {
+				$('#payDialog1').html("카드명");
+				$('#payDialog2').html("카드번호");
+				$('#payDialog3, .payDialogTd3').show();
+			}else if ($('#paycodeVal').val() == "휴대폰결제") {
+	  			$('#payDialog1').html("통신사명");
+				$('#payDialog2').html("휴대폰번호");
+				$('#payDialog3, .payDialogTd3').hide();
+	  		}else{
+	  			$('#payDialog1').html("은행명");
+				$('#payDialog2').html("계좌번호");
+				$('#payDialog3, .payDialogTd3').hide();
+	  		}
 			
 		},
 		error: function(msg, error) {
@@ -497,12 +493,10 @@ function goList() {
 		<caption>내 등록 결제 수단 선택</caption>
 			<thead>
 				<tr class="active">
-					<th>번호</th>
 					<th>결제수단</th>
 					<th id="payDialog1">은행명</th>
 					<th id="payDialog2">계좌번호</th>
 					<th id="payDialog3" style="display: none;">cvc</th>
-					<th>등록일</th>
 				</tr>
 			</thead>
 			<tbody id="paylist"></tbody>
