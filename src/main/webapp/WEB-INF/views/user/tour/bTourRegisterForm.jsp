@@ -144,6 +144,7 @@ function fileSelectChange(event) {
 <section class="container">
 <article>
 <div>
+	<input type="button" class="btn btn-default" align="left"  value="돌아가기" onclick="goList()">
 	<header><h2 align="center" class="text-primary">관광지 등록 화면</h2></header>
 	
 	<form:form name="myForm" commandName="tour" action="${contextPath}/bTourRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -262,10 +263,10 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center">
-				<input type="submit" class="btn btn-primary" value="등록" onclick="return inputSave()">
+			<td colspan="4">
+				<input type="button" class="btn btn-default"  value="돌아가기" onclick="goList()">
 				<input type="reset" class="btn btn-default" value="다시작성">
-				<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+				<input type="submit" class="btn btn-primary"  value="등록" onclick="return inputSave()">
 			</td>
 		</tr>
 	</table>

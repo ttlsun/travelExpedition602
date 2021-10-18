@@ -207,5 +207,13 @@
 		WHERE ROW_NUM  <![CDATA[ <= ]]> 3
 		ORDER BY STEAMED DESC
 	</select>
+	
+	<update id="updateSteamed">
+		UPDATE CAMPING
+		<set>
+			STEAMED = STEAMED+1
+		</set>
+		WHERE NUM = #{num}
+	</update>
    
 </mapper>

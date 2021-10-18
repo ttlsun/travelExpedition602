@@ -80,4 +80,8 @@ public class CampingDao {
 		List<CampingBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getCampingMainList");
 		return lists;
 	}
+
+	public void updateSteamed(Map<String, Object> map) {
+		sqlSessionTemplate.update(NAMESPACE+".updateSteamed",map);
+	}
 }

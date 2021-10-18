@@ -67,5 +67,16 @@ public class TourDao {
 		return lists;
 	}
 	
+	/* 캠핑 상세에서 보여줄 추천관광지 리스트(6개) */
+	public List<TourBean> getRecommendList(Map<String, String> map) {
+		List<TourBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getRecommendList",map);
+		return lists;
+	}
+
+	public void updateSteamed(Map<String, Object> map) {
+		sqlSessionTemplate.update(NAMESPACE+".updateSteamed",map);
+		
+	}
+	
 	
 }

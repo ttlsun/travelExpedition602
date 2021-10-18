@@ -19,6 +19,8 @@ import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.room.model.RoomBean;
 import user.room.model.RoomDao;
+import user.tour.model.TourBean;
+import user.tour.model.TourDao;
 
 @Controller
 public class CampingDetailController {
@@ -33,6 +35,9 @@ public class CampingDetailController {
 	private RoomDao roomDao;
 	
 	@Autowired
+	private TourDao tourDao;
+	
+	@Autowired
 	private CommunityDao communityDao; //커뮤니티
 	
 	@RequestMapping(value=COMMAND)
@@ -44,6 +49,7 @@ public class CampingDetailController {
 		String num = request.getParameter("num") == null ? (String)map.get("cnum") : (String)map.get("num");
 //		String cnum = request.getParameter("cnum") != null ? (String)map.get("cnum") : (String)map.get("num");
 	
+		
 		//캠핑장 상세내용 select
 		CampingBean campbean = campingDao.getCampingDetail(num);
 		mav.addObject("campbean", campbean);
@@ -74,12 +80,19 @@ public class CampingDetailController {
 		//조회수 올리기
 		int cnt = campingDao.campingReadcountUp(num);
 		
+		//추천관광지 리스트
+		map.put("address1", campbean.getAddress1()); //시
+		map.put("address2", campbean.getAddress2()); //군
+		List<TourBean> tourLists = tourDao.getRecommendList(map);
+		mav.addObject("tourLists",tourLists);
+		
+	
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보
 		mav.addObject("communityTotalCount",communityTotalCount); //커뮤니티 총카운트
 		mav.addObject("communityPageNumber", map.get("communityPageNumber")); //후기댓글 페이지
 		
-		mav.addObject("startAvg",startAvg); //별갯수 총카운트
+		 //별갯수 총카운트
 		mav.addObject("pageNumber", map.get("pageNumber")); //캠핑 페이지수
 		
 		return mav;

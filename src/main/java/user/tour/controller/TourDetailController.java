@@ -85,6 +85,7 @@ public class TourDetailController {
 		mav.addObject("totalCount", totalCount); // 주변관광지 총카운트
 		mav.addObject("lists", lists); //주변관광지 리스트
 		
+			
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보
 		mav.addObject("communityTotalCount",communityTotalCount); //커뮤니티 총카운트

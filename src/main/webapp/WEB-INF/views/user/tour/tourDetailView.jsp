@@ -119,6 +119,7 @@ function likesRegisters() {
             //alert(data.resultMsg);
             return;
          }
+         location.reload();
       },
       error: function(msg, error) {
          console.log("처리오류");

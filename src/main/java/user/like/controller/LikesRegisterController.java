@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.my.travelExpedition.utility.WebUtil;
 
 import net.sf.json.JSONObject;
+import user.camping.model.CampingDao;
 import user.like.model.LikeDao;
+import user.tour.model.TourDao;
 
 @Controller
 public class LikesRegisterController {
@@ -21,6 +23,13 @@ public class LikesRegisterController {
 	
 	@Autowired
 	private LikeDao likeDao;
+	
+	@Autowired
+	private TourDao tourDao;
+	
+	
+	@Autowired
+	private CampingDao campingDao;
 	
 	//likes테이블에도 insert 해주기
 	@RequestMapping(value = COMMAND)
@@ -41,6 +50,8 @@ public class LikesRegisterController {
 			map.put("acode", map.get("acode")); //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
 			
 			likeDao.insertLikesData(map);
+			tourDao.updateSteamed(map);
+			campingDao.updateSteamed(map);
 		
 			json.put("resultCode", "OK");
 			json.put("resultMsg", "성공");
