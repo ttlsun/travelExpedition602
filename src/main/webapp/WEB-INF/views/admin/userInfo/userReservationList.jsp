@@ -27,7 +27,6 @@ $(document).ready(function() {
 
 	<div class="form-horizontal rounded">
 		<form action="userReservationList.ad">
-			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchStatus">진행사항 상태</label></dt>

@@ -27,7 +27,6 @@ $(document).ready(function() {
 	
 	<div class="form-horizontal rounded">
 		<form action="communityList.ad">
-			<input type="hidden" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>

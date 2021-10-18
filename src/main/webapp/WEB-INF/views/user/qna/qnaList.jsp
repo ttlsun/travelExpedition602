@@ -35,8 +35,7 @@ function goRegister() {
 	</header>
 	
 	<div class="form-horizontal rounded">
-		<form action="">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
+		<form action="qnaList.do">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>

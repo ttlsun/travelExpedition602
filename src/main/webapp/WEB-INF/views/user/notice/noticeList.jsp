@@ -31,7 +31,6 @@ $(document).ready(function() {
 	
 	<div class="form-horizontal rounded">
 		<form action="noticeList.do">
-			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>

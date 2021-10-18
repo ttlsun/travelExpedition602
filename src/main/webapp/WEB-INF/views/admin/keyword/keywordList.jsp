@@ -48,7 +48,6 @@ function goRegister() {
 	
 	<div class="form-horizontal rounded">
 		<form action="keywordList.ad">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchAcode">키워드 구분코드</label></dt>

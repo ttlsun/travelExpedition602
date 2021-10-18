@@ -38,8 +38,7 @@ function goDetail(num) {
 	</header>
 	
 	<div class="form-horizontal rounded">
-		<form action="reservationCommunityList.do">
-			<input type="hidden" id="pageNumber" name="pageNumber" value="${pageInfo.pageNumber}">
+		<form action="myCommunityList.do">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>

@@ -32,7 +32,6 @@ function goRegister() {
 	
 	<div class="form-horizontal rounded">
 		<form action="endEventList.ad">
-			<input type="hidden"  name="pageNumber" value="${pageInfo.pageNumber}">
 			<div>
 				<dl>
 					<dt><label for="searchWhatColumn">검색</label></dt>
