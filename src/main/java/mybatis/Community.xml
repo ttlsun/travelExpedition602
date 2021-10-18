@@ -338,4 +338,29 @@
    		]]>
 	</select>
 	
+	
+	<!-- 메인용 후기 : 조회수가 높은 순 : 리스트 3개만 보여줌. -->
+	<select id="getCommunityMainList" resultType="myCommunityBean">
+		SELECT * FROM (
+				SELECT 
+					ROW_NUMBER() OVER(ORDER BY READCOUNT DESC , REGDATE DESC) AS ROW_NUM,
+					NUM,
+	        		REVIEW_NUM,
+			        (CASE	REVIEW_TYPE
+									WHEN '01' THEN '캠핑/글램핑 후기' 
+									WHEN '02' THEN '관광지 후기' 
+									WHEN '03' THEN '커뮤니티 후기' 
+			        END) AS REVIEW_TYPE,
+					IMGURL,
+					RESERVATION_NUM,
+					TITLE,
+					SUMMARY,READCOUNT
+				FROM COMMUNITY
+				WHERE 1=1
+				AND STATUS = '01'
+		)
+		WHERE ROW_NUM  <![CDATA[ <= ]]> 3
+		ORDER BY READCOUNT DESC
+	</select>
+	
 </mapper>

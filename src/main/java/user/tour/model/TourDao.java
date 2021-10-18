@@ -61,5 +61,11 @@ public class TourDao {
 		return cnt;
 	}
 	
+	/* 메인에 보여줄 관광지 리스트(3개만 보여줌) */
+	public List<TourBean> getTourMainList() {
+		List<TourBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getTourMainList");
+		return lists;
+	}
+	
 	
 }

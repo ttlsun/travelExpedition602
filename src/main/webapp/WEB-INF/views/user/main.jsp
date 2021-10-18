@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../common/top.jsp" %>   
+<style type="text/css">
+	.mainImgWH{
+	    width: 200px;
+	    height: 300px;
+	}
+</style>
 <script type="text/javascript">
 $(document).ready(function() {
 	navActive('main');
@@ -19,21 +25,136 @@ $(document).ready(function() {
 <div>
 	<header><h2 align="center" class="text-primary"> 602호여행자들 메인 </h2></header>
 	
-		<div>
-			이젠 관형님이 여기에 이것저것 이쁘게 뿌려주실 공간입니다..
-			<br>
-			상위 여행자들 클릭시, 회원 메인으로 이동 시켜놨는데.. 딴데 걸어두시는게 맞다.. 의견있으신분 알려주셔요.(조언도 주셔요..)
-			<br>
-			관리자페이지 홈은 어떤 내용이 좋을까요??? 머리가 안돌아가요.. 알려주셔요..
-			<br>
-			<span> (샘플페이지 가고 싶다면, <a href="home">샘플보러가기</a>) </span>
-			<br>
-			<span> 관리자 : 메인(<a href="main.ad">관리자 - 메인</a>) </span>
-			<br>
-			<span> 회원 : 메인(<a href="main.do">회원 - 메인</a>) </span>
-		</div>
+	<!-- 위에 큰 이미지 -->
+	<div style="padding-top: 3%;">
+		<a href="${contextPath}/main.do">
+			<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />
+		</a>
+	</div>
 	
-</div>   
+	<div style="padding-top: 10%;">
+		<!-- 캠핑 리스트 -->
+		<table class="table table-bordered" style="padding-top: 5%; margin-left:2%; width: 30%; float:left;">
+			<caption> 캠핑 리스트 </caption>
+			<thead>
+				<tr class="active">
+					<th colspan="3" style="text-align: center;">캠핑 </th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			<!-- list가 없을 경우 -->
+			<c:if test="${empty campingLists}">
+			<tr>
+				<td colspan="3" align="center"> 해당 캠핑 레코드가 없습니다.</td>
+			</tr>
+			</c:if>
+			
+			<c:forEach var="beanRow" items="${campingLists}" varStatus="vsRow" step="1">
+			<tr>
+				<c:forEach var="beanCell" items="${campingLists}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*1-1}">
+				<td align="center" class="col-xs-12 col-sm-6 col-md-3" width="30%">
+				
+					<ul class="thumbnail" style="list-style: none; border: none;">
+						<li><img src="${fileImg}/${beanCell.imgurl}" style="height: 100px;" alt="${beanCell.imgurl} 이미지" title="${beanCell.imgurl} 이미지"></li>
+						<li class="caption">
+							<h3>${beanCell.name} </h3>
+				            <p>${beanCell.summary}</p>
+				            <p>
+				            	<a href="${contextPath }/campingDetail.do?num=${beanCell.num}&pageNumber=1" class="btn btn-primary" role="button">상세보기</a> 
+				            </p>
+						</li>
+					</ul>
+				</td>
+				</c:forEach>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<!-- //캠핑 리스트 -->
+		<!-- 관광지 리스트 -->
+		<table class="table table-bordered" style="padding-top: 5%; margin-left:2%; width: 30%; float:left;">
+			<caption> 관광지 리스트 </caption>
+			<thead>
+				<tr class="active">
+					<th colspan="3" style="text-align: center;"> 관광지 </th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			<!-- list가 없을 경우 -->
+			<c:if test="${empty tourLists}">
+			<tr>
+				<td colspan="3" align="center"> 해당 관광지 레코드가 없습니다.</td>
+			</tr>
+			</c:if>
+			
+			<c:forEach var="beanRow" items="${tourLists}" varStatus="vsRow" step="1">
+			<tr>
+				<c:forEach var="tourBeanCell" items="${tourLists}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*1-1}">
+				<td align="center" class="col-xs-12 col-sm-6 col-md-3" width="30%">
+				
+					<ul class="thumbnail" style="list-style: none; border: none;">
+						<li><img src="${fileImg}/${tourBeanCell.imgurl}" style="height: 100px;" alt="${tourBeanCell.imgurl} 이미지" title="${tourBeanCell.imgurl} 이미지"></li>
+						<li class="caption">
+							<h3>${tourBeanCell.name} </h3>
+				            <p>${tourBeanCell.summary}</p>
+				            <p>
+				            	<a href="${contextPath}/tourDetail.do?num=${tourBeanCell.num}&pageNumber=1" class="btn btn-primary" role="button">상세보기</a> 
+				            </p>
+						</li>
+					</ul>
+				</td>
+				</c:forEach>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<!-- //관광지 리스트 -->
+		<!-- 후기 리스트 -->
+		<table class="table table-bordered" style="padding-top: 5%; margin-left:2%; width: 30%; float:left;">
+			<caption> 후기 리스트 </caption>
+			<thead>
+				<tr class="active">
+					<th colspan="3" style="text-align: center;"> 후기 </th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			<!-- list가 없을 경우 -->
+			<c:if test="${empty campingLists}">
+			<tr>
+				<td colspan="3" align="center"> 해당 후기 레코드가 없습니다.</td>
+			</tr>
+			</c:if>
+			
+			<c:forEach var="beanRow" items="${communityLists}" varStatus="vsRow" step="1">
+			<tr>
+				<c:forEach var="communityBeanCell" items="${campingLists}" varStatus="vsCell" begin="${vsRow.index}" end="${vsRow.count*1-1}">
+				<td align="center" class="col-xs-12 col-sm-6 col-md-3" width="30%">
+				
+					<ul class="thumbnail" style="list-style: none; border: none;">
+						<li><img src="${fileImg}/${communityBeanCell.imgurl}" style="height: 100px;" alt="${communityBeanCell.imgurl} 이미지" title="${communityBeanCell.imgurl} 이미지"></li>
+						<li class="caption">
+							<h3>${communityBeanCell.name} </h3>
+				            <p>${communityBeanCell.summary}</p>
+				            <p>
+				            	<a href="${contextPath }/communityDetail.do?num=${communityBeanCell.num}&pageNumber=1&type=1" class="btn btn-primary" role="button">상세보기</a> 
+				            </p>
+						</li>
+					</ul>
+				</td>
+				</c:forEach>
+			</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<!-- //후기 리스트 -->
+	</div>
+	
+	
+	
+</div>
 </article>
 </section>
 

@@ -177,4 +177,35 @@
       WHERE NUM = #{num}
    </update>
    
+   
+   	<!-- 메인용 : 찜 높은 순 : 리스트 3개만 보여줌. -->
+	<select id="getCampingMainList" resultType="myCampingBean">
+		SELECT * FROM (
+				SELECT 
+					ROW_NUMBER() OVER(ORDER BY STEAMED DESC, REGDATE DESC ) AS ROW_NUM,
+					NUM,NAME,
+					
+					(CASE CAMP_TYPE
+							WHEN '01' THEN '일반캠핑장'
+							WHEN '02' THEN '자동차캠핑장'
+							WHEN '03' THEN '글램핑'
+							WHEN '04' THEN '카라반'
+					END) AS CAMP_TYPE ,
+					(CASE THEMECODE
+							WHEN '01' THEN '숲/산'
+							WHEN '02' THEN '해변/바다'
+							WHEN '03' THEN '강/호수/계곡'
+							WHEN '04' THEN '도심'
+							WHEN '05' THEN '섬'
+					END) AS THEMECODE ,
+					REG_KEYWORD,SUMMARY,IMGURL, STEAMED,
+					POSTCODE,ADDRESS1,ADDRESS2,ADDRESS3,ADDRESS4
+				FROM CAMPING
+				WHERE 1=1
+				AND STATUS = '01'
+		)
+		WHERE ROW_NUM  <![CDATA[ <= ]]> 3
+		ORDER BY STEAMED DESC
+	</select>
+   
 </mapper>

@@ -139,4 +139,10 @@ public class CommunityDao {
 		return lists;
 	}
 	
+	/* 메인에 보여줄 후기 리스트(3개만 보여줌) */
+	public List<CommunityBean> getCommunityMainList() {
+		List<CommunityBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getCommunityMainList");
+		return lists;
+	}
+	
 }

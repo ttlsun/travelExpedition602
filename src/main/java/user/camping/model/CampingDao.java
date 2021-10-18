@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.my.travelExpedition.utility.Paging;
 
+import user.community.model.CommunityBean;
+
 @Component("myCampingDao")
 public class CampingDao {
 	
@@ -71,5 +73,11 @@ public class CampingDao {
 	//pay테이블 관련
 	public String getCampingRegid(int cnum) {
 	    return sqlSessionTemplate.selectOne(NAMESPACE+".getCampingRegid", cnum);
+	}
+	
+	/* 메인에 보여줄 캠핑 리스트(3개만 보여줌) */
+	public List<CampingBean> getCampingMainList() {
+		List<CampingBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getCampingMainList");
+		return lists;
 	}
 }
