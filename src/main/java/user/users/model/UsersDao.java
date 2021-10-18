@@ -46,8 +46,16 @@ public class UsersDao {
 		return sqlSessionTemplate.update(NAMESPACE+".byeUsers", users);
 	}
 	
+	public int deleteUsers(int num) {
+		return sqlSessionTemplate.delete(NAMESPACE+".deleteUsers", num);
+	}
+	
 	public int updateMyInfo(UsersBean users) {
 		return sqlSessionTemplate.update(NAMESPACE+".updateMyInfo", users);
+	}
+	
+	public int updateUserInfo(UsersBean users) {
+		return sqlSessionTemplate.update(NAMESPACE+".updateUserInfo", users);
 	}
 	
 	public int updatePw(UsersBean users) {
@@ -63,5 +71,9 @@ public class UsersDao {
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
 		lists = sqlSessionTemplate.selectList(NAMESPACE+".getList", map, rowBounds);
 		return lists;
+	}
+	
+	public UsersBean getData(int num) {
+		return sqlSessionTemplate.selectOne(NAMESPACE+".getData", num);
 	}
 }

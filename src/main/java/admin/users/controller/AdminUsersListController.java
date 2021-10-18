@@ -36,16 +36,10 @@ public class AdminUsersListController {
 		
 		UsersBean temp = (UsersBean) session.getAttribute("loginInfo");
 		if(temp.getUcode().equals("admin")) {
+			//ucode, id, name, email, contact, status
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("whatColumn", whatColumn);
 			map.put("keyword", "%"+keyword+"%");
-			if(whatColumn != "" && whatColumn != null) {
-				if(whatColumn.equals("cbirth") || whatColumn.equals("bbirth")
-				   || whatColumn.equals("regdate") || whatColumn.equals("moddate")) {
-					map.put("keyword", keyword);
-				}
-			}
-			//num, ucode, id, name, gender, email, birth, postcode, address1+address2+address3+address4, contact, regdate, moddate, modid, status
 			int totalCount = usersDao.getTotalCount(map);
 			String url = request.getContextPath()+COMMAND;
 			

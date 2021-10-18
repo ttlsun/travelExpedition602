@@ -162,7 +162,6 @@ public class UsersMyInfoController {
 				}
 			}
 			
-			
 			if(cnt != -1) {
 				//session.invalidate();
 				UsersBean usersBean = usersDao.login(temp);

@@ -3,8 +3,6 @@ package user.users.model;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class UsersBean {
 	//xml에서 삽입하는 값 (sequence)
 	private int num; //pk

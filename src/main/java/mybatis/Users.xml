@@ -34,12 +34,23 @@
 		update users set status = '탈퇴보류중' where id = #{id} and pw = #{pw}
 	</update>
 	
+	<delete id="deleteUsers" parameterType="int">
+		delete from users where num = #{num}
+	</delete>
+	
 	<update id="updateMyInfo" parameterType="myUsersBean">
 		update users set
 		name = #{name}, email = #{email}, birth = to_date(#{birth}), postcode = #{postcode},
 		address1 = #{address1}, address2 =  #{address2}, address3 = #{address3}, address4 = #{address4},
 		contact = #{contact}, moddate = sysdate, modid = #{modid}
 		where id = #{id}
+	</update>
+	
+	<update id="updateUserInfo" parameterType="myUsersBean">
+		update users set
+		gender = #{gender}, birth = to_date(#{birth}), status = #{status},
+		moddate = sysdate, modid = #{modid}
+		where num = #{num}
 	</update>
 	
 	<update id="updatePw" parameterType="myUsersBean">
@@ -49,9 +60,6 @@
 	<select id="getTotalCount" resultType="int">
 		select count(*) from users
 		where not ucode like 'admin'
-		<if test="whatColumn == 'num'">
-			and num like #{keyword}
-		</if>
 		<if test="whatColumn == 'ucode'">
 			and ucode like #{keyword}
 		</if>
@@ -61,35 +69,8 @@
 		<if test="whatColumn == 'name'">
 			and name like #{keyword}
 		</if>
-		<if test="whatColumn == 'gender'">
-			and gender like #{keyword}
-		</if>
-		<if test="whatColumn == 'email'">
-			and email like #{keyword}
-		</if>
-		<if test="whatColumn == 'cbirth'">
-			and birth like #{keyword} and ucode like 'customer'
-		</if>
-		<if test="whatColumn == 'bbirth'">
-			and birth like #{keyword} and ucode like 'business'
-		</if>
-		<if test="whatColumn == 'postcode'">
-			and postcode like #{keyword}
-		</if>
-		<if test="whatColumn == 'address'">
-			and ucode like 'business' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
-		</if>
 		<if test="whatColumn == 'contact'">
 			and contact like #{keyword}
-		</if>
-		<if test="whatColumn == 'regdate'">
-			and regdate like #{keyword}
-		</if>
-		<if test="whatColumn == 'moddate'">
-			and moddate like #{keyword}
-		</if>
-		<if test="whatColumn == 'modid'">
-			and modid like #{keyword}
 		</if>
 		<if test="whatColumn == 'status'">
 			and status like #{keyword}
@@ -99,9 +80,6 @@
 	<select id="getList" resultType="myUsersBean">
 		select * from users
 		where not ucode like 'admin'
-		<if test="whatColumn == 'num'">
-			and num like #{keyword}
-		</if>
 		<if test="whatColumn == 'ucode'">
 			and ucode like #{keyword}
 		</if>
@@ -111,39 +89,16 @@
 		<if test="whatColumn == 'name'">
 			and name like #{keyword}
 		</if>
-		<if test="whatColumn == 'gender'">
-			and gender like #{keyword}
-		</if>
-		<if test="whatColumn == 'email'">
-			and email like #{keyword}
-		</if>
-		<if test="whatColumn == 'cbirth'">
-			and birth like #{keyword} and ucode like 'customer'
-		</if>
-		<if test="whatColumn == 'bbirth'">
-			and birth like #{keyword} and ucode like 'business'
-		</if>
-		<if test="whatColumn == 'postcode'">
-			and postcode like #{keyword}
-		</if>
-		<if test="whatColumn == 'address'">
-			and ucode like 'business' and (address1 like #{keyword} or address2 like #{keyword} or address3 like #{keyword} or address4 like #{keyword})
-		</if>
 		<if test="whatColumn == 'contact'">
 			and contact like #{keyword}
-		</if>
-		<if test="whatColumn == 'regdate'">
-			and regdate like #{keyword}
-		</if>
-		<if test="whatColumn == 'moddate'">
-			and moddate like #{keyword}
-		</if>
-		<if test="whatColumn == 'modid'">
-			and modid like #{keyword}
 		</if>
 		<if test="whatColumn == 'status'">
 			and status like #{keyword}
 		</if>
 		order by num
+	</select>
+	
+	<select id="getData" resultType="myUsersBean">
+		select * from users where num = #{num}
 	</select>
 </mapper>
