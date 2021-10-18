@@ -34,14 +34,7 @@ function navActive(activeName) {
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong>〓</strong></small>
         	</button>
-        	<c:choose>
-        	<c:when test="${userCode eq 'admin'}">
-        	<a class="navbar-brand" href="${contextPath}/main.ad"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
-        	</c:when>
-        	<c:otherwise>
         	<a class="navbar-brand" href="${contextPath}/main.do"><span class="glyphicon glyphicon-send"></span>&nbsp;602호여행자들</a>
-        	</c:otherwise>
-        	</c:choose>
       	</div>
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">

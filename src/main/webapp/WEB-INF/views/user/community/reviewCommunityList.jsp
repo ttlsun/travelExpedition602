@@ -31,7 +31,11 @@ function goDetail(num) {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 방문 후기 리스트 </h2></header>
+	<header>
+		<div style="padding-bottom: 1%;">
+			<img class="travelExpedition602" width="1140" src="${images}/review.jpg" title="review 이미지" alt="review 이미지"  />
+		</div>
+	</header>
 	
 	<div class="form-horizontal rounded">
 		<form action="reviewCommunityList.do">
@@ -62,7 +66,7 @@ function goDetail(num) {
 		<caption>레코드 총 갯수 : ${totalCount} </caption>
 		<thead>
 			<tr class="active">
-				<th colspan="3">후기</th>
+				<th colspan="3">방문 후기</th>
 			</tr>
 		</thead>
 		<tbody>

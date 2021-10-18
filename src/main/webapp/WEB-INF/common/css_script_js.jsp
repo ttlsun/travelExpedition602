@@ -61,6 +61,24 @@
 	    max-width: 100%;
 	    height: auto;
 	}
+	
+	.navbar-default {
+	    background-color: #ffffff;
+	    border-color: #ffffff;
+	    font-size: 
+	}
+	
+	.nav>li>a {
+	    position: relative;
+	    display: block;
+	    padding: 12px 17px;
+	    font-size: large;
+	}
+	
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+	    color: #3a3568;
+	    background-color: ##e1e1e1;
+	}
 </style>
 
 <!-- 제이쿼리 js -->

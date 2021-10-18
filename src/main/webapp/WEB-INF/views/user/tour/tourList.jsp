@@ -138,7 +138,11 @@ function listOrderBy() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary">관광지 리스트 화면</h2></header>
+	<header>
+		<div style="padding-bottom: 1%;">
+			<img class="travelExpedition602" width="1140" src="${images}/tour.jpg" title="tour 이미지" alt="tour 이미지"/>
+		</div>
+	</header>
 	
 	<form name="myform" action="${contextPath}/tourList.do" method="post">
 	<div class="form-group rounded" style="padding: 40px;">		

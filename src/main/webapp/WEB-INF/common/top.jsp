@@ -16,10 +16,10 @@ function navActive(activeName) {
 }
 </script>
 
-<div class="container" style="padding-top: 10px;">
+<div class="container">
 	
 	<!-- 승민님이 만들어주신 저희 대표이미지..! -->
-	<div style="padding-bottom: 1%;">
+	<div>
 		<!-- 관형님이 링크 걸어달라고 하셔서 걸었습니다. 관형님 아이디어~! -->
 		<a href="${contextPath}/main.do">
 			<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />

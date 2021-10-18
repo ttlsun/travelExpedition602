@@ -22,7 +22,11 @@ $(document).ready(function() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 자주 묻는 질문 </h2></header>
+	<header>
+		<div style="padding-bottom: 1%;">
+			<img class="travelExpedition602" width="1140" src="${images}/faq.jpg" title="faq 이미지" alt="faq 이미지"/>
+		</div>
+	</header>
 	
 	<div class="marginPadding10">	
 		<div>

@@ -28,7 +28,11 @@ function goRegister() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 문의 리스트 </h2></header>
+	<header>
+		<div style="padding-bottom: 1%;">
+			<img class="travelExpedition602" width="1140" src="${images}/qna.jpg" title="qna 이미지" alt="qna 이미지"/>
+		</div>
+	</header>
 	
 	<div class="form-horizontal rounded">
 		<form action="">

@@ -23,7 +23,11 @@ $(document).ready(function() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 공지사항 </h2></header>
+	<header>
+		<div style="padding-bottom: 1%;">
+			<img class="travelExpedition602" width="1140" src="${images}/notice.jpg" title="notice 이미지" alt="notice 이미지"/>
+		</div>
+	</header>
 	
 	<div class="form-horizontal rounded">
 		<form action="noticeList.do">
