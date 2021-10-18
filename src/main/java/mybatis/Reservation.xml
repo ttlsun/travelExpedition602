@@ -23,7 +23,11 @@
 			EMAIL,
 			REQUESTED,
 			TOTALPRICE,
-			STATUS
+			STATUS,
+			PAYCODE,
+			PAYDETAIL1,
+			PAYDETAIL2,
+			CVC
 		)
 		values(
 			RESERVSEQ.NEXTVAL,
@@ -39,7 +43,11 @@
 			#{email},
 			#{requested},
 			#{totalprice},
-			#{status}
+			#{status},
+			#{paycode},
+			#{paydetail1},
+			#{paydetail2},
+			#{cvc}
 		)
 	</insert>
 
@@ -106,6 +114,10 @@
 			T1.REQUESTED,
 			T1.TOTALPRICE,
 			T1.STATUS,
+			T1.PAYCODE,
+			T1.PAYDETAIL1,
+			T1.PAYDETAIL2,
+			T1.CVC,
 			T2.NUM AS CAMPING_NUM,
 			T2.NAME AS CAMPING_NAME,
 			T2.CAMP_TYPE,

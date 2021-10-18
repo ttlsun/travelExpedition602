@@ -19,6 +19,11 @@ public class MyReservationBean {
 	private int totalprice;
 	private String status;
 
+	private String paycode;
+	private String paydetail1;
+	private String paydetail2;
+	private int cvc;
+
 	/* 캠핑 정보 컬럼 */
 	private int campingnum;
 	private String campingname;
@@ -334,6 +339,38 @@ public class MyReservationBean {
 
 	public void setAmenity(String amenity) {
 		this.amenity = amenity;
+	}
+
+	public String getPaycode() {
+		return paycode;
+	}
+
+	public void setPaycode(String paycode) {
+		this.paycode = paycode;
+	}
+
+	public String getPaydetail1() {
+		return paydetail1;
+	}
+
+	public void setPaydetail1(String paydetail1) {
+		this.paydetail1 = paydetail1;
+	}
+
+	public String getPaydetail2() {
+		return paydetail2;
+	}
+
+	public void setPaydetail2(String paydetail2) {
+		this.paydetail2 = paydetail2;
+	}
+
+	public int getCvc() {
+		return cvc;
+	}
+
+	public void setCvc(int cvc) {
+		this.cvc = cvc;
 	}
 
 }

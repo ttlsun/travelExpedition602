@@ -187,7 +187,7 @@ public class ReservationController {
 			System.out.println("paycode : " + map.get("paycode"));
 			
 			//paycode 만 검색하게 만들어주시면 주석 풀어서 사용. 
-			//map.put("whatColumn", map.get("paycode"));
+			map.put("paycode", map.get("paycode"));
 			int totalCount = payDao.getTotalCount(map);
 			String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
 			Paging pageInfo = new Paging(map, "10", totalCount, pageUrl);

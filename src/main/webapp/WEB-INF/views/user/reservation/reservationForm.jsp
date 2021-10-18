@@ -51,11 +51,24 @@ $(document).ready(function() {
   		//alert(selectVal);
   		$('#paycodeVal').val(selectVal);
   		
-  		if ($(this).val() == "카드결제") {
-  			$('#cvcTr').show(); //cvc 보이게 처리
-  		}else{
+  		$('#cvc, #paydetail1 ,#paydetail2 , #paycode').val(""); //값 초기화
+  		
+  		if ($(this).val() == "휴대폰결제") {
+  			$('#labelPaydetail1').html("통신사명");
+  			$('#labelPaycode').html("휴대폰번호");
   			$('#cvcTr').hide(); //cvc 안보이게 처리.
-  			$('#cvc').val(); //값 초기화
+  		}else if($(this).val() == "카드결제") {
+  			$('#labelPaydetail1').html("카드사명");
+  			$('#labelPaycode').html("카드번호");
+  			$('#cvcTr').show(); //cvc 보이게 처리
+  		}else if($(this).val() == "계좌이체") {
+  			$('#labelPaydetail1').html("은행명");
+  			$('#labelPaycode').html("계좌번호");
+  			$('#cvcTr').hide(); //cvc 보이게 처리
+  		}else{
+  			$('#labelPaydetail1').html("은행명");
+  			$('#labelPaycode').html("계좌번호");
+  			$('#cvcTr').hide(); //cvc 보이게 처리
   		}
   	});
   	
@@ -98,7 +111,6 @@ function getPay() {
 						addList += "</tr>";
 					}
 				}
-				
 			}
 			
 			$('#paylist').append(addList);
@@ -272,7 +284,7 @@ function goPayment() {
 			</tr>
 			<tr>
 				<td>
-					<label for="paycode">은행명</label>
+					<label for="paydetail1" id="labelPaydetail1">은행명</label>
 				</td>
 				<td style="border-right: none;">
 					<input type="text" class="form-control" name="paydetail1" id="paydetail1" value="">
@@ -280,7 +292,7 @@ function goPayment() {
 			</tr>
 			<tr>
 				<td>
-					<label for="paycode">계좌번호</label>
+					<label for="paydetail2" id="labelPaycode">계좌번호</label>
 				</td>
 				<td style="border-right: none;">
 					<input type="text" class="form-control" name="paydetail2" id="paydetail2" value="">
@@ -288,7 +300,7 @@ function goPayment() {
 			</tr>
 			<tr id="cvcTr" style="display: none;">
 				<td>
-					<label for="paycode">cvc</label>
+					<label for="cvc">cvc</label>
 				</td>
 				<td style="border-right: none;">
 					<input type="text" class="form-control" name="cvc" id="cvc" value="">
@@ -433,9 +445,9 @@ function goPayment() {
 			<thead>
 				<tr class="active">
 					<th>번호</th>
-					<th>결재수단</th>
-					<th>은행명</th>
-					<th>계좌번호</th>
+					<th>결제수단</th>
+					<th>은행명(통신사)</th>
+					<th>계좌번호(핸드폰번호)</th>
 					<th>cvc</th>
 					<th>등록일</th>
 				</tr>

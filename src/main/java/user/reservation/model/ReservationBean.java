@@ -3,7 +3,7 @@ package user.reservation.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class ReservationBean {
-	
+
 	private int num;
 	private int cnum;
 	private int rnum;
@@ -12,18 +12,23 @@ public class ReservationBean {
 	private String checkoutdate;
 	private String regdate;
 	private int guests;
-	
+
 	@NotBlank(message = "예약자 성명을 입력하세요.")
 	private String name;
-	
+
 	@NotBlank(message = "예약자 연락처을 입력하세요.")
 	private String phone;
-	
+
 	private String email;
 	private String requested;
 	private int totalprice;
 	private String status;
-	
+
+	private String paycode;
+	private String paydetail1;
+	private String paydetail2;
+	private int cvc;
+
 	public int getNum() {
 		return num;
 	}
@@ -71,7 +76,7 @@ public class ReservationBean {
 	public void setCheckoutdate(String checkoutdate) {
 		this.checkoutdate = checkoutdate;
 	}
-	
+
 	public String getRegdate() {
 		return regdate;
 	}
@@ -79,7 +84,7 @@ public class ReservationBean {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
+
 	public int getGuests() {
 		return guests;
 	}
@@ -136,6 +141,38 @@ public class ReservationBean {
 		this.status = status;
 	}
 
+	public String getPaycode() {
+		return paycode;
+	}
+
+	public void setPaycode(String paycode) {
+		this.paycode = paycode;
+	}
+
+	public String getPaydetail1() {
+		return paydetail1;
+	}
+
+	public void setPaydetail1(String paydetail1) {
+		this.paydetail1 = paydetail1;
+	}
+
+	public String getPaydetail2() {
+		return paydetail2;
+	}
+
+	public void setPaydetail2(String paydetail2) {
+		this.paydetail2 = paydetail2;
+	}
+
+	public int getCvc() {
+		return cvc;
+	}
+
+	public void setCvc(int cvc) {
+		this.cvc = cvc;
+	}
+
 	@Override
 	public String toString() {
 		return "ReservationBean [num=" + num + ", cnum=" + cnum + ", rnum=" + rnum + ", id=" + id + ", checkindate="
@@ -143,6 +180,5 @@ public class ReservationBean {
 				+ ", name=" + name + ", phone=" + phone + ", email=" + email + ", requested=" + requested
 				+ ", totalprice=" + totalprice + ", status=" + status + "]";
 	}
-	
-	
+
 }
