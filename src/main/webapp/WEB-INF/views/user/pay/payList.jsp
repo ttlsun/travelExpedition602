@@ -21,6 +21,10 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#여행자들602호 결제수단목록, 개인회원");
 });
 
+function goBack(){
+	history.go(-1);
+}
+
 //등록페이지이동 버튼
 function goRegister() {
 	location.href="payRegister.do";
@@ -47,6 +51,7 @@ function goDelete(num) {
 <section class="container">
 <article>
 <div>
+	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary">내 결제수단</h2></header>
 
 	<!-- 개인회원 : 계좌이체, 카드결제, 휴대폰결제 -->	

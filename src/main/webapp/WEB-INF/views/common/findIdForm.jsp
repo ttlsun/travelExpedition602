@@ -15,6 +15,10 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#여행자들602호 아이디찾기");
 });
 
+function goBack(){
+	history.go(-1);
+}
+
 function findPwBtn(){
 	location.href="usersFindPw.do";
 }
@@ -23,6 +27,7 @@ function findPwBtn(){
 <section class="container">
 <article>
 <div>
+	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<div class="container alingMargin" style="margin: auto;">
 		<header><h2 align="center" class="text-primary textFontSizeLarge">아이디 찾기</h2></header>
 	

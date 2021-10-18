@@ -36,7 +36,6 @@ public class UsersRegisterController {
 	}
 	
 	//userRegisterForm.jsp 에서 유효성 검사 성공하면 action usersRegister.do(POST) 요청
-	//@Valid UsersBean users, BindingResult result
 	@RequestMapping(value=COMMAND, method=RequestMethod.POST)
 	public ModelAndView doPost(@Valid @ModelAttribute("users") UsersBean users, BindingResult result, HttpServletRequest request, ModelAndView mav) throws IOException {
 		System.out.println(this.getClass()+" "+request.getMethod()); //추후 삭제 가능
@@ -44,8 +43,6 @@ public class UsersRegisterController {
 		if(result.hasErrors()) {
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors){ System.out.println(error.getDefaultMessage()); }
-
-			//System.out.println(users.getUcode()+", "+users.getName()+", "+users.getGender()+", "+users.getId()+", "+users.getPw()+", "+users.getPostcode()+", "+users.getEmail()+", "+users.getAddress1()+", "+users.getAddress2()+", "+users.getContact());
 			System.out.println("회원가입 실패 - result");
 			mav.setViewName(GETPAGE);
 		} else {

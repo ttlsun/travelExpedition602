@@ -23,6 +23,7 @@ function goBack(){
 <article>
 <div>
 	<div class="container alingMargin" style="margin: auto;">
+	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary textFontSizeLarge">회원탈퇴확인</h2></header>
 	
 	<form:form commandName="users" role="form" action="usersBye.do" method="post" class="form-horizontal">
@@ -43,7 +44,6 @@ function goBack(){
 			</div>
 		</div>
 		<div class="form-group"  style="margin:auto; margin-top: 5%; text-align: center;">
-			<input type="button" class="btn btn-primary" value="이전으로" onClick="goBack()">
 			<input type="submit" class="btn btn-primary" value="회원탈퇴">
 		</div>
 	</fieldset>

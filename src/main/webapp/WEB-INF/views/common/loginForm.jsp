@@ -2,6 +2,25 @@
 
 <!-- webapp/WEB-INF/views/common/loginForm.jsp -->
 <%@ include file="../../common/top.jsp"%>
+<style type="text/css">
+	#inputDiv{
+		width: 75%;
+		height: 100px;
+		float: left;
+	}
+	
+	#submitDiv{
+		width: 25%;
+		height: 100px;
+		float: left;
+	}
+	
+	#buttonDiv{
+		width: 100%;
+		height: 30px;
+		clear: both;
+	}
+</style>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -13,6 +32,10 @@
 		$("#metaDescription").attr("content", "로그인");
 		$("#metaKeywords").attr("content", "#여행자들602호 로그인");
 	});
+	
+	function goBack(){
+		history.go(-1);
+	}
 
 	//회원가입 클릭시
 	function goRegister() {
@@ -33,6 +56,7 @@
 <section class="container">
 	<article>
 		<div>
+			<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 			<div class="container alingMargin" style="margin: auto;">
 				<header>
 					<h2 align="center" class="text-primary textFontSizeLarge">로그인</h2>
@@ -43,25 +67,31 @@
 						<legend class="textAlignLeft textFontSizeSmall">
 							<span>아이디와 비밀번호를 입력하세요</span>
 						</legend>
-						<div class="form-group">
-							<label for="id" class="col-xs-2 col-lg-2 control-label text-primary">ID : </label>
-							<div class="col-xs-10 col-lg-10">
-								<input type="text" name="id" id="id" maxlength="20"	class="form-control" placeholder="아이디를 입력하세요">
-								<form:errors css="errMessage" path="id"/>
+						<div id="inputDiv">
+							<div class="form-group">
+								<label for="id" class="col-xs-2 col-lg-2 control-label text-primary">ID : </label>
+								<div class="col-xs-10 col-lg-10">
+									<input type="text" name="id" id="id" maxlength="20"	class="form-control" placeholder="아이디를 입력하세요">
+									<form:errors css="errMessage" path="id"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pw" class="col-xs-2 col-lg-2 control-label text-primary">비밀번호 : </label>
+								<div class="col-xs-10 col-lg-10">
+									<input type="password" name="pw" id="pw" maxlength="20" class="form-control" placeholder="비밀번호를 입력하세요">
+									<form:errors css="errMessage" path="pw"/>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="pw" class="col-xs-2 col-lg-2 control-label text-primary">비밀번호 : </label>
-							<div class="col-xs-10 col-lg-10">
-								<input type="password" name="pw" id="pw" maxlength="20" class="form-control" placeholder="비밀번호를 입력하세요">
-								<form:errors css="errMessage" path="pw"/>
-							</div>
+						<div id="submitDiv" class="form-group"	style="text-align: center;">
+							<input type="submit" class="btn btn-primary" style="width:60%; height:80%" value="로그인">
 						</div>
-						<div class="form-group"	style="margin: auto; margin-top: 5%; text-align: center;">
-							<input type="button" class="btn btn-primary" value="회원가입" onclick="goRegister()">
-							<input type="button" class="btn btn-primary" value="아이디찾기" onclick="findIdBtn()">
-							<input type="button" class="btn btn-primary" value="비번찾기" onclick="findPwBtn()">
-							<input type="submit" class="btn btn-primary" value="로그인">
+						<div id="buttonDiv" class="form-group"	style="margin: auto; margin-top: 5%; text-align: center;">
+							<input type="button" class="btn btn-default" value="회원가입" onclick="goRegister()">
+							&nbsp;
+							<input type="button" class="btn btn-default" value="아이디찾기" onclick="findIdBtn()">
+							&nbsp;
+							<input type="button" class="btn btn-default" value="비번찾기" onclick="findPwBtn()">
 						</div>
 					</fieldset>
 				</form:form>

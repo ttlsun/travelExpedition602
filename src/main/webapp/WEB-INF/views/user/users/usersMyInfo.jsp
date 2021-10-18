@@ -14,6 +14,10 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#여행자들602호 내정보");
 });
 
+function goBack(){
+	history.go(-1);
+}
+
 function goUpdate(){
 	location.href="usersUpdateMyInfo.do";
 }
@@ -32,6 +36,7 @@ function byeBtn() {
 <section class="container">
 <article>
 <div>
+	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary"> 회원정보 </h2></header>
 	<form action="usersBye.do" method="get" id="myFrom" class="form-horizontal" role="form">
 		<div class="form-group">
@@ -97,7 +102,7 @@ function byeBtn() {
 		</table>
 		</div>
 		<div class="marginPadding10" align="center">
-			<input type="button" class="btn btn-primary" value="정보변경하기" onClick="goUpdate()">
+			<input type="button" class="btn btn-primary" value="정보변경" onClick="goUpdate()">
 			<input type="button" class="btn btn-primary" value="비밀번호변경" onClick="goUpdatePw()">
 			<input type="submit" class="btn btn-primary" value="회원탈퇴" onclick="return byeBtn()">
 		</div>

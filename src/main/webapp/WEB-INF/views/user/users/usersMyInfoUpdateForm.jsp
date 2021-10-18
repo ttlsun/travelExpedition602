@@ -112,6 +112,10 @@
 		}); //ajax
 	}
 	
+	function goBack(){
+		history.go(-1);
+	}
+	
 	function goMain(){
 		location.href="main.do";
 	}
@@ -178,6 +182,7 @@
 <section class="container">
 	<article>
 		<div>
+			<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 			<header>
 				<h2 align="center" class="text-primary">회원정보변경</h2>
 			</header>
@@ -292,7 +297,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" align="center">
-							<input type="button" class="btn btn-primary" value="메인으로" onClick="goMain()">
+							<input type="button" class="btn btn-default" value="메인으로" onClick="goMain()">
 							<input type="reset" class="btn btn-default" value="다시작성">
 							<input type="submit" class="btn btn-primary" value="수정하기" onclick="return input()">
 						</td>

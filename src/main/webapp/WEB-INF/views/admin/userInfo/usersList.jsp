@@ -84,22 +84,17 @@ function search(){
 
 //수정페이지이동 버튼
 function goUpdate(num, pageNumber) {
-	if(!confirm("수정하시겠습니까?")){
-		return;
-	}
 	location.href="usersUpdate.ad?num="+num+"&pageNumber="+pageNumber;	
 }
 
-//삭제버튼
-function goDelete(status, num) {
+function goDelete(num, status) {
+	alert("클릭함");
 	
-	
-	if(!confirm("삭제하시겠습니까?")){
+	if(!confirm("삭제 하시겠습니까?")){
 		return;
 	}
-	location.href="usersDelete.ad?num="+num;
+	location.href="usersDelete.ad?num="+num+"&status="+status;
 }
-	
 </script>
 
 <section class="container">
@@ -116,7 +111,7 @@ function goDelete(status, num) {
 					<dt><label for="keyword">검색</label></dt>
 					<dd>
 						<select id="whatColumn" name="whatColumn" class="form-control" onChange="placeholderChange()">
-							<!-- <option value="">전체 검색</option> -->
+							<option value="">전체 검색</option>
 							<option value="ucode">회원 구분</option>
 							<option value="id">아이디</option>
 							<option value="name">회원명</option>
@@ -149,10 +144,9 @@ function goDelete(status, num) {
 				<th width="5%">생일/개업일</th>
 				<th width="10%">가입일</th>
 				<th width="10%">수정일</th> -->
-				<th width="10%">연락처</th>
+				<th width="15%">연락처</th>
 				<th width="10%">상태</th>
 				<th width="5%">수정</th>
-				<th width="5%">삭제</th>
 			</tr>
 		</thead>
 		
@@ -160,7 +154,7 @@ function goDelete(status, num) {
 		<!-- list가 없을 경우 -->
 		<c:if test="${empty lists}">
 		<tr>
-			<td colspan="8" align="center"> 해당 레코드가 없습니다.</td>
+			<td colspan="7" align="center"> 해당 레코드가 없습니다.</td>
 		</tr>
 		</c:if>
 		
@@ -208,8 +202,7 @@ function goDelete(status, num) {
 			<td>${lists[i].contact}</td>
 			<!-- 회원상태 -->
 			<td>${lists[i].status}</td>
-			<td><input type="button" class="btn btn-default" value="수정" onclick="goUpdate(${lists[i].num}, ${pageInfo.pageNumber})"></td>
-			<td><input type="button" class="btn btn-default" value="삭제" onclick="goDelete(${usersBean.status}, ${lists[i].num})"></td>
+			<td><input type="button" class="btn btn-primary" value="수정" onclick="goUpdate(${lists[i].num}, ${pageInfo.pageNumber})"></td>
 		</tr>
 		</c:forEach>
 		</c:if>

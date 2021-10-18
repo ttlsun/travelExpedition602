@@ -19,7 +19,6 @@ import user.reservation.model.ReservationDao;
 
 @Controller
 public class AdminReservationListController {
-
 	public static final String COMMAND = "/userReservationList.ad";
 	public static final String GETPAGE = "admin/userInfo/userReservationList";
 	
@@ -46,5 +45,4 @@ public class AdminReservationListController {
 		
 		return mav;
 	}
-	
 }

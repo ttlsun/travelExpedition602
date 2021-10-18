@@ -58,6 +58,7 @@ function input(){
 <article>
 <div>
 	<div class="container alingMargin" style="margin: auto;">
+	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary textFontSizeLarge">비밀번호변경</h2></header>
 	
 	<form role="form" action="usersUpdateMyPw.do" method="post" class="form-horizontal">
@@ -84,7 +85,6 @@ function input(){
 			</div>
 		</div>
 		<div class="form-group"  style="margin:auto; margin-top: 5%; text-align: center;">
-			<input type="button" class="btn btn-primary" value="이전으로" onClick="goBack()">
 			<input type="reset" class="btn btn-primary" value="다시작성">
 			<input type="submit" class="btn btn-primary" value="수정하기" onClick="return input()">
 		</div>

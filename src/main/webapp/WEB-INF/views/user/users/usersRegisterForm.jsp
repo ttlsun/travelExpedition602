@@ -75,6 +75,14 @@
 		});
 	});
 	
+	function goBack(){
+		history.go(-1);
+	}
+	
+	function goMain(){
+		location.href="main.do";
+	}
+	
 	function addrKakao() {
 		//상세주소 텍스트 초기화
 		$('#address1,#postcode').val("");
@@ -177,10 +185,6 @@
 		}); //ajax
 	}
 	
-	function goMain(){
-		location.href="main.do";
-	}
-
 	function input() {
 		if($('#ucode option:selected').val() == "customer"){
 			if($('#postcode').val() == ""){
@@ -271,6 +275,7 @@
 <section class="container">
 	<article>
 		<div>
+			<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 			<header>
 				<h2 align="center" class="text-primary">회원가입</h2>
 			</header>

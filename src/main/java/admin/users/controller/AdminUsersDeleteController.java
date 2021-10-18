@@ -19,8 +19,8 @@ public class AdminUsersDeleteController {
 	@Autowired
 	private UsersDao usersDao;
 	
-	@RequestMapping(value = COMMAND)
-	public void doAction(PrintWriter pw, HttpServletResponse response, HttpServletRequest request) throws IOException {
+	@RequestMapping(value=COMMAND)
+	public void doPost(PrintWriter pw, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		System.out.println(this.getClass()+" "+request.getMethod());
 		
 		pw = response.getWriter();
@@ -32,7 +32,7 @@ public class AdminUsersDeleteController {
 		int cnt = -1;
 		cnt = usersDao.deleteUsers(num);
 		
-		if(cnt >= 0) {
+		if(cnt != -1) {
 			pw.println("<script>alert('회원 정보 삭제가 완료되었습니다'); location.replace('usersList.ad');</script>");
 		} else {
 			pw.println("<script>alert('회원 정보 삭제에 실패했습니다'); history.go(-1);</script>");

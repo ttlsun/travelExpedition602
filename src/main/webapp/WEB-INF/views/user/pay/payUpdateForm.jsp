@@ -138,6 +138,7 @@ function input(){
 <section class="container">
 	<article>
 		<div>
+			<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 			<header>
 				<h2 align="center" class="text-primary">결제수단 정보변경</h2>
 			</header>
@@ -191,7 +192,6 @@ function input(){
 					</tr>
 					<tr>
 						<td colspan="4" align="center">
-							<input type="button" class="btn btn-primary" value="돌아가기" onClick="goBack()">
 							<input type="reset" class="btn btn-default" value="다시작성">
 							<input type="submit" class="btn btn-primary" value="수정하기" onclick="return input()"></td>
 					</tr>

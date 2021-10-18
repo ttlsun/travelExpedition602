@@ -40,7 +40,6 @@ public class AdminReservationDetailController {
 	// ajax 태우는게 좋긴하지만.. 이런 방식도 해봄.
 	@RequestMapping(value = COMMAND, method = RequestMethod.POST)
     public ModelAndView doActionPost(ModelAndView mav,@RequestParam Map<String, Object> map) {
-		
 		try {
 			
 			System.out.println("map: num" + map.get("num") +
@@ -57,9 +56,6 @@ public class AdminReservationDetailController {
 			e.printStackTrace();
 			System.out.println("내부오류");
 		}
-		
 		return mav;
 	}
-	
-	
 }
