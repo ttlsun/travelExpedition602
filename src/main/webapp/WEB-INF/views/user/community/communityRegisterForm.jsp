@@ -65,6 +65,11 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">후기 등록 화면</h2></header>
 	
 	<form:form commandName="community" name="myForm" action="communityRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -77,7 +82,7 @@ function goList() {
 	<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
-			<td width="20%"><label for="reviewType">후기 </label> </td>
+			<td width="20%" class="active"><label for="reviewType">후기 </label> </td>
 			<td>
 				<input type="hidden" name="reviewtype" id="reviewtype" value="${reviewType}">
 				<c:choose>
@@ -88,8 +93,8 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label for="title"><span class="redFont"> * </span> 제목 </label>
+			<td class="active">
+				<label for="title" class="active"><span class="redFont"> * </span> 제목 </label>
 			</td>
 			<td>
 				<input type="text" class="form-control" id="title" name="title" value="${community.title}" placeholder="입력해주세요.">
@@ -97,14 +102,14 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="summary"><span class="redFont"> * </span> 한줄 요약</label> </td>
+			<td class="active"><label for="summary"><span class="redFont"> * </span> 한줄 요약</label> </td>
 			<td>
 				<input type="text" class="form-control" id="summary" name="summary" value="${community.summary}" placeholder="입력해주세요.">
 				<form:errors cssClass="errMessage" path="summary"/>
 			</td>
 		</tr>
 		<tr id="starDisplay" style="display: none;">
-			<td width="20%"><label for="star_1"><span class="redFont"> * </span> 별등급</label></td>
+			<td width="20%" class="active"><label for="star_1"><span class="redFont"> * </span> 별등급</label></td>
 			<td>
 				<c:forEach var="i" begin="1" end="5" varStatus="status">
 				<label for="star_${i}">
@@ -118,7 +123,7 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
+			<td class="active"><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td>
 				<input type="file" id="imgFile" name="updateFile" value="" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" name="imgurl" value="${community.imgurl}">
@@ -126,7 +131,7 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="multipleUpdateFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
+			<td class="active"><label for="multipleUpdateFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
 			<td>
 				<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 				<input type="hidden" name="imgname" value="${community.imgname}">
@@ -134,14 +139,14 @@ function goList() {
 			</td>
 		</tr>
 		<tr>
-			<td><span class="redFont"> * </span> 내용</td>
+			<td class="active"><span class="redFont"> * </span> 내용</td>
 			<td>
 				<textarea rows="10" cols="3"  class="form-control summernote" name="contents">${community.contents}</textarea>
 				<form:errors cssClass="errMessage" path="contents"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="regKeyword">등록 키워드</label></td>
+			<td class="active"><label for="regKeyword">등록 키워드</label></td>
 			<td>
 				<input type="text" class="form-control" name="regkeyword" id="regkeyword" value="${community.regkeyword}" placeholder="#키워드,#입력해주세요.">
 				<form:errors cssClass="errMessage" path="regkeyword"/>
@@ -149,9 +154,10 @@ function goList() {
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" class="btn btn-primary" value="등록" onclick="return inputSave()">
-				<input type="reset" class="btn btn-default" value="다시작성">
 				<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+				<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
+				<input type="reset" class="btn btn-default" value="다시작성">
+				<input type="submit" class="btn btn-primary" value="등록" onclick="return inputSave()">
 			</td>
 		</tr>
 	</table>

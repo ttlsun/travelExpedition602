@@ -73,6 +73,10 @@ function goDetail() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left;" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
 	<header><h2 align="center" class="text-primary">후기 수정 화면</h2></header>
 	
 	<form:form commandName="community" name="myForm" action="communityUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -86,7 +90,7 @@ function goDetail() {
 	<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 		<tr>
-			<td><label for="reviewType">후기 구분 </label> </td>
+			<td class="active"><label for="reviewType">후기 구분 </label> </td>
 			<td>
 				<c:choose>
 					<c:when test="${community.reviewtype eq '01'}">캠핑/글램핑 후기</c:when>
@@ -96,7 +100,7 @@ function goDetail() {
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td class="active">
 				<label for="title"><span class="redFont"> * </span> 제목 </label>
 			</td>
 			<td>
@@ -105,14 +109,14 @@ function goDetail() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="summary"><span class="redFont"> * </span> 한줄 요약</label> </td>
+			<td class="active"><label for="summary"><span class="redFont"> * </span> 한줄 요약</label> </td>
 			<td>
 				<input type="text" class="form-control" id="summary" name="summary" value="${community.summary}" placeholder="입력해주세요.">
 				<form:errors cssClass="errMessage" path="summary"/>
 			</td>
 		</tr>
 		<tr id="starDisplay" style="display: none;">
-			<td><label for="star_1"><span class="redFont"> * </span> 별등급</label></td>
+			<td class="active"><label for="star_1"><span class="redFont"> * </span> 별등급</label></td>
 			<td>
 				<c:forEach var="i" begin="1" end="5" varStatus="status">
 				<label for="star_${i}">
@@ -127,7 +131,7 @@ function goDetail() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
+			<td class="active"><label for="imgFile"><span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td>
 				<div class="rounded">
 					<img src="${fileImg}/${basicImgUrl} " style="height:10%; width: 30%;">
@@ -139,7 +143,7 @@ function goDetail() {
 		</tr>
 		
 		<tr>
-			<td><label for="multipleImgFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
+			<td class="active"><label for="multipleImgFile"><span class="redFont"> * </span> 후기 이미지(여러장 올리기) </label> </td>
 			<td>
 				<c:if test="${!empty lists}">
 				<div class="rounded">
@@ -186,7 +190,7 @@ function goDetail() {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="regKeyword">등록 키워드</label></td>
+			<td class="active"><label for="regKeyword">등록 키워드</label></td>
 			<td>
 				<input type="text" class="form-control" name="regkeyword" id="regkeyword" value="${community.regkeyword}" placeholder="#키워드,#입력해주세요.">
 				<form:errors cssClass="errMessage" path="regkeyword"/>
@@ -194,10 +198,10 @@ function goDetail() {
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" class="btn btn-primary" value="수정" onclick="return inputSave()">
-				<input type="reset" class="btn btn-default" value="다시작성">
 				<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
-				<input type="reset" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+				<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+				<input type="reset" class="btn btn-default" value="다시작성">
+				<input type="submit" class="btn btn-primary" value="수정" onclick="return inputSave()">
 			</td>
 		</tr>
 	</table>

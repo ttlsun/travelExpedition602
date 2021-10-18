@@ -31,6 +31,14 @@ function goUpdate() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	
+		<c:if test="${myReservation.status ne '02'}">
+			<input type="button" class="btn btn-primary" value="수정하기" onclick="return goUpdate()">
+		</c:if>
+	</div>
+
 	<header><h2 align="center" class="text-primary">회원 ${myReservation.campingname} 예약 상세</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="post" class="form-horizontal">
@@ -40,21 +48,21 @@ function goUpdate() {
 	<table class="table table-bordered">
 		<caption>예약자 정보</caption>
 		<tr>
-			<td>예약 번호</td>
+			<td class="active">예약 번호</td>
 			<td>${myReservation.num}</td>
-			<td>예약자 ID</td>
+			<td class="active">예약자 ID</td>
 			<td>${myReservation.id}</td>
-			<td>예약자 이름</td>
+			<td class="active">예약자 이름</td>
 			<td>${myReservation.name}</td>
-			<td>예약자 등록일자</td>
+			<td class="active">예약자 등록일자</td>
 			<td>${myReservation.regdate}</td>
 		</tr>
 		<tr>
-			<td>체크인 날짜 ~ 체크아웃날짜</td>
+			<td class="active">체크인~체크아웃 날짜</td>
 			<td>${myReservation.checkindate} ~ ${myReservation.checkoutdate}</td>
-			<td>이용인원</td>
+			<td class="active">이용인원</td>
 			<td>${myReservation.guests}</td>
-			<td><label for="status">예약 진행사항</label></td>
+			<td class="active"><label for="status">예약 진행사항</label></td>
 			<td>
 				<!-- 예약완료상태이면, 진행사항 변경 못하게 함. 완료가 아닐경우 상태 변경가능. -->
 				<c:choose>
@@ -69,48 +77,48 @@ function goUpdate() {
 					<c:when test="${myReservation.status eq '02'}">결제완료</c:when>
 				</c:choose>
 			</td>
-			<td>예약 총금액</td>
+			<td class="active">예약 총금액</td>
 			<td>
 				<b class="redFont"><fmt:formatNumber value="${myReservation.totalprice}" pattern="###,###"/></b> 원
 			</td>
 		</tr>
 		<c:if test="${!empty myReservation.paycode}">
 		<tr>
-			<td>결제수단</td>
+			<td class="active">결제수단</td>
 			<!-- 얼랜 위에서..td 명칭 바꾸고 해야되는데 ..귀찮아서 걍 .. 무식하게 처리.. -->
 			<c:choose>
 				<c:when test="${myReservation.paycode eq '계좌이체'}">
 					<td>${myReservation.paycode}</td>
-					<td>은행명</td>
+					<td class="active">은행명</td>
 					<td>${myReservation.paydetail1}</td>
-					<td>계좌번호</td>
+					<td class="active">계좌번호</td>
 					<td colspan="3">${myReservation.paydetail2}</td>
 				</c:when>
 				<c:when test="${myReservation.paycode eq '무통장입금'}">
 					<td>${myReservation.paycode}</td>
-					<td>은행명</td>
+					<td class="active">은행명</td>
 					<td>${myReservation.paydetail1}</td>
-					<td>계좌번호</td>
+					<td class="active">계좌번호</td>
 					<td colspan="3">${myReservation.paydetail2}</td>
 				</c:when>
 				<c:when test="${myReservation.paycode eq '카드결제'}">
 					<td>${myReservation.paycode}</td>
-					<td>카드명</td>
+					<td class="active">카드명</td>
 					<td>${myReservation.paydetail1}</td>
-					<td>카드번호</td>
+					<td class="active">카드번호</td>
 					<td>${myReservation.paydetail2}</td>
-					<td>cvc</td>
+					<td class="active">cvc</td>
 					<td>${myReservation.cvc}</td>
 				</c:when>
 				<c:when test="${myReservation.paycode eq '휴대폰결제'}">
 					<td>${myReservation.paycode}</td>
-					<td>통신사명</td>
+					<td class="active">통신사명</td>
 					<td>${myReservation.paydetail1}</td>
-					<td>핸드폰번호</td>
+					<td class="active">핸드폰번호</td>
 					<td colspan="3">${myReservation.paydetail2}</td>
 				</c:when>
 				<c:otherwise>
-					<td colspan="8">현장 결제</td>
+					<td colspan="8" class="active">현장 결제</td>
 				</c:otherwise>
 			</c:choose>
 		</tr>
@@ -125,18 +133,16 @@ function goUpdate() {
 			</td>
 		</tr>
 		<tr>
-			<td>캠핑장 이름</td>
+			<td class="active">캠핑장 이름</td>
 			<td>${myReservation.campingname}</td>
-			<td>캠핑장 타입</td>
+			<td class="active">캠핑장 타입</td>
 			<td>
-				<c:choose>
-						<c:when test="${myReservation.camptype eq '01'}">일반캠핑장</c:when>
-						<c:when test="${myReservation.camptype eq '02'}">자동차캠핑장</c:when>
-						<c:when test="${myReservation.camptype eq '03'}">글램핑</c:when>
-						<c:when test="${myReservation.camptype eq '04'}">카라반</c:when>
-				</c:choose>
+				<c:if test="${fn:contains(myReservation.camptype,'01') }">일반캠핑장/&nbsp;</c:if>
+				<c:if test="${fn:contains(myReservation.camptype,'02') }">자동차캠핑장/&nbsp;</c:if>
+				<c:if test="${fn:contains(myReservation.camptype,'03') }">글램핑/&nbsp;</c:if>
+				<c:if test="${fn:contains(myReservation.camptype,'04') }">카라반/&nbsp;</c:if>
 			</td>
-			<td>캠핑장 태마</td>
+			<td class="active">캠핑장 태마</td>
 			<td>
 				<c:choose>
 					<c:when test="${myReservation.themecode eq '01'}">&nbsp;숲/산&nbsp;</c:when>
@@ -148,7 +154,7 @@ function goUpdate() {
 			</td>
 		</tr>
 		<tr>
-			<td>캠핑장 연락처</td>
+			<td class="active">캠핑장 연락처</td>
 			<td>
 				<a href="tel:${myReservation.contact }" class="text-decoration-none">
                 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
@@ -158,9 +164,8 @@ function goUpdate() {
               	&nbsp;
 				${myReservation.contact}
 			</td>
-			<td style="border-left: none; border-right: none;">캠핑장 주소</td>
-			<td style="border-left: none; border-right: none;">${myReservation.postcode} </td>
-			<td colspan="2" style="border-left: none;">${myReservation.addr}</td>
+			<td style="border-left: none; border-right: none;" class="active">캠핑장 주소</td>
+			<td colspan="3" style="border-left: none; border-right: none;">${myReservation.postcode} ${myReservation.addr}</td>
 		</tr>
 	</table>
 	
@@ -172,9 +177,9 @@ function goUpdate() {
 			</td>
 		</tr>
 		<tr>
-			<td>ROOM 명칭</td>
+			<td class="active">ROOM 명칭</td>
 			<td>${myReservation.roomname}</td>
-			<td>ROOM 타입</td>
+			<td class="active">ROOM 타입</td>
 			<td>
 				<c:choose>
 						<c:when test="${myReservation.roomtype eq '01'}">일반캠핑장</c:when>
@@ -185,28 +190,29 @@ function goUpdate() {
 			</td>
 		</tr>
 		<tr>
-			<td>ROOM 적정인원 (최대인원)</td>
+			<td class="active">ROOM 적정인원 (최대인원)</td>
 			<td>${myReservation.propguests} 명 ( <span class="redFont">${myReservation.maxguests}</span> 명) </td>
-			<td>ROOM 주중가격 / 주말가격</td>
+			<td class="active">ROOM 주중가격 / 주말가격</td>
 			<td>
 				<b class="redFont"><fmt:formatNumber value="${myReservation.weekdayprice}" pattern="###,###"/></b> 원 /
 				<b class="redFont"><fmt:formatNumber value="${myReservation.weekendprice}" pattern="###,###"/></b> 원
 			</td>
 		</tr>
 		<tr>
-			<td>ROOM 시설정보</td>
+			<td class="active">ROOM 시설정보</td>
 			<td>${myReservation.options}</td>
-			<td>ROOM 비품</td>
+			<td class="active">ROOM 비품</td>
 			<td>${myReservation.amenity}</td>
 		</tr>
 	</table>
 
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
 		<c:if test="${myReservation.status ne '02'}">
-			<input type="button" class="btn btn-default" value="수정하기" onclick="return goUpdate()">
+			<input type="button" class="btn btn-primary" value="수정하기" onclick="return goUpdate()">
 		</c:if>
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>
 	<!-- // 버튼 -->
 	

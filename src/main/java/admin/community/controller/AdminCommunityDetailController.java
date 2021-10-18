@@ -30,7 +30,7 @@ public class AdminCommunityDetailController {
 
 	public static final String COMMAND = "/communityDetail.ad";
 	public static final String GETPAGE = "admin/community/communityDetailForm";
-	public static final String GOTOPAGE = "redirect:/communityList.ad";
+	public static final String GOTOPAGE = "redirect:/communityDetail.ad";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -155,6 +155,7 @@ public class AdminCommunityDetailController {
 			
 			mav.setViewName(GOTOPAGE);
 			mav.addObject("pageNumber", map.get("pageNumber"));
+			mav.addObject("num", map.get("num"));
 			
 		}catch (Exception e) {
 			e.printStackTrace();

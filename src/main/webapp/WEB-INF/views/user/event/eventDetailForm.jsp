@@ -33,6 +33,10 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">${event.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -42,13 +46,13 @@ function goList() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="20%">번호</td>
+			<td width="20%" class="active">번호</td>
 			<td>${event.num}</td>
-			<td>조회수</td>
+			<td class="active">조회수</td>
 			<td>${event.readcount}</td>
 		</tr>
 		<tr>
-			<td>이벤트 시작일~종료일</td>
+			<td class="active">이벤트 시작일~종료일</td>
 			<td>
 				<fmt:parseDate var="fmtDate" value="${event.startdate}" pattern="yyyy-MM-dd"/>
 				<fmt:formatDate var="startdate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
@@ -56,7 +60,7 @@ function goList() {
 				<fmt:formatDate var="enddate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
 				${startdate} ~ ${enddate}
 			</td>
-			<td>등록 ID</td>
+			<td class="active">등록 ID</td>
 			<td>${event.id}</td>
 		</tr>
 		<c:if test="${!empty imgList}">

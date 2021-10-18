@@ -51,6 +51,11 @@ function goDetail() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> 문의 답변 등록 </h2></header>
 	<form:form commandName="qna" name="myForm" action="qnaRefRegister.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="id" value="${userId}">
@@ -64,14 +69,14 @@ function goDetail() {
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
-				<td width="20%"><label for="title"><span class="redFont"> * </span>문의 답변 제목 </label> </td>
+				<td width="20%" class="active"><label for="title"><span class="redFont"> * </span>문의 답변 제목 </label> </td>
 				<td>
 					<input type="text" maxlength="100" class="form-control" name="title" id="title" class="form-control input-sm" placeholder="제목 입력." value="${qna.title}">
 					<form:errors cssClass="errMessage" path="title"/>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="active">
 					<label for="contents"><span class="redFont"> * </span>문의 답변 내용</label>
 				</td>
 				<td>
@@ -79,7 +84,7 @@ function goDetail() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleUpdateFile"> 문의 답변 이미지(여러장 올리기) </label> </td>
+				<td class="active"><label for="multipleUpdateFile"> 문의 답변 이미지(여러장 올리기) </label> </td>
 				<td>
 					<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 					<input type="hidden" name="imgname" value="${qna.imgname}">
@@ -87,7 +92,7 @@ function goDetail() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="regkeyword1"><span class="redFont"> * </span>문의 답변 키워드 </label></td>
+				<td class="active"><label for="regkeyword1"><span class="redFont"> * </span>문의 답변 키워드 </label></td>
 				<td>
 					<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 						<label for="regkeyword_${status.index}" style="color: #337ab7;">
@@ -101,10 +106,10 @@ function goDetail() {
 		</table>
 		</div>
 		<div class="marginPadding10" align="center">
-			<input type="submit" class="btn btn-primary" value="등록하기" onclick="return inputSave()">
-			<input type="reset" class="btn btn-default" value="취소">
-			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
+			<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+			<input type="reset" class="btn btn-default" value="다시작성">
+			<input type="submit" class="btn btn-primary" value="등록하기" onclick="return inputSave()">
 		</div>
 	</form:form>
 </div>

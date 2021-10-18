@@ -49,6 +49,11 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> 공지사항 등록 </h2></header>
 	<form:form commandName="notice" name="myForm" action="noticeRegister.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="id" value="${userId}">

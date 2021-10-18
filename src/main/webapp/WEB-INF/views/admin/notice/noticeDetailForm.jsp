@@ -42,6 +42,12 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
+		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">공지사항 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -50,16 +56,16 @@ function goDelete() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="10%">번호</td>
+			<td width="10%" class="active">번호</td>
 			<td>${notice.num}</td>
-			<td>등록 ID</td>
+			<td class="active">등록 ID</td>
 			<td>${notice.id}</td>
-			<td>조회수</td>
+			<td class="active">조회수</td>
 			<td>${notice.readcount}</td>
 		</tr>
 		<c:if test="${!empty imgList}">
 		<tr>
-			<td>이미지</td>
+			<td class="active">이미지</td>
 			<td colspan="5">
 				<div class="rounded">
 					<div class="container rounded" style="width: 200px;"> 
@@ -108,9 +114,10 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
 		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
 	</div>
 	<!-- // 버튼 -->
 </div>  

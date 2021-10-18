@@ -71,6 +71,11 @@ function goDetail() {
  <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+	
 	<header><h2 align="center" class="text-primary"> 삭제 화면</h2></header>
 	
 	<form:form commandName="qna" name="myForm" id="myForm" action="" method="post" class="form-horizontal">
@@ -79,15 +84,15 @@ function goDetail() {
 		
 	<table class="table table-bordered">
 		<tr>
-			<td width="20%">번호</td>
+			<td width="20%" class="active">번호</td>
 			<td>${qna.num}</td>
-			<td>등록자 아이디</td>
+			<td class="active">등록자 아이디</td>
 			<td>${qna.id}</td>
 		</tr>
 		<tr>
-			<td>제목</td>
+			<td class="active">제목</td>
 			<td>${qna.title}</td>
-			<td>답변 여부</td>
+			<td class="active">답변 여부</td>
 			<td>
 				<c:choose>
 					<c:when test="${qna.status eq '01'}">대기</c:when>
@@ -99,7 +104,7 @@ function goDetail() {
 		</tr>
 		<c:if test="${!empty imgList}">
 		<tr>
-			<td>이미지</td>
+			<td class="active">이미지</td>
 			<td colspan="3">
 				<div class="rounded">
 					<div class="container rounded" style="width: 200px;"> 
@@ -143,11 +148,11 @@ function goDetail() {
 			</td>
 		</tr>
 		<tr>
-			<td style="border-bottom: none;"> 등록키워드 </td>
+			<td style="border-bottom: none;" class="active"> 등록키워드 </td>
 			<td colspan="3" style="border-bottom: none;">${qna.regkeyword} </td>
 		</tr>
 		<tr>
-			<td><label for="pw"><span class="redFont"> * </span> 게시글 비밀번호 </label> </td>
+			<td class="active"><label for="pw"><span class="redFont"> * </span> 게시글 비밀번호 </label> </td>
 			<td colspan="3">
 				<input type="text" class="form-control" maxlength="20" name="pw" id="pw" class="form-control input-sm" placeholder="비밀번호 입력." value="">
 				<form:errors cssClass="errMessage" path="pw"/>
@@ -160,10 +165,10 @@ function goDetail() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<input type="submit" class="btn btn-primary" value="삭제" onclick="return inputSave()">
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 		<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
-		
+		<input type="reset" class="btn btn-default" value="다시작성">
+		<input type="submit" class="btn btn-primary" value="삭제" onclick="return inputSave()">
 	</div>
 	<!-- // 버튼 -->
 </div>  

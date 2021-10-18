@@ -42,6 +42,12 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
+		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> 키워드 태그관리 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -50,11 +56,11 @@ function goDelete() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="20%">번호</td>
+			<td width="20%" class="active">번호</td>
 			<td>${keyword.num}</td>
 		</tr>
 		<tr>
-			<td>키워드 구분코드</td>
+			<td class="active">키워드 구분코드</td>
 			<td>
 				<c:choose>
 					<c:when test="${keyword.acode eq '1'}">캠핑&글램핑</c:when>
@@ -66,15 +72,15 @@ function goDelete() {
 			</td>
 		</tr>
 		<tr>
-			<td>키워드 태그 명칭</td>
+			<td class="active">키워드 태그 명칭</td>
 			<td>${keyword.tag}</td>
 		</tr>
 		<tr>
-			<td>등록자 아이디</td>
+			<td class="active">등록자 아이디</td>
 			<td>${keyword.regid}</td>
 		</tr>
 		<tr>
-			<td>등록일</td>
+			<td class="active">등록일</td>
 			<td>
 				<fmt:parseDate var="fmtDate" value="${keyword.regdate}" pattern="yyyy-MM-dd"/>
 				<fmt:formatDate var="regdate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
@@ -84,11 +90,11 @@ function goDelete() {
 		<!-- 수정일시가 있을경우, 수정일과 수정아이디 보여지게 처리 -->
 		<c:if test="${!empty keyword.modid}">
 			<tr>
-				<td>수정자 아이디</td>
+				<td class="active">수정자 아이디</td>
 				<td>${keyword.modid}</td>
 			</tr>
 			<tr>
-				<td>수정일</td>
+				<td class="active">수정일</td>
 				<td> 
 					<fmt:parseDate var="fmtDate" value="${keyword.moddate}" pattern="yyyy-MM-dd"/>
 					<fmt:formatDate var="moddate" value="${fmtDate}" pattern="yyyy-MM-dd"/>
@@ -102,9 +108,10 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
 		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
 	</div>
 	<!-- // 버튼 -->
 </div>  

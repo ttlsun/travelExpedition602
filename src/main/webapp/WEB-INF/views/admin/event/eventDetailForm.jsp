@@ -47,6 +47,14 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+		<c:if test="${type eq '01' }">
+			<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
+		</c:if>
+		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">${event.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -56,19 +64,19 @@ function goDelete() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="20%">번호</td>
+			<td width="20%" class="active">번호</td>
 			<td>${event.num}</td>
-			<td>조회수</td>
+			<td class="active">조회수</td>
 			<td>${event.readcount}</td>
 		</tr>
 		<tr>
-			<td>이벤트 시작일~종료일</td>
+			<td class="active">이벤트 시작일~종료일</td>
 			<td>${event.startdate} ~ ${event.enddate}</td>
-			<td>등록 ID</td>
+			<td class="active">등록 ID</td>
 			<td>${event.id}</td>
 		</tr>
 		<tr>
-			<td>이미지</td>
+			<td class="active">이미지</td>
 			<td colspan="3">
 				<c:if test="${!empty imgList}">
 				<div class="rounded">
@@ -118,13 +126,13 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
 		<!-- 진행중인 이벤트 일경우에만 수정가능 설정. -->
 		<c:if test="${type eq '01' }">
 			<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
 		</c:if>
-		
 		<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>
 	<!-- // 버튼 -->
 </div>  

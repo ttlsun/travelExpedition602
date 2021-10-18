@@ -42,6 +42,23 @@ function goStatus(num) {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	
+		<!-- 삭제하고 싶으면 .. 풀어서 삭제하세욤... ㅎㅎㅎㅎ (완전삭제는 늘 신중히!) -->
+		<c:choose>
+			<c:when test="${community.status eq '01' }">
+				<input type="submit" class="btn btn-primary" value="비활성화" onclick="return goStatus('02')">
+			</c:when>
+			<c:when test="${community.status eq '02' }">
+				<input type="submit" class="btn btn-primary" value="활성화" onclick="return goStatus('01')">
+			</c:when>
+			<c:otherwise>
+				<input type="submit" class="btn btn-primary" value="완전삭제" onclick="return goStatus('00')">
+			</c:otherwise>
+		</c:choose>
+	</div>
+
 	<header><h2 align="center" class="text-primary">${community.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="communityDetail.ad" method="post" class="form-horizontal">
@@ -126,9 +143,9 @@ function goStatus(num) {
 			</td>
 		</tr>
 		<tr>
-			<td width="10%">번호</td>
+			<td width="10%" class="active">번호</td>
 			<td>${community.num}</td>
-			<td>등록 ID</td>
+			<td class="active">등록 ID</td>
 			<td>${community.regid}</td>
 		</tr>
 		<tr>
@@ -140,7 +157,7 @@ function goStatus(num) {
 			</td>
 		</tr>
 		<tr>
-			<td> 키워드 </td>
+			<td class="active"> 키워드 </td>
 			<td colspan="3"> <span class="text-primary"> ${community.regkeyword} </span> </td>
 		</tr>
 	</table>

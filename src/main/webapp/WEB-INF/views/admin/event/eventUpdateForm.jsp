@@ -66,12 +66,16 @@ function inputSave() {
 	
 }
 
-
 </script>    
  
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary"> 이벤트 수정 </h2></header>
 	<form:form commandName="event" name="myForm" action="eventUpdate.ad" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="modid" value="${userId}">
@@ -83,28 +87,28 @@ function inputSave() {
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
-				<td style="text-align: left;"><label for="title"><span class="redFont"> * </span>이벤트 제목 </label> </td>
+				<td style="text-align: left;" class="active"><label for="title"><span class="redFont"> * </span>이벤트 제목 </label> </td>
 				<td>
 					<input type="text" class="form-control" name="title" id="title" class="form-control input-sm" placeholder="제목 입력." value="${event.title}">
 					<form:errors cssClass="errMessage" path="title"/>
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: left;"><label for="startdate"><span class="redFont"> * </span>이벤트 시작 날짜 </label> </td>
+				<td style="text-align: left;" class="active"><label for="startdate"><span class="redFont"> * </span>이벤트 시작 날짜 </label> </td>
 				<td>
 					<input type="date" class="form-control" name="startdate" id="startdate" class="form-control input-sm" value="${event.startdate}">
 					<form:errors cssClass="errMessage" path="startdate"/>
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: left;"><label for="enddate"><span class="redFont"> * </span>이벤트 끝낼 날짜 </label> </td>
+				<td style="text-align: left;" class="active"><label for="enddate"><span class="redFont"> * </span>이벤트 끝낼 날짜 </label> </td>
 				<td>
 					<input type="date" class="form-control" name="enddate" id="enddate" class="form-control input-sm" value="${event.enddate }">
 					<form:errors cssClass="errMessage" path="enddate"/>
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: left;" width="30%;"><label for="multipleImgFile"><span class="redFont"> * </span> 이벤트 이미지(여러장 올리기) </label> </td>
+				<td style="text-align: left;" width="30%;" class="active"><label for="multipleImgFile"><span class="redFont"> * </span> 이벤트 이미지(여러장 올리기) </label> </td>
 				<td>
 					<c:if test="${!empty imgList}">
 					<div class="rounded">
@@ -142,7 +146,7 @@ function inputSave() {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" style="text-align: left;">
+				<td colspan="2" style="text-align: left;" class="active">
 					<label for="contents"><span class="redFont"> * </span>이벤트 내용</label>
 				</td>
 			</tr>
@@ -154,10 +158,10 @@ function inputSave() {
 		</table>
 		</div>
 		<div class="marginPadding10" align="center">
-			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
-			<input type="reset" class="btn btn-default" value="취소">
 			<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 			<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+			<input type="reset" class="btn btn-default" value="다시작성">
+			<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 		</div>
 	</form:form>
 </div>

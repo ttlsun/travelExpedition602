@@ -25,6 +25,10 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">${myReservation.campingname} 예약 상세</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="post" class="form-horizontal">

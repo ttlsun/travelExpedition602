@@ -29,6 +29,10 @@ function goList() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	</div>
+
 	<header><h2 align="center" class="text-primary">${notice.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -37,11 +41,11 @@ function goList() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="10%">번호</td>
+			<td width="10%" class="active">번호</td>
 			<td>${notice.num}</td>
-			<td>등록 ID</td>
+			<td class="active">등록 ID</td>
 			<td>${notice.id}</td>
-			<td>조회수</td>
+			<td class="active">조회수</td>
 			<td>${notice.readcount}</td>
 		</tr>
 		<c:if test="${!empty imgList}">

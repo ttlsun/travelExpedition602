@@ -47,6 +47,21 @@ function goDelete() {
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList()">
+	
+		<input type="submit" class="btn btn-primary" value="삭제" onclick="goDelete()">
+		
+		<c:if test="${qna.status ne '03'}">
+			<input type="submit" class="btn btn-primary" value="답변하기" onclick="goRef()">
+		</c:if>
+		
+		<!-- 글쓴이가 나일경우 수정 -->
+		<c:if test="${qna.id eq userId}">
+			<input type="submit" class="btn btn-primary" value="수정" onclick="goUpdate()">
+		</c:if>
+	</div>
+
 	<header><h2 align="center" class="text-primary">${qna.title} 상세 화면</h2></header>
 	
 	<form name="myForm" id="myForm" action="" method="get" class="form-horizontal">
@@ -58,15 +73,15 @@ function goDelete() {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td width="20%">번호</td>
+			<td width="20%" class="active">번호</td>
 			<td>${qna.num}</td>
-			<td>등록자 아이디</td>
+			<td class="active">등록자 아이디</td>
 			<td>${qna.id}</td>
 		</tr>
 		<tr>
-			<td>제목</td>
+			<td class="active">제목</td>
 			<td>${qna.title}</td>
-			<td>답변 여부</td>
+			<td class="active">답변 여부</td>
 			<td>
 				<c:choose>
 					<c:when test="${qna.status eq '01'}">대기</c:when>
@@ -78,7 +93,7 @@ function goDelete() {
 		</tr>
 		<c:if test="${!empty imgList}">
 		<tr>
-			<td>이미지</td>
+			<td class="active">이미지</td>
 			<td colspan="3">
 				
 				<div class="rounded">
@@ -123,7 +138,7 @@ function goDelete() {
 			</td>
 		</tr>
 		<tr>
-			<td style="border-bottom: none;"> 등록키워드 </td>
+			<td style="border-bottom: none;" class="active"> 등록키워드 </td>
 			<td colspan="3" style="border-bottom: none;">${qna.regkeyword} </td>
 		</tr>
 	</table>
@@ -132,17 +147,18 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
+		<input type="submit" class="btn btn-primary" value="삭제" onclick="goDelete()">
+	
 		<c:if test="${qna.status ne '03'}">
 			<input type="submit" class="btn btn-primary" value="답변하기" onclick="goRef()">
 		</c:if>
 		
 		<!-- 글쓴이가 나일경우 수정 -->
 		<c:if test="${qna.id eq userId}">
-			<input type="submit" class="btn btn-primary" value="수정하기" onclick="goUpdate()">
+			<input type="submit" class="btn btn-primary" value="수정" onclick="goUpdate()">
 		</c:if>
-		
-		<input type="submit" class="btn btn-primary" value="삭제" onclick="goDelete()">
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>
 	<!-- // 버튼 -->
 </div>  
