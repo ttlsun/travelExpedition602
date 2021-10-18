@@ -106,11 +106,30 @@ function getPay() {
 						addList += "<td align='center'> " + data.lists[i].paycode + " </td>";
 						addList += "<td align='center'> " + data.lists[i].paydetail1 + " </td>";
 						addList += "<td align='center'> " + data.lists[i].paydetail2 + " </td>";
-						addList += "<td align='center'> " + data.lists[i].cvc + " </td>";
+						addList += "<td align='center' id='payDialogTd3' style='display: none;> " + data.lists[i].cvc + " </td>";
 						addList += "<td align='center'> " + data.lists[i].regdate + " </td>";
 						addList += "</tr>";
 					}
 				}
+				
+
+				//결제마다 다르게 보여주기.
+				//alert($('#paycodeVal').val());
+				if ($('#paycodeVal').val() == "카드결제") {
+					$('#payDialog1').html("카드명");
+					$('#payDialog2').html("카드번호");
+					$('#payDialog3,#payDialogTd3').show();
+		  		}else if ($('#paycodeVal').val() == "휴대폰결제") {
+		  			$('#payDialog1').html("통신사명");
+					$('#payDialog2').html("휴대폰번호");
+					$('#payDialog3,#payDialogTd3').hide();
+		  		}else{
+		  			$('#payDialog1').html("은행명");
+					$('#payDialog2').html("계좌번호");
+					$('#payDialog3,#payDialogTd3').hide();
+		  		}
+				
+				
 			}
 			
 			$('#paylist').append(addList);
@@ -446,9 +465,9 @@ function goPayment() {
 				<tr class="active">
 					<th>번호</th>
 					<th>결제수단</th>
-					<th>은행명(통신사)</th>
-					<th>계좌번호(핸드폰번호)</th>
-					<th>cvc</th>
+					<th id="payDialog1">은행명</th>
+					<th id="payDialog2">계좌번호</th>
+					<th id="payDialog3" style="display: none;">cvc</th>
 					<th>등록일</th>
 				</tr>
 			</thead>
