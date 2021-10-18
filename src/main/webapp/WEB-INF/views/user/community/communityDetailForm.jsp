@@ -463,17 +463,17 @@ function goAjaxDelete(url, numData , type) {
 	                	<div class="item <c:if test="${status.first}"> active </c:if> ">
 	                	<c:choose>
 	                		<c:when test="${community.reviewtype eq '01'}">
-	                			<a href="${contextPath}/campingDetailForm.do?pageNumber=1&num=${list.num}">
+	                			<a href="${contextPath}/campingDetail.do?pageNumber=1&num=${list.num}">
 			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
 				                </a>
 	                		</c:when>
 	                		<c:when test="${community.reviewtype eq '02'}">
-	                			<a href="${contextPath}/tourDetailForm.do?pageNumber=1&num=${list.num}">
+	                			<a href="${contextPath}/tourDetail.do?pageNumber=1&num=${list.num}">
 			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
 				                </a>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<a href="${contextPath}/campingDetailForm.do?pageNumber=1&num=${list.num}">
+	                			<a href="${contextPath}/campingDetail.do?pageNumber=1&num=${list.num}">
 			                		<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
 				                </a>
 	                		</c:otherwise>

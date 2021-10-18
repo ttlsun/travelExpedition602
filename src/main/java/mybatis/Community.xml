@@ -322,7 +322,7 @@
 	<!-- 추천 리스트 조회 -->
 	<select id="getRecommendList" parameterType="map" resultType="myCommunityBean">
 		SELECT 
-			ROW_NUMBER() OVER(ORDER BY T1.NUM DESC, T1.REGDATE DESC) AS ROW_NUM,  
+			ROW_NUMBER() OVER(ORDER BY T2.RECOMMEND DESC, T2.REGDATE DESC) AS ROW_NUM,  
 	   		T1.NUM , T1.IMGURL AS IMGNAME
 	    FROM 
 	    <choose>
@@ -333,8 +333,8 @@
 	    COMMUNITY T2
 	    <![CDATA[
 			WHERE T1.NUM = T2.REVIEW_NUM 
-			AND T1.RECOMMEND >= 10
-	   		AND ROWNUM <= 10
+			AND T2.RECOMMEND >= 6
+	   		AND ROWNUM <= 6
    		]]>
 	</select>
 	
