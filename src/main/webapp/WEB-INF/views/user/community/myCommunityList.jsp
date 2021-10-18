@@ -22,8 +22,7 @@ $(document).ready(function() {
 
 //상세페이지로 이동 버튼
 function goDetail(num) {
-	var pageNumber = $('#pageNumber').val();
-	location.href= "${contextPath}/communityDetail.do?num=" + num + "&pageNumber=" + pageNumber+"&type=3";
+	location.href= "${contextPath}/communityDetail.do?num=" + num + "&pageNumber=" + ${pageInfo.pageNumber} +"&type=3";
 }
 	
 </script>

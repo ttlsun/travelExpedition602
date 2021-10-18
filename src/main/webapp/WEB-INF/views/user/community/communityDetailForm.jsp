@@ -332,7 +332,7 @@ function goAjaxDelete(url, numData , type) {
 		</tr>
 		<c:if test="${!empty community.regkeyword}">
 		<tr>
-			<td width="20%"> 키워드 </td>
+			<td width="20%" class="active"> 키워드 </td>
 			<td colspan="3"> <span class="text-primary"> ${community.regkeyword} </span> </td>
 		</tr>
 		</c:if>
