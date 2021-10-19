@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- usersUpdateForm.jsp -->
-<%@ include file="../../../common/top.jsp"%>
+<%@ include file="../../../common/admin/top.jsp"%>
 
 <!-- 주소 관련 js -->
 <script src="${js}/mapview-1.0.0.js"></script>
@@ -126,4 +126,4 @@
 	</article>
 </section>
 
-<%@ include file="../../../common/bottom.jsp"%>
+<%@ include file="../../../common/admin/bottom.jsp"%>

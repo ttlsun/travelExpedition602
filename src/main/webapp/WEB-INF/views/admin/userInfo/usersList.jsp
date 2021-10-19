@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- usersList.jsp -->
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>   
 
 <style type="text/css">
 	th,td{
@@ -217,4 +217,4 @@ function goDelete(num, status) {
 </article>
 </section> 
 
-<%@ include file="../../../common/bottom.jsp" %>
+<%@ include file="../../../common/admin/bottom.jsp" %>

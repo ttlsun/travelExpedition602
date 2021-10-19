@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- userDetail.jsp -->
-<%@ include file="../../../common/top.jsp" %>   
+<%@ include file="../../../common/admin/top.jsp" %>   
 
 <style type="text/css">
 	table{
@@ -129,4 +129,4 @@ function goDelete(){
 </article>
 </section>
 
-<%@ include file="../../../common/bottom.jsp" %>
+<%@ include file="../../../common/admin/bottom.jsp" %>
