@@ -67,11 +67,24 @@ function goBack(){
 					<td>${list.summary}</td>
 					<td>
 						<c:choose>
-							<c:when test="${list.themecode eq '01'}">숲/산</c:when>
-							<c:when test="${list.themecode eq '02'}">해변/바다</c:when>
-							<c:when test="${list.themecode eq '03'}">강/호수/계곡</c:when>
-							<c:when test="${list.themecode eq '04'}">도심</c:when>
-							<c:when test="${list.themecode eq '05'}">섬</c:when>
+							<c:when test="${list.acode eq '1'}">
+								<c:choose>
+									<c:when test="${list.themecode eq '01'}">숲/산</c:when>
+									<c:when test="${list.themecode eq '02'}">해변/바다</c:when>
+									<c:when test="${list.themecode eq '03'}">강/호수/계곡</c:when>
+									<c:when test="${list.themecode eq '04'}">도심</c:when>
+									<c:when test="${list.themecode eq '05'}">섬</c:when>
+								</c:choose>
+							</c:when>
+							<c:when test="${list.acode eq '2'}">
+								<c:choose>
+									<c:when test="${list.themecode eq '01'}">베스트</c:when>
+									<c:when test="${list.themecode eq '02'}">제주여행</c:when>
+									<c:when test="${list.themecode eq '03'}">내륙여행</c:when>
+									<c:when test="${list.themecode eq '04'}">섬여행</c:when>
+								</c:choose>
+							</c:when>
+							<c:otherwise></c:otherwise>
 						</c:choose>
 					</td>
 					<td>${list.regdate}</td>

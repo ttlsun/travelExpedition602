@@ -62,14 +62,14 @@ function goList() {
 		<table class="table table-bordered">
 		<caption> <span class="redFont"> * </span> 필수 입력 해주세요.</caption>
 			<tr>
-				<td><label for="title"><span class="redFont"> * </span>공지사항 제목 </label> </td>
+				<td class="active"><label for="title"><span class="redFont"> * </span>공지사항 제목 </label> </td>
 				<td>
 					<input type="text" class="form-control" name="title" id="title" class="form-control input-sm" placeholder="제목 입력." value="${notice.title}">
 					<form:errors cssClass="errMessage" path="title"/>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="active">
 					<label for="contents"><span class="redFont"> * </span>공지사항 내용</label>
 				</td>
 				<td>
@@ -78,7 +78,7 @@ function goList() {
 				</td>
 			</tr>
 			<tr>
-				<td><label for="multipleUpdateFile"> 공지사항 이미지(여러장 올리기) </label> </td>
+				<td class="active"><label for="multipleUpdateFile"> 공지사항 이미지(여러장 올리기) </label> </td>
 				<td>
 					<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 					<input type="hidden" name="imgname" value="${notice.imgname}">
