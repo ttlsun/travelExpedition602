@@ -71,9 +71,9 @@ function goReservation() {
 	var endDate = $('#endDate').val().replaceAll('-', '');
 	var guests = $('#guests').val();
 	
-	if("${userId}" == ''){
-		alert("예약은 회원만 가능합니다.");
-		return false;
+	if("${userId}" == '' || "${userCode}" != "business" || "${userCode}" != "admin"){
+	      alert("예약은 회원만 가능합니다.");
+	      return false;
 	}
 	
 	if(startDate == null || startDate == ''){
