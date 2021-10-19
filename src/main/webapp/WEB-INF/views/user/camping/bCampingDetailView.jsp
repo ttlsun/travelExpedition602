@@ -369,12 +369,6 @@ function goCommunityRegister() {
 						${communityPageInfo.pagingHtml}
 					</div>
 					
-					<!-- 회원만 문의를 쓸수 있게 변경 (관리자는 안됨!) -->
-					<c:if test="${!empty userCode and userCode ne 'admin'}">
-					<div align="right"> 
-						<input type="button" class="btn btn-primary" value="후기등록하기" onclick="goCommunityRegister()">
-					</div>
-					</c:if>
 				</div>
 			</div>
 			
