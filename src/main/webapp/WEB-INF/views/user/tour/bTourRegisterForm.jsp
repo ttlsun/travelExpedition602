@@ -156,7 +156,7 @@ function fileSelectChange(event) {
 				<label for="name"><span class="redFont"> * </span> 관광지 이름 </label>
 			</td>
 			<td colspan="3">
-				<input type="text" class="form-control" id="name" name="name" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-control" id="name" name="name" value="${tour.name}" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
@@ -176,11 +176,11 @@ function fileSelectChange(event) {
 		<tr>
 			<td><label for="discount"><span class="redFont"> * </span> 할인가</label> </td>
 			<td>
-				<input type="text" class="form-control" id="discount" name="discount" value="" placeholder=" 할인율을 입력해주세요.">
+				<input type="text" class="form-control" id="discount" name="discount" value="${tour.discount}" placeholder=" 할인율을 입력해주세요.">
 			</td>
 			<td><label for="price"><span class="redFont"> * </span> 가격 </label> </td>
 			<td>
-				<input type="text" class="form-control" id="price" name="price" value="" placeholder="가격을 입력해주세요.">
+				<input type="text" class="form-control" id="price" name="price" value="${tour.price}" placeholder="가격을 입력해주세요.">
 			</td>
 		</tr>
 		<tr>
@@ -209,7 +209,7 @@ function fileSelectChange(event) {
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
 				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" placeholder="우편번호 입력">
-				<input type="hidden" id="postcode" name="postcode" value="">
+				<input type="hidden" id="postcode" name="postcode" value="${tour.postcode}">
 				<input type="button" class="btn btn-primary" id="searchZip" value="우편번호찾기"  data-toggle="modal" data-target="#myModal">
 			</td>
 		</tr>
@@ -237,7 +237,7 @@ function fileSelectChange(event) {
 				<label for="contact"><span class="redFont"> * </span> 관광지 연락처 </label>
 			</td>
 			<td colspan="3">
-				<input type="text" class="form-control" id="contact" name="contact" value="" placeholder="입력해주세요.">
+				<input type="text" class="form-control" id="contact" name="contact" value="${tour.contact}" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
@@ -259,7 +259,7 @@ function fileSelectChange(event) {
 		<tr>
 			<td><span class="redFont"> * </span> 내용</td>
 			<td colspan="3">
-				<textarea rows="10" cols="3"  class="form-control summernote" name="contents"></textarea>
+				<textarea rows="10" cols="3"  class="form-control summernote" name="contents">${tour.contents}</textarea>
 			</td>
 		</tr>
 		<tr>

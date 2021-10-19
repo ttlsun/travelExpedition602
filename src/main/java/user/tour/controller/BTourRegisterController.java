@@ -13,13 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
 
-import user.camping.model.CampingBean;
-import user.camping.model.CampingDao;
 import user.common.model.KeywordBean;
 import user.common.model.KeywordDao;
 import user.postimg.model.PostimgDao;
@@ -67,6 +64,10 @@ public class BTourRegisterController {
 		System.out.println("tourbean:" + tourbean.toString());
 		
 		try {
+			
+			String acode = "2"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티,4:문의)
+	    	List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
+	    	mav.addObject("keywordLists", keywordLists);
 		
 			//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
 			if(result.hasErrors()
