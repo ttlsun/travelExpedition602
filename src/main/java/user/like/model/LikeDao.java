@@ -54,4 +54,10 @@ public class LikeDao {
 		return cnt;
 	}
 	
+	/* 이미 찜 했는지 확인 */
+	public int confirmUserId(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.selectOne(NAMESPACE + ".confirmUserId", map);
+		return cnt;
+	}
+	
 }

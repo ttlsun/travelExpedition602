@@ -93,7 +93,7 @@ function likesRegisters() {
 	var num = $('#num').val(); //id로 얻어온 자기 고유값 넣기.
 	var acode = "1"; //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
 	var userCode = "${userCode}"; //유저 구분코드
-	
+
 	if(userId == ""){
 		alert("로그인후 이용해주세요.");
 		return;
@@ -119,6 +119,12 @@ function likesRegisters() {
 				//alert(data.resultMsg);
 				return;
 			}
+			
+			if(data.cnt == 1){
+				alert("이미 찜한 사람은 찜할 수 없습니다.");
+				return;
+			}
+			
 			location.reload();
 		},
 		error: function(msg, error) {

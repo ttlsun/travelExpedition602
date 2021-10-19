@@ -49,9 +49,24 @@ public class LikesRegisterController {
 			map.put("anum", map.get("num"));
 			map.put("acode", map.get("acode")); //게시글 구분코드(1:캠핑/2:관광지/3:커뮤니티)
 			
-			likeDao.insertLikesData(map);
-			tourDao.updateSteamed(map);
-			campingDao.updateSteamed(map);
+			int cnt = -1;
+
+			cnt = likeDao.confirmUserId(map);
+			System.out.println("이미 찜했는지 확인용 cnt:"+cnt);
+			
+			if(cnt == 0) {				
+				likeDao.insertLikesData(map);
+				
+				if(map.get("acode").equals("1")) {				
+					campingDao.updateSteamed(map);
+				}
+				else if(map.get("acode").equals("2")) {				
+					tourDao.updateSteamed(map);
+				}
+			}
+			//cnt = 0(찜한적없음) / 1(찜한적있음)
+			json.put("cnt",cnt);
+			
 		
 			json.put("resultCode", "OK");
 			json.put("resultMsg", "성공");

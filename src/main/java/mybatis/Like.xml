@@ -94,5 +94,13 @@
 			  AND A.ID = #{id}
 		)
 	</select>
+	
+	<select id="confirmUserId" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM LIKES
+		WHERE ID = #{id}
+			AND ACODE = #{acode}
+			AND ANUM = #{anum}
+	</select>
 
 </mapper>
