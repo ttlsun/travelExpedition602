@@ -17,9 +17,8 @@ $(document).ready(function() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 관리자 홈 </h2></header>
 	
-		<!-- 회원수, 캠핑수, 관광지수, 후기수, -->
+	<!-- 회원수, 캠핑수, 관광지수, 후기수, -->
 	<div style="padding-top:3%; padding-bottom: 10%">
 		<table class="table table-bordered" style="padding-top: 5%; margin-left:17%; width: 15%; float:left;">
 			<thead>

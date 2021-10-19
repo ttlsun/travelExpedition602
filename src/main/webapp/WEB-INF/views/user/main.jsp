@@ -23,7 +23,6 @@ $(document).ready(function() {
 <section class="container">
 <article>
 <div>
-	<header><h2 align="center" class="text-primary"> 602호여행자들 메인 </h2></header>
 	
 	<!-- 위에 큰 이미지 -->
 	<div style="padding-top: 3%;">
