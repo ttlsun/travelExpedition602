@@ -282,6 +282,7 @@ function likesRegisters() {
 			<div class="tab-pane fade" id="tab1" style="text-align: left;">
 			    <h3>캠핑장 상세 정보</h3>
 			    <div>${campbean.contents }</div>
+			    <hr style="display: none;">
 			</div>
 			
 			<!-- 객실 리스트 탭 -->

@@ -250,6 +250,7 @@ function goCommunityRegister() {
 			<div class="tab-pane fade" id="tab1" style="text-align: left;">
 			    <h3>캠핑장 상세 정보</h3>
 			    <div>${campbean.contents }</div>
+			    <hr style="display: none;">
 			</div>
 			
 			<!-- 객실 리스트 탭 -->
@@ -388,45 +389,6 @@ function goCommunityRegister() {
 		</div>
 		<hr>
 	</div>
-	
-	<!-- 추천관광지  -->
-	<div class="container"> 
-
-	   	<div class="marginPadding10">
-			<label class="text-primary textFontSizeLarge"> 추천관광지 </label>
-		</div>
-        	<div id="carousel-example-generic" class="carousel slide">
-        	<!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
-            <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-             <!-- Carousel items -->
-             <div class="carousel-inner">
-                <div class="item active">
-                   <img src="${images}/1.jpg" style="height:400px; display: block; margin: 0px auto;" alt="First slide" >
-                </div>
-                <div class="item">
-                   <img src="${images}/1.jpg" style="height:400px; display: block; margin: 0px auto;" alt="Second slide">               
-                </div>
-             </div>
-            <!-- Controls -->
-              <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
-                <span class="icon-prev"></span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
-                <span class="icon-next"></span>
-              </a>
-          </div>
-  	</div>
-	<!-- // 추천관광지  -->
-	
-	<!-- 버튼 -->
-	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="추천 관광지 더보기" onclick="goTourList()">
-	</div>
-	<!-- // 버튼 -->
 	
 	</form>
 </div>
