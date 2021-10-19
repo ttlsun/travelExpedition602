@@ -34,8 +34,9 @@ $(document).ready(function() {
 		<div class="tab-content marginPadding10">
 		    <div class="tab-pane fade" id="home" style="text-align: left;">
 			    <h3>팀원</h3>
-			    <p>김관형, 김세영, 남현선, 차승민</p>
-			    
+			    <div style="padding-top: 3%;">
+					<img class="travelExpedition602" width="600" src="${images}/member.jpg" title="602호여행자들 팀원 이미지" alt="602호여행자들 팀원 이미지"  />
+				</div>
 			</div>
 		    <div class="tab-pane active fade in" id="tab1" style="text-align: left;">
 		    	<h3>602호여행자들 소개</h3>
