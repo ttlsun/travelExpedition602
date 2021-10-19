@@ -76,6 +76,7 @@ public class CampingDetailController {
 		map.put("reviewtype", "01"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
 		System.out.println("startAvg::::::" + startAvg);
+		mav.addObject("startAvg",startAvg);
 		
 		//조회수 올리기
 		int cnt = campingDao.campingReadcountUp(num);
