@@ -18,7 +18,7 @@ function navActive(activeName) {
 }
 </script>
 
-<div class="container" style="padding-top: 10px;">
+<div class="container">
 	<!-- 승민님이 만들어주신 저희 대표이미지..! -->
 	<div style="padding-bottom: 1%;">
 		<!-- 관형님이 링크 걸어달라고 하셔서 걸었습니다. 관형님 아이디어~! -->
@@ -50,8 +50,6 @@ function navActive(activeName) {
 	<div class="collapse navbar-collapse navbar-ex1-collapse ">
     	<ul class="nav navbar-nav">
         	<li data-nav="main"><a href="${contextPath}/main.ad"> 여행자들 관리자홈 </a></li>
-        	
-        	
         	
         	<li data-nav="keyword" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 태그 &amp; 이미지 관리 <b class="caret"></b></a>

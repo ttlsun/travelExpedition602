@@ -65,7 +65,6 @@
 	.navbar-default {
 	    background-color: #ffffff;
 	    border-color: #ffffff;
-	    font-size: 
 	}
 	
 	.nav>li>a {
