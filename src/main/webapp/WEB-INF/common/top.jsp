@@ -28,20 +28,20 @@ function navActive(activeName) {
 	
 	<div>
 	<nav class="navbar navbar-default" role="navigation" >
-     	<div>
-			<ul class="navbar-nav navbar-nav ml-auto" style="width:100%">
-		    	<li style="float: right; list-style: none;">
-		        	<c:choose>
-		          		<c:when test="${!empty userId}">
-		          			<a class="navbar-brand" href="${contextPath}/logout.do"><b>${userName}님 로그아웃</b> </a>
-		          		</c:when>
-		          		<c:otherwise>
-		          			<a class="navbar-brand" href="${contextPath}/login.do"><b> 로그인</b> </a>
-		          		</c:otherwise>
-		          	</c:choose>
-		        </li>
-		    </ul>
-		</div>
+     	
+		<ul class="navbar-nav" style="width:100%">
+	    	<li style="float: right; list-style: none;">
+	        	<c:choose>
+	          		<c:when test="${!empty userId}">
+	          			<a class="navbar-brand" href="${contextPath}/logout.do"><b>${userName}님 로그아웃</b> </a>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<a class="navbar-brand" href="${contextPath}/login.do"><b> 로그인</b> </a>
+	          		</c:otherwise>
+	          	</c:choose>
+	        </li>
+	    </ul>
+		
     	<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong><b>〓</b></strong></small>
@@ -61,7 +61,7 @@ function navActive(activeName) {
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
         	<c:if test="${userCode eq 'business'}">
         	<li data-nav="bCamping" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b>[사업자] 캠핑/관광지</b> <b class="caret"></b></a>
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b>[개인] 캠핑/관광지</b> <b class="caret"></b></a>
             	<ul class="dropdown-menu">
            			<li><a href="${contextPath}/bCampingList.do"><b>캠핑/글램핑</b></a></li>
 	            	<li><a href="${contextPath}/bTourList.do"><b>관광지</b></a></li>
@@ -74,7 +74,7 @@ function navActive(activeName) {
          		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
          		<!-- 사업자와 관리자일경우, [일반회원] 으로 보이기. -->
          		<c:choose>
-         			<c:when test="${userCode eq 'business' or userCode eq 'admin' }"> <b>[일반회원] 캠핑/관광지</b></c:when>
+         			<c:when test="${userCode eq 'business' or userCode eq 'admin' }"> <b>[전체] 캠핑/관광지</b></c:when>
          			<c:otherwise><b> 캠핑/관광지</b></c:otherwise>
          		</c:choose>
            		 <b class="caret"></b></a>
@@ -85,7 +85,7 @@ function navActive(activeName) {
          	</li>
          	
         	<li data-nav="community" class="dropdown">
-           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> 후기커뮤니티공간</b><b class="caret"></b></a>
+           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> 후기</b><b class="caret"></b></a>
             	<ul class="dropdown-menu">
             		<li><a href="${contextPath}/communityList.do"><b>모든 후기</b></a></li>
            			<li><a href="${contextPath}/reviewCommunityList.do"><b>방문 후기</b></a></li>

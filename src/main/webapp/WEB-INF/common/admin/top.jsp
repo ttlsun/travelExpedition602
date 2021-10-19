@@ -28,20 +28,20 @@ function navActive(activeName) {
 	</div>
 	<div>
 		<nav class="navbar navbar-default" role="navigation" >
-     	<div>
-			<ul class="navbar-nav navbar-nav ml-auto" style="width:100%">
-		    	<li style="float: right; list-style: none;">
-		        	<c:choose>
-		          		<c:when test="${!empty userId}">
-		          			<b><a class="navbar-brand" style="float: right;" href="${contextPath}/logout.do"><b> ${userName}님 로그아웃</b> </a></b>
-		          		</c:when>
-		          		<c:otherwise>
-		          			<b><a class="navbar-brand" style="float: right;" href="${contextPath}/login.do"><b> 로그인</b> </a></b>
-		          		</c:otherwise>
-		          	</c:choose>
-		        </li>
-		    </ul>
-		</div>
+     	
+     	<ul class="navbar-default" style="width:100%">
+	    	<li style="float: right; list-style: none;">
+	        	<c:choose>
+	          		<c:when test="${!empty userId}">
+	          			<b><a class="navbar-brand" style="float: right;" href="${contextPath}/logout.do"><b> ${userName}님 로그아웃</b> </a></b>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<b><a class="navbar-brand" style="float: right;" href="${contextPath}/login.do"><b> 로그인</b> </a></b>
+	          		</c:otherwise>
+	          	</c:choose>
+	        </li>
+	    </ul>
+     	
      	<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       			<span class="navbar-toggler-icon" style="color: white"></span><small><strong><b>〓</b></strong></small>
