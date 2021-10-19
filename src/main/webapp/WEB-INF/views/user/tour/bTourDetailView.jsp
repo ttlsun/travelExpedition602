@@ -360,7 +360,7 @@ function likesRegisters() {
 				</div>
 				
 			</div>
-				<!-- 후기 탭-->
+				<!-- 후기 탭 :  사업자는 후기 보는 용도로만 사용(등록X) -->
 				<div class="tab-pane fade" id="tab3" style="text-align: left;">
 			    	<h3>관광지 후기</h3>
 					<div class="marginPadding10">
@@ -403,13 +403,6 @@ function likesRegisters() {
 					<div class="paginationCenter" align="center">
 						${communityPageInfo.pagingHtml}
 					</div>
-					
-					<!-- 회원만 문의를 쓸수 있게 변경 (관리자는 안됨!) -->
-					<c:if test="${!empty userCode and userCode ne 'admin'}">
-					<div align="right"> 
-						<input type="button" class="btn btn-primary" value="후기등록하기" onclick="goCommunityRegister()">
-					</div>
-					</c:if>
 				</div>
 			</div>
 			
@@ -425,69 +418,6 @@ function likesRegisters() {
 		<hr>
 	</div>
 	</div>
-	
-	<!-- 추천 캠핑/글램핑  -->
-	<div class="container" style="padding-top: 10%;"> 
-		<div class="marginPadding10">
-			<label class="text-primary textFontSizeLarge"> 추천 캠핑/글램핑 </label>
-		</div>
-        <div id="carousel-example-generic" class="carousel slide">
-        
-            <!-- Indicators(이미지 하단의 동그란것->class="carousel-indicators") -->
-            <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-             <!-- Carousel items -->
-             <div class="carousel-inner">
-                <div class="item active" align="center">
-                   
-                   <table>
-                   	<tr>
-                   		<td style="margin:20px; border:1px solid grey; border-radius: 4px;">
-                   			<div>
-                   				<img src="${images}/1.jpg" style="height:200px; display: block; margin: 0px auto;" alt="Second slide">     
-                   			</div>
-                   			<div>
-                   				<p>캠핑장 이름</p>
-                   				<p>캠핑장 요약</p>
-                   				<p>캠핑장 테마</p>
-                   			</div>
-                		</td>
-                   		<td style="margin:20px; border:1px solid grey; border-radius: 4px;">
-							<div>
-                   				<img src="${images}/1.jpg" style="height:200px; display: block; margin: 0px auto;" alt="Second slide">     
-                   			</div>
-                   			<div>
-                   				캠핑장 정보2
-                   			</div>
-						</td>
-                   		<td style="margin:20px; border:1px solid grey; border-radius: 4px;">
-							<div>
-                   				<img src="${images}/1.jpg" style="height:200px; display: block; margin: 0px auto;" alt="Second slide">     
-                   			</div>
-                   			<div>
-                   				캠핑장 정보3
-                   			</div>
-						</td>
-                   	</tr>
-                   </table>
-                </div>
-                <div class="item">
-                   <img src="${images}/1.jpg" style="height:400px; display: block; margin: 0px auto;" alt="Second slide">               
-                </div>
-             </div>
-            <!-- Controls -->
-              <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
-                <span class="icon-prev"></span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
-                <span class="icon-next"></span>
-              </a>
-          </div>
-  	</div>
-	<!-- // 추천 캠핑/글램핑  -->
 	</form>
 	
 </div>  

@@ -215,5 +215,27 @@
 		</set>
 		WHERE NUM = #{num}
 	</update>
+	
+	<select id="getRecommendList" resultType="myCampingBean">
+		SELECT * FROM (
+				SELECT 
+					ROW_NUMBER() OVER(ORDER BY STEAMED DESC, REGDATE DESC ) AS ROW_NUM,
+					NUM,NAME,
+					(CASE THEMECODE
+							WHEN '01' THEN '숲/산'
+							WHEN '02' THEN '해변/바다'
+							WHEN '03' THEN '강/호수/계곡'
+							WHEN '04' THEN '도심'
+							WHEN '05' THEN '섬'
+					END) AS THEMECODE ,
+					SUMMARY,IMGURL, STEAMED
+				FROM CAMPING
+				WHERE ADDRESS1 = #{address1}
+        AND ADDRESS2 = #{address2}
+				AND STATUS = '01'
+		)
+		WHERE ROW_NUM <![CDATA[ <= ]]> 6
+		ORDER BY STEAMED DESC
+	</select>
    
 </mapper>

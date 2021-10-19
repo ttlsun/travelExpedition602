@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.my.travelExpedition.utility.Paging;
 
-import user.community.model.CommunityBean;
-
 @Component("myCampingDao")
 public class CampingDao {
 	
@@ -84,4 +82,11 @@ public class CampingDao {
 	public void updateSteamed(Map<String, Object> map) {
 		sqlSessionTemplate.update(NAMESPACE+".updateSteamed",map);
 	}
+	
+	/* 관광지 상세에서 보여줄 추천캠핑장 리스트(6개) */
+	public List<CampingBean> getRecommendList(Map<String, String> map) {
+		List<CampingBean> lists = sqlSessionTemplate.selectList(NAMESPACE + ".getRecommendList",map);
+		return lists;
+	}
+	
 }

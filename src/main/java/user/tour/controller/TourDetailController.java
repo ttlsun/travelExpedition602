@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.Paging;
 
+import user.camping.model.CampingBean;
+import user.camping.model.CampingDao;
 import user.community.model.CommunityBean;
 import user.community.model.CommunityDao;
 import user.postimg.model.PostimgBean;
@@ -36,6 +38,9 @@ public class TourDetailController {
 	
 	@Autowired
 	private CommunityDao communityDao; //커뮤니티
+	
+	@Autowired
+	private CampingDao campingDao; //캠핑
 	
 	@RequestMapping(value=COMMAND)
 	public ModelAndView tourDetail(HttpServletRequest request,
@@ -85,13 +90,19 @@ public class TourDetailController {
 		mav.addObject("totalCount", totalCount); // 주변관광지 총카운트
 		mav.addObject("lists", lists); //주변관광지 리스트
 		
-			
 		mav.addObject("communityLists",communityLists); //커뮤니티 리스트
 		mav.addObject("communityPageInfo", communityPageInfo); //커뮤니티 페이징 정보
 		mav.addObject("communityTotalCount",communityTotalCount); //커뮤니티 총카운트
 		mav.addObject("communityPageNumber", map.get("communityPageNumber")); //후기댓글 페이지
 		
 		mav.addObject("startAvg",startAvg); //별갯수 총카운트
+		
+		//추천관광지 리스트
+		map.put("address1", tourbean.getAddress1()); //시
+		map.put("address2", tourbean.getAddress2()); //군
+		List<CampingBean> campingLists = campingDao.getRecommendList(map);
+		mav.addObject("campingLists",campingLists);
+		
 		
 		mav.addObject("pageNumber", map.get("pageNumber")); //관광지 페이지수
 		mav.addObject("imgList",imgList); //이미지 리스트

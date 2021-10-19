@@ -9,6 +9,12 @@
 <script src="${js}/mapview-1.0.0.js"></script>
 <!-- //지도관련 js -->
 
+<!-- 이미지 자동스크롤 -->
+<link rel="stylesheet" href="${js}/owlcarousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="${js}/owlcarousel/assets/owl.theme.default.min.css">
+<script src="${js}/owlcarousel/owl.carousel.min.js"></script>
+<!-- //이미지 자동스크롤 -->
+
 <script type="text/javascript" >
 var map;
 var overlay;
@@ -441,24 +447,26 @@ function goCampingList() {
 		</div>
 		<hr>
 	</div>
+	</div>
 	
 	
-	<!-- 추천관광지  -->
-   <div class="container"> 
+	<!-- 추천캠핑장  -->
+	<c:if test="${fn:length(campingLists) ne 0 }">
+   	<div class="container"> 
 
          <div class="marginPadding10">
-         <label class="text-primary textFontSizeLarge"> 추천관광지 </label>
+         <label class="text-primary textFontSizeLarge"> 추천캠핑장 </label>
       </div>
       
       <div class="owl-carousel owl-theme" style="width: 95%;" align="center">
-         <c:forEach var="tourTean" items="${tourLists}"> 
+         <c:forEach var="campingBean" items="${campingLists}"> 
          <table class="table table-bordered" style="height:350px; width:300px;">
              <tr class="item">
                 <td style="padding: 20px; text-align:center;">
-                   <img src="${images}/${tourTean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${tourTean.imgurl} 이미지" title="${tourTean.imgurl} 이미지" >
-                   <span style="display: block; font-size: 20px; padding: 5px;">${tourTean.name}</span>
-                   <span style="display: block; padding: 5px;">"${tourTean.summary}"</span>
-                   <span style="display: block;">${tourTean.themecode}</span>
+                   <img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
+                   <span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
+                   <span style="display: block; padding: 5px;">"${campingBean.summary}"</span>
+                   <span style="display: block;">${campingBean.themecode}</span>
                 </td>
              </tr>
           </table>
@@ -477,15 +485,20 @@ function goCampingList() {
           </script>
                 
      </div>
-   <!-- // 추천관광지  -->
-     <!-- 버튼 -->
+     
+    <!-- 버튼 -->
 	<div class="marginPadding10" align="center">
 		<input type="button" class="btn btn-primary" value="추천 캠핑장 더보기" onclick="goCampingList()">
 	</div>
 	<!-- // 버튼 -->
+     
+	</c:if>
+    
+   	<!-- // 추천캠핑장  -->
   
-	
 	</form>
+  </div>  
+  
 </div>  
 </article>
 </section>
