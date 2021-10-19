@@ -56,7 +56,7 @@ function navActive(activeName) {
         	<li data-nav="introduction"><a href="${contextPath}/introduction.do"> 여행자들 소개 </a></li>
         	
         	<!-- 사업자일경우 : 추후 협의하에 변경 요망-->
-        	<c:if test="${userCode eq 'business' or userCode eq 'admin'}">
+        	<c:if test="${userCode eq 'business'}">
         	<li data-nav="bCamping" class="dropdown">
            		<a href="#" class="dropdown-toggle" data-toggle="dropdown"> [사업자] 캠핑/관광지 <b class="caret"></b></a>
             	<ul class="dropdown-menu">
