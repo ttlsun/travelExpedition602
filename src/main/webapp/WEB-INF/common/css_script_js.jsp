@@ -62,11 +62,6 @@
 	    height: auto;
 	}
 	
-	.navbar-default {
-	    background-color: #ffffff;
-	    border-color: #ffffff;
-	}
-	
 	.nav>li>a {
 	    position: relative;
 	    display: block;
