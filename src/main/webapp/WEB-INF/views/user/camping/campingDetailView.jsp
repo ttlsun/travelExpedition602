@@ -80,7 +80,7 @@ function goList(pageNumber) {
 
 //추천관광지 더보기 버튼 클릭시
 function goTourList() {
-	location.href= "${contextPath}/추천관광지";
+	location.href= "${contextPath}/tourList.do?orderBy=steamed desc&address1=${campbean.address1 }&address2=${campbean.address2 }";
 }
 
 //객실 상세보기 버튼
