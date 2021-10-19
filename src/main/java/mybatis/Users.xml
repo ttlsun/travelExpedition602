@@ -34,8 +34,20 @@
 		update users set status = '탈퇴보류중' where id = #{id} and pw = #{pw}
 	</update>
 	
+	<select id="findIdwithNum" resultType="String">
+		select id from users where num = #{num}
+	</select>
+	
+	<delete id="deletePay" parameterType="String">
+		delete from pay where id = #{id}
+	</delete>
+	
+	<delete id="deleteQnA" parameterType="String">
+		delete from qna where id = #{id}
+	</delete>
+	
 	<delete id="deleteUsers" parameterType="int">
-		delete from users where num = #{num}
+		delete from users where num = #{num} 
 	</delete>
 	
 	<update id="updateMyInfo" parameterType="myUsersBean">

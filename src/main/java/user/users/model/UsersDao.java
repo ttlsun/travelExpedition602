@@ -47,6 +47,9 @@ public class UsersDao {
 	}
 	
 	public int deleteUsers(int num) {
+		String id = sqlSessionTemplate.selectOne(NAMESPACE+".findIdwithNum", num);
+		sqlSessionTemplate.delete(NAMESPACE+".deletePay", id);
+		sqlSessionTemplate.delete(NAMESPACE+".deleteQnA", id);
 		return sqlSessionTemplate.delete(NAMESPACE+".deleteUsers", num);
 	}
 	
