@@ -42,8 +42,12 @@
 		delete from pay where id = #{id}
 	</delete>
 	
-	<delete id="deleteQnA" parameterType="String">
-		delete from qna where id = #{id}
+	<select id="findQnARef" resultType="myQnaBean">
+		select ref from qna where id = #{id}
+	</select>
+	
+	<delete id="deleteQnA" parameterType="int">
+		delete from qna where ref = #{ref}
 	</delete>
 	
 	<delete id="deleteUsers" parameterType="int">

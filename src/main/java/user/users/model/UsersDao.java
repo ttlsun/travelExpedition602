@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 
 import com.my.travelExpedition.utility.Paging;
 
+import user.qna.model.QnaBean;
+
 @Controller("myUsersDao")
 public class UsersDao {
 	private static final String NAMESPACE = "user.users.model.UsersBean";
@@ -49,7 +51,13 @@ public class UsersDao {
 	public int deleteUsers(int num) {
 		String id = sqlSessionTemplate.selectOne(NAMESPACE+".findIdwithNum", num);
 		sqlSessionTemplate.delete(NAMESPACE+".deletePay", id);
-		sqlSessionTemplate.delete(NAMESPACE+".deleteQnA", id);
+		
+		List<QnaBean> lists = new ArrayList<QnaBean>();
+		lists = sqlSessionTemplate.selectList(NAMESPACE+".findQnARef", id);
+		for(int i=0; i<lists.size(); i++) {
+			sqlSessionTemplate.delete(NAMESPACE+".deleteQnA", lists.get(i).getRef());
+		}
+		
 		return sqlSessionTemplate.delete(NAMESPACE+".deleteUsers", num);
 	}
 	
