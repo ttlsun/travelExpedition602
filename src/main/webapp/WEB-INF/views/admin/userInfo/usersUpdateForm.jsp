@@ -110,7 +110,7 @@
 							</label>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="status" name="status" value="${usersBean.status}">
+							<input type="text" class="form-control" id="status" name="status" value="${usersBean.status}" placeholder="가입완료 또는 회원탈퇴">
 						</td>
 					</tr>
 					<tr>
