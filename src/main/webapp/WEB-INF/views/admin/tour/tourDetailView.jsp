@@ -190,8 +190,53 @@ function goCommunityList() {
 			
 			<!-- 관광지 리스트 탭 -->
 			<div class="tab-pane fade" id="tab2" style="text-align: left;">
-		   		<h3>주변 관광지 리스트</h3>
-		    	<span class="spanFlowRootP10"></span>
+		   		<h3>주변관광지</h3>
+		    	<div class="marginPadding10">
+						<table class="table table-bordered" style="margin-top: 3%;">
+					<caption>레코드 총 갯수 : ${totalCount}</caption>
+					<thead>
+						<tr class="active">
+							<th width="6%">번호</th>
+							<th>관광지명</th>
+							<th>주소</th>
+							<th>한줄요약</th>
+							<th width="14%">등록일</th>
+						</tr>
+					</thead>
+				
+					<tbody>
+						<!-- list가 없을 경우 -->
+						<c:if test="${empty lists}">
+						<tr>
+							<td colspan="5" align="center"> 해당 주변 관광지 레코드가 없습니다.</td>
+						</tr>
+						</c:if>
+						
+						<c:forEach var="list" items="${lists}">
+						<tr>
+							<td>${list.rownum}</td>
+							<td>
+								<a href="tourDetail.ad?num=${list.num}&pageNumber=${pageInfo.pageNumber}">${list.name}</a>
+							</td>
+							<td>${list.postcode} &nbsp; ${tourbean.address1 }&nbsp;${tourbean.address2 }&nbsp;${tourbean.address3 }&nbsp;${tourbean.address4 } </td>
+							<td>${list.summary}</td>
+							<td>
+								<fmt:parseDate var="dateFmt" value="${list.regdate}" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate var="registerDate" value="${dateFmt}" pattern="yyyy-MM-dd"/>
+								${registerDate}
+							</td> 
+						</tr>
+						</c:forEach>
+					</tbody>
+				
+					</table>
+			
+					<!-- 페이징 -->
+					<div class="paginationCenter" align="center">
+						${pageInfo.pagingHtml}
+					</div>
+					
+				</div>
 				
 			</div>
 			

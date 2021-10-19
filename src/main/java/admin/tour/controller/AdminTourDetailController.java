@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.travelExpedition.utility.Paging;
+
 import user.community.model.CommunityDao;
 import user.postimg.model.PostimgBean;
 import user.postimg.model.PostimgDao;
@@ -41,7 +43,7 @@ public class AdminTourDetailController {
 		
 		ModelAndView mav = new ModelAndView(GETPAGE);
 		
-		//관리자 페이지에서는 조회수 올릴필요없어요.... 사용자단에서는 올려야합니다...사업자도 안됨!!
+		String pageUrl = request.getContextPath()+ COMMAND; //페이지 URL
 		
 		//관광지상세
 		int num = Integer.parseInt((String)map.get("num"));
@@ -58,6 +60,18 @@ public class AdminTourDetailController {
 		map.put("reviewnum", map.get("num")); //관광지고유번호
 		map.put("reviewtype", "02"); //후기 구분자(01:캠핑/02:관광지/03:모든후기)
 		int startAvg = communityDao.getStarAVG(map);
+		
+		//주변관광지 리스트 (시,군) 
+		map.put("status", "01"); //노출만 보여주기.
+		map.put("address1", tourbean.getAddress1()); //시
+		map.put("address2", tourbean.getAddress2()); //군
+		map.put("aroundAddrRegId", tourbean.getRegid()); //등록자아이디꺼만 제외
+		int totalCount = tourDao.getTotalCount(map);
+		Paging pageInfo = new Paging(map,"10",totalCount, pageUrl);		
+		List<TourBean> lists = tourDao.getTourList(pageInfo,map);
+		mav.addObject("pageInfo", pageInfo); //주변관광지 리스트 페이징 정보
+		mav.addObject("totalCount", totalCount); // 주변관광지 총카운트
+		mav.addObject("lists", lists); //주변관광지 리스트
 		
 		mav.addObject("startAvg",startAvg); //별갯수 총카운트
 		
