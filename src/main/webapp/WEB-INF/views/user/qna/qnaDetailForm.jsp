@@ -129,13 +129,15 @@ function goDelete() {
 	
 	<!-- 버튼 -->
 	<div class="marginPadding10" align="center">
+		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
+		<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
+		
 		<!-- 내가 쓴 글이면서 답변이 완료되지 않는것들만 수정,삭제가능 설정. -->
 		<c:if test="${qna.id eq userId and qna.status ne '03'}">
 			<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
 			<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
 		</c:if>
 		
-		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
 	</div>
 	<!-- // 버튼 -->
 </div>  

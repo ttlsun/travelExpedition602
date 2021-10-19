@@ -28,7 +28,7 @@ $(document).ready(function() {
 	<!-- 위에 큰 이미지 -->
 	<div style="padding-top: 3%;">
 		<a href="${contextPath}/main.do">
-			<img class="travelExpedition602" width="1140" src="${images}/602호여행자들_큰거.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />
+			<img class="travelExpedition602" width="1140" src="${images}/602travelerMain.jpg" title="602호여행자들 이미지" alt="602호여행자들 이미지"  />
 		</a>
 	</div>
 	
