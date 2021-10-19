@@ -121,9 +121,17 @@ public class BRoomRegisterController {
 			for (String str : uploadFileList) {
 				System.out.println("file : " + str);
 				
-				map.put("imgname", str);
-				cnt = postimgDao.insertPostimgData(map);
-				roombean.setImgname(str);
+				//map.put("imgname", str);
+				//cnt = postimgDao.insertPostimgData(map);
+				//roombean.setImgname(str);
+				
+				//파일이 있을경우만, 이미지테이블에 데이터를 쌓는다.
+				if(str != null) {
+					map.put("imgname", str);
+					cnt = postimgDao.insertPostimgData(map);
+					roombean.setImgname(str);
+				}
+				
 			}
 						
 			//room 레코드 insert

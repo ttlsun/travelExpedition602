@@ -74,7 +74,13 @@ public class BCampingUpdateController {
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("originImgUrl", originImgUrl);
 		
-		if(result.hasErrors()) {
+		//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
+		if(result.hasErrors()
+				&& !WebUtil.isResultErrorIgnore(result, new String[] {"imgurl"}))  {
+			
+			System.out.println("유효성 검사 오류 S: ----------------------------------------------");
+			WebUtil.resultErrorConvert(result);
+			System.out.println("유효성 검사 오류 E: ----------------------------------------------");
 			mav.setViewName(GETPAGE);
 			return mav;
 		}

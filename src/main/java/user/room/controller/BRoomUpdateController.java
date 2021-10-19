@@ -97,7 +97,13 @@ public class BRoomUpdateController {
 			mav.addObject("originImgUrl", originImgUrl);
 			mav.addObject("imgList", imgList);
 			
-			if(result.hasErrors()) {
+			if(result.hasErrors()
+					&& !WebUtil.isResultErrorIgnore(result, new String[] {
+							"imgurl","imgname"}))  {
+				
+				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
+				WebUtil.resultErrorConvert(result);
+				System.out.println("유효성 검사 오류 E: ----------------------------------------------");
 				mav.setViewName(GETPAGE);
 				return mav;
 			}

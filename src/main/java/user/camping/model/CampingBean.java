@@ -26,8 +26,9 @@ public class CampingBean {
 	@NotNull(message = "한줄 소개글 입력은 필수입니다.")
 	private String summary;
 	
+	@NotEmpty(message = "대표이미지를 선택하세요.")
 	private String imgurl;
-	@NotNull(message = "대표이미지를 선택하세요.")
+	
 	private MultipartFile updateFile; // 대표이미지명
 	
 	private String options;

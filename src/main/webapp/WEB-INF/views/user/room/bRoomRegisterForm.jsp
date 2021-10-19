@@ -138,7 +138,7 @@ function goList() {
 			<td colspan="3">
 				<input type="file" id="imgFile" name="updateFile" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" name="imgurl" value="${room.imgurl}">
-				<form:errors cssClass="errMessage" path="updateFile"/>
+				<form:errors cssClass="errMessage" path="imgurl"/>
 			</td>
 		</tr>
 		<tr>

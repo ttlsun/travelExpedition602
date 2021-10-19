@@ -3,11 +3,8 @@ package user.room.model;
 import java.util.Arrays;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RoomBean {
@@ -20,15 +17,16 @@ public class RoomBean {
 	private String roomtype;
 	private int cnum;
 	
+	@NotBlank(message = "대표이미지를 선택하세요.")
 	private String imgurl; // 대표이미지
-	
-	@NotNull(message = "대표이미지를 선택하세요.")
 	private MultipartFile updateFile; // 대표이미지명
 
 	private String imgname; // 상세이미지(여러장)
 	private MultipartFile[] multipleUpdateFile; // 상세이미지명(여러장)
 
 	private String summary;
+	
+	@NotBlank(message = "내용을 선택하세요.")
 	private String contents;
 	
 	@Min(value = 1, message = "적정인원 입력은 필수입니다.")

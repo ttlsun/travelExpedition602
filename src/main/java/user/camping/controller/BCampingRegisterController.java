@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travelExpedition.utility.WebUtil;
@@ -61,7 +60,14 @@ public class BCampingRegisterController {
 			List<KeywordBean> keywordLists = keywordDao.getKeywordList(acode); 
 			mav.addObject("keywordLists", keywordLists);	
 				
-			if(result.hasErrors()) {
+			//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
+			if(result.hasErrors()
+					&& !WebUtil.isResultErrorIgnore(result, new String[] {
+							"imgurl"}))  {
+				
+				System.out.println("유효성 검사 오류 S: ----------------------------------------------");
+				WebUtil.resultErrorConvert(result);
+				System.out.println("유효성 검사 오류 E: ----------------------------------------------");
 				mav.setViewName(GETPAGE);
 				return mav;
 			}
