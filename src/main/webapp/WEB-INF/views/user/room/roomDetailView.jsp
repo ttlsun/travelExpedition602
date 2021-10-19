@@ -70,10 +70,11 @@ function goReservation() {
 	var startDate = $('#startDate').val().replaceAll('-', '');
 	var endDate = $('#endDate').val().replaceAll('-', '');
 	var guests = $('#guests').val();
-	
-	if("${userId}" == '' || "${userCode}" != "business" || "${userCode}" != "admin"){
-	      alert("예약은 회원만 가능합니다.");
-	      return false;
+	var userCode = "${userCode}";
+	   
+	if("${userId}" == '' || userCode == "business" || userCode == "admin"){
+	    alert("예약은 회원만 가능합니다.");
+	    return false;
 	}
 	
 	if(startDate == null || startDate == ''){
