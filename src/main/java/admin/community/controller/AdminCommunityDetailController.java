@@ -31,6 +31,7 @@ public class AdminCommunityDetailController {
 	public static final String COMMAND = "/communityDetail.ad";
 	public static final String GETPAGE = "admin/community/communityDetailForm";
 	public static final String GOTOPAGE = "redirect:/communityDetail.ad";
+	public static final String GOTOPAGE_LIST = "redirect:/communityList.ad";
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -92,6 +93,8 @@ public class AdminCommunityDetailController {
 			//상태값이 00일경우 완전삭제(이미지들도 삭제) , 상태값이 01: 노출 , 02 :비노출로 변경.
 			if(map.get("status").equals("00")) {
 				
+				System.out.println("map.get(\"status\")" + map.get("status"));
+				
 				//여럿 파일 이미지들(이미지관리테이블) 조회
 				map.put("acode", "6"); //커뮤니티 구분자값
 				map.put("anum", map.get("num")); 
@@ -116,7 +119,9 @@ public class AdminCommunityDetailController {
 				postimgDao.deletePostimgData(map);
 				
 				//캠핑 or 관광지 고유번호.
-				int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+				//int revieNum = Integer.parseInt((String)map.get("reviewnum"));
+				//int revieNum = 1;
+				//System.out.println("revieNum:" + map.get("reviewnum"));
 				
 				//별등급 삭제.(01,02 일경우에만 등급 테이블 삭제.)
 				if(!map.get("reviewtype").equals("03")) {
@@ -126,7 +131,7 @@ public class AdminCommunityDetailController {
 					ratingDao.deleteRatingData(map);
 					
 					//캠핑 or 관광지 리뷰수 삭제하기.
-					map.put("reviewnum", revieNum);
+					map.put("reviewnum", map.get("reviewnum"));
 					communityDao.deleteUpdateReviewCount(map);
 					
 					//캠핑 or 관광지 테이블에 추천 카운트 삭제하기
@@ -148,18 +153,21 @@ public class AdminCommunityDetailController {
 				//후기 테이블 데이터 삭제
 				communityDao.deleteData(num);
 				
-			}else {
+				mav.setViewName(GOTOPAGE_LIST);
 				
+				
+			}else {
 				communityDao.updateCommunityStatusChange(map);
+				mav.setViewName(GOTOPAGE);
 			}
 			
-			mav.setViewName(GOTOPAGE);
 			mav.addObject("pageNumber", map.get("pageNumber"));
 			mav.addObject("num", map.get("num"));
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("내부오류");
+			mav.setViewName(GOTOPAGE);
 		}
 		
 		return mav;

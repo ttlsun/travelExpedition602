@@ -69,6 +69,7 @@ function goStatus(num) {
 	<input type="hidden" name="modid" value="${userId}">
 	<input type="hidden" name="regid" value="${community.regid}">
 	<input type="hidden" name="reviewtype" value="${community.reviewtype}">
+	<input type="hidden" name="reviewnum" value="${community.reviewnum}">
 	
 	<table class="table table-bordered">
 		<tr>
@@ -245,9 +246,9 @@ function goStatus(num) {
 			<c:when test="${community.status eq '02' }">
 				<input type="submit" class="btn btn-primary" value="활성화" onclick="return goStatus('01')">
 			</c:when>
-			<c:otherwise>
+			<%-- <c:otherwise>
 				<input type="submit" class="btn btn-primary" value="완전삭제" onclick="return goStatus('00')">
-			</c:otherwise>
+			</c:otherwise> --%>
 		</c:choose>
 		
 		<input type="button" class="btn btn-default" value="목록보기" onclick="goList()">
