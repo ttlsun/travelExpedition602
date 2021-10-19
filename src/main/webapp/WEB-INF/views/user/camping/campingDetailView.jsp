@@ -417,6 +417,8 @@ function likesRegisters() {
 		<hr>
 	</div>
 	
+	<c:if test="${fn:length(tourLists) ne 0 }">
+
 	<!-- 추천관광지  -->
    <div class="container"> 
 
@@ -458,6 +460,8 @@ function likesRegisters() {
 		<input type="button" class="btn btn-primary" value="추천 관광지 더보기" onclick="goTourList()">
 	</div>
 	<!-- // 버튼 -->
+	
+	</c:if>
 	
 	</form>
 </div>
