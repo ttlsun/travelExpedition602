@@ -21,10 +21,6 @@ $(document).ready(function() {
 	$("#metaKeywords").attr("content", "#여행자들602호 회원목록");
 });
 
-function goBack(){
-	history.go(-1);
-}
-
 function placeholderChange(){
 	var selectVal = $("#whatColumn option:selected").val();
 	/*if(selectVal == ""){
@@ -100,7 +96,6 @@ function goDelete(num, status) {
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary">회원목록</h2></header>
 
 	<div class="form-horizontal rounded">
