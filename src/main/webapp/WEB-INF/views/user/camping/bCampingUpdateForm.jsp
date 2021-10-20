@@ -166,33 +166,51 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<th><label for="camptype"><span class="redFont"> * </span> 캠핑장 유형 </label></th>
+			<th><label for="camptype1"><span class="redFont"> * </span> 캠핑장 유형 </label></th>
 			<td>
 				<p><span class="redFont">해당되는 유형을 모두 선택해주세요.</span></p>
-				<input type="checkbox" id="camptype" name="camptype" value="01" 
+				<label for="camptype1">
+				<input type="checkbox" id="camptype1" name="camptype" value="01" 
 					<c:if test="${fn:contains(camping.camptype,'01')}"> checked</c:if>>&nbsp;일반캠핑장&nbsp;
-				<input type="checkbox" id="camptype" name="camptype" value="02" 
+				</label>
+				<label for="camptype2">
+				<input type="checkbox" id="camptype2" name="camptype" value="02" 
 					<c:if test="${fn:contains(camping.camptype,'02')}"> checked</c:if>>&nbsp;자동차캠핑장&nbsp;
-				<input type="checkbox" id="camptype" name="camptype" value="03" 
+				</label>
+				<label for="camptype3">
+				<input type="checkbox" id="camptype3" name="camptype" value="03" 
 					<c:if test="${fn:contains(camping.camptype,'03')}"> checked</c:if>>&nbsp;글램핑&nbsp;
-				<input type="checkbox" id="camptype" name="camptype" value="04" 
+				</label>
+				<label for="camptype4">
+				<input type="checkbox" id="camptype4" name="camptype" value="04" 
 					<c:if test="${fn:contains(camping.camptype,'04')}"> checked</c:if>>&nbsp;카라반&nbsp;
+				</label>
 				<form:errors cssClass="errMessage" path="camptype"/>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="themecode"><span class="redFont"> * </span> 캠핑장 테마 </label></th>
+			<th><label for="themecode1"><span class="redFont"> * </span> 캠핑장 테마 </label></th>
 			<td>
-				<input type="radio" id="themecode" name="themecode" value="01"
+				<label for="themecode1">
+				<input type="radio" id="themecode1" name="themecode" value="01"
 					<c:if test="${camping.themecode eq '01'}"> checked</c:if>>&nbsp;숲/산&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="02"
+				</label>
+				<label for="themecode2">
+				<input type="radio" id="themecode2" name="themecode" value="02"
 					<c:if test="${camping.themecode eq '02'}"> checked</c:if>>&nbsp;해변/바다&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="03"
+				</label>
+				<label for="themecode3">
+				<input type="radio" id="themecode3" name="themecode" value="03"
 					<c:if test="${camping.themecode eq '03'}"> checked</c:if>>&nbsp;강/호수/계곡&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="04"
+				</label>
+				<label for="themecode4">
+				<input type="radio" id="themecode4" name="themecode" value="04"
 					<c:if test="${camping.themecode eq '04'}"> checked</c:if>>&nbsp;도심&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="05"
+				</label>
+				<label for="themecode5">
+				<input type="radio" id="themecode5" name="themecode" value="05"
 					<c:if test="${camping.themecode eq '05'}"> checked</c:if>>&nbsp;섬&nbsp;
+				</label>
 				<form:errors cssClass="errMessage" path="themecode"/>
 			</td>
 		</tr>
@@ -204,7 +222,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<th><label for="regkeyword"> 우리 캠핑장의 키워드(#) </label></th>
+			<th><label for="regkeywords_0"> 우리 캠핑장의 키워드(#) </label></th>
 			<td>
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
@@ -262,7 +280,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<th><label for="imgfile"><span class="redFont"> * </span> 대표 이미지 </label></th>
+			<th><label for="imgFile"><span class="redFont"> * </span> 대표 이미지 </label></th>
 			<td>
 				<div class="rounded">
 					<img src="${fileImg}/${originImgUrl} " style="height:10%; width: 30%;">
@@ -274,9 +292,9 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<th><label for="contents"><span class="redFont"> * </span> 상세 소개글 </label></th>
+			<th><label for="contents">상세 소개글 </label></th>
 			<td colspan="3">
-				<textarea rows="10" cols="3" class="form-control summernote" name="contents">${camping.contents }</textarea>
+				<textarea rows="10" cols="3" id="contents" class="form-control summernote" name="contents">${camping.contents }</textarea>
 			</td>
 		</tr>
 		<tr>
