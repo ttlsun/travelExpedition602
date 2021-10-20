@@ -57,6 +57,7 @@ public class UsersDao {
 		for(int i=0; i<lists.size(); i++) {
 			sqlSessionTemplate.delete(NAMESPACE+".deleteQnA", lists.get(i).getRef());
 		}
+		sqlSessionTemplate.delete(NAMESPACE+".deleteLikes", id);
 		
 		return sqlSessionTemplate.delete(NAMESPACE+".deleteUsers", num);
 	}

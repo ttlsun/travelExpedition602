@@ -50,6 +50,10 @@
 		delete from qna where ref = #{ref}
 	</delete>
 	
+	<delete id="deleteLikes" parameterType="String">
+		delete from likes where id = #{id}
+	</delete>
+	
 	<delete id="deleteUsers" parameterType="int">
 		delete from users where num = #{num} 
 	</delete>
