@@ -317,6 +317,7 @@ function goCampingList() {
 				              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
 				                <span class="icon-next"></span>
 				              </a>
+				  		</div>
 				  	</div>
 					<!-- // 후기 사진  -->
 					
