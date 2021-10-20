@@ -109,7 +109,7 @@
          <when test="orderBy == 'reviewcount desc'">
             ORDER BY REVIEWCOUNT DESC
          </when>
-         <otherwise>ORDER BY REGDATE DESC</otherwise>
+         <otherwise>ORDER BY NUM DESC</otherwise>
     	</choose>
 	</select>
 	
