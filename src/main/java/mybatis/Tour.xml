@@ -124,7 +124,7 @@
 			NAME = #{name},
 			THEMECODE = #{themecode},
 			PRICE = #{price},
-			DISCOUNT = ${discount},
+			DISCOUNT = #{discount},
 			REG_KEYWORD = #{regkeyword},
 			SUMMARY = #{summary},
 			IMGURL = #{imgurl},
