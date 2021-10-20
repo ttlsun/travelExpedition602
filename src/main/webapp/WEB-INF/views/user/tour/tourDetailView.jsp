@@ -130,7 +130,7 @@ function likesRegisters() {
         	 alert("이미 찜 했습니다.");
         	 return;
          }
-         location.reload();
+         goMyLikesList();
       },
       error: function(msg, error) {
          console.log("처리오류");
@@ -140,6 +140,11 @@ function likesRegisters() {
 //추천관광지 더보기 버튼 클릭시
 function goCampingList() {
     location.href= "${contextPath}/campingList.do?orderBy=steamed desc&address1=${tourbean.address1 }&address2=${tourbean.address2 }";
+}
+
+//찜목록으로 이동
+function goMyLikesList() {
+	location.href= "${contextPath}/myLikesList.do";
 }
 </script>
 
