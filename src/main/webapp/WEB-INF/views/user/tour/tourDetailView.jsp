@@ -148,13 +148,13 @@ function goCampingList() {
 <div>
 	<div class="marginPadding10" align="right">
 		<input type="button" style="float: left" class="btn btn-default" value="목록보기" onclick="goList(${pageNumber})">
-		
+	</div>  
 	<!-- 상세페이지 form -->
 	<form name="tourForm" action="tourDetail.do" method="post" class="form-horizontal">
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
 	<input type="hidden" name="num" id="num" value="${tourbean.num}">
-	<table>
+	<table style="width:100%;">
 		<tr>
 			<td colspan="2" style="text-align:center; padding-bottom: 20px; border-bottom: 1px solid lightgrey;">
 				<h2 class="text-primary">${tourbean.name }</h2>
@@ -309,21 +309,15 @@ function goCampingList() {
 				                	<img src="${fileImg}/${list.imgname}" style="height:400px; display: block; margin: 0px auto;" alt="${list.imgname} 이미지" title="${list.imgname} 이미지" >
 					                </div>
 				                </c:forEach>
-				             </div>
-				            <!-- Controls -->
+				             	</div>
+				            	<!-- Controls -->
 				              <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
 				                <span class="icon-prev"></span>
 				              </a>
 				              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
 				                <span class="icon-next"></span>
 				              </a>
-				          </div>
-				           <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="prev">
-                <span class="icon-prev"></span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" style="background-image:none;" data-slide="next">
-                <span class="icon-next"></span>
-              </a>
+				  		</div>
 				  	</div>
 					<!-- // 후기 사진  -->
 					
@@ -452,52 +446,52 @@ function goCampingList() {
 	
 	<!-- 추천캠핑장  -->
 	<c:if test="${fn:length(campingLists) ne 0 }">
-   	<div class="container"> 
-
-         <div class="marginPadding10">
-         <label class="text-primary textFontSizeLarge"> 추천캠핑장 </label>
-      </div>
-      
-      <div class="owl-carousel owl-theme" style="width: 95%;" align="center">
-         <c:forEach var="campingBean" items="${campingLists}"> 
-         <table class="table table-bordered" style="height:350px; width:300px;">
-             <tr class="item">
-                <td style="padding: 20px; text-align:center;">
-                   <img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
-                   <span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
-                   <span style="display: block; padding: 5px;">"${campingBean.summary}"</span>
-                   <span style="display: block;">${campingBean.themecode}</span>
-                </td>
-             </tr>
-          </table>
-          </c:forEach>
-       </div>
-       <script>
-           // 이미지 여러개 표시 및 자동 스크롤
-         $('.owl-carousel').owlCarousel({
-            items:3,            // 표시할 갯수
-            loop:true,
-            margin:5,
-            autoplay:true,
-            autoplayTimeout:3000,    // 자동 스크롤 시간(밀리세컨드)
-            autoplayHoverPause:true
-         })
-          </script>
-                
-     </div>
+	   	<div class="container"> 
+			<div class="marginPadding10">
+	         	<label class="text-primary textFontSizeLarge"> 추천캠핑장 </label>
+	      	</div>
+			<div class="owl-carousel owl-theme" style="width: 95%;" align="center">
+		    	<c:forEach var="campingBean" items="${campingLists}"> 
+		        <table class="table table-bordered" style="height:350px; width:300px;">
+		        	<tr class="item">
+		            	<td style="padding: 20px; text-align:center;">
+		                 	<a href="campingDetail.do?num=${campingBean.num}&pageNumber=1">
+		                 		<img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
+		  					</a>
+		                   	<span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
+		                   	<span style="display: block; padding: 5px;">"${campingBean.summary}"</span>
+		                   	<span style="display: block;">${campingBean.themecode}</span>
+		                </td>
+		             </tr>
+		       </table>
+		       </c:forEach>
+			</div>
+	       <script>
+	           // 이미지 여러개 표시 및 자동 스크롤
+	         $('.owl-carousel').owlCarousel({
+	            items:3,            // 표시할 갯수
+	            loop:true,
+	            margin:5,
+	            autoplay:true,
+	            autoplayTimeout:3000,    // 자동 스크롤 시간(밀리세컨드)
+	            autoplayHoverPause:true
+	         })
+	          </script>
+	                
+	     </div>
      
-    <!-- 버튼 -->
-	<div class="marginPadding10" align="center">
-		<input type="button" class="btn btn-primary" value="추천 캠핑장 더보기" onclick="goCampingList()">
-	</div>
-	<!-- // 버튼 -->
+	    <!-- 버튼 -->
+		<div class="marginPadding10" align="center">
+			<input type="button" class="btn btn-primary" value="추천 캠핑장 더보기" onclick="goCampingList()">
+		</div>
+		<!-- // 버튼 -->
      
 	</c:if>
     
    	<!-- // 추천캠핑장  -->
   
 	</form>
-  </div>  
+  
   
 </div>  
 </article>

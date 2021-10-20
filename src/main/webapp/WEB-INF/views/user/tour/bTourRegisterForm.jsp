@@ -125,7 +125,7 @@ function inputSave() {
 
 //리스트 버튼 클릭시
 function goList() {
-	location.href= "${contextPath}/tourList.do";
+	location.href= "${contextPath}/bTourList.do";
 }
 
 // 이미지 파일 선택시 지도 말풍선 이미지 변경
@@ -144,7 +144,9 @@ function fileSelectChange(event) {
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" align="left"  value="돌아가기" onclick="goList()">
+	<div class="marginPadding10" align="right">
+		<input type="button" class="btn btn-default" style="float: left"  value="돌아가기" onclick="goList()">
+	</div>
 	<header><h2 align="center" class="text-primary">관광지 등록 화면</h2></header>
 	
 	<form:form name="myForm" commandName="tour" action="${contextPath}/bTourRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -157,42 +159,51 @@ function fileSelectChange(event) {
 			</td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="name" name="name" value="${tour.name}" placeholder="입력해주세요.">
+				<form:errors cssClass="errMessage" path="name"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="themecode"><span class="redFont"> * </span> 관광지 테마 </label> </td>
+			<td><label for="themecode1"><span class="redFont"> * </span> 관광지 테마 </label> </td>
 			<td colspan="3">
-				<input type="radio" id="themecode" name="themecode" value="01"
+				<label for="themecode1">
+				<input type="radio" id="themecode1" name="themecode" value="01"
 					<c:if test="${tour.themecode eq '01'}"> checked</c:if>>&nbsp;베스트&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="02"
+				</label>
+				<label for="themecode2">
+				<input type="radio" id="themecode2" name="themecode" value="02"
 					<c:if test="${tour.themecode eq '02'}"> checked</c:if>>&nbsp;제주여행&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="03"
+				</label>
+				<label for="themecode3">
+				<input type="radio" id="themecode3" name="themecode" value="03"
 					<c:if test="${tour.themecode eq '03'}"> checked</c:if>>&nbsp;내륙여행&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="04"
+				</label>
+				<label for="themecode4">
+				<input type="radio" id="themecode4" name="themecode" value="04"
 					<c:if test="${tour.themecode eq '04'}"> checked</c:if>>&nbsp;섬여행&nbsp;
+				</label>
 				<form:errors cssClass="errMessage" path="themecode"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="discount"><span class="redFont"> * </span> 할인가</label> </td>
+			<td><label for="discount"> 할인가</label> </td>
 			<td>
 				<input type="text" class="form-control" id="discount" name="discount" value="${tour.discount}" placeholder=" 할인율을 입력해주세요.">
 			</td>
-			<td><label for="price"><span class="redFont"> * </span> 가격 </label> </td>
+			<td><label for="price"> 가격 </label> </td>
 			<td>
 				<input type="text" class="form-control" id="price" name="price" value="${tour.price}" placeholder="가격을 입력해주세요.">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="summary"> 한줄 소개글 <span class="redFont"> * </span></label></td>
+			<td><label for="summary"> 한줄 소개글</label></td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="summary" name="summary" value="${tour.summary }" placeholder="목록 외부에 노출됩니다.">
 			</td>
 		</tr>
 		
-		<!-- 키워드(#) 코드와 문자열 연결하여 배열로 만들것 -->
+		<!-- 키워드(#) 코드와 문자열 연결하여 배열로 만듦 -->
 		<tr>
-			<td><label for="regkeywords"> 관광지 관련 키워드(#) </label></td>
+			<td><label for="regkeywords_0"> 관광지 관련 키워드(#) </label></td>
 			<td colspan="3">
 				<p><span class="redFont"> 검색에 활용됩니다. 최대 5개까지만 골라주세요. </span></p>
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
@@ -234,7 +245,7 @@ function fileSelectChange(event) {
 		</tr>
 		<tr>
 			<td width="20%">
-				<label for="contact"><span class="redFont"> * </span> 관광지 연락처 </label>
+				<label for="contact"> 관광지 연락처 </label>
 			</td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="contact" name="contact" value="${tour.contact}" placeholder="입력해주세요.">
@@ -249,7 +260,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><label for="multipleUpdateFile"><span class="redFont"> * </span> 관광지 이미지(여러장 올리기) </label> </td>
+			<td><label for="multipleUpdateFile">관광지 이미지(여러장 올리기) </label> </td>
 			<td colspan="3">
 				<input type="file" multiple id="multipleUpdateFile" name="multipleUpdateFile" value="" accept=".jpg, .jpeg, .png, .gif" >
 				<input type="hidden" name="imgname" value="${tour.imgname}">
@@ -257,7 +268,7 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><span class="redFont"> * </span> 내용</td>
+			<td> 내용</td>
 			<td colspan="3">
 				<textarea rows="10" cols="3"  class="form-control summernote" name="contents">${tour.contents}</textarea>
 			</td>

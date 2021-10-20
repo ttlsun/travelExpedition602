@@ -43,7 +43,7 @@ public class AdminUsersListController {
 			int totalCount = usersDao.getTotalCount(map);
 			String url = request.getContextPath()+COMMAND;
 			
-			Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
+			Paging pageInfo = new Paging(pageNumber, "10", totalCount, url, whatColumn, keyword);
 			List<UsersBean> lists = usersDao.getList(pageInfo, map);
 			
 			mav.addObject("pageNumber", pageNumber);
