@@ -132,12 +132,20 @@ function fileSelectChange(event) {
 	};
 	reader.readAsDataURL(event.target.files[0]);
 }
+
+//리스트 버튼 클릭시
+function goDetail() {
+	location.href= "${contextPath}/bTourDetail.do?num=${tour.num}&pageNumber=${pageNumber}";
+}
+
 </script>
 
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail(${tour.num},${pageNumber })">
+	<div class="marginPadding10" align="right">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goDetail()">
+	</div>
 	<header><h2 align="center" class="text-primary">관광지 수정 화면</h2></header>
 	
 	<form:form name="myForm" commandName="tour" action="${contextPath}/bTourUpdate.do" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -152,34 +160,43 @@ function fileSelectChange(event) {
 			</td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="name" name="name" value="${tour.name}" placeholder="입력해주세요.">
+				<form:errors cssClass="errMessage" path="name"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for=themecode><span class="redFont"> * </span> 관광지 테마 </label> </td>
+			<td><label for="themecode1"><span class="redFont"> * </span> 관광지 테마 </label> </td>
 			<td colspan="3">
-				<input type="radio" id="themecode" name="themecode" value="01"
+				<label for="themecode1">
+				<input type="radio" id="themecode1" name="themecode" value="01"
 					<c:if test="${tour.themecode eq '01'}"> checked</c:if>>&nbsp;베스트&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="02"
+				</label>
+				<label for="themecode2">
+				<input type="radio" id="themecode2" name="themecode" value="02"
 					<c:if test="${tour.themecode eq '02'}"> checked</c:if>>&nbsp;제주여행&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="03"
+				</label>
+				<label for="themecode3">
+				<input type="radio" id="themecode3" name="themecode" value="03"
 					<c:if test="${tour.themecode eq '03'}"> checked</c:if>>&nbsp;내륙여행&nbsp;
-				<input type="radio" id="themecode" name="themecode" value="04"
+				</label>
+				<label for="themecode4">
+				<input type="radio" id="themecode4" name="themecode" value="04"
 					<c:if test="${tour.themecode eq '04'}"> checked</c:if>>&nbsp;섬여행&nbsp;
+				</label>
 				<form:errors cssClass="errMessage" path="themecode"/>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="discount"><span class="redFont"> * </span> 할인가</label> </td>
+			<td><label for="discount"> 할인가 </label> </td>
 			<td>
 				<input type="text" class="form-control" id="discount" name="discount" value="${tour.discount }" placeholder=" 할인율을 입력해주세요.">
 			</td>
-			<td><label for="price"><span class="redFont"> * </span> 가격 </label> </td>
+			<td><label for="price"> 가격 </label> </td>
 			<td>
 				<input type="text" class="form-control" id="price" name="price" value="${tour.price }" placeholder="가격을 입력해주세요.">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="summary"> 한줄 소개글 <span class="redFont"> * </span></label></td>
+			<td><label for="summary"> 한줄 소개글 </label></td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="summary" name="summary" value="${tour.summary }" placeholder="목록 외부에 노출됩니다.">
 			</td>
@@ -206,7 +223,7 @@ function fileSelectChange(event) {
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
 				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" value="${tour.postcode }" placeholder="우편번호 입력">
-				<input type="hidden" id="zipcode" name="zip_code">
+				<input type="hidden" id="postcode" name="postcode" value="${tour.postcode}">
 				<input type="button" class="btn btn-primary" id="searchZip" value="우편번호찾기"  data-toggle="modal" data-target="#myModal">
 			</td>
 		</tr>
@@ -235,14 +252,14 @@ function fileSelectChange(event) {
 		</tr>
 		<tr>
 			<td width="20%">
-				<label for="contact"><span class="redFont"> * </span> 관광지 연락처 </label>
+				<label for="contact">관광지 연락처 </label>
 			</td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="contact" name="contact" value="${tour.contact }" placeholder="입력해주세요.">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="imgFile">대표 타이틀 이미지 </label> </td>
+			<td><label for="imgFile"> <span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td colspan="3">
 				<div class="rounded">
 					<img src="${fileImg}/${originImgUrl} " style="height:10%; width: 30%;">
@@ -275,14 +292,14 @@ function fileSelectChange(event) {
 			</td>
 		</tr>
 		<tr>
-			<td><span class="redFont"> * </span> 내용</td>
+			<td> 내용</td>
 			<td colspan="3">
 				<textarea rows="10" cols="3"  class="form-control summernote" name="contents">${tour.contents }</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-				<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail(${tour.num},${pageNumber })">
+				<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 				<input type="reset" class="btn btn-default" value="다시작성">
 				<input type="submit" class="btn btn-primary" value="수정" onclick="return inputSave()">
 			</td>
