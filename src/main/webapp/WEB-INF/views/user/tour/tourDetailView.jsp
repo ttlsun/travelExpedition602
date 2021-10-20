@@ -154,7 +154,7 @@ function goCampingList() {
 	<input type="hidden" name="pageNumber" id="pageNumber" value="${pageNumber}">
 	<input type="hidden" name="communityPageNumber" id="communityPageNumber" value="${communityPageInfo.pageNumber}">
 	<input type="hidden" name="num" id="num" value="${tourbean.num}">
-	<table>
+	<table style="width:100%;">
 		<tr>
 			<td colspan="2" style="text-align:center; padding-bottom: 20px; border-bottom: 1px solid lightgrey;">
 				<h2 class="text-primary">${tourbean.name }</h2>
@@ -463,10 +463,12 @@ function goCampingList() {
          <table class="table table-bordered" style="height:350px; width:300px;">
              <tr class="item">
                 <td style="padding: 20px; text-align:center;">
-                   <img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
-                   <span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
-                   <span style="display: block; padding: 5px;">"${campingBean.summary}"</span>
-                   <span style="display: block;">${campingBean.themecode}</span>
+                 	<a href="campingDetail.do?num=${campingBean.num}&pageNumber=1">
+                 		<img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
+  					</a>
+                   	<span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
+                   	<span style="display: block; padding: 5px;">"${campingBean.summary}"</span>
+                   	<span style="display: block;">${campingBean.themecode}</span>
                 </td>
              </tr>
           </table>
