@@ -30,8 +30,6 @@ public class CampingBean {
 	private MultipartFile updateFile; // 대표이미지명
 	
 	private String options;
-	
-	@NotEmpty(message = "연락처는 필수입니다.")
 	private String contents;
 	private int postcode;
 
