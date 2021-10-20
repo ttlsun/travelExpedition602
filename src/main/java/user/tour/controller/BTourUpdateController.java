@@ -107,7 +107,7 @@ public class BTourUpdateController {
 		//isResultErrorIgnore(Error 목록에서 특정 필드를 제외)
 		if(result.hasErrors()
 				&& !WebUtil.isResultErrorIgnore(result, new String[] {
-						"address1","address2","address3","address4","imgname","imgurl"}))  {
+						"address1","address2","address3","address4","imgname","imgurl","price"}))  {
 			
 			System.out.println("유효성 검사 오류 S: ----------------------------------------------");
 			WebUtil.resultErrorConvert(result);
