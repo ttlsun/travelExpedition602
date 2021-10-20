@@ -106,7 +106,7 @@ function goList() {
 		</div>
 		<div class="marginPadding10" align="center">
 			<input type="button" class="btn btn-primary" value="목록" onclick="goList()">
-			<input type="reset" class="btn btn-default" value="취소">
+			<input type="reset" class="btn btn-default" value="다시작성">
 			<input type="submit" class="btn btn-primary" value="등록하기" onclick="return inputSave()">
 		</div>
 	</form:form>

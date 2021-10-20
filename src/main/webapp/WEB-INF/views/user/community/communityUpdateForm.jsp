@@ -201,7 +201,7 @@ function goDetail() {
 				<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 				<input type="button" class="btn btn-default" value="돌아가기" onclick="goDetail()">
 				<input type="reset" class="btn btn-default" value="다시작성">
-				<input type="submit" class="btn btn-primary" value="수정" onclick="return inputSave()">
+				<input type="submit" class="btn btn-primary" value="수정하기" onclick="return inputSave()">
 			</td>
 		</tr>
 	</table>

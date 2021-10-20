@@ -134,8 +134,8 @@ function goDelete() {
 		
 		<!-- 내가 쓴 글이면서 답변이 완료되지 않는것들만 수정,삭제가능 설정. -->
 		<c:if test="${qna.id eq userId and qna.status ne '03'}">
-			<input type="button" class="btn btn-primary" value="수정" onclick="goUpdate()">
-			<input type="button" class="btn btn-primary" value="삭제" onclick="goDelete()">
+			<input type="button" class="btn btn-primary" value="수정하기" onclick="goUpdate()">
+			<input type="button" class="btn btn-primary" value="삭제하기" onclick="goDelete()">
 		</c:if>
 		
 	</div>
