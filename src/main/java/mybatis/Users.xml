@@ -56,7 +56,7 @@
 	
 	<update id="updateMyInfo" parameterType="myUsersBean">
 		update users set
-		name = #{name}, email = #{email}, birth = to_date(#{birth}), postcode = #{postcode},
+		name = #{name}, email = #{email}, postcode = #{postcode},
 		address1 = #{address1}, address2 =  #{address2}, address3 = #{address3}, address4 = #{address4},
 		contact = #{contact}, moddate = sysdate, modid = #{modid}
 		where id = #{id}

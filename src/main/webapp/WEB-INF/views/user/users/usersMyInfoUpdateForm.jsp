@@ -287,14 +287,6 @@
 							<form:errors cssClass="errMessage" path="contact"/>
 						</td>
 					</tr>
-					<tr style="display:none;">
-						<td width="20%">
-							<label for="birth">생일</label>
-						</td>
-						<td>
-							<input type="date" class="form-control" id="birth" name="birth" max="2021-11-01" value="${loginInfo.birth}" readonly>
-						</td>
-					</tr>
 					<tr>
 						<td colspan="4" align="center">
 							<input type="button" class="btn btn-default" value="메인으로" onClick="goMain()">
