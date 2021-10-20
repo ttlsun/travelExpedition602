@@ -124,11 +124,19 @@ function likesRegisters() {
 				//alert(data.resultMsg);
 				return;
 			}
+			
+			goMyLikesList();
+			
 		},
 		error: function(msg, error) {
 			console.log("처리오류");
 		}
 	});
+}
+
+//찜목록으로 이동
+function goMyLikesList() {
+	location.href= "${contextPath}/myLikesList.do";
 }
 
 //댓글 등록.
