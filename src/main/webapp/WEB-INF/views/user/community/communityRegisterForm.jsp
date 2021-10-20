@@ -66,7 +66,7 @@ function goList() {
 <article>
 <div>
 	<div class="marginPadding10" align="right">
-		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goList()">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="history.back()">
 		<input type="button" class="btn btn-primary" value="목록보기" onclick="goList()">
 	</div>
 
