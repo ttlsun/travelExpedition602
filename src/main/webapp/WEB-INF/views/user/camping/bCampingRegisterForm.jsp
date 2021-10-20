@@ -146,7 +146,9 @@ function fileSelectChange(event) {
 <section class="container">
 <article>
 <div>
-	<input type="button" class="btn btn-default" value="돌아가기" onclick="goList()">
+	<div class="marginPadding10">
+		<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onclick="goList()">
+	</div>
 	<header><h2 align="center" class="text-primary">캠핑장 등록</h2></header>
 	
 	<form:form name="myForm" commandName="camping" action="${contextPath}/bCampingRegister.do" method="post" enctype="multipart/form-data" class="form-horizontal">
