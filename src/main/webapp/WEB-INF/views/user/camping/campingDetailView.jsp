@@ -427,14 +427,16 @@ function likesRegisters() {
       </div>
       
       <div class="owl-carousel owl-theme" style="width: 95%;" align="center">
-         <c:forEach var="tourTean" items="${tourLists}"> 
+         <c:forEach var="tourBean" items="${tourLists}"> 
          <table class="table table-bordered" style="height:350px; width:300px;">
              <tr class="item">
                 <td style="padding: 20px; text-align:center;">
-                   <img src="${images}/${tourTean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${tourTean.imgurl} 이미지" title="${tourTean.imgurl} 이미지" >
-                   <span style="display: block; font-size: 20px; padding: 5px;">${tourTean.name}</span>
-                   <span style="display: block; padding: 5px;">"${tourTean.summary}"</span>
-                   <span style="display: block;">${tourTean.themecode}</span>
+                   <a href="${contextPath}/tourDetail.do?num=${tourBean.num}&pageNumber=1" >
+                   	<img src="${images}/${tourBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${tourBean.imgurl} 이미지" title="${tourBean.imgurl} 이미지" >
+                   </a>
+                   <span style="display: block; font-size: 20px; padding: 5px;">${tourBean.name}</span>
+                   <span style="display: block; padding: 5px;">"${tourBean.summary}"</span>
+                   <span style="display: block;">${tourBean.themecode}</span>
                 </td>
              </tr>
           </table>
