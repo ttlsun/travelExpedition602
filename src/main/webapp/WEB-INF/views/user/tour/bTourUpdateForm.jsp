@@ -262,7 +262,7 @@ function goDetail() {
 			<td><label for="imgFile"> <span class="redFont"> * </span> 대표 타이틀 이미지 </label> </td>
 			<td colspan="3">
 				<div class="rounded">
-					<img src="${fileImg}/${originImgUrl} " style="height:10%; width: 30%;">
+					<img src="${fileImg}/${originImgUrl} " alt="${originImgUrl}" style="height:10%; width: 30%;">
 				</div>
 				<input type="file" id="imgFile" name="updateFile" value="" accept=".jpg, .jpeg, .png, .gif">
 				<input type="hidden" name="imgurl" value="${tour.imgurl}">

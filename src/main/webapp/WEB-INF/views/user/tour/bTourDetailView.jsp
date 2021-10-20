@@ -147,7 +147,7 @@ function likesRegisters() {
 		</tr>
 		<tr>
 			<td style="text-align:left; padding-top: 20px; padding-bottom: 20px;" class="col-xs-8 col-sm-8 col-md-8">
-				<img src="${fileImg}/${tourbean.imgurl}" alt="" title="" width="100%">
+				<img src="${fileImg}/${tourbean.imgurl}" alt="${tourbean.imgurl}" width="100%">
 			</td>
 			<td style="border-left:none; padding-top:20px; text-align:right;" valign="top">
 				<table class="table table-bordered" style="border-left:none; border-right:none;">
