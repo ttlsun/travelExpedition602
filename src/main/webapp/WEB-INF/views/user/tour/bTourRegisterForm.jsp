@@ -209,7 +209,8 @@ function fileSelectChange(event) {
 				<c:forEach items="${keywordLists}" var="keywordList" varStatus="status">
 					<label for="regkeywords_${status.index}" style="color: #337ab7;">
 						&nbsp;
-						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"> ${keywordList.tag}
+						<input type="checkbox" name="regkeyword" id="regkeywords_${status.index}" value="${keywordList.tag}"
+						<c:if test="${fn:contains(tour.regkeyword,keywordList.tag) }">checked</c:if>> ${keywordList.tag}
 					</label>
 				</c:forEach>
 			</td>
@@ -219,7 +220,7 @@ function fileSelectChange(event) {
 				<label for="searchZip"><span class="redFont"> * </span> 관광지 주소</label>
 			</td>
 			<td colspan="3" style="border-bottom: none; border-right: none; border-left: none;">
-				<input type="text" disabled="disabled" class="form-control40" name="postcode" id="postcodeView" placeholder="우편번호 입력">
+				<input type="text" disabled="disabled" class="form-control40" name="postcode" value="${tour.postcode}" id="postcodeView" placeholder="우편번호 입력">
 				<input type="hidden" id="postcode" name="postcode" value="${tour.postcode}">
 				<input type="button" class="btn btn-primary" id="searchZip" value="우편번호찾기"  data-toggle="modal" data-target="#myModal">
 			</td>
@@ -233,8 +234,8 @@ function fileSelectChange(event) {
 					<input type="text" class="form-control40" id="address3" name="address3" value="${tour.address3}" placeholder="동" readonly="readonly">
 					<input type="text" class="form-control40" id="address4" name="address4" value="${tour.address4}" placeholder="상세주소 입력">
 				
-					<input type="text" class="form-control40" id="coordsMa" name="longitude" placeholder="좌표Ma">
-					<input type="text" class="form-control40" id="coordsLa" name="latitude" placeholder="좌표La">
+					<input type="text" class="form-control40" id="coordsMa" name="longitude" placeholder="좌표Ma" value="${tour.longitude}">
+					<input type="text" class="form-control40" id="coordsLa" name="latitude" placeholder="좌표La" value="${tour.latitude}">
 					
 				</label>
 				
@@ -245,7 +246,7 @@ function fileSelectChange(event) {
 		</tr>
 		<tr>
 			<td width="20%">
-				<label for="contact"> 관광지 연락처 </label>
+				<label for="contact">관광지 연락처 </label>
 			</td>
 			<td colspan="3">
 				<input type="text" class="form-control" id="contact" name="contact" value="${tour.contact}" placeholder="입력해주세요.">

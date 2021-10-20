@@ -115,11 +115,8 @@ public class BTourRegisterController {
 					cnt = postimgDao.insertPostimgData(map);
 					tourbean.setImgname(str);
 				}
-				map.put("imgname", str);
-				cnt = postimgDao.insertPostimgData(map);
-				tourbean.setImgname(str);
+				
 			}
-			
 			
 			tourbean.setNum(maxNum);
 			
