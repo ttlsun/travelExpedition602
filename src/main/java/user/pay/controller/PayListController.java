@@ -48,7 +48,7 @@ public class PayListController {
 			int totalCount = payDao.getTotalCount(map);
 			String url = request.getContextPath()+COMMAND;
 			
-			Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
+			Paging pageInfo = new Paging(pageNumber, "10", totalCount, url, whatColumn, keyword);
 			List<PayBean> lists = payDao.getList(pageInfo, map);
 			
 			mav.addObject("pageNumber", pageNumber);
