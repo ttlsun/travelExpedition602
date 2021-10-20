@@ -57,8 +57,10 @@ function input(){
 <section class="container">
 <article>
 <div>
+	<div class="marginPadding10" align="right">
+      <input type="button" style="float: left" class="btn btn-default" value="돌아가기" onClick="goBack()">
+    </div>
 	<div class="container alingMargin" style="margin: auto;">
-	<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
 	<header><h2 align="center" class="text-primary textFontSizeLarge">비밀번호변경</h2></header>
 	
 	<form role="form" action="usersUpdateMyPw.do" method="post" class="form-horizontal">

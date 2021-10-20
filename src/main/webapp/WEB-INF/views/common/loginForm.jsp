@@ -56,7 +56,9 @@
 <section class="container">
 	<article>
 		<div>
-			<input type="button" class="btn btn-default" value="돌아가기" onClick="goBack()">
+			<div class="marginPadding10" align="right">
+      			<input type="button" style="float: left" class="btn btn-default" value="돌아가기" onClick="goBack()">
+      		</div>
 			<div class="container alingMargin" style="margin: auto;">
 				<header>
 					<h2 align="center" class="text-primary textFontSizeLarge">로그인</h2>
