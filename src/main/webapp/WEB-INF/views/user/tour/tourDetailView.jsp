@@ -461,7 +461,7 @@ function goMyLikesList() {
 		        	<tr class="item">
 		            	<td style="padding: 20px; text-align:center;">
 		                 	<a href="campingDetail.do?num=${campingBean.num}&pageNumber=1">
-		                 		<img src="${images}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
+		                 		<img src="${fileImg}/${campingBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${campingBean.imgurl} 이미지" title="${campingBean.imgurl} 이미지" >
 		  					</a>
 		                   	<span style="display: block; font-size: 20px; padding: 5px;">${campingBean.name}</span>
 		                   	<span style="display: block; padding: 5px;">"${campingBean.summary}"</span>

@@ -437,7 +437,7 @@ function goMyLikesList() {
              <tr class="item">
                 <td style="padding: 20px; text-align:center;">
                    <a href="${contextPath}/tourDetail.do?num=${tourBean.num}&pageNumber=1" >
-                   	<img src="${images}/${tourBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${tourBean.imgurl} 이미지" title="${tourBean.imgurl} 이미지" >
+                   	<img src="${fileImg}/${tourBean.imgurl}" style="height:200px; width:250px; display: block; margin: 5px;" alt="${tourBean.imgurl} 이미지" title="${tourBean.imgurl} 이미지" >
                    </a>
                    <span style="display: block; font-size: 20px; padding: 5px;">${tourBean.name}</span>
                    <span style="display: block; padding: 5px;">"${tourBean.summary}"</span>

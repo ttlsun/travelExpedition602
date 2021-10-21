@@ -98,7 +98,7 @@ function goList() {
 			<tr>
 				<td class="active"><label for="pw"> 게시글 비밀번호 </label> </td>
 				<td>
-					<input type="text" maxlength="20" class="form-control" name="pw" id="pw" class="form-control input-sm" placeholder="비밀번호 입력." value="${qna.pw}">
+					<input type="password" maxlength="20" class="form-control" name="pw" id="pw" class="form-control input-sm" placeholder="비밀번호 입력." value="${qna.pw}">
 					<form:errors cssClass="errMessage" path="pw"/>
 				</td>
 			</tr>
